@@ -156,9 +156,12 @@
 -define:UNITY_EDITOR_WIN
 -define:ENABLE_NATIVE_ARRAY_CHECKS
 -define:UNITY_TEAM_LICENSE
+-define:ENABLE_VSTU
 Assets/Fonts/hand.cs
 Assets/Scripts/clickable.cs
+Assets/Scripts/GameState.cs
 Assets/Scripts/legalmoves.cs
+Assets/Scripts/Player.cs
 -r:D:\Programming\Unity\Editor\Data\Mono\lib\mono\unity\System.Runtime.Serialization.dll
 -r:D:\Programming\Unity\Editor\Data\Mono\lib\mono\unity\System.Xml.Linq.dll
 -r:D:\Programming\Unity\Editor\Data\Mono\lib\mono\unity\UnityScript.dll
