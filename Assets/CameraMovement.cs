@@ -48,6 +48,8 @@ public class CameraMovement : MonoBehaviour
 
         pos.y -= scroll * 1000 * zoomSpeed * Time.deltaTime;
         pos.y = Mathf.Clamp(pos.y, minZoom, maxZoom);
+        pos.x -= scroll * 1000 *zoomSpeed * Time.deltaTime;
+        pos.x = Mathf.Clamp(pos.x, 636, 700);
 
         transform.position = pos;
     }
