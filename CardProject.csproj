@@ -225,10 +225,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CameraMovement.cs" />
     <Compile Include="Assets\Fonts\hand.cs" />
     <Compile Include="Assets\Scripts\clickable.cs" />
+    <Compile Include="Assets\Scripts\DBHandler.cs" />
     <Compile Include="Assets\Scripts\GameState.cs" />
     <Compile Include="Assets\Scripts\legalmoves.cs" />
+    <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\movement.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
   </ItemGroup>
