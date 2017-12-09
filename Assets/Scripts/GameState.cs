@@ -40,7 +40,7 @@ public class GameState : MonoBehaviour {
 		}
 	}
 
-	void nextPlayerTurn() {
+	public void nextPlayerTurn() {
 		if (activePlayerIndex == -1) {
 			activePlayerIndex = 0;
 			players [activePlayerIndex].switchPlayingState ();

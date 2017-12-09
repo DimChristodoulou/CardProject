@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-	private string name;
+	private string pName;
 	private GameObject hero; //hero is a seperate unit due to its win condition checks and the fact that he is instantiated from beginning
 	private List<GameObject> handCards;
 	private List<GameObject> boardMinions;
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour {
 	}
 
 	public string getName() {
-		return this.name;
+		return this.pName;
 	}
 
 	public void setName(string mName) {
