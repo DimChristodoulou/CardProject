@@ -42,7 +42,7 @@ public class clickableV2 : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		if (myInfo.clickable){ //&& GameState.getActivePlayer() == this.GetComponentInParent<monsterInfo>().parentPlayer) { //we can only click our monsters
+		if (myInfo.clickable && GameState.getActivePlayer() == this.GetComponentInParent<monsterInfo>().parentPlayer) { //we can only click our monsters
 			toggleChange ();
 		} else {
 			//todo show a "cant do that" message
