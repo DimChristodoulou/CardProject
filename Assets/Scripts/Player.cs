@@ -20,11 +20,11 @@ public class Player {
 
 	public Player (int pPos, string pName)
 	{
+		selected = null;
 		monsterPrefab = ((GameObject)Resources.Load ("Monster"));
 		this.playingPos = pPos;
 		this.pName = pName;
 	}
-	
 
 	public void switchPlayState() {
 		isPlaying = !isPlaying;
@@ -34,15 +34,15 @@ public class Player {
 		return true;
 	}
 
-	public void untogglePreviousClicked() {
-		//here we will do something like
-		//selected.clearSelection();
-		//to remove highlighted squares or wtvr is associated with previous selection
+	public void updateClickedItem(GameObject newclick) {
+		//if another element was clicked before, update selection
+		if (selected != null && selected != newclick)
+			selected.GetComponent<clickableV2>().toggleChange();
+		selected = newclick;
 	}
 
-	public void setPlayerItemClicked(GameObject newSelection) {
-		selected = newSelection;
-		//here we will also do/call anything that wasn't done on click but needs to happen when selected
+	public void clearClickedItem() {
+		selected = null;
 	}
 
 	public void InstantiateHero() {
@@ -52,14 +52,16 @@ public class Player {
 		if (playingPos == 1) {
 			//summon for p1
 			hero = GameState.summonMonster ((GameObject)Resources.Load ("Monster"), new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, 0) });
+			GameObject testobj = GameState.summonMonster ((GameObject)Resources.Load ("Monster"), new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, 6) });
+			testobj.GetComponent<monsterInfo> ().setData ("test1", 1, 1, 1, 2, this);
 			if (hero != null) {
-				hero.GetComponent<monsterInfo> ().setData ("test1", 1, 1, 1, 1, this);
+				hero.GetComponent<monsterInfo> ().setData ("test1", 1, 1, 1, 2, this);
 			}
 		} else {
 			//summon for p2
 			hero = GameState.summonMonster (hero, new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, GameState.dimensionY - 1) });
 			if (hero != null) {
-				hero.GetComponent<monsterInfo> ().setData ("test2", 1, 1, 1, 1, this);
+				hero.GetComponent<monsterInfo> ().setData ("test2", 1, 1, 1, 2, this);
 			}
 		}
 	}

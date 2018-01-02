@@ -42,7 +42,7 @@ public class clickableV2 : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		if (myInfo.clickable) {
+		if (myInfo.clickable){ //&& GameState.getActivePlayer() == this.GetComponentInParent<monsterInfo>().parentPlayer) { //we can only click our monsters
 			toggleChange ();
 		} else {
 			//todo show a "cant do that" message
@@ -52,13 +52,19 @@ public class clickableV2 : MonoBehaviour {
 	public void toggleChange() {
 		toggle = !toggle;
 		if (toggle) {
-			//if now this item is active, remove previous active item
-			myInfo.parentPlayer.untogglePreviousClicked();
-			myInfo.parentPlayer.setPlayerItemClicked (this.gameObject);
+			myInfo.parentPlayer.updateClickedItem(gameObject);
 			mRenderer.material.color = hoverColorActive;
 		}
 		else {
+			myInfo.parentPlayer.clearClickedItem ();
 			mRenderer.material.color = startColor;
+		}
+		colorMovableNodes (GameState.availableMonsterMovements (gameObject));
+	}
+
+	private void colorMovableNodes(Dictionary<Pair<int,int>, int> availablesquares) {
+		foreach (Pair<int,int> coordpair in availablesquares.Keys) {
+			GameState.boardTable [coordpair.First, coordpair.Second].GetComponent<nodeInfo> ().switchColor ();
 		}
 	}
 }
