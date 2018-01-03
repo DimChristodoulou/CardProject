@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node : MonoBehaviour {
+public class Node {
 
     private GameObject nodeObj, model;
 	
-    // Use this for initialization
-	void Start () {
+    public Node()
+    {
         nodeObj = ((GameObject)Resources.Load("node"));
-
-        this.model = null;
-	}
+        model = null;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -28,7 +27,7 @@ public class Node : MonoBehaviour {
 
     public void removeModel()
     {
-        this.model = null;
+        model = null;
     }
 
     public GameObject getNodeObj()

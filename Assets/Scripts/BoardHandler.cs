@@ -9,9 +9,8 @@ public class BoardHandler : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		boardTable = createBoard (11, 7);
-        if (boardTable == null)
-            print("bla");
+        //print("null\n");
+        boardTable = createBoard (11, 7);
 	}
 	
 	// Update is called once per frame
@@ -24,10 +23,12 @@ public class BoardHandler : MonoBehaviour {
 		int i, j;
 		float offsetx = 0.0f, offsety = 0.0f;
 
-        
+        GameObject node = new GameObject();
         for (i = 0; i < sizex; i++) {
 			for (j = 0; j < sizey; j++) {
-				GameObject cube = Instantiate (myTable[j,i].getNodeObj());
+                myTable[j, i] = new Node();
+                GameObject cube = Instantiate (myTable[j,i].getNodeObj());
+                
 				cube.transform.SetParent (GameObject.Find("Board").transform, false);
 				cube.transform.localPosition = new Vector3 (-1.2f+offsety, 0.0f, 0+offsetx);
 				cube.name = "node " + (j+1) + "," + (i+1);
