@@ -57,5 +57,4 @@ public class GameState : MonoBehaviour {
 		currentMoveTime = moveTime; //reset time
 		//add Player functions to start turn properly here, using players[activePlayerIndex]
 	}
-
 }
