@@ -15,6 +15,10 @@ public class GameState : MonoBehaviour {
 	void Start () {
 		setPlayers (2);
 		moveTime = 10.0f;
+        //
+        GameObject cardsample = Instantiate<GameObject>( (GameObject)Resources.Load("CardDisplaySample") );
+        //cardsample.transform.SetParent(GameObject.Find("Canvas").transform, false);
+        //
 		activePlayerIndex = -1;
 		nextPlayerTurn ();
 	}
