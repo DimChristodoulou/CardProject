@@ -2535,16 +2535,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114376930578413270, guid: ae9d991a3648a384fbeac87e6fdfb120,
-        type: 2}
-      propertyPath: cardName
-      value: 
-      objectReference: {fileID: 1741733805}
-    - target: {fileID: 114237008698790614, guid: ae9d991a3648a384fbeac87e6fdfb120,
-        type: 2}
-      propertyPath: m_Text
-      value: asd
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ae9d991a3648a384fbeac87e6fdfb120, type: 2}
   m_IsPrefabParent: 0
@@ -2553,12 +2543,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224702787487046230, guid: ae9d991a3648a384fbeac87e6fdfb120,
     type: 2}
   m_PrefabInternal: {fileID: 1741733803}
---- !u!114 &1741733805 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114237008698790614, guid: ae9d991a3648a384fbeac87e6fdfb120,
-    type: 2}
-  m_PrefabInternal: {fileID: 1741733803}
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1749573181
 GameObject:
   m_ObjectHideFlags: 0
