@@ -26,7 +26,6 @@ public class CardDisplay : MonoBehaviour {
     {
         //Debug.Log(jsonparse.cards[cardId].card_name);
         //cardName.GetComponent<Text>();
-        Debug.Log(cardName);
         cardName.text = jsonparse.cards[cardId].card_name;
         description.text = jsonparse.cards[cardId].card_text;
         manaCost.text = jsonparse.cards[cardId].card_manacost.ToString();

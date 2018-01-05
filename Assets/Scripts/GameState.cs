@@ -19,7 +19,6 @@ public class GameState : MonoBehaviour {
         GameObject cardsample = Instantiate<GameObject>( (GameObject)Resources.Load("CardDisplaySample") );
         cardsample.transform.SetParent(GameObject.Find("Main UI").transform, false);
 
-        cardsample.GetComponent<Renderer>().enabled = true;
         //cardsample.transform.SetParent(GameObject.Find("Canvas").transform, false);
         //
 		activePlayerIndex = -1;
