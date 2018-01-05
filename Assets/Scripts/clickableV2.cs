@@ -64,7 +64,7 @@ public class clickableV2 : MonoBehaviour {
 
 	private void colorMovableNodes(Dictionary<Pair<int,int>, int> availablesquares) {
 		foreach (Pair<int,int> coordpair in availablesquares.Keys) {
-			GameState.boardTable [coordpair.First, coordpair.Second].GetComponent<nodeInfo> ().switchColor ();
+			GameState.boardTable [coordpair.First, coordpair.Second].GetComponent<nodeInfo> ().switchActiveColor ();
 		}
 	}
 }

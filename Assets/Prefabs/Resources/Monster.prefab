@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 23408890127923504}
   - component: {fileID: 54098536552210108}
   - component: {fileID: 114557672483097732}
+  - component: {fileID: 114691433679143274}
   - component: {fileID: 114117565857980684}
   m_Layer: 5
   m_Name: Monster
@@ -147,3 +148,14 @@ MonoBehaviour:
   hoverColorActive: {r: 0, g: 0.6, b: 0, a: 1}
   hoverColorInactive: {r: 0.8, g: 0, b: 0, a: 1}
   startColor: {r: 1, g: 1, b: 1, a: 0}
+--- !u!114 &114691433679143274
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1500180638956852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f630d755d275234aa5f626dff9f3505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

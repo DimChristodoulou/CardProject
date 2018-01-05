@@ -27,6 +27,7 @@ public class Player {
 	}
 
 	public void switchPlayState() {
+		updateClickedItem (null);
 		isPlaying = !isPlaying;
 	}
 
@@ -48,7 +49,6 @@ public class Player {
 	public void InstantiateHero() {
 		//create and position hero
 		//hero = Instantiate(blah blah);
-		hero = (GameObject)Resources.Load ("Monster");
 		if (playingPos == 1) {
 			//summon for p1
 			hero = summonMonster("test1", 1, 1, 1, 2, new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, 0) });
@@ -63,7 +63,7 @@ public class Player {
 	public GameObject summonMonster(string mName, int att, int def, int mcost, int mspeed, List<Pair<int,int>> summonPos) {
 		GameObject myObj = null;
 		if (GameState.allocateBoardPosition(summonPos)) {
-			myObj = GameObject.Instantiate((GameObject)Resources.Load ("Monster"), GameState.getPositionRelativeToBoard(summonPos), new Quaternion(0,0,0,0));
+			myObj = GameObject.Instantiate(monsterPrefab, GameState.getPositionRelativeToBoard(summonPos), new Quaternion(0,0,0,0));
 			myObj.GetComponent<monsterInfo>().setPosition(summonPos);
 			myObj.GetComponent<monsterInfo>().setData(mName, att, def, mcost, mspeed, this);
 		}
