@@ -51,20 +51,23 @@ public class Player {
 		hero = (GameObject)Resources.Load ("Monster");
 		if (playingPos == 1) {
 			//summon for p1
-			hero = GameState.summonMonster ((GameObject)Resources.Load ("Monster"), new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, 0) });
+			hero = summonMonster("test1", 1, 1, 1, 2, new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, 0) });
 			//test monster for debug purposes
-			//GameObject testobj = GameState.summonMonster ((GameObject)Resources.Load ("Monster"), new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, 1) });
-			//testobj.GetComponent<monsterInfo> ().setData ("test1", 1, 1, 1, 2, this);
-			if (hero != null) {
-				hero.GetComponent<monsterInfo> ().setData ("test1", 1, 1, 1, 2, this);
-			}
+			GameObject testobj = summonMonster ("test1", 1, 1, 1, 2, new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, 1) });
 		} else {
 			//summon for p2
-			hero = GameState.summonMonster (hero, new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, GameState.dimensionY - 1) });
-			if (hero != null) {
-				hero.GetComponent<monsterInfo> ().setData ("test2", 1, 1, 1, 2, this);
-			}
+			hero = summonMonster ("test2", 1, 1, 1, 2, new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, GameState.dimensionY - 1) });
 		}
+	}
+
+	public GameObject summonMonster(string mName, int att, int def, int mcost, int mspeed, List<Pair<int,int>> summonPos) {
+		GameObject myObj = null;
+		if (GameState.allocateBoardPosition(summonPos)) {
+			myObj = GameObject.Instantiate((GameObject)Resources.Load ("Monster"), GameState.getPositionRelativeToBoard(summonPos), new Quaternion(0,0,0,0));
+			myObj.GetComponent<monsterInfo>().setPosition(summonPos);
+			myObj.GetComponent<monsterInfo>().setData(mName, att, def, mcost, mspeed, this);
+		}
+		return myObj;
 	}
 
 }

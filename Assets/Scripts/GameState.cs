@@ -88,22 +88,18 @@ public class GameState : MonoBehaviour {
 		return players [activePlayerIndex];
 	}
 
-	static public GameObject summonMonster(GameObject myMonster, List< Pair<int,int> > proposedPos) {
-		foreach (Pair<int,int> pair in proposedPos) {
+	static public bool allocateBoardPosition(List<Pair<int,int>> allocPos) {
+		foreach (Pair<int,int> pair in allocPos) {
 			if (boardTable [pair.First, pair.Second].GetComponent<nodeInfo> ().isFree == false)
-				return null;
+				return false;
 		}
-		//call any animations etc and instantiate object relative to board
-		foreach (Pair<int,int> pair in proposedPos) {
+		foreach (Pair<int,int> pair in allocPos) {
 			boardTable [pair.First, pair.Second].GetComponent<nodeInfo> ().isFree = false; //allocating the board space
 		}
-		//update monster position
-		GameObject instantiated = Instantiate(myMonster, fixPositionRelativeToBoard(myMonster, proposedPos), new Quaternion(0,0,0,0));
-		instantiated.GetComponent<monsterInfo>().setPosition(proposedPos);
-		return instantiated;
+		return true;
 	}
 
-	static private Vector3 fixPositionRelativeToBoard(GameObject myObj, List< Pair<int,int> > pos) {
+	static public Vector3 getPositionRelativeToBoard(List< Pair<int,int> > pos) {
 		//get average of positions in list, centering the object
 		Pair<float,float> avgpos = new Pair<float,float>(0f,0f);
 		foreach (Pair<int,int> pair in pos) {
