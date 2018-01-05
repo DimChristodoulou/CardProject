@@ -129,25 +129,23 @@ public class GameState : MonoBehaviour {
 				if (i == 0 && j == 0)
 					continue;
 				foreach (Pair<int,int> startpair in startPos) {
-					if (startpair.First + i >= 0 && startpair.First + i < dimensionX && startpair.Second + j >= 0 && startpair.Second + j < dimensionY)
+					if (startpair.First + i >= 0 && startpair.First + i < dimensionX && startpair.Second + j >= 0 && startpair.Second + j < dimensionY && boardTable[startpair.First+i,startpair.Second+j].GetComponent<nodeInfo>().isFree)
 						goalPos.Add (new Pair<int,int> (startpair.First + i, startpair.Second + j));
 					else {
 						goalPos.Clear ();
 						break;
 					}
 				}
-				if (true/*DFS (startPos, goalPos, maxmoves)*/) {
-					//Debug.Log ("SOLUTION " + temp);
-					foreach (Pair<int,int> pair in goalPos) {
-							//Debug.Log ("Solution " + temp + " contains " + pair.First + "," + pair.Second);
+				if (goalPos.Count > 0) {
+					if (DFS (startPos, goalPos, maxmoves)) {
+						foreach (Pair<int,int> pair in goalPos) {
+							if (!availableMoves.ContainsKey (pair)) {
+								availableMoves.Add (pair, 1);
+							}
+						}
 					}
 				}
 				temp++;
-				foreach (Pair<int,int> pair in goalPos) {
-					if (!availableMoves.ContainsKey (pair)) {
-						availableMoves.Add (pair, 1);
-					}
-				}
 			}
 		}
 		return availableMoves;
@@ -161,17 +159,19 @@ public class GameState : MonoBehaviour {
 		while (frontier.Count > 0) {
 			node = ((Pair <List<Pair<int,int>>, int>)frontier.Peek ()).First;
 			int moves = ((Pair <List<Pair<int,int>>, int>)frontier.Peek ()).Second;
-			if (CompareLists<Pair<int,int>> (goalPos, node)) {
+			frontier.Pop ();
+			Debug.Log (goalPos [0].First + "," + goalPos [0].Second + " = " + node [0].First + "," + node [0].Second);
+			if (ComparePairLists (goalPos, node)) {
+				Debug.Log ("YES");
 				return true;
 			}
-			if (moves >= maxmoves) {
+			if (moves > maxmoves) {
 				continue;
 			}
-			frontier.Pop ();
 			explored.Add (node, moves);
 			int i, j;
 			for (i = -1; i <= 1; i++) {
-				for (j = -1 + Mathf.Abs (i); j < 1 - Mathf.Abs (i); j++) {
+				for (j = -1 + Mathf.Abs (i); j <= 1 - Mathf.Abs (i); j++) {
 					List<Pair<int,int>> child = new List<Pair<int,int>> ();
 					foreach (Pair<int,int> startpair in node) {
 						if (startpair.First+i >= 0 && startpair.First+i < dimensionX && startpair.Second+j >= 0 && startpair.Second+j < dimensionY && boardTable [startpair.First + i, startpair.Second + j].GetComponent<nodeInfo> ().isFree) {
@@ -190,40 +190,26 @@ public class GameState : MonoBehaviour {
 		return false;
 	}
 
-	//utility O(2n) function to compare 2 lists
-	static private bool CompareLists<T>(List<T> aListA, List<T> aListB)
+	//utility O(n^2) function to compare 2 lists of pairs
+	//we need better complexity algorithm for that
+	static private bool ComparePairLists(List<Pair<int,int>> aListA, List<Pair<int,int>> aListB)
 	{
 		if (aListA == null || aListB == null || aListA.Count != aListB.Count)
 			return false;
 		if (aListA.Count == 0)
 			return true;
-		Dictionary<T, int> lookUp = new Dictionary<T, int>();
-		// create index for the first list
-		for(int i = 0; i < aListA.Count; i++)
-		{
-			int count = 0;
-			if (!lookUp.TryGetValue(aListA[i], out count))
-			{
-				lookUp.Add(aListA[i], 1);
-				continue;
+		for (int i = 0; i < aListA.Count; i++) {
+			bool flag = false;
+			for (int j = 0; j < aListB.Count; j++) {
+				if (aListA [i].First == aListB [j].First && aListA [i].Second == aListB [j].Second) {
+					flag = true;
+					aListB.RemoveAt (j); //we remove the common element to avoid unneseccary checks later
+					break;
+				}
 			}
-			lookUp[aListA[i]] = count + 1;
-		}
-		for (int i = 0; i < aListB.Count; i++)
-		{
-			int count = 0;
-			if (!lookUp.TryGetValue(aListB[i], out count))
-			{
-				// early exit as the current value in B doesn't exist in the lookUp (and not in ListA)
+			if (!flag)
 				return false;
-			}
-			count--;
-			if (count <= 0)
-				lookUp.Remove(aListB[i]);
-			else
-				lookUp[aListB[i]] = count;
 		}
-		// if there are remaining elements in the lookUp, that means ListA contains elements that do not exist in ListB
-		return lookUp.Count == 0;
+		return true;
 	}
 }

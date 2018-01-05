@@ -52,8 +52,9 @@ public class Player {
 		if (playingPos == 1) {
 			//summon for p1
 			hero = GameState.summonMonster ((GameObject)Resources.Load ("Monster"), new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, 0) });
-			GameObject testobj = GameState.summonMonster ((GameObject)Resources.Load ("Monster"), new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, 6) });
-			testobj.GetComponent<monsterInfo> ().setData ("test1", 1, 1, 1, 2, this);
+			//test monster for debug purposes
+			//GameObject testobj = GameState.summonMonster ((GameObject)Resources.Load ("Monster"), new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, 1) });
+			//testobj.GetComponent<monsterInfo> ().setData ("test1", 1, 1, 1, 2, this);
 			if (hero != null) {
 				hero.GetComponent<monsterInfo> ().setData ("test1", 1, 1, 1, 2, this);
 			}

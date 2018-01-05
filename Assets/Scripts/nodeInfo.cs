@@ -16,7 +16,6 @@ public class nodeInfo : MonoBehaviour {
 	void Start () {
 		mRenderer = this.GetComponentInParent<Renderer>();
 		mRenderer.material.color = startColor;
-		isFree = true;
 	}
 	
 	// Update is called once per frame
