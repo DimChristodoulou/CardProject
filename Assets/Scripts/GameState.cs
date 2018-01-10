@@ -76,13 +76,13 @@ public class GameState : MonoBehaviour {
 		}
 		activePlayerIndex = 0;
 		currentMoveTime = moveTime;
-		players [activePlayerIndex].switchPlayState ();
+		players [activePlayerIndex].startTurn ();
 	}
 
 	static public void nextPlayerTurn() {
-		players [activePlayerIndex].switchPlayState ();
+		players [activePlayerIndex].endTurn ();
 		activePlayerIndex = (activePlayerIndex + 1) % numOfPlayers;
-		players [activePlayerIndex].switchPlayState ();
+		players [activePlayerIndex].startTurn ();
 		currentMoveTime = moveTime; //reset time
 		//add Player functions to start turn properly here, using players[activePlayerIndex]
 	}
@@ -157,11 +157,11 @@ public class GameState : MonoBehaviour {
 			node = ((Pair <List<Pair<int,int>>, int>)frontier.Peek ()).First;
 			int moves = ((Pair <List<Pair<int,int>>, int>)frontier.Peek ()).Second;
 			frontier.Pop ();
-			if (ComparePairLists (goalPos, node)) {
-				return true;
-			}
 			if (moves > maxmoves) {
 				continue;
+			}
+			if (ComparePairLists (goalPos, node)) {
+				return true;
 			}
 			explored.Add (node, moves);
 			int i, j;
@@ -239,11 +239,26 @@ public class GameState : MonoBehaviour {
 				newPos.Add (new Pair<int,int> (clickedX + i, clickedY+j));
 			}
 		}
+		Debug.Log (selectedMonster.GetComponent<monsterInfo> ().coords [0].First + "," + selectedMonster.GetComponent<monsterInfo> ().coords [0].Second);
+		Debug.Log ("N" + newPos [0].First + "," + newPos [0].Second);
+		Debug.Log (selectedMonster.GetComponent<monsterInfo> ().movspeed);
 		if (DFS (selectedMonster.GetComponent<monsterInfo> ().coords, newPos, selectedMonster.GetComponent<monsterInfo> ().movspeed)) {
 			//untoggle the element from player that clicked it, we already have the reference from the item he selected as selectedMonsteer
 			players[activePlayerIndex].updateClickedItem(null);
 			selectedMonster.GetComponent<movement> ().moveTo (newPos);
 		}
+	}
+
+	static public void applyAttackIndicatorWhenMonsterSelected(GameObject enemy) {
+		if (players [activePlayerIndex].selected == null)
+			return;
+		players [activePlayerIndex].selected.GetComponent<attacking> ().indicateAttack (enemy);
+	}
+
+	static public void applyAttackWhenMonsterSelected(GameObject enemy) {
+		if (players [activePlayerIndex].selected == null)
+			return;
+		players [activePlayerIndex].selected.GetComponent<attacking> ().executeAttack (enemy);
 	}
 
 	static public void setSquares(List<Pair<int,int>> squarecoords, bool value) {

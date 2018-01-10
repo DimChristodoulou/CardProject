@@ -11,9 +11,6 @@ public class clickableV2 : MonoBehaviour {
 	public bool toggle;
 	private monsterInfo myInfo;
 	private Renderer mRenderer;
-	public Color hoverColorActive = new Color32(0x00, 0x99, 0x00, 0xFF); // RGBA
-	public Color hoverColorInactive = new Color32(0xCC, 0x00, 0x00, 0xFF); // RGBA
-	public Color startColor = new Color32(0xFF, 0xFF, 0xFF, 0x00); // RGBA
 
 	// Use this for initialization
 	void Start () {
@@ -28,24 +25,31 @@ public class clickableV2 : MonoBehaviour {
 	}
 
 	void OnMouseOver() {
-		if (myInfo.clickable)
-			mRenderer.material.color = hoverColorActive;
-		else
-			mRenderer.material.color = hoverColorInactive;
+		if (myInfo.clickable && GameState.getActivePlayer () == this.GetComponentInParent<monsterInfo> ().parentPlayer)
+			mRenderer.material.color = GetComponentInParent<monsterInfo> ().hoverColorActive;
+		else if (GameState.getActivePlayer () == this.GetComponentInParent<monsterInfo> ().parentPlayer)
+			mRenderer.material.color = GetComponentInParent<monsterInfo> ().hoverColorInactive;
+		else if (!(GameState.getActivePlayer () == this.GetComponentInParent<monsterInfo> ().parentPlayer)) {//enemy player is playing
+			mRenderer.material.color = GetComponentInParent<monsterInfo>().hoverColorAttacked;
+			GameState.applyAttackIndicatorWhenMonsterSelected (this.gameObject);
+		}
 	}
 
 	void OnMouseExit() {
 		if (toggle)
-			mRenderer.material.color = hoverColorActive;
+			mRenderer.material.color = GetComponentInParent<monsterInfo>().hoverColorActive;
 		else
-			mRenderer.material.color = startColor;
+			mRenderer.material.color = GetComponentInParent<monsterInfo>().startColor;
 	}
 
 	void OnMouseDown() {
 		if (myInfo.clickable && GameState.getActivePlayer() == this.GetComponentInParent<monsterInfo>().parentPlayer) { //we can only click our monsters
 			toggleChange ();
-		} else {
+		} else if (GameState.getActivePlayer() == this.GetComponentInParent<monsterInfo>().parentPlayer) {
 			//todo show a "cant do that" message
+		}
+		else if (!(GameState.getActivePlayer() == this.GetComponentInParent<monsterInfo>().parentPlayer)) { //enemy player is playing
+			GameState.applyAttackWhenMonsterSelected(this.gameObject);
 		}
 	}
 
@@ -53,11 +57,11 @@ public class clickableV2 : MonoBehaviour {
 		toggle = !toggle;
 		if (toggle) {
 			myInfo.parentPlayer.updateClickedItem(gameObject);
-			mRenderer.material.color = hoverColorActive;
+			mRenderer.material.color = GetComponentInParent<monsterInfo>().hoverColorActive;
 		}
 		else {
 			myInfo.parentPlayer.clearClickedItem ();
-			mRenderer.material.color = startColor;
+			mRenderer.material.color = GetComponentInParent<monsterInfo>().startColor;
 		}
 		colorMovableNodes (GameState.availableMonsterMovements (gameObject));
 	}

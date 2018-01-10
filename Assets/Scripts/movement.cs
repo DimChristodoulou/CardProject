@@ -20,7 +20,8 @@ public class movement : MonoBehaviour {
 	}
 
 	public void moveTo(List<Pair<int,int>> newPos) {
-		//this function is created to add here animations or anything else related to moves
+		if (!GetComponentInParent<monsterInfo> ().movable)
+			return;
 		GameState.setSquares(GetComponentInParent<monsterInfo>().coords, true);
 		Vector3 boardPos = GameState.getPositionRelativeToBoard(newPos);
 		gameObject.transform.position = boardPos;

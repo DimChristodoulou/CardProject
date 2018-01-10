@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Fonts\hand.cs" />
+     <Compile Include="Assets\Scripts\attacking.cs" />
      <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\clickable.cs" />
      <Compile Include="Assets\Scripts\clickableV2.cs" />

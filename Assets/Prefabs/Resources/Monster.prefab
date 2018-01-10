@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 54098536552210108}
   - component: {fileID: 114557672483097732}
   - component: {fileID: 114691433679143274}
+  - component: {fileID: 114641538133472492}
   - component: {fileID: 114117565857980684}
   m_Layer: 5
   m_Name: Monster
@@ -126,10 +127,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterName: test2
+  card: {fileID: 0}
   attack: 1
   defense: 1
   manacost: 1
   movspeed: 1
+  hoverColorAttacked: {r: 0, g: 0.6, b: 0, a: 1}
+  hoverColorActive: {r: 0, g: 0.6, b: 0, a: 1}
+  hoverColorInactive: {r: 0.8, g: 0, b: 0, a: 1}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
   clickable: 0
   movable: 0
   attackable: 0
@@ -145,9 +151,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toggle: 0
-  hoverColorActive: {r: 0, g: 0.6, b: 0, a: 1}
-  hoverColorInactive: {r: 0.8, g: 0, b: 0, a: 1}
-  startColor: {r: 1, g: 1, b: 1, a: 0}
+--- !u!114 &114641538133472492
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1500180638956852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc30afb41a8a81745a4bf3ba62a939d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114691433679143274
 MonoBehaviour:
   m_ObjectHideFlags: 1

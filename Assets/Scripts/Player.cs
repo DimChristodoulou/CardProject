@@ -24,11 +24,25 @@ public class Player {
 		monsterPrefab = ((GameObject)Resources.Load ("Monster"));
 		this.playingPos = pPos;
 		this.pName = pName;
+		handCards = new List<GameObject> ();
+		boardMinions = new List<GameObject> ();
+		graveyard = new List<GameObject> ();
 	}
 
-	public void switchPlayState() {
+	public void startTurn() {
+		isPlaying = true;
+		//test monster for debug purposes
+		if (playingPos == 1) {
+			GameObject testobj = summonMonster ("test1", 1, 1, 1, 2, 1, new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, 1) });
+		}
+	}
+
+	public void endTurn() {
 		updateClickedItem (null);
-		isPlaying = !isPlaying;
+		isPlaying = false;
+		if (playingPos == 1) {
+			boardMinions [boardMinions.Count - 1].GetComponent<monsterInfo> ().Die ();
+		}
 	}
 
 	public bool heroAlive() {
@@ -51,23 +65,40 @@ public class Player {
 		//hero = Instantiate(blah blah);
 		if (playingPos == 1) {
 			//summon for p1
-			hero = summonMonster("test1", 1, 1, 1, 2, new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, 0) });
-			//test monster for debug purposes
-			GameObject testobj = summonMonster ("test1", 1, 1, 1, 2, new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, 1) });
+			hero = summonMonster("test1", 1, 1, 1, 2, 1, new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, 0) });
 		} else {
 			//summon for p2
-			hero = summonMonster ("test2", 1, 1, 1, 2, new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, GameState.dimensionY - 1) });
+			hero = summonMonster ("test2", 1, 1, 1, 2, 1, new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, GameState.dimensionY - 1) });
 		}
 	}
 
-	public GameObject summonMonster(string mName, int att, int def, int mcost, int mspeed, List<Pair<int,int>> summonPos) {
+	public GameObject summonMonster(string mName, int att, int def, int mcost, int mspeed, int attkrange, List<Pair<int,int>> summonPos) {
 		GameObject myObj = null;
 		if (GameState.allocateBoardPosition(summonPos)) {
 			myObj = GameObject.Instantiate(monsterPrefab, GameState.getPositionRelativeToBoard(summonPos), new Quaternion(0,0,0,0));
 			myObj.GetComponent<monsterInfo>().setPosition(summonPos);
-			myObj.GetComponent<monsterInfo>().setData(mName, att, def, mcost, mspeed, this);
+			myObj.GetComponent<monsterInfo>().setData(mName, att, def, mcost, mspeed, attkrange, this);
+			boardMinions.Add (myObj);
+			//also remove the monster from hand or something
 		}
 		return myObj;
+	}
+
+	public void DieMonster(GameObject monster) {
+		GameState.setSquares (monster.GetComponent<monsterInfo> ().coords, true); //dellocate tiles
+		if (boardMinions.Find (x => monster)!=null) {
+			boardMinions.Remove (monster);
+		}
+		//we add the card to graveyard, not the monster
+		GameObject.Destroy(monster); //we can safely delete this since we have created a new card instance for the graveyard
+	}
+
+	public void BanishMonster(GameObject monster) { //this is for banishing monsters immidiately from play, not for graveyard cards
+		if (boardMinions.Find (x => monster)!=null) {
+			boardMinions.Remove (monster);
+		}
+		//note that we do not send the card to graveyard here
+		GameObject.Destroy (monster);
 	}
 
 }
