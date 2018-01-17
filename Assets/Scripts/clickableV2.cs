@@ -31,7 +31,9 @@ public class clickableV2 : MonoBehaviour {
 			mRenderer.material.color = GetComponentInParent<monsterInfo> ().hoverColorInactive;
 		else if (!(GameState.getActivePlayer () == this.GetComponentInParent<monsterInfo> ().parentPlayer)) {//enemy player is playing
 			mRenderer.material.color = GetComponentInParent<monsterInfo>().hoverColorAttacked;
-			GameState.applyAttackIndicatorWhenMonsterSelected (this.gameObject);
+			if (GameState.players [GameState.activePlayerIndex].selected != null) {
+				GameState.players [GameState.activePlayerIndex].selected.GetComponent<attacking> ().indicateAttack (gameObject);
+			}
 		}
 	}
 
@@ -48,8 +50,10 @@ public class clickableV2 : MonoBehaviour {
 		} else if (GameState.getActivePlayer() == this.GetComponentInParent<monsterInfo>().parentPlayer) {
 			//todo show a "cant do that" message
 		}
-		else if (!(GameState.getActivePlayer() == this.GetComponentInParent<monsterInfo>().parentPlayer)) { //enemy player is playing
-			GameState.applyAttackWhenMonsterSelected(this.gameObject);
+		else if (!(GameState.getActivePlayer() == this.GetComponentInParent<monsterInfo>().parentPlayer)) { //enemy player is playing, so the click means attack
+			if (GameState.players [GameState.activePlayerIndex].selected != null) {
+				GameState.players [GameState.activePlayerIndex].selected.GetComponent<attacking> ().executeAttack (gameObject);
+			}
 		}
 	}
 
@@ -63,12 +67,6 @@ public class clickableV2 : MonoBehaviour {
 			myInfo.parentPlayer.clearClickedItem ();
 			mRenderer.material.color = GetComponentInParent<monsterInfo>().startColor;
 		}
-		colorMovableNodes (GameState.availableMonsterMovements (gameObject));
-	}
-
-	private void colorMovableNodes(Dictionary<Pair<int,int>, int> availablesquares) {
-		foreach (Pair<int,int> coordpair in availablesquares.Keys) {
-			GameState.boardTable [coordpair.First, coordpair.Second].GetComponent<nodeInfo> ().switchActiveColor ();
-		}
+		GetComponentInParent<movement> ().highlightMovableSquares ();
 	}
 }

@@ -14,13 +14,6 @@ public class attacking : MonoBehaviour {
 
 	}
 
-	void OnSceneGUI() {
-		Vector3 startV = new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
-		Vector3 endV = new Vector3 (0,0,0);
-		Vector3 startT = (endV + startV) / 2;
-		Vector3 endT = (endV + startV) / 2;
-	}
-
 	public void indicateAttack(GameObject enemy) {
 		if (!GetComponentInParent<monsterInfo> ().attackable)
 			return;
@@ -32,5 +25,9 @@ public class attacking : MonoBehaviour {
 			return;
 		Debug.Log ("attk");
 		enemy.GetComponent<monsterInfo> ().defense -= GetComponentInParent<monsterInfo> ().attack; //dummy attacking
+		GetComponentInParent<monsterInfo>().onPostAttack();
+		if (enemy.GetComponent<monsterInfo>().defense>0) { //if the monster has died we do not execute the postdefense effects
+			enemy.GetComponent<monsterInfo> ().onPostDefense ();
+		}
 	}
 }

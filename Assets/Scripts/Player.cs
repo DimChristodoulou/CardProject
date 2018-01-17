@@ -30,19 +30,21 @@ public class Player {
 	}
 
 	public void startTurn() {
-		isPlaying = true;
-		//test monster for debug purposes
-		if (playingPos == 1) {
-			GameObject testobj = summonMonster ("test1", 1, 1, 1, 2, 1, new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, 1) });
+		foreach (GameObject monster in boardMinions) {
+			monster.GetComponent<monsterInfo> ().onStartTurn ();
 		}
+		isPlaying = true;
 	}
 
 	public void endTurn() {
 		updateClickedItem (null);
 		isPlaying = false;
-		if (playingPos == 1) {
-			boardMinions [boardMinions.Count - 1].GetComponent<monsterInfo> ().Die ();
+		foreach (GameObject monster in boardMinions) {
+			monster.GetComponent<monsterInfo> ().onEndTurn ();
 		}
+		//if (playingPos == 1) {
+		//	boardMinions [boardMinions.Count - 1].GetComponent<monsterInfo> ().Die ();
+		//}
 	}
 
 	public bool heroAlive() {
@@ -65,19 +67,21 @@ public class Player {
 		//hero = Instantiate(blah blah);
 		if (playingPos == 1) {
 			//summon for p1
-			hero = summonMonster("test1", 1, 1, 1, 2, 1, new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, 0) });
+			hero = summonMonster("test1", 1, 1, 1, 2, 1, new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, 0) }, GameState.turn);
+			Debug.Log (GameState.turn);
+			summonMonster("test1", 1, 1, 1, 2, 1, new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, 1) }, GameState.turn);
 		} else {
 			//summon for p2
-			hero = summonMonster ("test2", 1, 1, 1, 2, 1, new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, GameState.dimensionY - 1) });
+			hero = summonMonster ("test2", 1, 1, 1, 2, 1, new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, GameState.dimensionY - 1) }, GameState.turn);
 		}
 	}
 
-	public GameObject summonMonster(string mName, int att, int def, int mcost, int mspeed, int attkrange, List<Pair<int,int>> summonPos) {
+	public GameObject summonMonster(string mName, int att, int def, int mcost, int mspeed, int attkrange, List<Pair<int,int>> summonPos, int summonedTurn) {
 		GameObject myObj = null;
 		if (GameState.allocateBoardPosition(summonPos)) {
 			myObj = GameObject.Instantiate(monsterPrefab, GameState.getPositionRelativeToBoard(summonPos), new Quaternion(0,0,0,0));
 			myObj.GetComponent<monsterInfo>().setPosition(summonPos);
-			myObj.GetComponent<monsterInfo>().setData(mName, att, def, mcost, mspeed, attkrange, this);
+			myObj.GetComponent<monsterInfo>().setData(mName, att, def, mcost, mspeed, attkrange, this, summonedTurn);
 			boardMinions.Add (myObj);
 			//also remove the monster from hand or something
 		}
@@ -85,7 +89,7 @@ public class Player {
 	}
 
 	public void DieMonster(GameObject monster) {
-		GameState.setSquares (monster.GetComponent<monsterInfo> ().coords, true); //dellocate tiles
+		GameState.setSquares (monster.GetComponent<monsterInfo> ().coords, true); //deallocate tiles
 		if (boardMinions.Find (x => monster)!=null) {
 			boardMinions.Remove (monster);
 		}

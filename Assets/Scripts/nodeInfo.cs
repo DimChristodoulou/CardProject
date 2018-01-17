@@ -27,15 +27,19 @@ public class nodeInfo : MonoBehaviour {
 	}
 
 	void OnMouseEnter() {
-		GameState.applyHoverWhenMonsterSelected (xpos, ypos);
+		colorHovered ();
 	}
 
 	void OnMouseExit() {
-		GameState.applyHoverWhenMonsterSelected (xpos, ypos);
+		colorHovered ();
 	}
 
 	void OnMouseDown() {
-		GameState.applyMovementWhenMonsterSelected (xpos, ypos);
+		GameObject selectedMonster = GameState.players [GameState.activePlayerIndex].selected;
+		if (selectedMonster == null) {
+			return; //no selected monster for movement
+		}
+		selectedMonster.GetComponent<movement> ().moveTo (xpos, ypos);
 	}
 
 	public void switchHoverColor() {
@@ -54,5 +58,24 @@ public class nodeInfo : MonoBehaviour {
 			currentColor = startColor;
 		}
 		mRenderer.material.color = currentColor;
+	}
+
+	//colors/uncolors the hovered squares for the movement, if the player has a monster selected
+	private void colorHovered() {
+		GameObject selectedMonster = GameState.players [GameState.activePlayerIndex].selected;
+		if (selectedMonster == null) {
+			return; //no selected monster for movement
+		}
+		int monsterSize = (int)Mathf.Sqrt ((float)selectedMonster.GetComponent<monsterInfo> ().coords.Count);
+		if (xpos + monsterSize >= GameState.dimensionX || ypos + monsterSize >= GameState.dimensionY) {
+			return; //out of table placement
+		}
+		int i;
+		GameState.boardTable [xpos, ypos].GetComponent<nodeInfo> ().switchHoverColor ();
+		for (i = 1; i < monsterSize; i++) {
+			GameState.boardTable [xpos+i, ypos].GetComponent<nodeInfo> ().switchHoverColor ();
+			GameState.boardTable [xpos, ypos+i].GetComponent<nodeInfo> ().switchHoverColor ();
+			GameState.boardTable [xpos+i, ypos+i].GetComponent<nodeInfo> ().switchHoverColor ();
+		}
 	}
 }

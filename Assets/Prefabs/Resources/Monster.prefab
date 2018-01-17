@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114557672483097732}
   - component: {fileID: 114691433679143274}
   - component: {fileID: 114641538133472492}
-  - component: {fileID: 114117565857980684}
+  - component: {fileID: 114325682655996194}
   m_Layer: 5
   m_Name: Monster
   m_TagString: Model
@@ -115,7 +115,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114117565857980684
+--- !u!114 &114325682655996194
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -126,19 +126,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b372e3cccdb374a49b189f54e14a2e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterName: test2
+  monsterName: 
   card: {fileID: 0}
-  attack: 1
-  defense: 1
-  manacost: 1
-  movspeed: 1
-  hoverColorAttacked: {r: 0, g: 0.6, b: 0, a: 1}
-  hoverColorActive: {r: 0, g: 0.6, b: 0, a: 1}
-  hoverColorInactive: {r: 0.8, g: 0, b: 0, a: 1}
+  attack: 0
+  defense: 0
+  manacost: 0
+  movspeed: 0
+  attkrange: 0
+  hoverColorAttacked: {r: 1, g: 0, b: 0, a: 0.56078434}
+  hoverColorActive: {r: 0, g: 0.6, b: 0, a: 0.56078434}
+  hoverColorInactive: {r: 0.6, g: 0.6, b: 0, a: 0.56078434}
   startColor: {r: 1, g: 1, b: 1, a: 0}
   clickable: 0
   movable: 0
   attackable: 0
+  playedturn: 0
 --- !u!114 &114557672483097732
 MonoBehaviour:
   m_ObjectHideFlags: 1

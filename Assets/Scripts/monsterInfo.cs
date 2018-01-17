@@ -11,7 +11,7 @@ public class monsterInfo : MonoBehaviour {
 	public int attack, defense, manacost, movspeed, attkrange; //these will affect offsets to card values, but the card is needed for that to be implemented (TODO post-merge)
 	//stores pairs of coordinates that this monster sits on, indexed [0,size-1]
 	public List< Pair<int,int> > coords;
-	public Color hoverColorAttacked = new Color32(0xFF, 0x99, 0x00, 0x8F); // RGBA
+	public Color hoverColorAttacked = new Color32(0xFF, 0x00, 0x00, 0x8F); // RGBA
 	public Color hoverColorActive = new Color32(0x00, 0x99, 0x00, 0x8F); // RGBA
 	public Color hoverColorInactive = new Color32(0x99, 0x99, 0x00, 0x8F); // RGBA
 	public Color startColor = new Color32(0xFF, 0xFF, 0xFF, 0x00); // RGBA
@@ -22,11 +22,14 @@ public class monsterInfo : MonoBehaviour {
 	//a monster can be clicked, move, attack
 	public bool clickable, movable, attackable;
 
+	//the turn the monster was played
+	public int playedturn;
+
 	//todo need to find a way to store enchants without changing originals, making silence applicable
 
-	public void setData(string mName, int att, int def, int mcost, int mspeed, int attkrange, Player parent) {
+	public void setData(string mName, int att, int def, int mcost, int mspeed, int attkrange, Player parent, int summonTurn) {
 		monsterName = mName; attack = att; defense = def; manacost = mcost; movspeed = mspeed; attkrange = attkrange;
-		parentPlayer = parent;
+		parentPlayer = parent; playedturn = summonTurn;
 	}
 
 	public void setPosition(List< Pair<int, int> > myList) {
@@ -35,8 +38,7 @@ public class monsterInfo : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//for testing i enable all monster options
-		clickable = true; movable = true; attackable = true;
+
 	}
 	
 	// Update is called once per frame
@@ -45,8 +47,50 @@ public class monsterInfo : MonoBehaviour {
 			Die ();
 	}
 
+	public void onStartTurn() {
+		//effects when starting a turn
+		Debug.Log(playedturn + " " + GameState.turn);
+		if (playedturn != GameState.turn) {
+			clickable = true;
+			movable = true;
+			attackable = true;
+		} else {
+			clickable = false;
+			movable = false;
+			attackable = false;
+		}
+	}
+
+	public void onEndTurn() {
+		//effects when ending a turn
+	}
+
+	public void onPostMove() {
+		//effects after moving
+		movable = false;
+	}
+
+	public void onPostAttack() {
+		//effects after attacking once
+		attackable = false;
+	}
+
+	public void onPostDefense() {
+		//effects after defending once
+		Debug.Log("help");
+	}
+
+	public void onPostHeal() {
+		//effects after heal
+	}
+
+	public void onPostDeath() {
+		//deathrattles
+	}
+
 	public void Die() {
 		parentPlayer.DieMonster (this.gameObject);
+		onPostDeath ();
 	}
 
 	public void Banish() {
