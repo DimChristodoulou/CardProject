@@ -7,8 +7,14 @@ public class MainMenu : MonoBehaviour
 {
 
     // Use this for initialization
-    public void Play()
+    public void LoadPlayScene()
     {
         SceneManager.LoadScene("mainscene");
     }
+
+    public void LoadCollectionScene()
+    {
+        SceneManager.LoadScene("collectionscene");
+    }
+
 }
