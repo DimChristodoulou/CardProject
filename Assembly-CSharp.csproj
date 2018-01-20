@@ -65,6 +65,20 @@
      <Compile Include="Assets\Scripts\movement.cs" />
      <Compile Include="Assets\Scripts\Node.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
+     <Compile Include="Assets\Scripts\attacking.cs" />
+     <Compile Include="Assets\Scripts\CameraMovement.cs" />
+     <Compile Include="Assets\Scripts\clickable.cs" />
+     <Compile Include="Assets\Scripts\clickableV2.cs" />
+     <Compile Include="Assets\Scripts\DBHandler.cs" />
+     <Compile Include="Assets\Scripts\GameState.cs" />
+     <Compile Include="Assets\Scripts\legalmoves.cs" />
+     <Compile Include="Assets\Scripts\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\monsterInfo.cs" />
+     <Compile Include="Assets\Scripts\movement.cs" />
+     <Compile Include="Assets\Scripts\nodeInfo.cs" />
+     <Compile Include="Assets\Scripts\Pair.cs" />
+     <Compile Include="Assets\Scripts\Player.cs" />
+     <Compile Include="Assets\Scripts\Utilities.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
