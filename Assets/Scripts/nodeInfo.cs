@@ -14,11 +14,12 @@ public class nodeInfo : MonoBehaviour {
 	public Color hoverColor = new Color32(0x2C, 0x2C, 0xFF, 0x8F); //RGBA
 	public Color currentColor; //current color, ignoring temporary effects like hovers
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		mRenderer = this.GetComponentInParent<Renderer>();
 		currentColor = startColor;
 		mRenderer.material.color = currentColor;
+        Debug.Log(xpos + " debug in Start " + ypos);
 	}
 	
 	// Update is called once per frame
@@ -30,7 +31,12 @@ public class nodeInfo : MonoBehaviour {
 		colorHovered ();
 	}
 
-	void OnMouseExit() {
+    void OnMouseOver()
+    {
+
+    }
+
+    void OnMouseExit() {
 		colorHovered ();
 	}
 

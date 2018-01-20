@@ -5,8 +5,6 @@ using UnityEngine;
 public class Player {
 	//class for player. note that it is not MonoBehaviour extension because player is an abstraction, not a physical game object.
 
-
-<<<<<<< HEAD
     private void shuffleDeck()
     {
         int randInt;
@@ -49,7 +47,6 @@ public class Player {
         // shuffle
         shuffleDeck();
     }
-=======
 	private GameObject monsterPrefab;
 	public int playingPos; //which player am i, 1st or 2nd
 	public string pName;
@@ -90,7 +87,6 @@ public class Player {
 		//	boardMinions [boardMinions.Count - 1].GetComponent<monsterInfo> ().Die ();
 		//}
 	}
->>>>>>> automated-approach
 
 	public bool heroAlive() {
 		return true;
@@ -119,6 +115,7 @@ public class Player {
 				hero.GetComponent<monsterInfo> ().setData ("test1", 1, 1, 1, 2, 1, this, GameState.turn);
 				boardMinions.Add (hero);
 			}
+            summonMonster("test", 1, 1, 1, 3, 1, new List<Pair<int, int>> { new Pair<int, int>(4, 1) }, GameState.turn);
 		} else {
 			//summon for p2
 			List<Pair<int,int>> summonPos = new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, GameState.dimensionY - 1) };

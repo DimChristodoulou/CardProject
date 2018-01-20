@@ -26,7 +26,7 @@ public class GameState : MonoBehaviour {
 		moveTime = 10.0f;
         //
         GameObject cardsample = Instantiate<GameObject>( (GameObject)Resources.Load("CardDisplaySample") );
-        cardsample.transform.SetParent(GameObject.Find("Main UI").transform, false);
+        //cardsample.transform.SetParent(GameObject.Find("Main UI").transform, false);
 
         //cardsample.transform.SetParent(GameObject.Find("Canvas").transform, false);
         //
@@ -60,7 +60,8 @@ public class GameState : MonoBehaviour {
 				cube.GetComponent<nodeInfo> ().xpos = j;
 				cube.GetComponent<nodeInfo> ().ypos = i;
 				cube.name = "node " + (j+1) + "," + (i+1);
-				myTable [j,i] = cube;
+                Debug.Log(cube.GetComponent<nodeInfo>().xpos + " Debugingamestate " + cube.GetComponent<nodeInfo>().ypos);
+                myTable [j,i] = cube;
 				offsety += yspacing;
 			}
 			offsetx += xspacing;
@@ -92,8 +93,6 @@ public class GameState : MonoBehaviour {
 		currentMoveTime = moveTime; //reset time
 		//add Player functions to start turn properly here, using players[activePlayerIndex]
 	}
-<<<<<<< HEAD
-=======
 
 	static public Player getActivePlayer() {
 		return players [activePlayerIndex];
@@ -128,5 +127,4 @@ public class GameState : MonoBehaviour {
 			boardTable [coord.First, coord.Second].GetComponent<nodeInfo> ().isFree = value;
 		}
 	}
->>>>>>> automated-approach
 }

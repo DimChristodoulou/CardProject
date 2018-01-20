@@ -107,4 +107,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae1a556723c339d4da3e06947c8fee98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xpos: 0
+  ypos: 0
   isFree: 0
+  activeColor: {r: 0, g: 0.6, b: 0, a: 1}
+  startColor: {r: 1, g: 1, b: 1, a: 0}
+  hoverColor: {r: 0.17254902, g: 0.17254902, b: 1, a: 0.56078434}
+  currentColor: {r: 0, g: 0, b: 0, a: 0}
