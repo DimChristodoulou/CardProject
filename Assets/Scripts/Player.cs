@@ -67,13 +67,27 @@ public class Player {
 		//hero = Instantiate(blah blah);
 		if (playingPos == 1) {
 			//summon for p1
-			hero = summonMonster("test1", 1, 1, 1, 2, 1, new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, 0) }, GameState.turn);
-			Debug.Log (GameState.turn);
-			summonMonster("test1", 1, 1, 1, 2, 1, new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, 1) }, GameState.turn);
+			List<Pair<int,int>> summonPos = new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, 0) };
+			if (GameState.allocateBoardPosition (summonPos)) {
+				hero = GameObject.Instantiate (monsterPrefab, GameState.getPositionRelativeToBoard (summonPos), new Quaternion (0, 0, 0, 0));
+				hero.GetComponent<monsterInfo> ().setPosition (summonPos);
+				hero.GetComponent<monsterInfo> ().setData ("test1", 1, 1, 1, 2, 1, this, GameState.turn);
+				boardMinions.Add (hero);
+			}
 		} else {
 			//summon for p2
-			hero = summonMonster ("test2", 1, 1, 1, 2, 1, new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, GameState.dimensionY - 1) }, GameState.turn);
+			List<Pair<int,int>> summonPos = new List<Pair<int,int>>{ new Pair<int,int> (GameState.dimensionX / 2, GameState.dimensionY - 1) };
+			if (GameState.allocateBoardPosition (summonPos)) {
+				hero = GameObject.Instantiate (monsterPrefab, GameState.getPositionRelativeToBoard (summonPos), new Quaternion (0, 0, 0, 0));
+				hero.GetComponent<monsterInfo> ().setPosition (summonPos);
+				hero.GetComponent<monsterInfo> ().setData ("test1", 1, 1, 1, 2, 1, this, GameState.turn);
+				boardMinions.Add (hero);
+			}
 		}
+	}
+
+	public void indicateSummonablePositions() {
+
 	}
 
 	public GameObject summonMonster(string mName, int att, int def, int mcost, int mspeed, int attkrange, List<Pair<int,int>> summonPos, int summonedTurn) {

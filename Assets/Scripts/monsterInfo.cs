@@ -49,7 +49,6 @@ public class monsterInfo : MonoBehaviour {
 
 	public void onStartTurn() {
 		//effects when starting a turn
-		Debug.Log(playedturn + " " + GameState.turn);
 		if (playedturn != GameState.turn) {
 			clickable = true;
 			movable = true;

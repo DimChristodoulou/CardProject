@@ -26,7 +26,8 @@ public class Utilities {
 				for (j = -1 + Mathf.Abs (i); j <= 1 - Mathf.Abs (i); j++) {
 					List<Pair<int,int>> child = new List<Pair<int,int>> ();
 					foreach (Pair<int,int> startpair in node) {
-						if (startpair.First+i >= 0 && startpair.First+i < GameState.dimensionX && startpair.Second+j >= 0 && startpair.Second+j < GameState.dimensionY && GameState.boardTable [startpair.First + i, startpair.Second + j].GetComponent<nodeInfo> ().isFree) {
+						if (startpair.First+i >= 0 && startpair.First+i < GameState.dimensionX && startpair.Second+j >= 0 && startpair.Second+j < GameState.dimensionY && 
+							(GameState.boardTable [startpair.First + i, startpair.Second + j].GetComponent<nodeInfo> ().isFree || Utilities.ContainsPair(curPos, new Pair<int,int>(startpair.First+i,startpair.Second+j)))) {
 							child.Add (new Pair<int,int> (startpair.First + i, startpair.Second + j));
 						} else {
 							child.Clear ();
@@ -55,7 +56,6 @@ public class Utilities {
 			for (int j = 0; j < aListB.Count; j++) {
 				if (aListA [i].First == aListB [j].First && aListA [i].Second == aListB [j].Second) {
 					flag = true;
-					aListB.RemoveAt (j); //we remove the common element to avoid unneseccary checks later
 					break;
 				}
 			}
@@ -63,6 +63,16 @@ public class Utilities {
 				return false;
 		}
 		return true;
+	}
+
+	public static bool ContainsPair(List<Pair<int,int>> mylist, Pair<int,int> myitem) {
+		bool result = false;
+		foreach (Pair<int,int> item in mylist) {
+			if (item.First == myitem.First && item.Second == myitem.Second) {
+				result = true;
+			}
+		}
+		return result;
 	}
 
 }

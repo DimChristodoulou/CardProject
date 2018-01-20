@@ -31,7 +31,7 @@ public class movement : MonoBehaviour {
 			}
 		}
 		if (!Utilities.DFS (gameObject.GetComponent<monsterInfo> ().coords, newPos, gameObject.GetComponent<monsterInfo> ().movspeed)) {
-			//untoggle the element from player that clicked it, we already have the reference from the item he selected as selectedMonsteer
+			//untoggle the element from player that clicked it, we already have the reference from the item he selected as selectedMonster
 			return;
 		}
 		gameObject.GetComponent<monsterInfo>().parentPlayer.updateClickedItem(null);
@@ -63,15 +63,20 @@ public class movement : MonoBehaviour {
 			for (j = -maxmoves+Mathf.Abs(i); j <= maxmoves-Mathf.Abs(i); j++) {
 				goalPos.Clear ();
 				foreach (Pair<int,int> startpair in startPos) {
-					if (startpair.First + i >= 0 && startpair.First + i < GameState.dimensionX && startpair.Second + j >= 0 && startpair.Second + j < GameState.dimensionY && GameState.boardTable[startpair.First+i,startpair.Second+j].GetComponent<nodeInfo>().isFree)
+					if (startpair.First + i >= 0 && startpair.First + i < GameState.dimensionX && startpair.Second + j >= 0 && startpair.Second + j < GameState.dimensionY && 
+						(GameState.boardTable[startpair.First+i,startpair.Second+j].GetComponent<nodeInfo>().isFree || Utilities.ContainsPair(startPos, new Pair<int,int>(startpair.First+i,startpair.Second+j)))) {
+						//Debug.Log ((startpair.First + i) + "," + (startpair.Second + j));
 						goalPos.Add (new Pair<int,int> (startpair.First + i, startpair.Second + j));
+					}
 					else {
 						goalPos.Clear ();
 						break;
 					}
 				}
 				if (goalPos.Count > 0) {
+					int pr = startPos.Count;
 					if (Utilities.DFS (startPos, goalPos, maxmoves)) {
+						Debug.Log (pr + " " + startPos.Count);
 						foreach (Pair<int,int> pair in goalPos) {
 							if (!availableMoves.ContainsKey (pair)) {
 								availableMoves.Add (pair, 1);
