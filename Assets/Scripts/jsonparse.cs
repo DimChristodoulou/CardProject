@@ -14,6 +14,7 @@ public class jsonparse : MonoBehaviour {
         path = Application.streamingAssetsPath + "/cards.json";
         jsonString = File.ReadAllText(path);
         cards = JsonHelper.getJsonArray<Card>(jsonString);
+        Debug.Log("111111111111111111111" + cards[0].card_name);
     }
 	
 }

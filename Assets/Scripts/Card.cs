@@ -17,5 +17,8 @@ public class Card{
     public string card_ingameModel;
     public string card_text;
     public string card_set;
-
+    public string card_attribute;
+    public string card_type;
+    public string card_tags;
+    public string card_actionpoints;
 }

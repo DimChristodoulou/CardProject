@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameState : MonoBehaviour {
 	//This is the class to handle board, check board conditions (can monster move/summon) where it wants etc
@@ -18,6 +19,7 @@ public class GameState : MonoBehaviour {
 	static public int dimensionX=7, dimensionY=11;
 	static private float xspacing = 1.2f, yspacing = 1.2f; //offset for board view
 
+
 	// Use this for initialization
 	void Start () {
 		turn = 0;
@@ -27,6 +29,11 @@ public class GameState : MonoBehaviour {
 		activePlayerIndex = -1;
 		nextPlayerTurn ();
 	}
+
+    public void endTurnOnButtonClick()
+    {
+        nextPlayerTurn();
+    }
 
 	// Update is called once per frame
 	void Update () {

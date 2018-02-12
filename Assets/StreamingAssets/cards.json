@@ -1,1 +1,1 @@
-[{"card_id":1, "card_name":"sample_name", "card_manacost":1, "card_image":"1.jpg", "card_text":"sample_text", "card_set":"sample_set"}]
+[{"card_id":1, "card_name":"Flamesprite", "card_manacost":1, "card_image":"flamesprite_0", "card_text":"[On Summon]: Deal 5 damage to the enemy hero.", "card_set":"Basic", "card_ingamemodel":"flamesprite3d_0", "card_attribute":"Fire", "card_type":"Minion", "card_tags":"Fire", "card_actionpoints":2}]

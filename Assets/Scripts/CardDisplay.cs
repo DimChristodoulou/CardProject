@@ -24,13 +24,17 @@ public class CardDisplay : MonoBehaviour {
 
     public void DisplayCard (int cardId)
     {
-        //Debug.Log(jsonparse.cards[cardId].card_name);
-        //cardName.GetComponent<Text>();
-        Debug.Log(cardName);
+        Debug.Log(jsonparse.cards[cardId].card_name);
+        cardName.GetComponent<Text>();
         cardName.text = jsonparse.cards[cardId].card_name;
         description.text = jsonparse.cards[cardId].card_text;
         manaCost.text = jsonparse.cards[cardId].card_manacost.ToString();
-        //artwork.sprite = Resources.Load(jsonparse.cards[cardId].card_image.ToString(), typeof(Sprite)) as Sprite;
+        string isMinion = jsonparse.cards[cardId].card_type.ToString();
+        if (isMinion.Equals("Minion"))
+        {
+            meleeAttack.text = jsonparse.cards[cardId].card_actionpoints.ToString();
+        }
+        artwork.sprite = Resources.Load(jsonparse.cards[cardId].card_image.ToString(), typeof(Sprite)) as Sprite;
     }
     
 }
