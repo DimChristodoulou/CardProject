@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player {
 	//class for player. note that it is not MonoBehaviour extension because player is an abstraction, not a physical game object.
@@ -13,7 +14,8 @@ public class Player {
 	public List<GameObject> handCards;
 	public List<GameObject> boardMinions;
 	public List<GameObject> graveyard;
-	public List<GameObject> deck;
+	public List<int> deck;                   //Changed from List<GameObject> to List<int> because the deck will consist of card ids.
+    private int deckSize;
 	public bool isPlaying = false;
     private CardDisplay originalCard;
     private GameObject clonedCard;
@@ -26,26 +28,31 @@ public class Player {
 		monsterPrefab = ((GameObject)Resources.Load ("Monster"));
 		this.playingPos = pPos;
 		this.pName = pName;
+        this.deckSize = 30;
 		handCards = new List<GameObject> ();
 		boardMinions = new List<GameObject> ();
 		graveyard = new List<GameObject> ();
         originalCard = new CardDisplay();
         if (playingPos == 1)
         {
-            for(int i=0; i<4; i++)
-            {
-                clonedCard = originalCard.initandstart(-157+161*i, -330.9f, 0);
-                handCards.Add(clonedCard);
-            }
+            for (int i = 0; i < 4; i++)
+                DrawCard(-157 + 161 * i, -330.9f, 0, 1);
         }
         if (playingPos == 2)
         {
             for (int i = 0; i < 4; i++)
-            {
-                clonedCard = originalCard.initandstart(-157 + 161 * i, 330, 0);
-                handCards.Add(clonedCard);
-            }
+                DrawCard(-157 + 161 * i, 330, 0, 1);
         }
+    }
+
+    public void DrawCard(float x, float y, float z, int cardId)
+    {
+        clonedCard = originalCard.initializeCard(x, y, z, cardId);
+        handCards.Add(clonedCard);
+        deckSize--;
+        GameObject deck = GameObject.Find("Player_Deck");
+        Text remainingCards = GameObject.Find("Remaining_Cards").GetComponent<Text>();
+        remainingCards.text = "Remaining:\n" + deckSize;
     }
 
 	public void startTurn() {
