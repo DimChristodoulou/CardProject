@@ -15,6 +15,8 @@ public class Player {
 	public List<GameObject> graveyard;
 	public List<GameObject> deck;
 	public bool isPlaying = false;
+    private CardDisplay originalCard;
+    private GameObject clonedCard;
 	//when a player selects an item, we need to remove selection if we click another
 	public GameObject selected;
 
@@ -27,7 +29,24 @@ public class Player {
 		handCards = new List<GameObject> ();
 		boardMinions = new List<GameObject> ();
 		graveyard = new List<GameObject> ();
-	}
+        originalCard = new CardDisplay();
+        if (playingPos == 1)
+        {
+            for(int i=0; i<4; i++)
+            {
+                clonedCard = originalCard.initandstart(-157+161*i, -330.9f, 0);
+                handCards.Add(clonedCard);
+            }
+        }
+        if (playingPos == 2)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                clonedCard = originalCard.initandstart(-157 + 161 * i, 330, 0);
+                handCards.Add(clonedCard);
+            }
+        }
+    }
 
 	public void startTurn() {
 		foreach (GameObject monster in boardMinions) {
