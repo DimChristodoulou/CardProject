@@ -26,7 +26,7 @@ public class CardDisplay : MonoBehaviour {
         if (this.name.Equals("CardDisplaySample(Clone)"))                                   //Needs checking or the cloned object will clone again.
         {
             isInstantiated = true;
-            DisplayCard(0);
+            //DisplayCard(0);
         }
     }
 
@@ -50,6 +50,7 @@ public class CardDisplay : MonoBehaviour {
             GameObject mainui = GameObject.Find("Main UI");
             card = (GameObject)Instantiate(Resources.Load("CardDisplaySample"));
             card.transform.SetParent(mainui.transform);
+            card.GetComponent<CardDisplay>().DisplayCard(cardId);
             card.transform.localPosition = new Vector3(x, y, z);
             return card;
     }

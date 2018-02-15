@@ -36,7 +36,7 @@ public class Player {
         if (playingPos == 1)
         {
             for (int i = 0; i < 4; i++)
-                DrawCard(-157 + 161 * i, -330.9f, 0, 1);
+                DrawCard(-157 + 161 * i, -330.9f, 0, 0);
         }
         if (playingPos == 2)
         {
