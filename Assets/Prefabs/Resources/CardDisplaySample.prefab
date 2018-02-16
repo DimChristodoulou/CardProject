@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 222996713640590116}
   - component: {fileID: 114413329948035658}
   - component: {fileID: 114745810881101114}
+  - component: {fileID: 114067190062165146}
   m_Layer: 5
   m_Name: CardDisplaySample
   m_TagString: Untagged
@@ -165,6 +166,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114067190062165146
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1407063761613826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cfc917aacb378c46996651231b874be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Font: {fileID: 12800000, guid: 3b441e50773280048828b2807578f00e, type: 3}
 --- !u!114 &114132720050937406
 MonoBehaviour:
   m_ObjectHideFlags: 1

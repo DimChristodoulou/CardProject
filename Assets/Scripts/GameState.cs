@@ -25,7 +25,7 @@ public class GameState : MonoBehaviour {
 		turn = 0;
 		boardTable = createBoard (dimensionX, dimensionY);
 		setPlayers (2);
-		moveTime = 10.0f;
+		moveTime = 30.0f;
 		activePlayerIndex = -1;
 		nextPlayerTurn ();
 	}
@@ -38,12 +38,14 @@ public class GameState : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		currentMoveTime -= Time.deltaTime;
+        Text turn_timer = GameObject.Find("turn_timer").GetComponent<Text>();
+        turn_timer.text = "Time Remaining: \n" + (int)currentMoveTime;
 		if (currentMoveTime <= 0) { //end of turn
 			nextPlayerTurn();
 		}
 		//to get seconds in int value use:
 		Mathf.Ceil(currentMoveTime);
-		Debug.Log("Turn " + turn + " : Playing " + players[activePlayerIndex].pName + " time " + Mathf.Ceil(currentMoveTime));
+		//Debug.Log("Turn " + turn + " : Playing " + players[activePlayerIndex].pName + " time " + Mathf.Ceil(currentMoveTime));
 
 	}
 

@@ -4,17 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Player {
-	//class for player. note that it is not MonoBehaviour extension because player is an abstraction, not a physical game object.
+    //class for player. note that it is not MonoBehaviour extension because player is an abstraction, not a physical game object.
 
 
-	private GameObject monsterPrefab;
-	public int playingPos; //which player am i, 1st or 2nd
-	public string pName;
-	public GameObject hero; //hero is a seperate unit due to its win condition checks and the fact that he is instantiated from beginning
-	public List<GameObject> handCards;
-	public List<GameObject> boardMinions;
-	public List<GameObject> graveyard;
-	public List<int> deck;                   //Changed from List<GameObject> to List<int> because the deck will consist of card ids.
+    private GameObject monsterPrefab;
+    public int playingPos; //which player am i, 1st or 2nd
+    public string pName;
+    public GameObject hero; //hero is a seperate unit due to its win condition checks and the fact that he is instantiated from beginning
+    public List<GameObject> handCards;
+    public List<GameObject> boardMinions;
+    public List<GameObject> graveyard;
+    public List<int> deck = new List<int>{1, 0, 1, 1};                   //Changed from List<GameObject> to List<int> because the deck will consist of card ids.
     private int deckSize;
 	public bool isPlaying = false;
     private CardDisplay originalCard;
@@ -36,12 +36,19 @@ public class Player {
         if (playingPos == 1)
         {
             for (int i = 0; i < 4; i++)
-                DrawCard(-157 + 161 * i, -330.9f, 0, 0);
+            {
+                DrawCard(-157 + 161 * i, -330.9f, 0, deck[0]);
+                deck.RemoveAt(0);
+            }
         }
         if (playingPos == 2)
         {
             for (int i = 0; i < 4; i++)
-                DrawCard(-157 + 161 * i, 330, 0, 1);
+            {
+                DrawCard(-157 + 161 * i, 330, 0, deck[0]);
+                deck.RemoveAt(0);
+            }
+                
         }
     }
 
