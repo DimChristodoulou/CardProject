@@ -15,7 +15,7 @@ public class jsonparse : MonoBehaviour {
         jsonString = File.ReadAllText(path);
         cards = JsonHelper.getJsonArray<Card>(jsonString);
     }
-	
+
 }
 
 public class JsonHelper

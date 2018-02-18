@@ -50,6 +50,7 @@ public class CardDisplay : MonoBehaviour {
             GameObject mainui = GameObject.Find("Main UI");
             card = (GameObject)Instantiate(Resources.Load("CardDisplaySample"));
             card.transform.SetParent(mainui.transform);
+            Debug.Log("Hi");
             card.GetComponent<CardDisplay>().DisplayCard(cardId);
             card.transform.localPosition = new Vector3(x, y, z);
             return card;
@@ -60,7 +61,6 @@ public class CardDisplay : MonoBehaviour {
      */
     public void DisplayCard (int cardId)
     {
-        //Debug.Log(jsonparse.cards[cardId].card_name);
         cardName.GetComponent<Text>();
         cardName.text = jsonparse.cards[cardId].card_name;
         description.text = jsonparse.cards[cardId].card_text;
@@ -80,6 +80,6 @@ public class CardDisplay : MonoBehaviour {
         //TODO: Other attributes...
         artwork.sprite = Resources.Load(jsonparse.cards[cardId].card_image.ToString(), typeof(Sprite)) as Sprite;
     }
-    
+
 }
 
