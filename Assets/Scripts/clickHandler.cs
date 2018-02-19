@@ -59,16 +59,35 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("Mouse Enter");
-        Text descText = GameObject.Find("description_text").GetComponent<Text>();
-        descText.text = "Hello there";
+        Debug.Log("Mouse Exit");
+        Scene currentScene = SceneManager.GetActiveScene();
+        if (currentScene.name.Equals("deckbuilder"))
+        {
+            Debug.Log("Mouse Enter");
+            Transform hoveredCardName = eventData.pointerCurrentRaycast.gameObject.transform.parent.Find("name");
+            Text textHoveredCardName = hoveredCardName.GetComponent<Text>();
+            string s = textHoveredCardName.text.ToString();
+            Text descText = GameObject.Find("description_text").GetComponent<Text>();
+            int cardIndex = 0;
+            for (; cardIndex < jsonparse.cards.Length; cardIndex++)
+            {
+                if (jsonparse.cards[cardIndex].card_name.Equals(s))
+                    break;
+            }
+            Debug.Log("INDEX IS" + cardIndex);
+            descText.text = jsonparse.cards[cardIndex].card_flavortext;
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         Debug.Log("Mouse Exit");
-        Text descText = GameObject.Find("description_text").GetComponent<Text>();
-        descText.text = "";
+        Scene currentScene = SceneManager.GetActiveScene();
+        if (currentScene.name.Equals("deckbuilder"))
+        {
+            Text descText = GameObject.Find("description_text").GetComponent<Text>();
+            descText.text = "";
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)

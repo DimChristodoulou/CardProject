@@ -10,6 +10,7 @@ public class deckbuilder : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
         cardsJson = new jsonparse();
         originalCard = new CardDisplay();
         originalCard.initializeCard(-330, 86, 0, 0);

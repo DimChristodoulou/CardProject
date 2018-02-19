@@ -18,8 +18,8 @@ public class CardDisplay : MonoBehaviour {
     public Image artwork;
     public Image element;
 
-    public Text meleeAttack;
-    public Text rangedAttack;
+    public Text power;
+
 
     void Start()
     {
@@ -49,7 +49,7 @@ public class CardDisplay : MonoBehaviour {
     {
             GameObject mainui = GameObject.Find("Main UI");
             card = (GameObject)Instantiate(Resources.Load("CardDisplaySample"));
-            card.transform.SetParent(mainui.transform);
+            card.transform.SetParent(mainui.transform, false);
             Debug.Log("Hi");
             card.GetComponent<CardDisplay>().DisplayCard(cardId);
             card.transform.localPosition = new Vector3(x, y, z);
@@ -70,7 +70,7 @@ public class CardDisplay : MonoBehaviour {
         string isMinion = jsonparse.cards[cardId].card_type.ToString();
         if (isMinion.Equals("Minion"))
         {
-            meleeAttack.text = jsonparse.cards[cardId].card_actionpoints.ToString();
+            power.text = jsonparse.cards[cardId].card_actionpoints.ToString();
         }
         string attribute = jsonparse.cards[cardId].card_attribute.ToString();
         if (attribute.Equals("Fire"))

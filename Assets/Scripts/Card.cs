@@ -21,4 +21,5 @@ public class Card{
     public string card_type;
     public string card_tags;
     public string card_actionpoints;
+    public string card_flavortext;
 }

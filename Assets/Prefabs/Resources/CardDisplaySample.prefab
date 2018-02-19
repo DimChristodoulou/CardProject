@@ -475,8 +475,8 @@ MonoBehaviour:
   type: {fileID: 114509657558790208}
   artwork: {fileID: 114621331328164356}
   element: {fileID: 114257190093405112}
-  meleeAttack: {fileID: 114677675259875150}
-  rangedAttack: {fileID: 0}
+  power: {fileID: 114677675259875150}
+  flavortext: {fileID: 0}
 --- !u!222 &222015136567816920
 CanvasRenderer:
   m_ObjectHideFlags: 1
