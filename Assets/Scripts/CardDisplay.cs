@@ -49,7 +49,8 @@ public class CardDisplay : MonoBehaviour {
     {
             GameObject mainui = GameObject.Find("Main UI");
             card = (GameObject)Instantiate(Resources.Load("CardDisplaySample"));
-            card.transform.SetParent(mainui.transform, false);
+            card.transform.SetParent(mainui.transform);
+            card.transform.localScale = new Vector3(1, 1, 1);
             Debug.Log("Hi");
             card.GetComponent<CardDisplay>().DisplayCard(cardId);
             card.transform.localPosition = new Vector3(x, y, z);
