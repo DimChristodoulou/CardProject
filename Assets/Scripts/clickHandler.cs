@@ -5,6 +5,11 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
+/*
+ *  Generic class used to identify User-GUI interaction.
+ */
+
 public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHandler,
     IPointerUpHandler, IPointerExitHandler, IPointerEnterHandler,
     IBeginDragHandler, IDragHandler, IEndDragHandler
@@ -12,21 +17,35 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
 
     public Font m_Font;
 
+
+    /*
+     * Called the moment cursor is clicked.
+     */
     public void OnBeginDrag(PointerEventData eventData)
     {
         Debug.Log("Drag Begin");
     }
 
+    /*
+     *  Called while cursor is held down and moving.
+     */
     public void OnDrag(PointerEventData eventData)
     {
         Debug.Log("Dragging");
     }
 
+
+    /*
+     *  Called when cursor stops being held down.
+     */
     public void OnEndDrag(PointerEventData eventData)
     {
         Debug.Log("Drag Ended");
     }
 
+   /*
+    *  Called when the user clicks.
+    */
     public void OnPointerClick(PointerEventData eventData)
     {
         Scene currentScene = SceneManager.GetActiveScene();
@@ -41,6 +60,8 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
                 creatureText.transform.SetParent(mainui.transform);
                 Text newtext = creatureText.AddComponent<Text>();
                 newtext.font = m_Font;
+                newtext.GetComponent<RectTransform>().sizeDelta = new Vector2(600, 50);
+                newtext.fontSize = 36;
                 newtext.text = "Choose where to summon the creature";
                 newtext.color = UnityEngine.Color.black;
                 newtext.transform.localPosition = new Vector3(100, 52, 0);
@@ -52,11 +73,17 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
         }
     }
 
+   /*
+    *  Called while cursor is stationary and held down.
+    */
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log("Mouse Down: " + eventData.pointerCurrentRaycast.gameObject.name);
     }
 
+   /*
+    *  Called when cursor enters the space allocated to the object attached to this script.
+    */
     public void OnPointerEnter(PointerEventData eventData)
     {
         Debug.Log("Mouse Exit");
@@ -79,6 +106,9 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
         }
     }
 
+    /*
+     *  Called when cursor exits the space allocated to the object attached to this script.
+     */
     public void OnPointerExit(PointerEventData eventData)
     {
         Debug.Log("Mouse Exit");
