@@ -8,12 +8,16 @@ public class jsonparse : MonoBehaviour {
     string path;
     string jsonString;
     public static Card[] cards;
+    public static int[] cardids;
 
     // Use this for initialization
     void Start () {
         path = Application.streamingAssetsPath + "/cards.json";
         jsonString = File.ReadAllText(path);
         cards = JsonHelper.getJsonArray<Card>(jsonString);
+        cardids = new int[cards.Length];
+        for (int i = 0; i < cards.Length; i++)
+            cardids[i] = i+1;
     }
 
 }

@@ -80,6 +80,10 @@ public class CardDisplay : MonoBehaviour {
         {
             element.sprite = Resources.Load("fire", typeof(Sprite)) as Sprite;
         }
+        else if (attribute.Equals("Light"))
+        {
+            element.sprite = Resources.Load("light", typeof(Sprite)) as Sprite;
+        }
         //TODO: Other attributes...
         artwork.sprite = Resources.Load(jsonparse.cards[cardId].card_image.ToString(), typeof(Sprite)) as Sprite;
     }
