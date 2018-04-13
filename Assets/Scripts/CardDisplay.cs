@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class CardDisplay : MonoBehaviour {
     
-
     public GameObject card;
 
     private bool isInstantiated = false;
@@ -19,6 +18,7 @@ public class CardDisplay : MonoBehaviour {
     public Image element;
 
     public Text power;
+    public int id;
 
 
     void Start()
@@ -63,6 +63,8 @@ public class CardDisplay : MonoBehaviour {
      */
     public void DisplayCard (int cardId)
     {
+        id = cardId;
+        
         cardName.GetComponent<Text>();
         cardName.text = jsonparse.cards[cardId].card_name;
         description.text = jsonparse.cards[cardId].card_text;

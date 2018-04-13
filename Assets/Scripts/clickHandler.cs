@@ -17,6 +17,7 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
 
     public Font m_Font;
 
+    static int cardEntryOffset = 133;
 
     /*
      * Called the moment cursor is clicked.
@@ -51,9 +52,11 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
         Scene currentScene = SceneManager.GetActiveScene();
         if (currentScene.name.Equals("mainscene"))
         {
-            string clickedCard = eventData.pointerCurrentRaycast.gameObject.transform.parent.name;
+            //string clickedCard = eventData.pointerCurrentRaycast.gameObject.transform.parent.name;
+            GameObject clickedObj = eventData.pointerCurrentRaycast.gameObject;
+            string clickedCard = clickedObj.name;
             Debug.Log("Clicked: " + eventData.pointerCurrentRaycast.gameObject.transform.parent.name);
-            if (clickedCard.Equals("CardDisplaySample(Clone)"))
+            if (clickedCard.Equals("CardDisplaySample(Clone)") || clickedObj.transform.parent.name.Equals("CardDisplaySample(Clone)") || clickedCard.Equals("CardDisplaySpellSample(Clone)") || clickedObj.transform.parent.name.Equals("CardDisplaySpellSample(Clone)"))
             {
                 GameObject mainui = GameObject.Find("Main UI");
                 GameObject creatureText = new GameObject("Summon_Creature_Text");
@@ -69,9 +72,36 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
         }
         else
         {
-            if(deckbuilder.deckBuildActive == true)
+            //Debug.Log("DECK BUILD ACTIVE = " + deckbuilder.deckBuildActive);
+            if (deckbuilder.deckBuildActive == true)
             {
+                if (Player.deck.Count < 30)
+                {
+                    GameObject clickedObj = eventData.pointerCurrentRaycast.gameObject;
+                    string clickedCard = clickedObj.name;
+                    Debug.Log("Clicked: " + eventData.pointerCurrentRaycast.gameObject.transform.parent.name);
+                    if (clickedCard.Equals("CardDisplaySample(Clone)") || clickedObj.transform.parent.name.Equals("CardDisplaySample(Clone)") || clickedCard.Equals("CardDisplaySpellSample(Clone)") || clickedObj.transform.parent.name.Equals("CardDisplaySpellSample(Clone)"))
+                    {
+                        GameObject cardListEntry = new GameObject("cardListEntry");
+                        //cardListEntry = Instantiate(cardListEntry, GameObject.FindGameObjectWithTag("ListWithCards").transform);
+                        cardListEntry.AddComponent<LayoutElement>();
+                        cardListEntry.AddComponent<Text>();
+                        //cardListEntry.GetComponent<Text>().font.name = "Arial";
+                        cardListEntry.GetComponent<Text>().text = clickedObj.GetComponent<CardDisplay>().cardName.text;
+                        cardListEntry.GetComponent<Text>().font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
+                        cardListEntry.GetComponent<Text>().fontSize = 10;
 
+                        //cardListEntry.transform.parent = GameObject.FindGameObjectWithTag("ListWithCards").transform;
+                        Debug.Log("card list entry created!");
+                        cardListEntry = Instantiate(cardListEntry, GameObject.FindGameObjectWithTag("ListWithCards").transform);
+                        cardEntryOffset -= 20;
+                        cardListEntry.transform.localPosition = new Vector3(3.382453f, cardEntryOffset, 0);
+                        ((RectTransform)cardListEntry.transform).sizeDelta = new Vector2(118.89f, 17.58f);
+
+
+                        Player.deck.Add(clickedObj.GetComponent<CardDisplay>().id);
+                    }
+                }
             }
         }
     }
