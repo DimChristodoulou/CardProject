@@ -1,0 +1,91 @@
+card_id,card_name,card_manacost,card_image,card_text,card_set,card_ingamemodel,card_attribute,card_type,card_tags,card_actionpoints,card_flavortext
+1,Ashen,1,ashen_0,[On Death]: All enemy minions suffer -3 Power.,Basic,ashen_igm_0,Fire,Minion,,2,"Like the Ashen One, but better."
+2,Flamesprite,1,flamesprite_0,[On Summon]: Deal 5 damage to your opponent.,Basic,flamesprite_igm_0,Fire,Minion,,2,Just because Flamecola doesn’t make any sense.
+3,Mind of the Emperor,1,mind_of_the_emperor_0,Look at the cards in your opponent’s hand.,Basic,,Fire,Spell,,-1,It’s kinda big.
+4,The Emperor’s Fool,1,the_emperors_fool_0,"(Treated as an Emperor’s Fragment card).
+
+When targeted for an attack, you may destroy this card. If you do, summon an Emperor’s Fragment card from your deck adjacent to where this died.",Basic,the_emperors_fool_igm_0,Fire,Minion,,1,Not a fool.
+5,Ashes to Ashes,2,ashes_to_ashes_0,[Instant]: Reduce the Power of a minion by 3.,Basic,,Fire,Spell,,-1,Dust to dust.
+6,Ashenborn,2,ashenborn_0,[On Death]: Summon a Ashenborn from your deck and increase its Power by 3.,Basic,fireborn_igm_0,Fire,Minion,,3,How was he actually born?
+7,Iron Resolve,2,iron_resolve_0,Increase the Power of a minion by 3.,Basic,,Fire,Spell,,-1,It comes in Magnesium as well!
+8,Raging Flamesprite,2,raging_flamesprite_0,[On Death]: Destroy the minion that killed this.,Basic,raging_flamesprite_igm_0,Fire,Minion,,4,Arrrr
+9,The Emperor’s Wizard,2,the_emperors_wizard_0,"(Treated as an Emperor’s Fragment card).  
+
+[On Summon]: Silence an enemy minion.",Basic,the_emperors_wizard_igm_0,Fire,Minion,,3,He’s an imperial mage.
+10,Wickerman,2,wickerman_0,"While adjacent to a Fire minion, gains +2 Power.",Basic,wickerman_igm_0,Fire,Minion,,3,Wicked.
+11,Firewraith,3,firewraith_0,Charge.,Basic,firewraith_igm_0,Fire,Minion,,5,Spooky.
+12,Flameheart,3,flameheart_0,Discard a Fire minion and draw 3 cards.,Basic,,Fire,Spell,,-1,So hot.
+13,Flame Shaman,3,flame_shaman_0,All Fire minions have +2 Power.,Basic,flame_shaman_igm_0,Fire,Minion,,2,Shaman.
+14,Flame Warper,3,flame_warper_0,[On Summon]: Switch places with another minion.,Basic,flame_warper_igm_0,Fire,Minion,,6,Beam us up Scotty!
+15,Idol of Fire,3,idol_of_fire_0,"Cannot move or attack.
+
+Once per turn, you can banish a Fire minion from your discard pile and make an enemy minion lose Power equal to the banished minion’s cost.",Basic,idol_of_fire_igm_0,Fire,Minion,,6,Pretty hot for an idol.
+16,The Emperor’s Hound,3,the_emperors_hound_0,"(Treated as an Emperor’s Fragment card).
+
+Charge.",Basic,the_emperors_hound_igm_0,Fire,Minion,,6,Woof woof.
+17,The Emperor’s Knight,3,the_emperors_knight_0,(Treated as an Emperor’s Fragment card).,Basic,the_emperors_knight_igm_0,Fire,Minion,,8,"Your average, nonchalant knight."
+18,Avenging Flame,4,avenging_flame_0,"When a Fire minion dies, your opponent takes damage equal to its cost.",Basic,avenging_flame_igm_0,Fire,Minion,,6,Avenge it!!!
+19,Blessing of the Infernal Emperor,4,blessing_of_the_inf_emperor_0,Choose a friendly minion. It gains +4 Power and [On Death]: Give a friendly minion +4 Power.,Basic,,Fire,Spell,,-1,
+20,Burning Walls,4,burning_walls_0,Destroy all minions on the outer board tiles.,Basic,,Fire,Spell,,-1,
+21,Combustion,4,combustion_0,Destroy a Fire minion and choose another minion. The chosen minion gains Power equal to half of that of the destroyed minion’s.,Basic,,Fire,Spell,,-1,
+22,Emperor’s March,4,emperors_march_0,All Fire minions can move immediately after this card resolves. You choose the order they move in.,Basic,,Fire,Spell,,-1,"Later than Emperor’s February, but sooner than Emperor’s April."
+23,Fireball,4,fireball_0,Destroy a minion on the board.,Basic,,Fire,Spell,,-1,
+24,Fireborn,4,Fireborn_0,[On Death]: Add a Fire minion from your discard pile to your hand.,Basic,fireborn_igm_0,Fire,Minion,,6,
+25,Firedrake,4,firedrake_0,"Fly, Speed 2",Basic,firedrake_igm_0,Fire,Minion,,8,A drake that spits fire. So basically just a drake.
+26,Fire Elemental,4,fire_elemental_0,[On Summon]: Destroy an adjacent enemy minion.,Basic,fire_elemental_igm_0,Fire,Minion,,4,
+27,Flame Manipulator,4,flame_manipulator_0,[On Summon]: Reveal the top 3 cards of your deck. Choose a Fire minion among them to add to your hand and shuffle the rest back into your deck.,Basic,flame_manipulator_igm_0,Fire,Minion,,7,
+28,Hellraiser,4,hellraiser_0,"When targeted for an attack, reduce the Power of the attacker by 3 for that attack only.",Basic,hellraiser_igm_0,Fire,Minion,,7,
+29,Inferno Summon,4,inferno_summon_0,"If “Demise, the Infernal Emperor” is on the board and under your control, summon two Fire minions from your discard pile.",Basic,,Fire,Spell,,-1,
+30,The Crater,4,the_crater_0,"Once per turn, the turn player can discard a Fire minion. If they do, they draw 1 card.",Basic,,Fire,Spell,Arena,-1,
+31,The Emperor’s Advisor,4,the_emperors_advisor_0,"(Treated as an Emperor’s Fragment card)
+
+[On Summon]: Add an “Emperor’s Fragment” card from your deck to your hand.",Basic,the_emperors_advisor_igm_0,Fire,Minion,,6,
+32,The Flame Within,4,the_flame_within_0,Give a Fire minion +10 Power. It cannot attack directly and is destroyed at the end of this turn.,Basic,,Fire,Spell,,-1,
+33,Burning Manifestation,5,burning_manifestation_0,Summon a Fire minion from your hand. At the end of the next turn destroy it and take damage equal to its Power.,Basic,,Fire,Spell,,-1,
+34,Burning Tomb,5,burning_tomb_0,Destroy a minion. That minion’s On Death effects cannot be activated.,Basic,,Fire,Spell,,-1,
+35,Doomfire,5,doomfire_0,"When a minion is summoned, the player that summoned it takes 2 damage.",Basic,doomfire_igm_0,Fire,Minion,,9,
+36,Infernal Revenant,5,infernal_revenant_0,You can banish Fire minions from your discard pile that total a cost of 5 or more to summon this card from your hand.,Basic,infernal_revenant_igm_0,Fire,Minion,,8,
+37,Palace of Inferno,5,palace_of_inferno_0,"All Fire minions gain +3 Power. While a player controls “Demise, the Infernal Emperor”, their opponent cannot activate any minion effects.",Basic,,Fire,Spell,"Arena,Unique",-1,
+38,Protector of Flames,5,protector_of_flames_0,Friendly Fire minions within 2 tiles of this minion cannot be targeted by spells.,Basic,protector_of_flames_igm_0,Fire,Minion,,8,
+39,The Burning Planes,5,the_burning_planes_0,"All Fire minions gain +3 Power. When an attacking Fire minion destroys a minion, both players take damage equal to half the destroyed minion’s cost.",Basic,,Fire,Spell,Arena,-1,
+40,The Emperor’s Squire,5,the_emperors_squire_0,"(Treated as an Emperor’s Fragment card)
+If you control an “Emperor’s Fragment” card, you can summon this minion from your hand.
+[On Death]: If this minion is destroyed by the effect of “Infernal Rise”, “Demise, the Infernal Emperor” gains the following ability: You can banish Fire minions from your discard pile instead of your hand when using your instant ability.",Basic,the_emperors_squire_igm_0,Fire,Minion,,5,
+41,Cleansing Flame,6,cleansing_flame_0,"Until the end of your next turn, no minion effects can be used and their effects are negated.",Basic,,Fire,Spell,,-1,
+42,Effigy of Flames,6,effigy_of_flames_0,"When a friendly Fire minion dies while this is in your hand, you can summon this where the minion died.",Basic,effigy_of_flames_igm_0,Fire,Minion,,5,
+43,Infernal Rise,6,infernal_rise_0,"If you control 4 “Emperor’s Fragment” cards, destroy all of them and summon “Demise, the Infernal Emperor” from your hand, deck or discard pile.
+
+The activation and the effects of this card cannot be negated.",Basic,,Fire,Spell,,6,
+44,Reborn from Ash,6,reborn_from_ash_0,Destroy all minions you control. Summon a Fire minion from your discard pile.,Basic,,Fire,Spell,,-1,
+45,The Emperor Incarnate,6,the_emperor_incarnate_0,"(Treated as an Emperor’s Fragment card)
+
+[On Summon]: Add “Infernal Rise” from your deck to your hand.
+[On Death]: Summon up to two “Emperor’s Fragment” cards from your deck, except “The Emperor Incarnate”.",Basic,the_emperor_incarnate_igm_0,Fire,Minion,,10,
+46,Fire Giant,7,fire_giant_0,[On Summon]: Reduce the Power of all adjacent minions by 5.,Basic,fire_giant_igm_0,Fire,Minion,,10,
+47,Firestorm,7,firestorm_0,Destroy all minions with 12 Power or less.,Basic,,Fire,Spell,,-1,
+48,Flamelord,7,flamelord_0,[On Summon]: Banish any number of Fire minions from your discard pile and choose an enemy minion. That minion loses Power equal to double the number of minions banished for this effect,Basic,flamelord_igm_0,Fire,Minion,,10,
+49,Burning Colossus,8,burning_colossus_0,"You can summon this card from your hand by paying no mana. If you do, destroy 2 Fire minions you control.",Basic,burning_colossus_igm_0,Fire,Minion,,8,
+50,Kirin,3,kirin_0,"Once per turn, you can send a Fire minion from your deck to your discard pile and draw a card.",Basic,kirin_igm_0,Fire,Minion,Unique,4,
+51,Fiend with the Burning Blade,6,fiend_burning_blade_0,"When this minion destroys an enemy minion by attacking, choose an adjacent minion to the attack target and destroy it.",Basic,fiend_burning_blade_igm_0,Fire,Minion,Unique,12,
+52,"Perses, The Sovereign of Flames",6,perses_0,"[On Summon]: Discard a random card from your opponent’s hand. If it was a minion, you can destroy a minion on the board.",Basic,perses_igm_0,Fire,Minion,Unique,10,
+53,Phoenix,6,phoenix_0,"If this is destroyed by a spell or ability, summon it from your discard pile during your next turn.",Basic,phoenix_igm_0,Fire,Minion,Unique,10,
+54,"Pyra, the Elemental Lord",8,pyra_0,[On Summon]: Destroy a minion on the board. Both players take damage equal to its Power.,Basic,pyra_igm_0,Fire,Minion,Unique,8,
+55,"Elleron, the Raging Fire",10,elleron_0,"Fly, Speed 4
+
+[On Summon]: Destroy all other minions on the board.",Basic,elleron_igm_0,Fire,Minion,Unique,16,
+56,"Demise, the Infernal Emperor",15,demise_0,"Cannot be summoned except by the effect of “Infernal Rise”.
+[On Summon]: Reduce the Power of all enemy and all non-Fire minions to 0.
+Cannot be targeted by card effects.
+All other Fire minions gain +7 Power.",Basic,demise_igm_0,Fire,Minion,Unique,20,"He’s the one and True Lord of Inferno, Master of Flame 
+And Emperor of All Things Burning. He’s pretty chill."
+57,Archlord Blessing,1,archlord_blessing_0,"Give a minion +2 Power and Fly. If this card is in your discard pile, you can discard a Light minion. If you do, add this card to your hand.",Basic,,Light,Spell,,-1,
+58,Cleric of the Sun,1,cleric_of_the_sun_0,[On Summon]: Restore 5 HP to a player.,Basic,cleric_of_the_sun_igm_0,Light,Minion,,2,
+59,Herald of the Light,1,herald_of_the_light_0,[On Summon]: Reduce the Power of a non-Light minion by 2.,Basic,herald_of_the_light_igm_0,Light,Minion,,2,
+60,Silence!,1,Silence_0,[Instant]: Silence a minion.,Basic,,Light,Spell,,-1,
+61,Smite Evil,1,smite_evil_0,"Reduce the Power of a minion by 2. If it is a Dark minion, reduce its Power by 4 instead.",Basic,,Light,Spell,,-1,
+62,Wisp,1,Wisp_0,"Fly, Speed 2
+
+[On Death]: Banish this.",Basic,wisp_igm_0,Light,Minion,,2,
+63,Heaven’s Squire,2,heavens_squire_0,[On Summon]: Give a friendly minion +2 Power.,Basic,heavens_squire_igm_0,Light,Minion,,3,
+64,Herald of Wisdom,2,herald_of_wisdom_0,[On Summon]: Look at the top 3 cards of your deck and place them in any order.,Basic,herald_of_wisdom_igm_0,Light,Minion,,2,
+65,Lightspawn,2,Lightspawn_0,[On Summon]: Summon a “Lightspawn” from your deck adjacent to this.,Basic,lightspawn_igm_0,Light,Minion,,3,
