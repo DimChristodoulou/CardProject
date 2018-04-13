@@ -53,7 +53,6 @@ public class CardDisplay : MonoBehaviour {
             else
                 card = (GameObject)Instantiate(Resources.Load("CardDisplaySpellSample"));
             card.transform.SetParent(mainui.transform, false);
-            Debug.Log("Hi");
             card.GetComponent<CardDisplay>().DisplayCard(cardId);
             card.transform.localPosition = new Vector3(x, y, z);
             return card;
@@ -68,7 +67,6 @@ public class CardDisplay : MonoBehaviour {
         cardName.text = jsonparse.cards[cardId].card_name;
         description.text = jsonparse.cards[cardId].card_text;
         manaCost.text = jsonparse.cards[cardId].card_manacost.ToString();
-        Debug.Log(jsonparse.cards[cardId].card_type.ToString());
         type.text = jsonparse.cards[cardId].card_type.ToString();
         string isMinion = jsonparse.cards[cardId].card_type.ToString();
         if (isMinion.Equals("Minion"))

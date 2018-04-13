@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class deckbuilder : MonoBehaviour {
 
+    public static bool deckBuildActive = false;
+
     private CardDisplay originalCard;
     private GameObject clonedCard;
     private jsonparse cardsJson;
@@ -29,8 +31,6 @@ public class deckbuilder : MonoBehaviour {
         cardsJson = new jsonparse();
         originalCard = new CardDisplay();
         int i = 0;
-        Debug.Log(jsonparse.cardids[i]);
-        Debug.Log(cardsToBeDisplayed[i]);
         DisplayCurrentEight(mainui, cardsToBeDisplayed);
     }
 
@@ -66,18 +66,19 @@ public class deckbuilder : MonoBehaviour {
         DisplayCurrentEight(mainui, cardsToOutput);
     }
 
-    public void displayOnlyLight()
+    public void filterByAttribute(String attribute)
     {
         GameObject mainui = GameObject.Find("Main UI");
         int[] lightCards = new int[jsonparse.cards.Length];
         int j = 0;
         for(int i=0; i< jsonparse.cards.Length; i++)
         {
-            if (jsonparse.cards[i].card_attribute.Equals("Light"))
+            if (jsonparse.cards[i].card_attribute.Equals(attribute))
                 lightCards[j++] = jsonparse.cards[i].card_id;
         }
         DisplayCurrentEight(mainui, lightCards);
     }
+
 
     void DisplayCurrentEight(GameObject mainui, int[] cardsToOutput)
     {
@@ -116,24 +117,26 @@ public class deckbuilder : MonoBehaviour {
         {
             if((currentEightCards*8)+i < cardsToOutput.Length)
             {
-                Debug.Log(cardsToOutput[i]);
                 if ((i / 4) % 2 == 0)
-                    originalCard.initializeCard(-280f + (140 * (i % 4)), 86, 0, (currentEightCards * 8) + cardsToOutput[i]);
+                    originalCard.initializeCard(-280f + (140 * (i % 4)), 70, 0, (currentEightCards * 8) + cardsToOutput[i]);
                 else
-                    originalCard.initializeCard(-280f + (140 * (i % 4)), -86, 0, (currentEightCards * 8) + cardsToOutput[i]);
+                    originalCard.initializeCard(-280f + (140 * (i % 4)), -105, 0, (currentEightCards * 8) + cardsToOutput[i]);
             }
         }
     }
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
 
     public void deck_build()
     {
         main_ui.SetActive(false);
         deck_canvas_ui.SetActive(true);
+    }
+
+    public void onClickButtonDeckBuild(String attribute)
+    {
+        deck_canvas_ui.SetActive(false);
+        main_ui.SetActive(true);
+        filterByAttribute(attribute);
+        deckBuildActive = true;
     }
 
 }

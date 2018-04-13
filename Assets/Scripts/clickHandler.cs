@@ -69,7 +69,10 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
         }
         else
         {
-            Debug.Log("Hi");
+            if(deckbuilder.deckBuildActive == true)
+            {
+
+            }
         }
     }
 

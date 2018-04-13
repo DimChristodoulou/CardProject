@@ -14,7 +14,7 @@ public class Player {
     public List<GameObject> handCards;
     public List<GameObject> boardMinions;
     public List<GameObject> graveyard;
-    public List<int> deck = new List<int>{1, 0, 1, 1};                   //Changed from List<GameObject> to List<int> because the deck will consist of card ids.
+    public static List<int> deck = new List<int>{1, 0, 1, 1};                   //Changed from List<GameObject> to static List<int> because the deck will consist of card ids.
     private int deckSize;
 	public bool isPlaying = false;
     private CardDisplay originalCard;
