@@ -14,7 +14,7 @@ public class Player {
     public List<GameObject> handCards;
     public List<GameObject> boardMinions;
     public List<GameObject> graveyard;
-    public static List<int> deck = new List<int>{1, 0, 1, 1};                   //Changed from List<GameObject> to static List<int> because the deck will consist of card ids.
+    public static List<int> deck = new List<int>{};                   //Changed from List<GameObject> to static List<int> because the deck will consist of card ids.
     private int deckSize;
 	public bool isPlaying = false;
     private CardDisplay originalCard;
@@ -37,16 +37,18 @@ public class Player {
         {
             for (int i = 0; i < 4; i++)
             {
-                DrawCard(-157 + 161 * i, -330.9f, 0, deck[0]);
-                deck.RemoveAt(0);
+                int cardDrawn = Random.Range(0, deck.Count);
+                DrawCard(-157 + 161 * i, -330.9f, 0, deck[Random.Range(0, deck.Count)]);
+                deck.RemoveAt(cardDrawn);
             }
         }
         if (playingPos == 2)
         {
             for (int i = 0; i < 4; i++)
             {
-                DrawCard(-157 + 161 * i, 330, 0, deck[0]);
-                deck.RemoveAt(0);
+                int cardDrawn = Random.Range(0, deck.Count);
+                DrawCard(-157 + 161 * i, 330, 0, deck[Random.Range(0, deck.Count)]);
+                deck.RemoveAt(cardDrawn);
             }
                 
         }

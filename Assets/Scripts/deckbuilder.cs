@@ -137,6 +137,13 @@ public class deckbuilder : MonoBehaviour {
         main_ui.SetActive(true);
         filterByAttribute(attribute);
         deckBuildActive = true;
+        GameObject saveDeck = (GameObject)Instantiate(Resources.Load("Button"));
+        Debug.Log("Created!");
+        saveDeck.transform.SetParent(main_ui.transform);
+        saveDeck.transform.localPosition = new Vector3(83.3f, 174.89f, 0);
+        ((RectTransform)saveDeck.transform).sizeDelta = new Vector2(100, 30);
+        saveDeck.GetComponentInChildren<Text>().text = "SAVE DECK";
+        saveDeck.GetComponent<Button>().onClick.AddListener(clickHandler.SaveDeck);
     }
 
 }

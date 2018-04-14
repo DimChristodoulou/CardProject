@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 
 /*
@@ -14,7 +15,7 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
     IPointerUpHandler, IPointerExitHandler, IPointerEnterHandler,
     IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-
+    private static bool timesTwo = true;
     public Font m_Font;
 
     static int cardEntryOffset = 133;
@@ -24,7 +25,7 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
      */
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("Drag Begin");
+        //Debug.Log("Drag Begin");
     }
 
     /*
@@ -32,7 +33,7 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
      */
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("Dragging");
+        //Debug.Log("Dragging");
     }
 
 
@@ -41,7 +42,7 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
      */
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("Drag Ended");
+        //Debug.Log("Drag Ended");
     }
 
    /*
@@ -49,16 +50,16 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
     */
     public void OnPointerClick(PointerEventData eventData)
     {
+        GameObject mainui = GameObject.Find("Main UI");
         Scene currentScene = SceneManager.GetActiveScene();
         if (currentScene.name.Equals("mainscene"))
         {
             //string clickedCard = eventData.pointerCurrentRaycast.gameObject.transform.parent.name;
             GameObject clickedObj = eventData.pointerCurrentRaycast.gameObject;
             string clickedCard = clickedObj.name;
-            Debug.Log("Clicked: " + eventData.pointerCurrentRaycast.gameObject.transform.parent.name);
+            //Debug.Log("Clicked: " + eventData.pointerCurrentRaycast.gameObject.transform.parent.name);
             if (clickedCard.Equals("CardDisplaySample(Clone)") || clickedObj.transform.parent.name.Equals("CardDisplaySample(Clone)") || clickedCard.Equals("CardDisplaySpellSample(Clone)") || clickedObj.transform.parent.name.Equals("CardDisplaySpellSample(Clone)"))
             {
-                GameObject mainui = GameObject.Find("Main UI");
                 GameObject creatureText = new GameObject("Summon_Creature_Text");
                 creatureText.transform.SetParent(mainui.transform);
                 Text newtext = creatureText.AddComponent<Text>();
@@ -75,35 +76,71 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
             //Debug.Log("DECK BUILD ACTIVE = " + deckbuilder.deckBuildActive);
             if (deckbuilder.deckBuildActive == true)
             {
+                
                 if (Player.deck.Count < 30)
                 {
                     GameObject clickedObj = eventData.pointerCurrentRaycast.gameObject;
                     string clickedCard = clickedObj.name;
-                    Debug.Log("Clicked: " + eventData.pointerCurrentRaycast.gameObject.transform.parent.name);
+                    //Debug.Log("Clicked: " + eventData.pointerCurrentRaycast.gameObject.transform.parent.name);
                     if (clickedCard.Equals("CardDisplaySample(Clone)") || clickedObj.transform.parent.name.Equals("CardDisplaySample(Clone)") || clickedCard.Equals("CardDisplaySpellSample(Clone)") || clickedObj.transform.parent.name.Equals("CardDisplaySpellSample(Clone)"))
                     {
-                        GameObject cardListEntry = new GameObject("cardListEntry");
-                        //cardListEntry = Instantiate(cardListEntry, GameObject.FindGameObjectWithTag("ListWithCards").transform);
-                        cardListEntry.AddComponent<LayoutElement>();
-                        cardListEntry.AddComponent<Text>();
-                        //cardListEntry.GetComponent<Text>().font.name = "Arial";
-                        cardListEntry.GetComponent<Text>().text = clickedObj.GetComponent<CardDisplay>().cardName.text;
-                        cardListEntry.GetComponent<Text>().font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
-                        cardListEntry.GetComponent<Text>().fontSize = 10;
+                        Debug.Log(Player.deck.Count);
+                        if (!Player.deck.Contains(clickedObj.GetComponent<CardDisplay>().id))
+                        {
+                            GameObject cardListEntry = new GameObject("cardListEntry");
+                            cardListEntry.gameObject.tag = "cardEntry";
+                            //cardListEntry = Instantiate(cardListEntry, GameObject.FindGameObjectWithTag("ListWithCards").transform);
+                            cardListEntry.AddComponent<LayoutElement>();
+                            cardListEntry.AddComponent<Text>();
+                            //cardListEntry.GetComponent<Text>().font.name = "Arial";
+                            cardListEntry.GetComponent<Text>().text = clickedObj.GetComponent<CardDisplay>().cardName.text;
+                            cardListEntry.GetComponent<Text>().font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
+                            cardListEntry.GetComponent<Text>().fontSize = 10;
 
-                        //cardListEntry.transform.parent = GameObject.FindGameObjectWithTag("ListWithCards").transform;
-                        Debug.Log("card list entry created!");
-                        cardListEntry = Instantiate(cardListEntry, GameObject.FindGameObjectWithTag("ListWithCards").transform);
-                        cardEntryOffset -= 20;
-                        cardListEntry.transform.localPosition = new Vector3(3.382453f, cardEntryOffset, 0);
-                        ((RectTransform)cardListEntry.transform).sizeDelta = new Vector2(118.89f, 17.58f);
-
-
-                        Player.deck.Add(clickedObj.GetComponent<CardDisplay>().id);
+                            //cardListEntry.transform.parent = GameObject.FindGameObjectWithTag("ListWithCards").transform;
+                            cardListEntry = Instantiate(cardListEntry, GameObject.FindGameObjectWithTag("ListWithCards").transform);
+                            cardEntryOffset -= 20;
+                            cardListEntry.transform.localPosition = new Vector3(3.382453f, cardEntryOffset, 0);
+                            ((RectTransform)cardListEntry.transform).sizeDelta = new Vector2(118.89f, 17.58f);
+                            Player.deck.Add(clickedObj.GetComponent<CardDisplay>().id);
+                            timesTwo = false;
+                        }
+                        else if(Player.deck.Contains(clickedObj.GetComponent<CardDisplay>().id) && timesTwo == false)
+                        {
+                            GameObject[] cardEntries = GameObject.FindGameObjectsWithTag("cardEntry");
+                            foreach (GameObject card in cardEntries)
+                            {
+                                if (card.GetComponent<Text>().text.Equals(clickedObj.GetComponent<CardDisplay>().cardName.text))
+                                {
+                                    card.GetComponent<Text>().text = clickedObj.GetComponent<CardDisplay>().cardName.text + " x2";             
+                                    timesTwo = true;
+                                }
+                            }
+                            Player.deck.Add(clickedObj.GetComponent<CardDisplay>().id);
+                        }
                     }
                 }
             }
         }
+    }
+
+    public static void SaveDeck()
+    {
+        string deckCode = "";
+        foreach(int cardId in Player.deck)
+        {
+            deckCode += cardId.ToString() + " ";
+        }
+        Debug.Log(deckCode);
+        string path = "Assets/Prefabs/Resources/playerDecks.txt";
+        StreamReader reader = new StreamReader(path, true);
+        string allText = reader.ReadToEnd();
+        reader.Close();
+
+        StreamWriter writer = new StreamWriter(path, true);
+        writer.WriteLine(deckCode);
+        writer.Close();
+
     }
 
    /*
@@ -111,7 +148,7 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
     */
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("Mouse Down: " + eventData.pointerCurrentRaycast.gameObject.name);
+        //Debug.Log("Mouse Down: " + eventData.pointerCurrentRaycast.gameObject.name);
     }
 
    /*
@@ -119,7 +156,7 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
     */
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("Mouse Exit");
+        //Debug.Log("Mouse Exit");
         Scene currentScene = SceneManager.GetActiveScene();
         if (currentScene.name.Equals("deckbuilder"))
         {
@@ -144,7 +181,7 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
      */
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("Mouse Exit");
+        //Debug.Log("Mouse Exit");
         Scene currentScene = SceneManager.GetActiveScene();
         if (currentScene.name.Equals("deckbuilder"))
         {
@@ -155,6 +192,6 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log("Mouse Up");
+        //Debug.Log("Mouse Up");
     }
 }
