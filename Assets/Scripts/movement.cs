@@ -52,7 +52,7 @@ public class movement : MonoBehaviour {
 		}
 	}
 
-	private Dictionary<Pair<int,int>, int> availableMonsterMovements(GameObject monster) {
+	public Dictionary<Pair<int,int>, int> availableMonsterMovements(GameObject monster) {
 		//monster param to get the movspeed and/or additional movement effects (flying etc)
 		Dictionary<Pair<int,int>, int> availableMoves = new Dictionary<Pair<int,int>, int> ();
 		List<Pair<int,int>> startPos = monster.GetComponent<monsterInfo> ().coords;

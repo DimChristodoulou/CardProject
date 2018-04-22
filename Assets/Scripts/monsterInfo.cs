@@ -43,8 +43,8 @@ public class monsterInfo : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (defense <= 0)
-			Die ();
+		//if (defense <= 0)
+		//	Die ();
 	}
 
 	public void onStartTurn() {

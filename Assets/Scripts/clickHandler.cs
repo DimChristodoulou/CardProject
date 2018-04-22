@@ -54,22 +54,17 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
         Scene currentScene = SceneManager.GetActiveScene();
         if (currentScene.name.Equals("mainscene"))
         {
-            GameObject clickedObj = eventData.pointerCurrentRaycast.gameObject;
+            GameObject clickedObj = eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject;
+            if (clickedObj == null || clickedObj.name == "Main UI")
+                clickedObj = eventData.pointerCurrentRaycast.gameObject;
             string clickedCard = clickedObj.name;
-            if (clickedCard.Equals("CardDisplaySample(Clone)") || clickedObj.transform.parent.name.Equals("CardDisplaySample(Clone)") || clickedCard.Equals("CardDisplaySpellSample(Clone)") || clickedObj.transform.parent.name.Equals("CardDisplaySpellSample(Clone)"))
+            Debug.Log("CLICKED OBJECT EXISTS: " + clickedObj);
+            if (clickedCard.Equals("CardDisplaySample(Clone)"))
             {
-                Debug.Log("MANA:" + (clickedObj.GetComponent<CardDisplay>().manaCost.text));
+                //Debug.Log("MANA:" + (clickedObj.GetComponent<CardDisplay>().manaCost.text));
                 if (GameState.getActivePlayer().currentMana >= int.Parse(clickedObj.GetComponent<CardDisplay>().manaCost.text))
                 {
-                    GameObject creatureText = new GameObject("Summon_Creature_Text");
-                    creatureText.transform.SetParent(mainui.transform);
-                    Text newtext = creatureText.AddComponent<Text>();
-                    newtext.font = m_Font;
-                    newtext.GetComponent<RectTransform>().sizeDelta = new Vector2(600, 50);
-                    newtext.fontSize = 36;
-                    newtext.text = "Choose where to summon the creature";
-                    newtext.color = UnityEngine.Color.black;
-                    newtext.transform.localPosition = new Vector3(100, 52, 0);
+                    GameState.getActivePlayer().playCard(GameState.getActivePlayer().handCards.IndexOf(clickedObj));
 
                     //Event system from here on out...
                     string s = clickedObj.GetComponent<CardDisplay>().cardName.ToString();
@@ -85,9 +80,13 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
                 
                 if (Player.deck.Count < 30)
                 {
-                    GameObject clickedObj = eventData.pointerCurrentRaycast.gameObject;
+                 
+                    GameObject clickedObj = eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject;
+                    if (clickedObj == null)
+                        clickedObj = eventData.pointerCurrentRaycast.gameObject;
                     string clickedCard = clickedObj.name;
-                    //Debug.Log("Clicked: " + eventData.pointerCurrentRaycast.gameObject.transform.parent.name);
+
+                    Debug.Log("Clicked: " + clickedObj.transform.parent.name);
                     if (clickedCard.Equals("CardDisplaySample(Clone)") || clickedObj.transform.parent.name.Equals("CardDisplaySample(Clone)") || clickedCard.Equals("CardDisplaySpellSample(Clone)") || clickedObj.transform.parent.name.Equals("CardDisplaySpellSample(Clone)"))
                     {
                         Debug.Log(Player.deck.Count);
