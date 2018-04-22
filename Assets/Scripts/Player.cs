@@ -6,7 +6,12 @@ using UnityEngine.UI;
 public class Player {
     //class for player. note that it is not MonoBehaviour extension because player is an abstraction, not a physical game object.
 
+    private GameObject mainui = GameObject.Find("Main UI");
+    public GameObject healthGO;
 
+    public int currentMana = 1;
+    public int maxTurnMana = 1;
+    public int playerHealth = 50;
     private GameObject monsterPrefab;
     public int playingPos; //which player am i, 1st or 2nd
     public string pName;
@@ -33,8 +38,16 @@ public class Player {
 		boardMinions = new List<GameObject> ();
 		graveyard = new List<GameObject> ();
         originalCard = new CardDisplay();
+
+        healthGO = new GameObject();
+        healthGO.transform.SetParent(mainui.transform);
+        healthGO.AddComponent<Text>();
+        healthGO.GetComponent<Text>().font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
+        healthGO.GetComponent<Text>().text = "Health: " + playerHealth.ToString();
+
         if (playingPos == 1)
         {
+            healthGO.transform.localPosition = new Vector3(-909, 250, 0);
             for (int i = 0; i < 4; i++)
             {
                 int cardDrawn = Random.Range(0, deck.Count);
@@ -44,6 +57,7 @@ public class Player {
         }
         if (playingPos == 2)
         {
+            healthGO.transform.localPosition = new Vector3(909, 250, 0);
             for (int i = 0; i < 4; i++)
             {
                 int cardDrawn = Random.Range(0, deck.Count);
@@ -64,7 +78,31 @@ public class Player {
         remainingCards.text = "Remaining:\n" + deckSize;
     }
 
-	public void startTurn() {
+    public void increaseMana(int amount)
+    {
+        this.maxTurnMana+=amount;
+        this.currentMana = this.maxTurnMana;
+    }
+
+    public void decreaseMana(int amount)
+    {
+        this.maxTurnMana-= amount;
+        this.currentMana = this.maxTurnMana;
+    }
+
+    public void increaseCurrentMana(int amount)
+    {
+        this.currentMana+=amount;
+    }
+
+    public void decreaseCurrentMana(int amount)
+    {
+        this.currentMana-=amount;
+    }
+
+    public void startTurn() {
+        this.increaseMana(1);
+        //UI MANA GOES HERE
 		foreach (GameObject monster in boardMinions) {
 			monster.GetComponent<monsterInfo> ().onStartTurn ();
 		}

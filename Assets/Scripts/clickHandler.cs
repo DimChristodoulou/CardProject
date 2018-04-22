@@ -54,26 +54,32 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
         Scene currentScene = SceneManager.GetActiveScene();
         if (currentScene.name.Equals("mainscene"))
         {
-            //string clickedCard = eventData.pointerCurrentRaycast.gameObject.transform.parent.name;
             GameObject clickedObj = eventData.pointerCurrentRaycast.gameObject;
             string clickedCard = clickedObj.name;
-            //Debug.Log("Clicked: " + eventData.pointerCurrentRaycast.gameObject.transform.parent.name);
             if (clickedCard.Equals("CardDisplaySample(Clone)") || clickedObj.transform.parent.name.Equals("CardDisplaySample(Clone)") || clickedCard.Equals("CardDisplaySpellSample(Clone)") || clickedObj.transform.parent.name.Equals("CardDisplaySpellSample(Clone)"))
             {
-                GameObject creatureText = new GameObject("Summon_Creature_Text");
-                creatureText.transform.SetParent(mainui.transform);
-                Text newtext = creatureText.AddComponent<Text>();
-                newtext.font = m_Font;
-                newtext.GetComponent<RectTransform>().sizeDelta = new Vector2(600, 50);
-                newtext.fontSize = 36;
-                newtext.text = "Choose where to summon the creature";
-                newtext.color = UnityEngine.Color.black;
-                newtext.transform.localPosition = new Vector3(100, 52, 0);
+                Debug.Log("MANA:" + (clickedObj.GetComponent<CardDisplay>().manaCost.text));
+                if (GameState.getActivePlayer().currentMana >= int.Parse(clickedObj.GetComponent<CardDisplay>().manaCost.text))
+                {
+                    GameObject creatureText = new GameObject("Summon_Creature_Text");
+                    creatureText.transform.SetParent(mainui.transform);
+                    Text newtext = creatureText.AddComponent<Text>();
+                    newtext.font = m_Font;
+                    newtext.GetComponent<RectTransform>().sizeDelta = new Vector2(600, 50);
+                    newtext.fontSize = 36;
+                    newtext.text = "Choose where to summon the creature";
+                    newtext.color = UnityEngine.Color.black;
+                    newtext.transform.localPosition = new Vector3(100, 52, 0);
+
+                    //Event system from here on out...
+                    string s = clickedObj.GetComponent<CardDisplay>().cardName.ToString();
+                    cardEventHandler.onMinionSummon(s);
+                    GameState.getActivePlayer().decreaseCurrentMana(1);
+                }
             }
         }
         else
         {
-            //Debug.Log("DECK BUILD ACTIVE = " + deckbuilder.deckBuildActive);
             if (deckbuilder.deckBuildActive == true)
             {
                 
@@ -162,6 +168,9 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
         {
             Debug.Log("Mouse Enter");
             Transform hoveredCardName = eventData.pointerCurrentRaycast.gameObject.transform.parent.Find("name");
+            if(hoveredCardName==null)
+                hoveredCardName = eventData.pointerCurrentRaycast.gameObject.transform.Find("name");
+
             Text textHoveredCardName = hoveredCardName.GetComponent<Text>();
             string s = textHoveredCardName.text.ToString();
             Text descText = GameObject.Find("description_text").GetComponent<Text>();

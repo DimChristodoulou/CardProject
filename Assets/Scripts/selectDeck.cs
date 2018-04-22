@@ -31,10 +31,14 @@ public class selectDeck : MonoBehaviour {
             }
             int temp = i;
             GameObject deckButton = (GameObject)Instantiate(Resources.Load("deckButton"));
+            deckButton.GetComponentInChildren<Text>().text = "Deck #" + (i+1);
             deckButton.transform.SetParent(mainui.transform);
             deckButton.transform.localPosition = new Vector3(-280 + 75*i, 140, 0);
             deckButton.AddComponent<Button>();
             deckButton.GetComponent<Button>().onClick.AddListener(() => { selectAndStart(temp); });
+
+            deckButton.AddComponent<Text>();
+            //deckButton.GetComponent<Text>().text = "Deck " + temp;
 
             i++;
         }

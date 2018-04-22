@@ -72,6 +72,8 @@ public class GameState : MonoBehaviour {
 		return myTable;
 	}
 
+
+
 	public void setPlayers(int playersNum) { //will probably change to array of Player later on
 		numOfPlayers = playersNum;
 		players = new Player[numOfPlayers];

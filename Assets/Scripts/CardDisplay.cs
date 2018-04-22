@@ -68,6 +68,7 @@ public class CardDisplay : MonoBehaviour {
         cardName.GetComponent<Text>();
         cardName.text = jsonparse.cards[cardId].card_name;
         description.text = jsonparse.cards[cardId].card_text;
+        Debug.Log("MANA CARDDISPLAY:" + jsonparse.cards[cardId].card_manacost.ToString());
         manaCost.text = jsonparse.cards[cardId].card_manacost.ToString();
         type.text = jsonparse.cards[cardId].card_type.ToString();
         string isMinion = jsonparse.cards[cardId].card_type.ToString();
