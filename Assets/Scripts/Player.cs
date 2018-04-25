@@ -78,6 +78,32 @@ public class Player {
         remainingCards.text = "Remaining:\n" + deckSize;
     }
 
+    public void playCard(int cardIndex)
+    {
+
+
+        // spell
+
+        // creature
+
+        Debug.Log("PLAY CARD WITH INDEX: " + cardIndex);
+        if (handCards[cardIndex].GetComponent<CardDisplay>().type.text == "Minion")
+        {
+            List<Pair<int, int>> availableNodes = new List<Pair<int, int>>();
+            Debug.Log("PLAY CARD1");
+            foreach (GameObject minion in boardMinions)
+            {
+                minion.GetComponent<movement>().highlightMovableSquares();
+                foreach (KeyValuePair<Pair<int, int>, int> pair in minion.GetComponent<movement>().availableMonsterMovements(minion))
+                {
+                    if(GameState.boardTable[pair.Key.First, pair.Key.Second].GetComponent<nodeInfo>().isFree)
+                        availableNodes.Add(pair.Key);
+                }
+            }
+            summonMonster(handCards[cardIndex].GetComponent<CardDisplay>().name, availableNodes, 1);
+        }
+    }
+
     public void increaseMana(int amount)
     {
         this.maxTurnMana+=amount;
@@ -163,16 +189,23 @@ public class Player {
 
 	}
 
-	public GameObject summonMonster(string mName, int att, int def, int mcost, int mspeed, int attkrange, List<Pair<int,int>> summonPos, int summonedTurn) {
+	public GameObject summonMonster(string mName, List<Pair<int,int>> summonPos, int summonedTurn) {
 		GameObject myObj = null;
 		if (GameState.allocateBoardPosition(summonPos)) {
-			myObj = GameObject.Instantiate(monsterPrefab, GameState.getPositionRelativeToBoard(summonPos), new Quaternion(0,0,0,0));
-			myObj.GetComponent<monsterInfo>().setPosition(summonPos);
-			myObj.GetComponent<monsterInfo>().setData(mName, att, def, mcost, mspeed, attkrange, this, summonedTurn);
-			boardMinions.Add (myObj);
-			//also remove the monster from hand or something
-		}
-		return myObj;
+            Debug.Log("SUMMON MONSTER1");
+            myObj = GameObject.Instantiate(monsterPrefab, GameState.getPositionRelativeToBoard(summonPos), new Quaternion(0,0,0,0));
+            Debug.Log("SUMMON MONSTER2");
+
+            myObj.GetComponent<monsterInfo>().setPosition(summonPos);
+            Debug.Log("SUMMON MONSTER3");
+
+            //myObj.GetComponent<monsterInfo>().setData(mName, att, def, mcost, mspeed, attkrange, this, summonedTurn);
+            boardMinions.Add (myObj);
+            Debug.Log("SUMMON MONSTER4");
+
+            //also remove the monster from hand or something
+        }
+        return myObj;
 	}
 
 	public void DieMonster(GameObject monster) {
