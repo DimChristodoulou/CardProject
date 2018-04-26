@@ -47,6 +47,8 @@ public class CardDisplay : MonoBehaviour {
      */
     public GameObject initializeCard(float x, float y, float z, int cardId)                                                              
     {
+            cardId--;
+            Debug.Log(cardId);
             GameObject mainui = GameObject.Find("Main UI");
             if(jsonparse.cards[cardId].card_type.Equals("Minion"))
                 card = (GameObject)Instantiate(Resources.Load("CardDisplaySample"));

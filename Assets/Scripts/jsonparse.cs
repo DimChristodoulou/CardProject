@@ -17,7 +17,7 @@ public class jsonparse : MonoBehaviour {
         cards = JsonHelper.getJsonArray<Card>(jsonString);
         cardids = new int[cards.Length];
         for (int i = 0; i < cards.Length; i++)
-            cardids[i] = i;
+            cardids[i] = i+1;
     }
 
 }

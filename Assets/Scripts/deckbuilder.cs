@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -66,47 +67,53 @@ public class deckbuilder : MonoBehaviour {
         DisplayCurrentEight(mainui, cardsToOutput);
     }
 
-    public void filterByAttribute(String attribute)
+    public void filterByAttribute(string attribute)
     {
         GameObject mainui = GameObject.Find("Main UI");
-        int[] lightCards = new int[jsonparse.cards.Length];
+
+        GameObject[] cardsToBeDestroyed;
+        cardsToBeDestroyed = GameObject.FindGameObjectsWithTag("Card");
+        foreach (GameObject card in cardsToBeDestroyed)
+        {
+            Destroy(card);
+        }
+
+        int[] filteredCards = new int[jsonparse.cards.Length];
         int j = 0;
         for(int i=0; i< jsonparse.cards.Length; i++)
         {
             if (jsonparse.cards[i].card_attribute.Equals(attribute))
-                lightCards[j++] = jsonparse.cards[i].card_id;
+            {
+                filteredCards[j++] = jsonparse.cards[i].card_id;
+                Debug.Log(jsonparse.cards[i].card_attribute);
+            }
         }
-        DisplayCurrentEight(mainui, lightCards);
+        int[] shortFilteredCards = filteredCards.Where(i => i != 0).ToArray();
+        currentEightCards = 0;
+        GameObject leftArrow = GameObject.Find("leftArrowButton(Clone)");
+        Destroy(leftArrow);
+        GameObject rightArrow = GameObject.Find("rightArrowButton(Clone)");
+        Destroy(rightArrow);
+        Debug.Log("LENGTH: " + shortFilteredCards.Length);
+        DisplayCurrentEight(mainui, shortFilteredCards);
     }
 
 
     void DisplayCurrentEight(GameObject mainui, int[] cardsToOutput)
     {
-        int i;
-        if (currentEightCards == 0)
-        {
-            rightArrow = (GameObject)Instantiate(Resources.Load("rightArrowButton"));
-            rightArrow.transform.SetParent(mainui.transform, false);
-            rightArrow.transform.localPosition = new Vector3(230f, 0, 0);
-            Button rAButton = rightArrow.GetComponent<Button>();
-            rAButton.onClick.AddListener(() => nextScreen(mainui, cardsToOutput));
-        }
-        else if(currentEightCards*8 >= cardsToOutput.Length)
-        {
-            leftArrow = (GameObject)Instantiate(Resources.Load("leftArrowButton"));
-            leftArrow.transform.SetParent(mainui.transform, false);
-            leftArrow.transform.localPosition = new Vector3(-370f, 0, 0);
-            Button lAButton = leftArrow.GetComponent<Button>();
-            lAButton.onClick.AddListener(() => lastScreen(mainui, cardsToOutput));
-        }
-        else
-        {
-            rightArrow = (GameObject)Instantiate(Resources.Load("rightArrowButton"));
-            rightArrow.transform.SetParent(mainui.transform, false);
-            rightArrow.transform.localPosition = new Vector3(230f, 0, 0);
-            Button rAButton = rightArrow.GetComponent<Button>();
-            rAButton.onClick.AddListener(() => nextScreen(mainui, cardsToOutput));
+        int len = jsonparse.cardids.Length;
 
+        int i;
+        if ((currentEightCards+1)*8 < cardsToOutput.Length)
+        {
+            rightArrow = (GameObject)Instantiate(Resources.Load("rightArrowButton"));
+            rightArrow.transform.SetParent(mainui.transform, false);
+            rightArrow.transform.localPosition = new Vector3(230f, 0, 0);
+            Button rAButton = rightArrow.GetComponent<Button>();
+            rAButton.onClick.AddListener(() => nextScreen(mainui, cardsToOutput));
+        }
+        if(currentEightCards >= 1)
+        {
             leftArrow = (GameObject)Instantiate(Resources.Load("leftArrowButton"));
             leftArrow.transform.SetParent(mainui.transform, false);
             leftArrow.transform.localPosition = new Vector3(-370f, 0, 0);
@@ -117,6 +124,7 @@ public class deckbuilder : MonoBehaviour {
         {
             if((currentEightCards*8)+i < cardsToOutput.Length)
             {
+                Debug.Log("CARD TO OUTPUT IS:" + (currentEightCards * 8) + cardsToOutput[i]);
                 if ((i / 4) % 2 == 0)
                     originalCard.initializeCard(-280f + (140 * (i % 4)), 70, 0, (currentEightCards * 8) + cardsToOutput[i]);
                 else
@@ -131,14 +139,13 @@ public class deckbuilder : MonoBehaviour {
         deck_canvas_ui.SetActive(true);
     }
 
-    public void onClickButtonDeckBuild(String attribute)
+    public void onClickButtonDeckBuild(string attribute)
     {
         deck_canvas_ui.SetActive(false);
         main_ui.SetActive(true);
         filterByAttribute(attribute);
         deckBuildActive = true;
         GameObject saveDeck = (GameObject)Instantiate(Resources.Load("Button"));
-        Debug.Log("Created!");
         saveDeck.transform.SetParent(main_ui.transform);
         saveDeck.transform.localPosition = new Vector3(83.3f, 174.89f, 0);
         ((RectTransform)saveDeck.transform).sizeDelta = new Vector2(100, 30);

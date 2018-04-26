@@ -78,6 +78,10 @@ public class Player {
         remainingCards.text = "Remaining:\n" + deckSize;
     }
 
+
+    /*
+     * Doc: Function used to play a card and resolve its effects.
+     */
     public void playCard(int cardIndex)
     {
 
