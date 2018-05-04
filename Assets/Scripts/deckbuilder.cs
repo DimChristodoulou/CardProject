@@ -126,7 +126,7 @@ public class deckbuilder : MonoBehaviour {
         for (int i=0; i<jsonparse.cards.Length; i++){
             if(String.Equals(searchCard.GetComponent<InputField>().text, jsonparse.cards[i].card_type, StringComparison.OrdinalIgnoreCase))
                 filteredCards[j++] = jsonparse.cards[i].card_id;
-            else if( jsonparse.cards[i].card_name.Contains(searchCard.GetComponent<InputField>().text) || jsonparse.cards[i].card_text.Contains(searchCard.GetComponent<InputField>().text))
+            else if( jsonparse.cards[i].card_name.Contains(searchCard.GetComponent<InputField>().text) || jsonparse.cards[i].card_text.Contains(searchCard.GetComponent<InputField>().text)) { }
                 filteredCards[j++] = jsonparse.cards[i].card_id;
         }
         int[] shortFilteredCards = filteredCards.Where(i => i != 0).ToArray();
