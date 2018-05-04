@@ -41,6 +41,7 @@ public class nodeInfo : MonoBehaviour
 
 	void OnMouseDown() {
         Player activePlayer = GameState.players[GameState.activePlayerIndex];
+        Debug.Log("ACTIVE PLAYER INDEX: " + GameState.activePlayerIndex);
 
         GameObject selectedMonster = activePlayer.selected;
         if (selectedMonster != null)
@@ -51,7 +52,7 @@ public class nodeInfo : MonoBehaviour
             if (Contains(activePlayer.availableNodesForSummon, new Pair<int, int>(xpos, ypos)))
             {
                 List<Pair<int, int>> summonNodes = new List<Pair<int, int>>() { new Pair<int, int>(xpos, ypos) }; // ONLY for monsters that need one node to spawn
-                activePlayer.boardMinions.Add(activePlayer.summonMonster(activePlayer.selectedCard.GetComponent<CardDisplay>().cardName.text, summonNodes, GameState.turn));
+                activePlayer.summonMonster(activePlayer.selectedCard.GetComponent<CardDisplay>().cardName.text, summonNodes, GameState.turn);
 
                 GameObject currentMinion = activePlayer.boardMinions[activePlayer.boardMinions.Count - 1];
 
@@ -67,17 +68,20 @@ public class nodeInfo : MonoBehaviour
                 //GetComponentInParent<monsterInfo>().setPosition(newPos);
                 GameState.setSquares(currentMinion.GetComponent<monsterInfo>().coords, false);
                 currentMinion.GetComponent<monsterInfo>().onPostMove();
+                
+                
                 //GameState.boardTable[xpos, ypos].GetComponent<nodeInfo>().switchActiveColor();
 
-                foreach (GameObject minion in activePlayer.boardMinions)
-                {
-                    if (minion != currentMinion)
-                    // minion.GetComponent<clickableV2>().toggleChange();
-                        GameState.boardTable[minion.GetComponent<monsterInfo>().coords[0].First, minion.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().switchActiveColor();
-                }
+                //foreach (GameObject minion in activePlayer.boardMinions)
+                //{
+                //    if (minion != currentMinion)
+                //    // minion.GetComponent<clickableV2>().toggleChange();
+                //        GameState.boardTable[minion.GetComponent<monsterInfo>().coords[0].First, minion.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().switchActiveColor();
+                //}
+
 
                 foreach ( Pair<int,int> pair in activePlayer.availableNodesForSummon)
-                    GameState.boardTable[pair.First, pair.Second].GetComponent<nodeInfo>().switchActiveColor();
+                    GameState.boardTable[pair.First, pair.Second].GetComponent<nodeInfo>().makeInactive();
 
                 Destroy(activePlayer.handCards[activePlayer.selectedCardIndex]);
                 activePlayer.handCards.RemoveAt(activePlayer.selectedCardIndex);
@@ -119,8 +123,20 @@ public class nodeInfo : MonoBehaviour
 		mRenderer.material.color = currentColor;
 	}
 
-	//colors/uncolors the hovered squares for the movement, if the player has a monster selected
-	private void colorHovered() {
+    public void makeActive()
+    {
+        currentColor = activeColor;
+        mRenderer.material.color = activeColor;
+    }
+
+    public void makeInactive()
+    {
+        currentColor = startColor;
+        mRenderer.material.color = startColor;
+    }
+
+    //colors/uncolors the hovered squares for the movement, if the player has a monster selected
+    private void colorHovered() {
 		GameObject selectedMonster = GameState.players [GameState.activePlayerIndex].selected;
         //Debug.Log("HELLO");
 		if (selectedMonster == null && !GameState.players[GameState.activePlayerIndex].cardSelected) {

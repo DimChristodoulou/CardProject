@@ -44,7 +44,7 @@ public class movement : MonoBehaviour {
 	}
 
 	public void highlightMovableSquares() {
-		if (!GetComponentInParent<monsterInfo> ().movable)
+		if (!GetComponentInParent<monsterInfo>().movable)
 			return;
 		Dictionary<Pair<int,int>, int> availablesquares = availableMonsterMovements (gameObject);
 		foreach (Pair<int,int> coordpair in availablesquares.Keys) {

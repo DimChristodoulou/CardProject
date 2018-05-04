@@ -93,10 +93,10 @@ public class Player {
      */
     public void playCard(int cardIndex)
     {
-        cardSelected = true;
+        
         selectedCard = handCards[cardIndex];
         selectedCardIndex = cardIndex;
-
+        cardSelected = true;
         // spell
 
         // creature
@@ -108,19 +108,29 @@ public class Player {
             Debug.Log("PLAY CARD1");
             foreach (GameObject minion in boardMinions)
             {
-                minion.GetComponent<movement>().highlightMovableSquares();
+                Debug.Log("BOARD MINIONS COUNT: " + boardMinions.Count);
+                Debug.Log("MINION name: " + minion.name);
+                //minion.GetComponent<movement>().highlightMovableSquares();
+                //Dictionary<Pair<int, int>, int> availableNodes = minion.GetComponent<movement>().availableMonsterMovements(minion);
+                //foreach (KeyValuePair<Pair<int, int>, int> pair )
+
                 foreach (KeyValuePair<Pair<int, int>, int> pair in minion.GetComponent<movement>().availableMonsterMovements(minion))
                 {
-                    if(GameState.boardTable[pair.Key.First, pair.Key.Second].GetComponent<nodeInfo>().isFree)
+                    if (GameState.boardTable[pair.Key.First, pair.Key.Second].GetComponent<nodeInfo>().isFree)
+                    {
+                        Debug.Log(minion.name + ":");
+                        GameState.boardTable[pair.Key.First, pair.Key.Second].GetComponent<nodeInfo>().makeActive();
+
                         availableNodesForSummon.Add(pair.Key);
+                    }
                 }
             }
             foreach (Pair<int,int> pair in availableNodesForSummon)
                 Debug.Log("Nodes available: " + pair.First + ", " + pair.Second);
 
-
-            //summonMonster(handCards[cardIndex].GetComponent<CardDisplay>().name, availableNodes, 1);
             
+            //summonMonster(handCards[cardIndex].GetComponent<CardDisplay>().name, availableNodes, 1);
+
         }
     }
 
@@ -209,7 +219,7 @@ public class Player {
 
 	}
 
-	public GameObject summonMonster(string mName, List<Pair<int,int>> summonPos, int summonedTurn) {
+	public void summonMonster(string mName, List<Pair<int,int>> summonPos, int summonedTurn) {
 		GameObject myObj = null;
 		if (GameState.allocateBoardPosition(summonPos)) {
             Debug.Log("SUMMON MONSTER1");
@@ -221,12 +231,12 @@ public class Player {
             Debug.Log("SUMMON MONSTER3");
 
             //myObj.GetComponent<monsterInfo>().setData(mName, att, def, mcost, mspeed, attkrange, this, summonedTurn);
-            boardMinions.Add (myObj);
+            boardMinions.Add(myObj);
             Debug.Log("SUMMON MONSTER4");
 
             //also remove the monster from hand or something
         }
-        return myObj;
+        return;
 	}
 
 	public void DieMonster(GameObject monster) {
