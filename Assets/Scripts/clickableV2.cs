@@ -13,10 +13,10 @@ public class clickableV2 : MonoBehaviour {
 	private Renderer mRenderer;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		toggle = false;
 		mRenderer = this.GetComponentInParent<Renderer>();
-		myInfo = this.GetComponentInParent<monsterInfo>();
+        myInfo = gameObject.GetComponent<monsterInfo>(); //this.GetComponentInParent<monsterInfo>();
 	}
 	
 	// Update is called once per frame
@@ -58,13 +58,19 @@ public class clickableV2 : MonoBehaviour {
 	}
 
 	public void toggleChange() {
-		toggle = !toggle;
+        if (!myInfo.parentPlayer.cardSelected)
+		    toggle = !toggle;
 		if (toggle) {
-			myInfo.parentPlayer.updateClickedItem(gameObject);
-			mRenderer.material.color = GetComponentInParent<monsterInfo>().hoverColorActive;
-		}
+            //if (myInfo == null)
+            //    Debug.Log("gameobject name: "+  gameObject.name);
+            if (!myInfo.parentPlayer.cardSelected)
+            {
+                myInfo.parentPlayer.updateClickedItem(gameObject);
+                mRenderer.material.color = GetComponentInParent<monsterInfo>().hoverColorActive;
+            }
+        }
 		else {
-			myInfo.parentPlayer.clearClickedItem ();
+			myInfo.parentPlayer.clearClickedItem();
 			mRenderer.material.color = GetComponentInParent<monsterInfo>().startColor;
 		}
 		GetComponentInParent<movement> ().highlightMovableSquares ();

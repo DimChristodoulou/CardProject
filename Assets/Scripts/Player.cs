@@ -26,6 +26,15 @@ public class Player {
     private GameObject clonedCard;
 	//when a player selects an item, we need to remove selection if we click another
 	public GameObject selected;
+    public bool cardSelected = false;
+    public GameObject selectedCard = null;
+    public int selectedCardIndex;
+    public List<Pair<int, int>> availableNodesForSummon;
+
+    public void Start()
+    {
+        cardSelected = false;
+    }
 
 	public Player (int pPos, string pName)
 	{
@@ -84,7 +93,9 @@ public class Player {
      */
     public void playCard(int cardIndex)
     {
-
+        cardSelected = true;
+        selectedCard = handCards[cardIndex];
+        selectedCardIndex = cardIndex;
 
         // spell
 
@@ -93,7 +104,7 @@ public class Player {
         Debug.Log("PLAY CARD WITH INDEX: " + cardIndex);
         if (handCards[cardIndex].GetComponent<CardDisplay>().type.text == "Minion")
         {
-            List<Pair<int, int>> availableNodes = new List<Pair<int, int>>();
+            availableNodesForSummon = new List<Pair<int, int>>();
             Debug.Log("PLAY CARD1");
             foreach (GameObject minion in boardMinions)
             {
@@ -101,12 +112,15 @@ public class Player {
                 foreach (KeyValuePair<Pair<int, int>, int> pair in minion.GetComponent<movement>().availableMonsterMovements(minion))
                 {
                     if(GameState.boardTable[pair.Key.First, pair.Key.Second].GetComponent<nodeInfo>().isFree)
-                        availableNodes.Add(pair.Key);
+                        availableNodesForSummon.Add(pair.Key);
                 }
             }
+            foreach (Pair<int,int> pair in availableNodesForSummon)
+                Debug.Log("Nodes available: " + pair.First + ", " + pair.Second);
+
+
             //summonMonster(handCards[cardIndex].GetComponent<CardDisplay>().name, availableNodes, 1);
-            GameObject.Destroy(handCards[cardIndex]);
-            handCards.RemoveAt(cardIndex);
+            
         }
     }
 
@@ -202,6 +216,7 @@ public class Player {
             myObj = GameObject.Instantiate(monsterPrefab, GameState.getPositionRelativeToBoard(summonPos), new Quaternion(0,0,0,0));
             Debug.Log("SUMMON MONSTER2");
 
+            myObj.name = mName;
             myObj.GetComponent<monsterInfo>().setPosition(summonPos);
             Debug.Log("SUMMON MONSTER3");
 
