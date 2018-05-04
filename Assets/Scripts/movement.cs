@@ -48,8 +48,12 @@ public class movement : MonoBehaviour {
 			return;
 		Dictionary<Pair<int,int>, int> availablesquares = availableMonsterMovements (gameObject);
 		foreach (Pair<int,int> coordpair in availablesquares.Keys) {
-			GameState.boardTable [coordpair.First, coordpair.Second].GetComponent<nodeInfo> ().switchActiveColor ();
-		}
+            {
+                Debug.Log("COORDS: " + (coordpair.First + 1) + ", " + (coordpair.Second + 1));
+                GameState.boardTable[coordpair.First, coordpair.Second].GetComponent<nodeInfo>().switchActiveColor();
+                
+            }
+        }
 	}
 
 	public Dictionary<Pair<int,int>, int> availableMonsterMovements(GameObject monster) {

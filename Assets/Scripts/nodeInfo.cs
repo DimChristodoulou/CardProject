@@ -51,14 +51,14 @@ public class nodeInfo : MonoBehaviour
             if (Contains(activePlayer.availableNodesForSummon, new Pair<int, int>(xpos, ypos)))
             {
                 List<Pair<int, int>> summonNodes = new List<Pair<int, int>>() { new Pair<int, int>(xpos, ypos) }; // ONLY for monsters that need one node to spawn
-                activePlayer.boardMinions.Add(activePlayer.summonMonster(activePlayer.selectedCard.GetComponent<CardDisplay>().cardName.text, summonNodes, 1));
+                activePlayer.boardMinions.Add(activePlayer.summonMonster(activePlayer.selectedCard.GetComponent<CardDisplay>().cardName.text, summonNodes, GameState.turn));
 
                 GameObject currentMinion = activePlayer.boardMinions[activePlayer.boardMinions.Count - 1];
 
                 // HERE SET DATA OF MINION USING SETDATA FUNCTION
-                //currentMinion.GetComponent<monsterInfo>().setData(activePlayer.selectedCard.GetComponent<CardDisplay>().cardName.text,  )
+                currentMinion.GetComponent<monsterInfo>().setData(activePlayer.selectedCard.GetComponent<CardDisplay>().cardName.text, 1, 1, 1, 2, 2, activePlayer, GameState.turn);
                 currentMinion.GetComponent<monsterInfo>().setPosition(summonNodes);
-                currentMinion.GetComponent<monsterInfo>().parentPlayer = activePlayer;
+                //currentMinion.GetComponent<monsterInfo>().parentPlayer = activePlayer;
 
                 currentMinion.GetComponent<monsterInfo>().parentPlayer.updateClickedItem(null);
                 //GameState.setSquares(currentMinion.GetComponent<monsterInfo>().coords, true);
@@ -67,13 +67,17 @@ public class nodeInfo : MonoBehaviour
                 //GetComponentInParent<monsterInfo>().setPosition(newPos);
                 GameState.setSquares(currentMinion.GetComponent<monsterInfo>().coords, false);
                 currentMinion.GetComponent<monsterInfo>().onPostMove();
-                GameState.boardTable[xpos, ypos].GetComponent<nodeInfo>().switchActiveColor();
+                //GameState.boardTable[xpos, ypos].GetComponent<nodeInfo>().switchActiveColor();
 
                 foreach (GameObject minion in activePlayer.boardMinions)
                 {
                     if (minion != currentMinion)
-                        minion.GetComponent<clickableV2>().toggleChange();
+                    // minion.GetComponent<clickableV2>().toggleChange();
+                        GameState.boardTable[minion.GetComponent<monsterInfo>().coords[0].First, minion.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().switchActiveColor();
                 }
+
+                foreach ( Pair<int,int> pair in activePlayer.availableNodesForSummon)
+                    GameState.boardTable[pair.First, pair.Second].GetComponent<nodeInfo>().switchActiveColor();
 
                 Destroy(activePlayer.handCards[activePlayer.selectedCardIndex]);
                 activePlayer.handCards.RemoveAt(activePlayer.selectedCardIndex);
