@@ -25,7 +25,6 @@ public class cardEffects : MonoBehaviour {
             opponent = GameState.players[0];
         
         DealDamageToPlayer(opponent,5);
-
     }
 
     /*
