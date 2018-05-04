@@ -58,10 +58,8 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
             if (clickedObj == null || clickedObj.name == "Main UI")
                 clickedObj = eventData.pointerCurrentRaycast.gameObject;
             string clickedCard = clickedObj.name;
-            Debug.Log("CLICKED OBJECT EXISTS: " + clickedObj);
             if (clickedCard.Equals("CardDisplaySample(Clone)"))
             {
-                //Debug.Log("MANA:" + (clickedObj.GetComponent<CardDisplay>().manaCost.text));
                 if (GameState.getActivePlayer().currentMana >= int.Parse(clickedObj.GetComponent<CardDisplay>().manaCost.text))
                 {
                     GameState.getActivePlayer().playCard(GameState.getActivePlayer().handCards.IndexOf(clickedObj));
@@ -77,32 +75,24 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
         {
             if (deckbuilder.deckBuildActive == true)
             {
-                
                 if (Player.deck.Count < 30)
                 {
-                 
                     GameObject clickedObj = eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject;
                     if (clickedObj == null)
                         clickedObj = eventData.pointerCurrentRaycast.gameObject;
                     string clickedCard = clickedObj.name;
-
-                    Debug.Log("Clicked: " + clickedObj.transform.parent.name);
                     if (clickedCard.Equals("CardDisplaySample(Clone)") || clickedObj.transform.parent.name.Equals("CardDisplaySample(Clone)") || clickedCard.Equals("CardDisplaySpellSample(Clone)") || clickedObj.transform.parent.name.Equals("CardDisplaySpellSample(Clone)"))
                     {
-                        Debug.Log(Player.deck.Count);
                         if (!Player.deck.Contains(clickedObj.GetComponent<CardDisplay>().id))
                         {
                             GameObject cardListEntry = new GameObject("cardListEntry");
                             cardListEntry.gameObject.tag = "cardEntry";
-                            //cardListEntry = Instantiate(cardListEntry, GameObject.FindGameObjectWithTag("ListWithCards").transform);
                             cardListEntry.AddComponent<LayoutElement>();
                             cardListEntry.AddComponent<Text>();
-                            //cardListEntry.GetComponent<Text>().font.name = "Arial";
                             cardListEntry.GetComponent<Text>().text = clickedObj.GetComponent<CardDisplay>().cardName.text;
                             cardListEntry.GetComponent<Text>().font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
                             cardListEntry.GetComponent<Text>().fontSize = 10;
 
-                            //cardListEntry.transform.parent = GameObject.FindGameObjectWithTag("ListWithCards").transform;
                             cardListEntry = Instantiate(cardListEntry, GameObject.FindGameObjectWithTag("ListWithCards").transform);
                             cardEntryOffset -= 20;
                             cardListEntry.transform.localPosition = new Vector3(3.382453f, cardEntryOffset, 0);
@@ -129,6 +119,9 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
         }
     }
 
+    /*
+     * Function used to store the player's decks in a .txt file, located in the resources folder.
+     */
     public static void SaveDeck()
     {
         string deckCode = "";
@@ -136,7 +129,6 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
         {
             deckCode += cardId.ToString() + " ";
         }
-        Debug.Log(deckCode);
         string path = "Assets/Prefabs/Resources/playerDecks.txt";
         StreamReader reader = new StreamReader(path, true);
         string allText = reader.ReadToEnd();
@@ -165,7 +157,6 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
         Scene currentScene = SceneManager.GetActiveScene();
         if (currentScene.name.Equals("deckbuilder"))
         {
-            Debug.Log("Mouse Enter");
             Transform hoveredCardName = eventData.pointerCurrentRaycast.gameObject.transform.parent.Find("name");
             if(hoveredCardName==null)
                 hoveredCardName = eventData.pointerCurrentRaycast.gameObject.transform.Find("name");
@@ -179,7 +170,6 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
                 if (jsonparse.cards[cardIndex].card_name.Equals(s))
                     break;
             }
-            Debug.Log("INDEX IS" + cardIndex);
             descText.text = jsonparse.cards[cardIndex].card_flavortext;
         }
     }

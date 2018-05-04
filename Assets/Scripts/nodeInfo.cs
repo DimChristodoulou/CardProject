@@ -1,8 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using System.IO;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class nodeInfo : MonoBehaviour {
+public class nodeInfo : MonoBehaviour
+{
 	//contains info regarding nodes
 
 	//checks if node is free to place unit

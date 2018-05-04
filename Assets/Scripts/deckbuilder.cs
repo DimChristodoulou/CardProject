@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class deckbuilder : MonoBehaviour {
 
+    public InputField searchCard;
+
     public static bool deckBuildActive = false;
 
     private CardDisplay originalCard;
@@ -35,6 +37,9 @@ public class deckbuilder : MonoBehaviour {
         DisplayCurrentEight(mainui, cardsToBeDisplayed);
     }
 
+    /*
+     * Function used to show the next eight cards on the screen
+     */
     public void nextScreen(GameObject mainui, int[] cardsToOutput)
     {
         GameObject[] cardsToBeDestroyed;
@@ -51,6 +56,9 @@ public class deckbuilder : MonoBehaviour {
         DisplayCurrentEight(mainui, cardsToOutput);
     }
 
+    /*
+    * Function used to show the previous eight cards on the screen
+    */
     public void lastScreen(GameObject mainui, int[] cardsToOutput)
     {
         GameObject[] cardsToBeDestroyed;
@@ -67,6 +75,9 @@ public class deckbuilder : MonoBehaviour {
         DisplayCurrentEight(mainui, cardsToOutput);
     }
 
+    /*
+    * Function used to filter cards by their Attribute
+    */
     public void filterByAttribute(string attribute)
     {
         GameObject mainui = GameObject.Find("Main UI");
@@ -83,10 +94,7 @@ public class deckbuilder : MonoBehaviour {
         for(int i=0; i< jsonparse.cards.Length; i++)
         {
             if (jsonparse.cards[i].card_attribute.Equals(attribute))
-            {
                 filteredCards[j++] = jsonparse.cards[i].card_id;
-                Debug.Log(jsonparse.cards[i].card_attribute);
-            }
         }
         int[] shortFilteredCards = filteredCards.Where(i => i != 0).ToArray();
         currentEightCards = 0;
@@ -99,6 +107,41 @@ public class deckbuilder : MonoBehaviour {
     }
 
 
+    /*
+    * Function used to search the card database by a keyword
+    */
+    public void filterBySearchKeyword()
+    {
+        GameObject mainui = GameObject.Find("Main UI");
+        Debug.Log("STRING IS: " + searchCard.GetComponent<InputField>().text);
+        GameObject[] cardsToBeDestroyed;
+        cardsToBeDestroyed = GameObject.FindGameObjectsWithTag("Card");
+        foreach (GameObject card in cardsToBeDestroyed){
+            Destroy(card);
+        }
+
+        int[] filteredCards = new int[jsonparse.cards.Length];
+        int j = 0;
+
+        for (int i=0; i<jsonparse.cards.Length; i++){
+            if(String.Equals(searchCard.GetComponent<InputField>().text, jsonparse.cards[i].card_type, StringComparison.OrdinalIgnoreCase))
+                filteredCards[j++] = jsonparse.cards[i].card_id;
+            else if( jsonparse.cards[i].card_name.Contains(searchCard.GetComponent<InputField>().text) || jsonparse.cards[i].card_text.Contains(searchCard.GetComponent<InputField>().text))
+                filteredCards[j++] = jsonparse.cards[i].card_id;
+        }
+        int[] shortFilteredCards = filteredCards.Where(i => i != 0).ToArray();
+        currentEightCards = 0;
+        GameObject leftArrow = GameObject.Find("leftArrowButton(Clone)");
+        Destroy(leftArrow);
+        GameObject rightArrow = GameObject.Find("rightArrowButton(Clone)");
+        Destroy(rightArrow);
+        Debug.Log("SEARCH LENGTH: " + shortFilteredCards.Length);
+        DisplayCurrentEight(mainui, shortFilteredCards);
+    }
+
+    /*
+    * Function used to display 8 cards from the cardsToOutput array to the player.
+    */
     void DisplayCurrentEight(GameObject mainui, int[] cardsToOutput)
     {
         int len = jsonparse.cardids.Length;
@@ -124,15 +167,18 @@ public class deckbuilder : MonoBehaviour {
         {
             if((currentEightCards*8)+i < cardsToOutput.Length)
             {
-                Debug.Log("CARD TO OUTPUT IS:" + (currentEightCards * 8) + cardsToOutput[i]);
+                Debug.Log("CARD TO OUTPUT IS:" + cardsToOutput[(currentEightCards * 8) + i]);
                 if ((i / 4) % 2 == 0)
-                    originalCard.initializeCard(-280f + (140 * (i % 4)), 70, 0, (currentEightCards * 8) + cardsToOutput[i]);
+                    originalCard.initializeCard(-280f + (140 * (i % 4)), 70, 0, cardsToOutput[(currentEightCards * 8) + i]);
                 else
-                    originalCard.initializeCard(-280f + (140 * (i % 4)), -105, 0, (currentEightCards * 8) + cardsToOutput[i]);
+                    originalCard.initializeCard(-280f + (140 * (i % 4)), -105, 0, cardsToOutput[(currentEightCards * 8) + i]);
             }
         }
     }
 
+    /*
+    * Function used to switch the active scene to the deck builder
+    */
     public void deck_build()
     {
         main_ui.SetActive(false);
@@ -140,6 +186,11 @@ public class deckbuilder : MonoBehaviour {
     }
 
     public void onClickButtonDeckBuild(string attribute)
+    {
+        BuildDeck(attribute);
+    }
+
+    public void BuildDeck(string attribute)
     {
         deck_canvas_ui.SetActive(false);
         main_ui.SetActive(true);

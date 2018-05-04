@@ -30,17 +30,6 @@ public class CardDisplay : MonoBehaviour {
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A) && isInstantiated==false)                           //Sample test for creating cards
-        {
-            initializeCard(-157,-150.9f,0,1);
-            initializeCard(5, -150.9f, 0,1);
-            initializeCard(166, -150.9f, 0,1);
-            initializeCard(332, -150.9f, 0,1);
-        }
-    }
-
     /*
      * Function used to clone the card prefab and place it in the main UI.
      * Arguments: Vector3 Coordinates(where to instantiate the card)
@@ -86,6 +75,10 @@ public class CardDisplay : MonoBehaviour {
         else if (attribute.Equals("Light"))
         {
             element.sprite = Resources.Load("light", typeof(Sprite)) as Sprite;
+        }
+        else if (attribute.Equals("Dark"))
+        {
+            element.sprite = Resources.Load("dark", typeof(Sprite)) as Sprite;
         }
         //TODO: Other attributes...
         artwork.sprite = Resources.Load(jsonparse.cards[cardId].card_image.ToString(), typeof(Sprite)) as Sprite;

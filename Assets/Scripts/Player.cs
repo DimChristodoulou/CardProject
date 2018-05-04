@@ -104,7 +104,9 @@ public class Player {
                         availableNodes.Add(pair.Key);
                 }
             }
-            summonMonster(handCards[cardIndex].GetComponent<CardDisplay>().name, availableNodes, 1);
+            //summonMonster(handCards[cardIndex].GetComponent<CardDisplay>().name, availableNodes, 1);
+            GameObject.Destroy(handCards[cardIndex]);
+            handCards.RemoveAt(cardIndex);
         }
     }
 
