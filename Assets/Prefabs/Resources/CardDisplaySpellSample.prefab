@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114352126942464258}
   - component: {fileID: 114730791846277976}
   - component: {fileID: 114316964138925252}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: CardDisplaySpellSample
   m_TagString: Card
   m_Icon: {fileID: 0}
@@ -390,6 +390,7 @@ MonoBehaviour:
   artwork: {fileID: 114229213174586892}
   element: {fileID: 114275539231727504}
   power: {fileID: 0}
+  id: 0
 --- !u!222 &222241549937847674
 CanvasRenderer:
   m_ObjectHideFlags: 1

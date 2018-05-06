@@ -57,7 +57,15 @@ public class nodeInfo : MonoBehaviour
                 GameObject currentMinion = activePlayer.boardMinions[activePlayer.boardMinions.Count - 1];
 
                 // HERE SET DATA OF MINION USING SETDATA FUNCTION
-                currentMinion.GetComponent<monsterInfo>().setData(activePlayer.selectedCard.GetComponent<CardDisplay>().cardName.text, 1, 1, 1, 2, 2, activePlayer, GameState.turn);
+                CardDisplay selectedCardDisplay = activePlayer.selectedCard.GetComponent<CardDisplay>();
+
+                currentMinion.GetComponent<monsterInfo>().setData(jsonparse.cards[selectedCardDisplay.id].card_name,
+                                                                  jsonparse.cards[selectedCardDisplay.id].card_actionpoints,
+                                                                  jsonparse.cards[selectedCardDisplay.id].card_manacost,
+                                                                  jsonparse.cards[selectedCardDisplay.id].card_movement,
+                                                                  2,
+                                                                  activePlayer, GameState.turn);
+
                 currentMinion.GetComponent<monsterInfo>().setPosition(summonNodes);
                 //currentMinion.GetComponent<monsterInfo>().parentPlayer = activePlayer;
 

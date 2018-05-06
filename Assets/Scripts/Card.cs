@@ -9,7 +9,7 @@ public class Card{
     /*DB Independent*/
     public GameObject cardObject;
 
-    /*DB Dependend*/
+    /*DB Dependent*/
     public int card_id;
     public string card_name;
     public int card_manacost;
@@ -20,6 +20,8 @@ public class Card{
     public string card_attribute;
     public string card_type;
     public string card_tags;
-    public string card_actionpoints;
+    public int card_actionpoints;
     public string card_flavortext;
+    public int card_movement;
+    public string card_rarity;
 }

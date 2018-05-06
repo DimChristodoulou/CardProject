@@ -34,6 +34,7 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
     public void OnDrag(PointerEventData eventData)
     {
         //Debug.Log("Dragging");
+        //eventData.pointerCurrentRaycast.gameObject.transform.parent.position = Input.mousePosition;
     }
 
 
@@ -54,12 +55,17 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
         Scene currentScene = SceneManager.GetActiveScene();
         if (currentScene.name.Equals("mainscene"))
         {
-            GameObject clickedObj = eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject;
-            if (clickedObj == null || clickedObj.name == "Main UI")
-                clickedObj = eventData.pointerCurrentRaycast.gameObject;
-            string clickedCard = clickedObj.name;
-            if (clickedCard.Equals("CardDisplaySample(Clone)"))
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Debug.Log("a");
+            if (Physics.Raycast(ray, out hit, 1000, LayerMask.GetMask("CardLayer")))
             {
+                Debug.Log("a");
+                GameObject clickedObj = hit.transform.gameObject;
+                //if (clickedObj == null || clickedObj.name == "Main UI")
+                //clickedObj = eventData.pointerCurrentRaycast.gameObject;
+                string clickedCard = clickedObj.name;
+                Debug.Log(clickedCard);
                 if (GameState.getActivePlayer().currentMana >= int.Parse(clickedObj.GetComponent<CardDisplay>().manaCost.text))
                 {
                     GameState.getActivePlayer().playCard(GameState.getActivePlayer().handCards.IndexOf(clickedObj));
@@ -70,6 +76,7 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
                     GameState.getActivePlayer().decreaseCurrentMana(1);
                 }
             }
+            Debug.Log("a");
         }
         else
         {

@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class deckbuilder : MonoBehaviour {
 
     public InputField searchCard;
@@ -106,7 +107,6 @@ public class deckbuilder : MonoBehaviour {
         DisplayCurrentEight(mainui, shortFilteredCards);
     }
 
-
     /*
     * Function used to search the card database by a keyword
     */
@@ -123,10 +123,11 @@ public class deckbuilder : MonoBehaviour {
         int[] filteredCards = new int[jsonparse.cards.Length];
         int j = 0;
 
-        for (int i=0; i<jsonparse.cards.Length; i++){
-            if(String.Equals(searchCard.GetComponent<InputField>().text, jsonparse.cards[i].card_type, StringComparison.OrdinalIgnoreCase))
+        for (int i = 0; i < jsonparse.cards.Length; i++)
+        {
+            if (String.Equals(searchCard.GetComponent<InputField>().text, jsonparse.cards[i].card_type, StringComparison.OrdinalIgnoreCase))
                 filteredCards[j++] = jsonparse.cards[i].card_id;
-            else if( jsonparse.cards[i].card_name.Contains(searchCard.GetComponent<InputField>().text) || jsonparse.cards[i].card_text.Contains(searchCard.GetComponent<InputField>().text)) { }
+            else if (jsonparse.cards[i].card_name.ToLower().Contains(searchCard.GetComponent<InputField>().text.ToLower()) || jsonparse.cards[i].card_text.ToLower().Contains(searchCard.GetComponent<InputField>().text.ToLower()))
                 filteredCards[j++] = jsonparse.cards[i].card_id;
         }
         int[] shortFilteredCards = filteredCards.Where(i => i != 0).ToArray();
@@ -167,7 +168,6 @@ public class deckbuilder : MonoBehaviour {
         {
             if((currentEightCards*8)+i < cardsToOutput.Length)
             {
-                Debug.Log("CARD TO OUTPUT IS:" + cardsToOutput[(currentEightCards * 8) + i]);
                 if ((i / 4) % 2 == 0)
                     originalCard.initializeCard(-280f + (140 * (i % 4)), 70, 0, cardsToOutput[(currentEightCards * 8) + i]);
                 else

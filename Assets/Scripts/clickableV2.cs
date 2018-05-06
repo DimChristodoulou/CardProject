@@ -52,7 +52,7 @@ public class clickableV2 : MonoBehaviour {
 		}
 		else if (!(GameState.getActivePlayer() == this.GetComponentInParent<monsterInfo>().parentPlayer)) { //enemy player is playing, so the click means attack
 			if (GameState.players [GameState.activePlayerIndex].selected != null) {
-				GameState.players [GameState.activePlayerIndex].selected.GetComponent<attacking> ().executeAttack (gameObject);
+				//GameState.players [GameState.activePlayerIndex].selected.GetComponent<attacking> ().executeAttack (gameObject);
 			}
 		}
 	}

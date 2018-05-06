@@ -37,7 +37,6 @@ public class CardDisplay : MonoBehaviour {
     public GameObject initializeCard(float x, float y, float z, int cardId)                                                              
     {
             cardId--;
-            Debug.Log(cardId);
             GameObject mainui = GameObject.Find("Main UI");
             if(jsonparse.cards[cardId].card_type.Equals("Minion"))
                 card = (GameObject)Instantiate(Resources.Load("CardDisplaySample"));
@@ -59,7 +58,6 @@ public class CardDisplay : MonoBehaviour {
         cardName.GetComponent<Text>();
         cardName.text = jsonparse.cards[cardId].card_name;
         description.text = jsonparse.cards[cardId].card_text;
-        Debug.Log("MANA CARDDISPLAY:" + jsonparse.cards[cardId].card_manacost.ToString());
         manaCost.text = jsonparse.cards[cardId].card_manacost.ToString();
         type.text = jsonparse.cards[cardId].card_type.ToString();
         string isMinion = jsonparse.cards[cardId].card_type.ToString();

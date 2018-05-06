@@ -47,7 +47,7 @@ public class Player {
 		boardMinions = new List<GameObject> ();
 		graveyard = new List<GameObject> ();
         originalCard = new CardDisplay();
-
+        
         healthGO = new GameObject();
         healthGO.transform.SetParent(mainui.transform);
         healthGO.AddComponent<Text>();
@@ -157,9 +157,17 @@ public class Player {
     }
 
     public void startTurn() {
+        //Increase mana at start of turn.
         this.increaseMana(1);
+        //Draw card after increasing mana. (Max number of cards in hand is 8).
+        //if (handCards.Count < 8)
+        //{
+        //    int cardDrawn = Random.Range(0, deck.Count);
+        //    DrawCard(-157 + 161 * handCards.Count, 330, 0, deck[Random.Range(0, deck.Count)]);
+        //    deck.RemoveAt(cardDrawn);
+        //}
         //UI MANA GOES HERE
-		foreach (GameObject monster in boardMinions) {
+        foreach (GameObject monster in boardMinions) {
 			monster.GetComponent<monsterInfo> ().onStartTurn ();
 		}
 		isPlaying = true;
@@ -200,7 +208,7 @@ public class Player {
 			if (GameState.allocateBoardPosition (summonPos)) {
 				hero = GameObject.Instantiate (monsterPrefab, GameState.getPositionRelativeToBoard (summonPos), new Quaternion (0, 0, 0, 0));
 				hero.GetComponent<monsterInfo> ().setPosition (summonPos);
-				hero.GetComponent<monsterInfo> ().setData ("test1", 1, 1, 1, 2, 1, this, GameState.turn);
+				hero.GetComponent<monsterInfo> ().setData ("hero1", 0, 0, 2, 1, this, GameState.turn);
 				boardMinions.Add (hero);
 			}
 		} else {
@@ -209,7 +217,7 @@ public class Player {
 			if (GameState.allocateBoardPosition (summonPos)) {
 				hero = GameObject.Instantiate (monsterPrefab, GameState.getPositionRelativeToBoard (summonPos), new Quaternion (0, 0, 0, 0));
 				hero.GetComponent<monsterInfo> ().setPosition (summonPos);
-				hero.GetComponent<monsterInfo> ().setData ("test1", 1, 1, 1, 2, 1, this, GameState.turn);
+				hero.GetComponent<monsterInfo> ().setData ("hero2", 0, 0, 2, 1, this, GameState.turn);
 				boardMinions.Add (hero);
 			}
 		}
