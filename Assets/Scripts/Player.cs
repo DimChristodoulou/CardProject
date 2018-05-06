@@ -87,12 +87,21 @@ public class Player {
         remainingCards.text = "Remaining:\n" + deckSize;
     }
 
+    public void setupPlayCard(GameObject clickedObj) {
+        if (GameState.getActivePlayer().currentMana >= int.Parse(clickedObj.GetComponent<CardDisplay>().manaCost.text))
+        {
+            GameState.getActivePlayer().playCard(GameState.getActivePlayer().handCards.IndexOf(clickedObj));
+            //Event system from here on out...
+            string s = clickedObj.GetComponent<CardDisplay>().cardName.ToString();
+            cardEventHandler.onMinionSummon(s);
+            GameState.getActivePlayer().decreaseCurrentMana(1);
+        }
+    }
 
-    /*
-     * Doc: Function used to play a card and resolve its effects.
-     */
-    public void playCard(int cardIndex)
-    {
+/*
+ * Doc: Function used to play a card and resolve its effects.
+ */
+    public void playCard(int cardIndex){
         
         selectedCard = handCards[cardIndex];
         selectedCardIndex = cardIndex;

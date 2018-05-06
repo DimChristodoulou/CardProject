@@ -66,15 +66,7 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
                 //clickedObj = eventData.pointerCurrentRaycast.gameObject;
                 string clickedCard = clickedObj.name;
                 Debug.Log(clickedCard);
-                if (GameState.getActivePlayer().currentMana >= int.Parse(clickedObj.GetComponent<CardDisplay>().manaCost.text))
-                {
-                    GameState.getActivePlayer().playCard(GameState.getActivePlayer().handCards.IndexOf(clickedObj));
-
-                    //Event system from here on out...
-                    string s = clickedObj.GetComponent<CardDisplay>().cardName.ToString();
-                    cardEventHandler.onMinionSummon(s);
-                    GameState.getActivePlayer().decreaseCurrentMana(1);
-                }
+                GameState.getActivePlayer().setupPlayCard(clickedObj);
             }
             Debug.Log("a");
         }
