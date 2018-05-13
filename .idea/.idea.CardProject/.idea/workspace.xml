@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="82ab2cd9-7aa2-42d9-b96e-4e2e48bb1059" name="Default" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="clickHandler.cs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/clickHandler.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="74" column="8" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="8" />
+              <folding>
+                <marker date="1525428206777" expanded="false" signature="6:184" ph="..." />
+                <marker date="1525428206777" expanded="true" signature="187:250" ph="/* Generic class used to identify User-GUI interaction. ... */" />
+                <marker date="1525428206777" expanded="true" signature="456:7860" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="568:622" ph="/* Called the moment cursor is clicked. ... */" />
+                <marker date="1525428206777" expanded="true" signature="678:725" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="731:794" ph="/* Called while cursor is held down and moving. ... */" />
+                <marker date="1525428206777" expanded="true" signature="845:890" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="897:957" ph="/* Called when cursor stops being held down. ... */" />
+                <marker date="1525428206777" expanded="true" signature="1011:1058" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="1063:1108" ph="/* Called when the user clicks. ... */" />
+                <marker date="1525428206777" expanded="true" signature="1167:5330" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="1340:2307" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="1713:2297" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="1855:2283" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="2320:5324" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="2383:5314" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="2441:5300" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="3032:5282" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="3148:4376" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="4494:5260" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="4692:5146" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="4851:5116" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="5336:5444" ph="/* Function used to store the player's decks in a .txt file, located in the resources folder. ... */" />
+                <marker date="1525428206777" expanded="true" signature="5478:5949" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="5557:5626" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="5954:6019" ph="/* Called while cursor is stationary and held down. ... */" />
+                <marker date="1525428206777" expanded="true" signature="6077:6176" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="6181:6282" ph="/* Called when cursor enters the space allocated to the object attached to this script. ... */" />
+                <marker date="1525428206777" expanded="true" signature="6341:7292" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="6495:7286" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="7081:7204" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="7298:7400" ph="/* Called when cursor exits the space allocated to the object attached to this script. ... */" />
+                <marker date="1525428206777" expanded="true" signature="7458:7756" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="7612:7750" ph="{...}" />
+                <marker date="1525428206777" expanded="true" signature="7813:7858" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/clickHandler.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="240" />
+    <option name="y" value="130" />
+    <option name="width" value="1440" />
+    <option name="height" value="780" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="UnityExplorer" proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="UnityExplorer">
+        <subPane>
+          <expand>
+            <path>
+              <item name="" type="ad4990d8:FileSystemViewPaneBase$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="CardProject" type="483dac07:UnityExplorerNode$Root" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <option name="show-hidden-items" value="false" />
+      </pane>
+      <pane id="SolutionExplorer">
+        <option name="show-file-system" value="false" />
+        <option name="show-all-items" value="false" />
+      </pane>
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="SolutionBuilderGeneralOptionsPageId" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="82ab2cd9-7aa2-42d9-b96e-4e2e48bb1059" name="Default" comment="" />
+      <created>1525524994834</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1525524994834</updated>
+      <workItem from="1525525004518" duration="200000" />
+      <workItem from="1525525563617" duration="286000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="486000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <layout>
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Errors In Solution" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32897604" />
+      <window_info anchor="bottom" id="Unit Tests" order="7" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1108742" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Unity" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="NuGet" order="7" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="UnityProjectConfiguration" isUnityUI="true" />
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/clickHandler.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="40" column="42" lean-forward="true" selection-start-line="40" selection-start-column="42" selection-end-line="40" selection-end-column="42" />
+          <folding>
+            <marker date="1525428206777" expanded="false" signature="6:184" ph="..." />
+            <marker date="1525428206777" expanded="true" signature="187:250" ph="/* Generic class used to identify User-GUI interaction. ... */" />
+            <marker date="1525428206777" expanded="true" signature="456:7860" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="568:622" ph="/* Called the moment cursor is clicked. ... */" />
+            <marker date="1525428206777" expanded="true" signature="678:725" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="731:794" ph="/* Called while cursor is held down and moving. ... */" />
+            <marker date="1525428206777" expanded="true" signature="845:890" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="897:957" ph="/* Called when cursor stops being held down. ... */" />
+            <marker date="1525428206777" expanded="true" signature="1011:1058" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="1063:1108" ph="/* Called when the user clicks. ... */" />
+            <marker date="1525428206777" expanded="true" signature="1167:5330" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="1340:2307" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="1713:2297" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="1855:2283" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="2320:5324" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="2383:5314" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="2441:5300" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="3032:5282" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="3148:4376" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="4494:5260" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="4692:5146" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="4851:5116" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="5336:5444" ph="/* Function used to store the player's decks in a .txt file, located in the resources folder. ... */" />
+            <marker date="1525428206777" expanded="true" signature="5478:5949" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="5557:5626" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="5954:6019" ph="/* Called while cursor is stationary and held down. ... */" />
+            <marker date="1525428206777" expanded="true" signature="6077:6176" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="6181:6282" ph="/* Called when cursor enters the space allocated to the object attached to this script. ... */" />
+            <marker date="1525428206777" expanded="true" signature="6341:7292" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="6495:7286" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="7081:7204" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="7298:7400" ph="/* Called when cursor exits the space allocated to the object attached to this script. ... */" />
+            <marker date="1525428206777" expanded="true" signature="7458:7756" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="7612:7750" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="7813:7858" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/clickHandler.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="74" column="8" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="8" />
+          <folding>
+            <marker date="1525428206777" expanded="false" signature="6:184" ph="..." />
+            <marker date="1525428206777" expanded="true" signature="187:250" ph="/* Generic class used to identify User-GUI interaction. ... */" />
+            <marker date="1525428206777" expanded="true" signature="456:7860" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="568:622" ph="/* Called the moment cursor is clicked. ... */" />
+            <marker date="1525428206777" expanded="true" signature="678:725" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="731:794" ph="/* Called while cursor is held down and moving. ... */" />
+            <marker date="1525428206777" expanded="true" signature="845:890" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="897:957" ph="/* Called when cursor stops being held down. ... */" />
+            <marker date="1525428206777" expanded="true" signature="1011:1058" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="1063:1108" ph="/* Called when the user clicks. ... */" />
+            <marker date="1525428206777" expanded="true" signature="1167:5330" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="1340:2307" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="1713:2297" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="1855:2283" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="2320:5324" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="2383:5314" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="2441:5300" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="3032:5282" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="3148:4376" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="4494:5260" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="4692:5146" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="4851:5116" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="5336:5444" ph="/* Function used to store the player's decks in a .txt file, located in the resources folder. ... */" />
+            <marker date="1525428206777" expanded="true" signature="5478:5949" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="5557:5626" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="5954:6019" ph="/* Called while cursor is stationary and held down. ... */" />
+            <marker date="1525428206777" expanded="true" signature="6077:6176" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="6181:6282" ph="/* Called when cursor enters the space allocated to the object attached to this script. ... */" />
+            <marker date="1525428206777" expanded="true" signature="6341:7292" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="6495:7286" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="7081:7204" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="7298:7400" ph="/* Called when cursor exits the space allocated to the object attached to this script. ... */" />
+            <marker date="1525428206777" expanded="true" signature="7458:7756" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="7612:7750" ph="{...}" />
+            <marker date="1525428206777" expanded="true" signature="7813:7858" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
