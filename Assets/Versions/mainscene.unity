@@ -959,7 +959,7 @@ GameObject:
   - component: {fileID: 939099742}
   m_Layer: 5
   m_Name: Main UI
-  m_TagString: Untagged
+  m_TagString: Main UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -976,10 +976,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
+  m_BlockingObjects: 3
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 512
 --- !u!114 &939099739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1999,7 +1999,7 @@ Prefab:
     - target: {fileID: 224744828323638618, guid: 01dbe114c8e08524f9bd858093062470,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 01dbe114c8e08524f9bd858093062470, type: 2}
