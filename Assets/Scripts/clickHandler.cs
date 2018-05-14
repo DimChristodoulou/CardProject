@@ -65,23 +65,6 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
         Scene currentScene = SceneManager.GetActiveScene();
         if (currentScene.name.Equals("mainscene"))
         {
-<<<<<<< HEAD
-            //RaycastHit hit;
-            //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //if (Physics.Raycast(ray, out hit, 1000, LayerMask.GetMask("CardLayer")))
-            GameObject clickedObj = eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject;
-            if (clickedObj == null || clickedObj.name == "Main UI")
-                clickedObj = eventData.pointerCurrentRaycast.gameObject;
-            string clickedCard = clickedObj.name;
-            if (clickedCard.Equals("CardDisplaySample(Clone)"))
-            {
-                GameState.getActivePlayer().setupPlayCard(clickedObj);
-            }
-            else if (clickedCard.Equals("CardDisplaySpellSample(Clone)"))
-            {
-                //Check for mana, wait for player to specify target and resolve effect.
-            }
-=======
             RaycastHit hit;
             m_PointerEventData = new PointerEventData(m_EventSystem);
             m_PointerEventData.position = Input.mousePosition;
@@ -101,20 +84,19 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
                 }
             }
 
-//            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-//            Debug.Log("a");
-//            if (Physics2D.Raycast(ray, out hit, 1000/*, LayerMask.GetMask("CardLayer")*/))
-//            {
-//                Debug.Log("RAYCAST COLLIDED WITH: " + hit.collider.tag);
-//                Debug.Log("a");
-//                GameObject clickedObj = result.transform.gameObject;
-//                //if (clickedObj == null || clickedObj.name == "Main UI")
-//                //clickedObj = eventData.pointerCurrentRaycast.gameObject;
-//                string clickedCard = clickedObj.name;
-//                Debug.Log(clickedCard);
-//                GameState.getActivePlayer().setupPlayCard(clickedObj);
-//            }
->>>>>>> a43ab902c2fd23c7659cb20ffcb45904d50d54ea
+            //            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            //            Debug.Log("a");
+            //            if (Physics2D.Raycast(ray, out hit, 1000/*, LayerMask.GetMask("CardLayer")*/))
+            //            {
+            //                Debug.Log("RAYCAST COLLIDED WITH: " + hit.collider.tag);
+            //                Debug.Log("a");
+            //                GameObject clickedObj = result.transform.gameObject;
+            //                //if (clickedObj == null || clickedObj.name == "Main UI")
+            //                //clickedObj = eventData.pointerCurrentRaycast.gameObject;
+            //                string clickedCard = clickedObj.name;
+            //                Debug.Log(clickedCard);
+            //                GameState.getActivePlayer().setupPlayCard(clickedObj);
+            //            }
         }
         else
         {
@@ -122,10 +104,10 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
             {
                 if (Player.deck.Count < 30)
                 {
-//                    GameObject clickedObj = eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject;
-//                    if (clickedObj == null)
-//                        clickedObj = eventData.pointerCurrentRaycast.gameObject;
-//                    RaycastHit hit;
+                    //                    GameObject clickedObj = eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject;
+                    //                    if (clickedObj == null)
+                    //                        clickedObj = eventData.pointerCurrentRaycast.gameObject;
+                    //                    RaycastHit hit;
                     m_PointerEventData = new PointerEventData(m_EventSystem);
                     m_PointerEventData.position = Input.mousePosition;
                     List<RaycastResult> results = new List<RaycastResult>();
@@ -137,33 +119,7 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
                     {
                         if (result.gameObject.CompareTag("Card"))
                         {
-<<<<<<< HEAD
-                            GameObject cardListEntry = new GameObject("cardListEntry");
-                            cardListEntry.gameObject.tag = "cardEntry";
-                            cardListEntry.AddComponent<LayoutElement>();
-                            cardListEntry.AddComponent<Text>();
-                            cardListEntry.GetComponent<Text>().text = clickedObj.GetComponent<CardDisplay>().manaCost.text + clickedObj.GetComponent<CardDisplay>().cardName.text;
-                            cardListEntry.GetComponent<Text>().font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
-                            cardListEntry.GetComponent<Text>().fontSize = 10;
-
-                            cardListEntry = Instantiate(cardListEntry, GameObject.FindGameObjectWithTag("ListWithCards").transform);
-                            cardEntryOffset -= 20;
-                            cardListEntry.transform.localPosition = new Vector3(3.382453f, cardEntryOffset, 0);
-                            ((RectTransform)cardListEntry.transform).sizeDelta = new Vector2(118.89f, 17.58f);
-                            Player.deck.Add(clickedObj.GetComponent<CardDisplay>().id);
-                            timesTwo = false;
-                        }
-                        else if(Player.deck.Contains(clickedObj.GetComponent<CardDisplay>().id) && timesTwo == false)
-                        {
-                            GameObject[] cardEntries = GameObject.FindGameObjectsWithTag("cardEntry");
-                            foreach (GameObject card in cardEntries)
-                            {
-                                if (card.GetComponent<Text>().text.Equals(clickedObj.GetComponent<CardDisplay>().manaCost.text + clickedObj.GetComponent<CardDisplay>().cardName.text))
-                                {
-                                    card.GetComponent<Text>().text = clickedObj.GetComponent<CardDisplay>().manaCost.text + clickedObj.GetComponent<CardDisplay>().cardName.text + " x2";             
-                                    timesTwo = true;
-=======
-//                            Debug.Log("RAYCAST COLLIDED WITH: " + result.gameObject.tag);
+                            //                            Debug.Log("RAYCAST COLLIDED WITH: " + result.gameObject.tag);
                             GameObject clickedObj = result.gameObject;
                             string clickedCard = clickedObj.name;
                             Debug.Log(clickedCard);
@@ -183,7 +139,7 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
                                     GameObject.FindGameObjectWithTag("ListWithCards").transform);
                                 cardEntryOffset -= 20;
                                 cardListEntry.transform.localPosition = new Vector3(3.382453f, cardEntryOffset, 0);
-                                ((RectTransform) cardListEntry.transform).sizeDelta = new Vector2(118.89f, 17.58f);
+                                ((RectTransform)cardListEntry.transform).sizeDelta = new Vector2(118.89f, 17.58f);
                                 Player.deck.Add(clickedObj.GetComponent<CardDisplay>().id);
                                 timesTwo = false;
                             }
@@ -200,7 +156,6 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
                                             clickedObj.GetComponent<CardDisplay>().cardName.text + " x2";
                                         timesTwo = true;
                                     }
->>>>>>> a43ab902c2fd23c7659cb20ffcb45904d50d54ea
                                 }
 
                                 Player.deck.Add(clickedObj.GetComponent<CardDisplay>().id);
@@ -210,7 +165,7 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
                         }
                     }
 
-//                    string clickedCard = clickedObj.name;
+                    //                    string clickedCard = clickedObj.name;
                 }
             }
         }
