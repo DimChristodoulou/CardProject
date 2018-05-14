@@ -55,20 +55,21 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
         Scene currentScene = SceneManager.GetActiveScene();
         if (currentScene.name.Equals("mainscene"))
         {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Debug.Log("a");
-            if (Physics.Raycast(ray, out hit, 1000, LayerMask.GetMask("CardLayer")))
+            //RaycastHit hit;
+            //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            //if (Physics.Raycast(ray, out hit, 1000, LayerMask.GetMask("CardLayer")))
+            GameObject clickedObj = eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject;
+            if (clickedObj == null || clickedObj.name == "Main UI")
+                clickedObj = eventData.pointerCurrentRaycast.gameObject;
+            string clickedCard = clickedObj.name;
+            if (clickedCard.Equals("CardDisplaySample(Clone)"))
             {
-                Debug.Log("a");
-                GameObject clickedObj = hit.transform.gameObject;
-                //if (clickedObj == null || clickedObj.name == "Main UI")
-                //clickedObj = eventData.pointerCurrentRaycast.gameObject;
-                string clickedCard = clickedObj.name;
-                Debug.Log(clickedCard);
                 GameState.getActivePlayer().setupPlayCard(clickedObj);
             }
-            Debug.Log("a");
+            else if (clickedCard.Equals("CardDisplaySpellSample(Clone)"))
+            {
+                //Check for mana, wait for player to specify target and resolve effect.
+            }
         }
         else
         {
@@ -88,7 +89,7 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
                             cardListEntry.gameObject.tag = "cardEntry";
                             cardListEntry.AddComponent<LayoutElement>();
                             cardListEntry.AddComponent<Text>();
-                            cardListEntry.GetComponent<Text>().text = clickedObj.GetComponent<CardDisplay>().cardName.text;
+                            cardListEntry.GetComponent<Text>().text = clickedObj.GetComponent<CardDisplay>().manaCost.text + clickedObj.GetComponent<CardDisplay>().cardName.text;
                             cardListEntry.GetComponent<Text>().font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
                             cardListEntry.GetComponent<Text>().fontSize = 10;
 
@@ -104,9 +105,9 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
                             GameObject[] cardEntries = GameObject.FindGameObjectsWithTag("cardEntry");
                             foreach (GameObject card in cardEntries)
                             {
-                                if (card.GetComponent<Text>().text.Equals(clickedObj.GetComponent<CardDisplay>().cardName.text))
+                                if (card.GetComponent<Text>().text.Equals(clickedObj.GetComponent<CardDisplay>().manaCost.text + clickedObj.GetComponent<CardDisplay>().cardName.text))
                                 {
-                                    card.GetComponent<Text>().text = clickedObj.GetComponent<CardDisplay>().cardName.text + " x2";             
+                                    card.GetComponent<Text>().text = clickedObj.GetComponent<CardDisplay>().manaCost.text + clickedObj.GetComponent<CardDisplay>().cardName.text + " x2";             
                                     timesTwo = true;
                                 }
                             }
