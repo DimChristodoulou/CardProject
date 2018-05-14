@@ -9,6 +9,7 @@ TagManager:
   - Card
   - ListWithCards
   - cardEntry
+  - Main UI
   layers:
   - Default
   - TransparentFX
