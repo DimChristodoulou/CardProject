@@ -123,7 +123,7 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
                             GameObject clickedObj = result.gameObject;
                             string clickedCard = clickedObj.name;
                             Debug.Log(clickedCard);
-                            if (!Player.deck.Contains(clickedObj.GetComponent<CardDisplay>().id))
+                            if (!Player.deck.Contains(clickedObj.GetComponent<CardDisplay>().id+1))
                             {
                                 GameObject cardListEntry = new GameObject("cardListEntry");
                                 cardListEntry.gameObject.tag = "cardEntry";
@@ -140,25 +140,20 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
                                 cardEntryOffset -= 20;
                                 cardListEntry.transform.localPosition = new Vector3(3.382453f, cardEntryOffset, 0);
                                 ((RectTransform)cardListEntry.transform).sizeDelta = new Vector2(118.89f, 17.58f);
-                                Player.deck.Add(clickedObj.GetComponent<CardDisplay>().id);
+                                Player.deck.Add(clickedObj.GetComponent<CardDisplay>().id+1);
                                 timesTwo = false;
                             }
-                            else if (Player.deck.Contains(clickedObj.GetComponent<CardDisplay>().id) &&
-                                     timesTwo == false)
-                            {
+                            else if (Player.deck.Contains(clickedObj.GetComponent<CardDisplay>().id+1) && timesTwo == false){
                                 GameObject[] cardEntries = GameObject.FindGameObjectsWithTag("cardEntry");
-                                foreach (GameObject card in cardEntries)
-                                {
-                                    if (card.GetComponent<Text>().text
-                                        .Equals(clickedObj.GetComponent<CardDisplay>().cardName.text))
+                                foreach (GameObject card in cardEntries){
+                                    if (card.GetComponent<Text>().text.Equals(clickedObj.GetComponent<CardDisplay>().cardName.text))
                                     {
                                         card.GetComponent<Text>().text =
                                             clickedObj.GetComponent<CardDisplay>().cardName.text + " x2";
                                         timesTwo = true;
                                     }
                                 }
-
-                                Player.deck.Add(clickedObj.GetComponent<CardDisplay>().id);
+                                Player.deck.Add(clickedObj.GetComponent<CardDisplay>().id+1);
                             }
 
                             break;
@@ -179,7 +174,7 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
         string deckCode = "";
         foreach (int cardId in Player.deck)
         {
-            deckCode += cardId.ToString() + " ";
+            deckCode += (cardId).ToString() + " ";
         }
 
         string path = "Assets/Prefabs/Resources/playerDecks.txt";
