@@ -7,36 +7,15 @@ using UnityEngine.UI;
 
 public class coroutineClass : MonoBehaviour {
     //Generic async Enumerator that checks the clicked GO and returns it to the main effector function.
-    public IEnumerator waitForUserToSelect(GameObject target)
-    {
-        bool selected = false;
-        RaycastHit hit = new RaycastHit();
-        while (selected)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit, 100))
-                {
-                    Debug.Log(hit.transform.gameObject.name);
-                    target = hit.transform.gameObject;
-                }
-                selected = true;
-            }
-        }
-        yield return target;
-    }
+
 }
 
 public class cardEffects : MonoBehaviour {
-    public coroutineClass coroutineInstance = null;
     private cardEventHandler cardEvents;
     private cardEffects effector = null;
 
     private void Awake()
     {
-        if(coroutineInstance == null)
-            coroutineInstance = new coroutineClass();
         if (effector == null)
             effector = new cardEffects();
     }
@@ -45,6 +24,7 @@ public class cardEffects : MonoBehaviour {
     void Start () {
         cardEventHandler.onSummon += effector.flamesprite;
         cardEventHandler.onSummon += effector.fireball;
+
     }
 
     /*
@@ -62,12 +42,31 @@ public class cardEffects : MonoBehaviour {
         DealDamageToPlayer(opponent,5);
     }
 
+    private IEnumerator waitForUserToSelect(GameObject target)
+    {
+        bool selected = false;
+        RaycastHit hit = new RaycastHit();
+        while (!selected)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit, 100))
+                {
+                    Debug.Log("HIT: " + hit.transform.gameObject.name);
+                    target = hit.transform.gameObject;
+                }
+                selected = true;
+            }
+            yield return null;
+        }
+        yield return target;
+    }
 
     public void fireball(string spellName)
     {
         GameObject target = null;
-        Debug.Log("coroutine: " + coroutineInstance);
-        StartCoroutine(coroutineInstance.waitForUserToSelect(target));
+        StartCoroutine(waitForUserToSelect(target));
         //Debug.Log(target);
     }
 
