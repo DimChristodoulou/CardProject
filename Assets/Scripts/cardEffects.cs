@@ -12,9 +12,9 @@ public class cardEffects : MonoBehaviour
     private cardEventHandler cardEvents;
 
     public static cardEffects instance = null;
-//    GraphicRaycaster m_Raycaster;
-//    PointerEventData m_PointerEventData;
-//    EventSystem m_EventSystem;
+    GraphicRaycaster m_Raycaster;
+    PointerEventData m_PointerEventData;
+    EventSystem m_EventSystem;
 
     //    private cardEffects effector = null;
 
@@ -32,8 +32,8 @@ public class cardEffects : MonoBehaviour
 //        cardEventHandler.onSummon += flamesprite;
 //        cardEventHandler.onSummon += fireball;
 
-//        m_Raycaster = GameObject.FindGameObjectWithTag("Main UI").GetComponent<GraphicRaycaster>();
-//        m_EventSystem = GetComponent<EventSystem>();
+        m_Raycaster = GameObject.FindGameObjectWithTag("Main UI").GetComponent<GraphicRaycaster>();
+        m_EventSystem = GetComponent<EventSystem>();
     }
 
     public void setUpDelegate(string minionName)
@@ -85,10 +85,10 @@ public class cardEffects : MonoBehaviour
             {
                 Debug.Log("MOUSE BUTTON PRESSED");
 
-//                m_PointerEventData = new PointerEventData(m_EventSystem) {position = Input.mousePosition};
-//                List<RaycastResult> results = new List<RaycastResult>();
-//
-//                m_Raycaster.Raycast(m_PointerEventData, results);
+                m_PointerEventData = new PointerEventData(m_EventSystem) {position = Input.mousePosition};
+                List<RaycastResult> results = new List<RaycastResult>();
+
+                m_Raycaster.Raycast(m_PointerEventData, results);
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
@@ -107,10 +107,18 @@ public class cardEffects : MonoBehaviour
                         Destroy(target);
                         cardEventHandler.onSummon -= fireball;
                     }
-                    else if (hit.collider.gameObject.layer == 9)
+                    else if (results.Count > 0)
                     {
-                        selected = true;
-                        cardEventHandler.onSummon -= fireball;
+                        foreach (RaycastResult result in results)
+                        {
+                            if (result.gameObject.CompareTag("Card"))
+                            {
+                                selected = true; // stop coroutine
+                                cardEventHandler.onSummon -= fireball;
+                                break;
+                            }
+                        }
+                        
 //                        StopCoroutine(waitForUserToSelect());
                     }
 

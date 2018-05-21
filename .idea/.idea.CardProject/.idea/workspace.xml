@@ -14,12 +14,11 @@
       <file leaf-file-name="clickHandler.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/clickHandler.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="477">
+            <state relative-caret-position="1170">
               <caret line="84" column="13" selection-start-line="84" selection-start-column="13" selection-end-line="84" selection-end-column="13" />
               <folding>
                 <marker date="1526775674346" expanded="false" signature="6:184" ph="..." />
                 <marker date="1526775674346" expanded="true" signature="187:250" ph="/* Generic class used to identify User-GUI interaction. ... */" />
-                <marker date="1526775674346" expanded="true" signature="456:10531" ph="{...}" />
                 <marker date="1526775674346" expanded="true" signature="694:859" ph="{...}" />
                 <marker date="1526775674346" expanded="true" signature="865:919" ph="/* Called the moment cursor is clicked. ... */" />
                 <marker date="1526775674346" expanded="true" signature="975:1022" ph="{...}" />
@@ -67,31 +66,32 @@
       <file leaf-file-name="cardEffects.cs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/cardEffects.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="110" column="21" lean-forward="true" selection-start-line="110" selection-start-column="21" selection-end-line="110" selection-end-column="21" />
+            <state relative-caret-position="210">
+              <caret line="35" column="52" lean-forward="true" selection-start-line="35" selection-start-column="52" selection-end-line="35" selection-end-column="52" />
               <folding>
-                <marker date="1526927443838" expanded="false" signature="6:163" ph="..." />
-                <marker date="1526927443838" expanded="true" signature="206:4446" ph="{...}" />
-                <marker date="1526927443838" expanded="true" signature="298:613" ph="/* GraphicRaycaster m_Raycaster; ... */" />
-                <marker date="1526927443838" expanded="true" signature="630:960" ph="{...}" />
-                <marker date="1526927443838" expanded="true" signature="696:954" ph="/* cardEventHandler.onSummon += flamesprite; ... */" />
-                <marker date="1526927443838" expanded="true" signature="1010:1465" ph="{...}" />
-                <marker date="1526927443838" expanded="true" signature="1094:1459" ph="{...}" />
-                <marker date="1526927443838" expanded="true" signature="1471:1561" ph="/* Function used to handle the effect of the flamesprite card (card ID = 7) ... */" />
-                <marker date="1526927443838" expanded="true" signature="1608:2019" ph="{...}" />
-                <marker date="1526927443838" expanded="true" signature="2066:3855" ph="{...}" />
-                <marker date="1526927443838" expanded="true" signature="2200:3819" ph="{...}" />
-                <marker date="1526927443838" expanded="true" signature="2297:3777" ph="{...}" />
-                <marker date="1526927443838" expanded="true" signature="2364:2618" ph="/* m_PointerEventData = new PointerEventData(m_EventSystem) {position = Input.mousePosition}; ... */" />
-                <marker date="1526927443838" expanded="true" signature="2779:3763" ph="{...}" />
-                <marker date="1526927443838" expanded="true" signature="2798:2877" ph="/* foreach (RaycastResult result in results) ... */" />
-                <marker date="1526927443838" expanded="true" signature="3104:3447" ph="{...}" />
-                <marker date="1526927443838" expanded="true" signature="3512:3724" ph="{...}" />
-                <marker date="1526927443838" expanded="true" signature="3899:3992" ph="{...}" />
-                <marker date="1526927443838" expanded="true" signature="3998:4072" ph="/* Function used to handle the deal damage on player effect ... */" />
-                <marker date="1526927443838" expanded="true" signature="4155:4318" ph="{...}" />
-                <marker date="1526927443838" expanded="true" signature="4324:4383" ph="/* Function used to handle the freeze effect ... */" />
-                <marker date="1526927443838" expanded="true" signature="4432:4444" ph="{...}" />
+                <marker date="1526930170700" expanded="false" signature="6:163" ph="..." />
+                <marker date="1526930170700" expanded="true" signature="206:4757" ph="{...}" />
+                <marker date="1526930170700" expanded="true" signature="409:607" ph="/* private cardEffects effector = null; ... */" />
+                <marker date="1526930170700" expanded="true" signature="624:950" ph="{...}" />
+                <marker date="1526930170700" expanded="true" signature="690:790" ph="/* cardEventHandler.onSummon += flamesprite; ... */" />
+                <marker date="1526930170700" expanded="true" signature="1000:1455" ph="{...}" />
+                <marker date="1526930170700" expanded="true" signature="1084:1449" ph="{...}" />
+                <marker date="1526930170700" expanded="true" signature="1461:1551" ph="/* Function used to handle the effect of the flamesprite card (card ID = 7) ... */" />
+                <marker date="1526930170700" expanded="true" signature="1598:2009" ph="{...}" />
+                <marker date="1526930170700" expanded="true" signature="2056:4166" ph="{...}" />
+                <marker date="1526930170700" expanded="true" signature="2190:4130" ph="{...}" />
+                <marker date="1526930170700" expanded="true" signature="2287:4088" ph="{...}" />
+                <marker date="1526930170700" expanded="true" signature="2761:4074" ph="{...}" />
+                <marker date="1526930170700" expanded="true" signature="2780:2859" ph="/* foreach (RaycastResult result in results) ... */" />
+                <marker date="1526930170700" expanded="true" signature="3086:3429" ph="{...}" />
+                <marker date="1526930170700" expanded="true" signature="3477:4035" ph="{...}" />
+                <marker date="1526930170700" expanded="true" signature="3565:3924" ph="{...}" />
+                <marker date="1526930170700" expanded="true" signature="3661:3898" ph="{...}" />
+                <marker date="1526930170700" expanded="true" signature="4210:4303" ph="{...}" />
+                <marker date="1526930170700" expanded="true" signature="4309:4383" ph="/* Function used to handle the deal damage on player effect ... */" />
+                <marker date="1526930170700" expanded="true" signature="4466:4629" ph="{...}" />
+                <marker date="1526930170700" expanded="true" signature="4635:4694" ph="/* Function used to handle the freeze effect ... */" />
+                <marker date="1526930170700" expanded="true" signature="4743:4755" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -100,7 +100,7 @@
       <file leaf-file-name="Player.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
+            <state relative-caret-position="1380">
               <caret line="95" column="47" selection-start-line="95" selection-start-column="47" selection-end-line="95" selection-end-column="47" />
               <folding>
                 <marker date="1526926899449" expanded="false" signature="6:100" ph="..." />
@@ -213,10 +213,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="SolutionExplorer">
-        <option name="show-file-system" value="false" />
-        <option name="show-all-items" value="false" />
-      </pane>
+      <pane id="Scratches" />
       <pane id="UnityExplorer">
         <subPane>
           <expand>
@@ -229,7 +226,10 @@
         </subPane>
         <option name="show-hidden-items" value="false" />
       </pane>
-      <pane id="Scratches" />
+      <pane id="SolutionExplorer">
+        <option name="show-file-system" value="false" />
+        <option name="show-all-items" value="false" />
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -269,11 +269,12 @@
       <workItem from="1525525563617" duration="286000" />
       <workItem from="1526254746255" duration="4625000" />
       <workItem from="1526920510790" duration="7319000" />
+      <workItem from="1526929963391" duration="319000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12430000" />
+    <option name="totallyTimeSpent" value="12749000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -295,7 +296,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1130064" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.114072494" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Unity" order="8" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -322,12 +323,161 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/clickHandler.cs">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1170">
+          <caret line="84" column="13" selection-start-line="84" selection-start-column="13" selection-end-line="84" selection-end-column="13" />
+          <folding>
+            <marker date="1526775674346" expanded="false" signature="6:184" ph="..." />
+            <marker date="1526775674346" expanded="true" signature="187:250" ph="/* Generic class used to identify User-GUI interaction. ... */" />
+            <marker date="1526775674346" expanded="true" signature="694:859" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="865:919" ph="/* Called the moment cursor is clicked. ... */" />
+            <marker date="1526775674346" expanded="true" signature="975:1022" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="1028:1091" ph="/* Called while cursor is held down and moving. ... */" />
+            <marker date="1526775674346" expanded="true" signature="1142:1289" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="1157:1283" ph="/* Debug.Log(&quot;Dragging&quot;); ... */" />
+            <marker date="1526775674346" expanded="true" signature="1296:1356" ph="/* Called when cursor stops being held down. ... */" />
+            <marker date="1526775674346" expanded="true" signature="1410:1457" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="1463:1510" ph="/* Called when the user clicks. ... */" />
+            <marker date="1526775674346" expanded="true" signature="1569:7367" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="1742:3445" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="2100:2544" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="2172:2530" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="2558:3435" ph="/* Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); ... */" />
+            <marker date="1526775674346" expanded="true" signature="3458:7361" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="3521:7351" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="3579:7337" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="3618:3962" ph="/* GameObject clickedObj = eventData.pointerCurrentRaycast.gameObject.transform.parent.gameObject; ... */" />
+            <marker date="1526775674346" expanded="true" signature="4323:7238" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="4411:7216" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="4846:6244" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="6369:7154" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="6550:7030" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="6684:6996" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="7373:7481" ph="/* Function used to store the player's decks in a .txt file, located in the resources folder. ... */" />
+            <marker date="1526775674346" expanded="true" signature="7515:7989" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="7595:7666" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="7995:8062" ph="/* Called while cursor is stationary and held down. ... */" />
+            <marker date="1526775674346" expanded="true" signature="8120:8219" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="8225:8328" ph="/* Called when cursor enters the space allocated to the object attached to this script. ... */" />
+            <marker date="1526775674346" expanded="true" signature="8387:9965" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="8541:9959" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="8872:9949" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="9018:9935" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="9653:9808" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="9971:10073" ph="/* Called when cursor exits the space allocated to the object attached to this script. ... */" />
+            <marker date="1526775674346" expanded="true" signature="10131:10427" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="10283:10421" ph="{...}" />
+            <marker date="1526775674346" expanded="true" signature="10484:10529" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1380">
+          <caret line="95" column="47" selection-start-line="95" selection-start-column="47" selection-end-line="95" selection-end-column="47" />
+          <folding>
+            <marker date="1526926899449" expanded="false" signature="6:100" ph="..." />
+            <marker date="1526926899449" expanded="true" signature="122:10236" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="1429:1471" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="1512:2951" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="2196:2550" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="2320:2540" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="2579:2945" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="2702:2918" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="3016:3352" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="3407:3912" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="3528:3906" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="3914:3982" ph="/* Doc: Function used to play a card and resolve its effects. ... */" />
+            <marker date="1526926899449" expanded="true" signature="4022:5777" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="4154:4183" ph="/* spell ... */" />
+            <marker date="1526926899449" expanded="true" signature="4325:5771" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="4494:5493" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="4656:4918" ph="/* minion.GetComponent&lt;movement&gt;().highlightMovableSquares(); ... */" />
+            <marker date="1526926899449" expanded="true" signature="5053:5479" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="5182:5461" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="5819:5910" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="5952:6044" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="6093:6139" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="6188:6234" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="6264:6837" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="6346:6699" ph="/* Draw card after increasing mana. (Max number of cards in hand is 8). ... */" />
+            <marker date="1526926899449" expanded="true" signature="6753:6814" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="6862:7135" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="6960:7019" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="7022:7132" ph="/* if (playingPos == 1) { ... */" />
+            <marker date="1526926899449" expanded="true" signature="7162:7181" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="7235:7426" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="7460:7483" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="7516:8651" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="7520:7581" ph="/* create and position hero ... */" />
+            <marker date="1526926899449" expanded="true" signature="7605:8112" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="7789:8108" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="8325:8644" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="8696:8701" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="8793:9526" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="8872:9507" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="9572:9926" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="9715:9754" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="9975:10233" ph="{...}" />
+            <marker date="1526926899449" expanded="true" signature="10103:10142" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/cardEventHandler.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="18" column="29" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
+          <folding>
+            <marker date="1526926969602" expanded="false" signature="6:78" ph="..." />
+            <marker date="1526926969602" expanded="true" signature="126:737" ph="{...}" />
+            <marker date="1526926969602" expanded="true" signature="304:366" ph="/* Function used to handle the on Summon effect ... */" />
+            <marker date="1526926969602" expanded="true" signature="423:570" ph="{...}" />
+            <marker date="1526926969602" expanded="true" signature="576:637" ph="/* Function used to handle the on Death effect ... */" />
+            <marker date="1526926969602" expanded="true" signature="693:734" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/cardEffects.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1560">
+          <caret line="110" column="21" lean-forward="true" selection-start-line="110" selection-start-column="21" selection-end-line="110" selection-end-column="21" />
+          <folding>
+            <marker date="1526930170700" expanded="false" signature="6:163" ph="..." />
+            <marker date="1526930170700" expanded="true" signature="206:4757" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="409:607" ph="/* private cardEffects effector = null; ... */" />
+            <marker date="1526930170700" expanded="true" signature="624:950" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="690:790" ph="/* cardEventHandler.onSummon += flamesprite; ... */" />
+            <marker date="1526930170700" expanded="true" signature="1000:1455" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="1084:1449" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="1461:1551" ph="/* Function used to handle the effect of the flamesprite card (card ID = 7) ... */" />
+            <marker date="1526930170700" expanded="true" signature="1598:2009" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="2056:4166" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="2190:4130" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="2287:4088" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="2761:4074" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="2780:2859" ph="/* foreach (RaycastResult result in results) ... */" />
+            <marker date="1526930170700" expanded="true" signature="3086:3429" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="3477:4035" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="3565:3924" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="3661:3898" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="4210:4303" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="4309:4383" ph="/* Function used to handle the deal damage on player effect ... */" />
+            <marker date="1526930170700" expanded="true" signature="4466:4629" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="4635:4694" ph="/* Function used to handle the freeze effect ... */" />
+            <marker date="1526930170700" expanded="true" signature="4743:4755" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/clickHandler.cs">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1275">
           <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
           <folding>
             <marker date="1526775674346" expanded="false" signature="6:184" ph="..." />
             <marker date="1526775674346" expanded="true" signature="187:250" ph="/* Generic class used to identify User-GUI interaction. ... */" />
-            <marker date="1526775674346" expanded="true" signature="456:10531" ph="{...}" />
             <marker date="1526775674346" expanded="true" signature="694:859" ph="{...}" />
             <marker date="1526775674346" expanded="true" signature="865:919" ph="/* Called the moment cursor is clicked. ... */" />
             <marker date="1526775674346" expanded="true" signature="975:1022" ph="{...}" />
@@ -431,7 +581,6 @@
           <folding>
             <marker date="1526775674346" expanded="false" signature="6:184" ph="..." />
             <marker date="1526775674346" expanded="true" signature="187:250" ph="/* Generic class used to identify User-GUI interaction. ... */" />
-            <marker date="1526775674346" expanded="true" signature="456:10531" ph="{...}" />
             <marker date="1526775674346" expanded="true" signature="694:859" ph="{...}" />
             <marker date="1526775674346" expanded="true" signature="865:919" ph="/* Called the moment cursor is clicked. ... */" />
             <marker date="1526775674346" expanded="true" signature="975:1022" ph="{...}" />
@@ -482,7 +631,6 @@
           <folding>
             <marker date="1526775674346" expanded="false" signature="6:184" ph="..." />
             <marker date="1526775674346" expanded="true" signature="187:250" ph="/* Generic class used to identify User-GUI interaction. ... */" />
-            <marker date="1526775674346" expanded="true" signature="456:10531" ph="{...}" />
             <marker date="1526775674346" expanded="true" signature="694:859" ph="{...}" />
             <marker date="1526775674346" expanded="true" signature="865:919" ph="/* Called the moment cursor is clicked. ... */" />
             <marker date="1526775674346" expanded="true" signature="975:1022" ph="{...}" />
@@ -528,7 +676,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
+        <state relative-caret-position="1380">
           <caret line="95" column="47" selection-start-line="95" selection-start-column="47" selection-end-line="95" selection-end-column="47" />
           <folding>
             <marker date="1526926899449" expanded="false" signature="6:100" ph="..." />
@@ -596,12 +744,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/clickHandler.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
+        <state relative-caret-position="1170">
           <caret line="84" column="13" selection-start-line="84" selection-start-column="13" selection-end-line="84" selection-end-column="13" />
           <folding>
             <marker date="1526775674346" expanded="false" signature="6:184" ph="..." />
             <marker date="1526775674346" expanded="true" signature="187:250" ph="/* Generic class used to identify User-GUI interaction. ... */" />
-            <marker date="1526775674346" expanded="true" signature="456:10531" ph="{...}" />
             <marker date="1526775674346" expanded="true" signature="694:859" ph="{...}" />
             <marker date="1526775674346" expanded="true" signature="865:919" ph="/* Called the moment cursor is clicked. ... */" />
             <marker date="1526775674346" expanded="true" signature="975:1022" ph="{...}" />
@@ -647,31 +794,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/cardEffects.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="110" column="21" lean-forward="true" selection-start-line="110" selection-start-column="21" selection-end-line="110" selection-end-column="21" />
+        <state relative-caret-position="210">
+          <caret line="35" column="52" lean-forward="true" selection-start-line="35" selection-start-column="52" selection-end-line="35" selection-end-column="52" />
           <folding>
-            <marker date="1526927443838" expanded="false" signature="6:163" ph="..." />
-            <marker date="1526927443838" expanded="true" signature="206:4446" ph="{...}" />
-            <marker date="1526927443838" expanded="true" signature="298:613" ph="/* GraphicRaycaster m_Raycaster; ... */" />
-            <marker date="1526927443838" expanded="true" signature="630:960" ph="{...}" />
-            <marker date="1526927443838" expanded="true" signature="696:954" ph="/* cardEventHandler.onSummon += flamesprite; ... */" />
-            <marker date="1526927443838" expanded="true" signature="1010:1465" ph="{...}" />
-            <marker date="1526927443838" expanded="true" signature="1094:1459" ph="{...}" />
-            <marker date="1526927443838" expanded="true" signature="1471:1561" ph="/* Function used to handle the effect of the flamesprite card (card ID = 7) ... */" />
-            <marker date="1526927443838" expanded="true" signature="1608:2019" ph="{...}" />
-            <marker date="1526927443838" expanded="true" signature="2066:3855" ph="{...}" />
-            <marker date="1526927443838" expanded="true" signature="2200:3819" ph="{...}" />
-            <marker date="1526927443838" expanded="true" signature="2297:3777" ph="{...}" />
-            <marker date="1526927443838" expanded="true" signature="2364:2618" ph="/* m_PointerEventData = new PointerEventData(m_EventSystem) {position = Input.mousePosition}; ... */" />
-            <marker date="1526927443838" expanded="true" signature="2779:3763" ph="{...}" />
-            <marker date="1526927443838" expanded="true" signature="2798:2877" ph="/* foreach (RaycastResult result in results) ... */" />
-            <marker date="1526927443838" expanded="true" signature="3104:3447" ph="{...}" />
-            <marker date="1526927443838" expanded="true" signature="3512:3724" ph="{...}" />
-            <marker date="1526927443838" expanded="true" signature="3899:3992" ph="{...}" />
-            <marker date="1526927443838" expanded="true" signature="3998:4072" ph="/* Function used to handle the deal damage on player effect ... */" />
-            <marker date="1526927443838" expanded="true" signature="4155:4318" ph="{...}" />
-            <marker date="1526927443838" expanded="true" signature="4324:4383" ph="/* Function used to handle the freeze effect ... */" />
-            <marker date="1526927443838" expanded="true" signature="4432:4444" ph="{...}" />
+            <marker date="1526930170700" expanded="false" signature="6:163" ph="..." />
+            <marker date="1526930170700" expanded="true" signature="206:4757" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="409:607" ph="/* private cardEffects effector = null; ... */" />
+            <marker date="1526930170700" expanded="true" signature="624:950" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="690:790" ph="/* cardEventHandler.onSummon += flamesprite; ... */" />
+            <marker date="1526930170700" expanded="true" signature="1000:1455" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="1084:1449" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="1461:1551" ph="/* Function used to handle the effect of the flamesprite card (card ID = 7) ... */" />
+            <marker date="1526930170700" expanded="true" signature="1598:2009" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="2056:4166" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="2190:4130" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="2287:4088" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="2761:4074" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="2780:2859" ph="/* foreach (RaycastResult result in results) ... */" />
+            <marker date="1526930170700" expanded="true" signature="3086:3429" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="3477:4035" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="3565:3924" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="3661:3898" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="4210:4303" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="4309:4383" ph="/* Function used to handle the deal damage on player effect ... */" />
+            <marker date="1526930170700" expanded="true" signature="4466:4629" ph="{...}" />
+            <marker date="1526930170700" expanded="true" signature="4635:4694" ph="/* Function used to handle the freeze effect ... */" />
+            <marker date="1526930170700" expanded="true" signature="4743:4755" ph="{...}" />
           </folding>
         </state>
       </provider>
