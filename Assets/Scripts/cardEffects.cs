@@ -3,28 +3,56 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class coroutineClass : MonoBehaviour {
-    //Generic async Enumerator that checks the clicked GO and returns it to the main effector function.
 
-}
-
-public class cardEffects : MonoBehaviour {
+public class cardEffects : MonoBehaviour
+{
     private cardEventHandler cardEvents;
-    private cardEffects effector = null;
 
-    private void Awake()
-    {
-        if (effector == null)
-            effector = new cardEffects();
-    }
+    public static cardEffects instance = null;
+//    GraphicRaycaster m_Raycaster;
+//    PointerEventData m_PointerEventData;
+//    EventSystem m_EventSystem;
+
+    //    private cardEffects effector = null;
+
+//    private void Awake()
+//    {
+//        if (effector == null)
+//            effector = new cardEffects();
+//    }
 
     // Use this for initialization
-    void Start () {
-        cardEventHandler.onSummon += effector.flamesprite;
-        cardEventHandler.onSummon += effector.fireball;
+    void Start()
+    {
+        if (instance == null)
+            instance = this;
+//        cardEventHandler.onSummon += flamesprite;
+//        cardEventHandler.onSummon += fireball;
 
+//        m_Raycaster = GameObject.FindGameObjectWithTag("Main UI").GetComponent<GraphicRaycaster>();
+//        m_EventSystem = GetComponent<EventSystem>();
+    }
+
+    public void setUpDelegate(string minionName)
+    {
+        Debug.Log("name of card: " + minionName);
+        switch (minionName)
+        {
+            case "Flamesprite":
+            {
+                Debug.Log("Flamesprite function added to delegate");
+                cardEventHandler.onSummon += flamesprite;
+                break;
+            }
+            case "Fireball":
+            {
+                cardEventHandler.onSummon += fireball;
+                break;
+            }
+        }
     }
 
     /*
@@ -32,42 +60,74 @@ public class cardEffects : MonoBehaviour {
      */
     public void flamesprite(string minionName)
     {
+//        cardEventHandler.onSummon -= fireball;
         GameState.getActivePlayer().currentMana -= jsonparse.cards[1].card_manacost;
         Player opponent;
         if (GameState.activePlayerIndex == 0)
             opponent = GameState.players[1];
         else
             opponent = GameState.players[0];
-        
-        DealDamageToPlayer(opponent,5);
+
+        DealDamageToPlayer(opponent, 5);
+//        cardEventHandler.onSummon += fireball;
     }
 
-    private IEnumerator waitForUserToSelect(GameObject target)
+    private IEnumerator waitForUserToSelect()
     {
+        GameObject target = null;
+        Debug.Log("IN IENUMERATOR");
         bool selected = false;
-        RaycastHit hit = new RaycastHit();
         while (!selected)
         {
+//            Debug.Log("NOT SELECTED");
+
             if (Input.GetMouseButtonDown(0))
             {
+                Debug.Log("MOUSE BUTTON PRESSED");
+
+//                m_PointerEventData = new PointerEventData(m_EventSystem) {position = Input.mousePosition};
+//                List<RaycastResult> results = new List<RaycastResult>();
+//
+//                m_Raycaster.Raycast(m_PointerEventData, results);
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit, 100))
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit))
                 {
-                    Debug.Log("HIT: " + hit.transform.gameObject.name);
-                    target = hit.transform.gameObject;
+//                foreach (RaycastResult result in results)
+//                {
+                    Debug.Log("result tag: " + hit.collider.gameObject.tag);
+                    Debug.Log("result layer: " + hit.collider.gameObject.layer);
+                    if (hit.collider.gameObject.CompareTag("Model"))
+                    {
+                        Debug.Log("TARGET CHANGED");
+                        target = hit.collider.gameObject;
+                        selected = true;
+                        Debug.Log(target);
+                        Destroy(target);
+                        cardEventHandler.onSummon -= fireball;
+                    }
+                    else if (hit.collider.gameObject.layer == 9)
+                    {
+                        selected = true;
+                        cardEventHandler.onSummon -= fireball;
+//                        StopCoroutine(waitForUserToSelect());
+                    }
+
+//                }
                 }
-                selected = true;
             }
+
             yield return null;
         }
+
         yield return target;
     }
 
     public void fireball(string spellName)
     {
-        GameObject target = null;
-        StartCoroutine(waitForUserToSelect(target));
-        //Debug.Log(target);
+        Debug.Log("IN FIREBALL");
+        StartCoroutine(waitForUserToSelect());
     }
 
     /*
@@ -84,9 +144,5 @@ public class cardEffects : MonoBehaviour {
      */
     public static void Freeze(GameObject target)
     {
-
     }
-
 }
-
-

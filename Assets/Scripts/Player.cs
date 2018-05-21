@@ -92,9 +92,9 @@ public class Player {
         {
             GameState.getActivePlayer().playCard(GameState.getActivePlayer().handCards.IndexOf(clickedObj));
             //Event system from here on out...
-            string s = clickedObj.GetComponent<CardDisplay>().cardName.ToString();
+            string s = clickedObj.GetComponent<CardDisplay>().cardName.text.ToString();
             cardEventHandler.onMinionSummon(s);
-            GameState.getActivePlayer().decreaseCurrentMana(1);
+//            GameState.getActivePlayer().decreaseCurrentMana(1);
         }
     }
 

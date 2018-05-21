@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114691433679143274}
   - component: {fileID: 114641538133472492}
   - component: {fileID: 114325682655996194}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Monster
   m_TagString: Model
   m_Icon: {fileID: 0}
@@ -128,8 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterName: 
   card: {fileID: 0}
-  attack: 0
-  defense: 0
+  power: 0
   manacost: 0
   movspeed: 0
   attkrange: 0

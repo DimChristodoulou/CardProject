@@ -14,6 +14,8 @@ public class cardEventHandler : MonoBehaviour {
      */
     public static void onMinionSummon(string minionName)
     {
+        Debug.Log("minion name: " + minionName);
+        cardEffects.instance.setUpDelegate(minionName);
         onSummon(minionName);
     }
 

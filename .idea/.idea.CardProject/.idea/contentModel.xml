@@ -4,7 +4,6 @@
     <e p="C:\Users\antonis\.Rider2018.1\system\resharper-host\local\Transient\ReSharperHost\v12\SolutionCaches\_CardProject.-873314630.00" t="ExcludeRecursive" />
     <e p="C:\Users\antonis\Documents\GitHub\CardProject" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
-      <e p="Assets\canvasClick.cs" t="Include" />
       <e p="Assets\Fonts" t="Include">
         <e p="hand.cs" t="Include" />
       </e>
@@ -16,6 +15,7 @@
       <e p="Assets\Scripts" t="Include">
         <e p="attacking.cs" t="Include" />
         <e p="CameraMovement.cs" t="Include" />
+        <e p="canvasClick.cs" t="Include" />
         <e p="Card.cs" t="Include" />
         <e p="CardDisplay.cs" t="Include" />
         <e p="cardEffects.cs" t="Include" />
