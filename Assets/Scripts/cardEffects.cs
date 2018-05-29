@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class cardEffects : MonoBehaviour
 {
     private cardEventHandler cardEvents;
-
+    public static bool disableOtherInput = false;
     public static cardEffects instance = null;
     GraphicRaycaster m_Raycaster;
     PointerEventData m_PointerEventData;
@@ -38,12 +38,10 @@ public class cardEffects : MonoBehaviour
 
     public void setUpDelegate(string minionName)
     {
-        Debug.Log("name of card: " + minionName);
         switch (minionName)
         {
             case "Flamesprite":
             {
-                Debug.Log("Flamesprite function added to delegate");
                 cardEventHandler.onSummon += flamesprite;
                 break;
             }
@@ -52,7 +50,27 @@ public class cardEffects : MonoBehaviour
                 cardEventHandler.onSummon += fireball;
                 break;
             }
+            case "The Emperor's Hound":
+            {
+                cardEventHandler.onSummon += emperorsHound;
+                break;
+            }
+            case "Firewraith":
+            {
+                cardEventHandler.onSummon += firewraith;
+                break;
+            }
         }
+    }
+
+    public void emperorsHound(string minionName)
+    {
+        //Do Nothing
+    }
+
+    public void firewraith(string minionName)
+    {
+        //Do Nothing
     }
 
     /*
@@ -60,7 +78,7 @@ public class cardEffects : MonoBehaviour
      */
     public void flamesprite(string minionName)
     {
-//        cardEventHandler.onSummon -= fireball;
+
         GameState.getActivePlayer().currentMana -= jsonparse.cards[1].card_manacost;
         Player opponent;
         if (GameState.activePlayerIndex == 0)
@@ -69,21 +87,18 @@ public class cardEffects : MonoBehaviour
             opponent = GameState.players[0];
 
         DealDamageToPlayer(opponent, 5);
-//        cardEventHandler.onSummon += fireball;
+        cardEventHandler.onSummon -= flamesprite;
     }
 
     private IEnumerator waitForUserToSelect()
     {
         GameObject target = null;
-        Debug.Log("IN IENUMERATOR");
         bool selected = false;
-        while (!selected)
-        {
-//            Debug.Log("NOT SELECTED");
+        disableOtherInput = true;
+        while (!selected) { 
 
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("MOUSE BUTTON PRESSED");
 
                 m_PointerEventData = new PointerEventData(m_EventSystem) {position = Input.mousePosition};
                 List<RaycastResult> results = new List<RaycastResult>();
@@ -94,17 +109,10 @@ public class cardEffects : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hit))
                 {
-//                foreach (RaycastResult result in results)
-//                {
-                    Debug.Log("result tag: " + hit.collider.gameObject.tag);
-                    Debug.Log("result layer: " + hit.collider.gameObject.layer);
                     if (hit.collider.gameObject.CompareTag("Model"))
                     {
-                        Debug.Log("TARGET CHANGED");
                         target = hit.collider.gameObject;
                         selected = true;
-                        Debug.Log(target);
-                        Destroy(target);
                         cardEventHandler.onSummon -= fireball;
                     }
                     else if (results.Count > 0)
@@ -128,13 +136,28 @@ public class cardEffects : MonoBehaviour
 
             yield return null;
         }
-
+        disableOtherInput = false;
         yield return target;
+    }
+
+    public void destroyMinion(GameObject target)
+    {
+        //TODO Change this whenever we need to :)
+        //First, we destroy the GO...
+        Destroy(target);
+        //Then we remove the model from the boardMinions list...
+        GameState.getActivePlayer().boardMinions.Remove(target);
+        //then we get the coordinates of the monster and set its square to free...
+        GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First, target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
+        //then we destroy the card
+        Destroy(GameState.getActivePlayer().selectedCard);
+        GameState.getActivePlayer().handCards.RemoveAt(GameState.getActivePlayer().selectedCardIndex);
+
+        GameState.getActivePlayer().cardSelected = false;
     }
 
     public void fireball(string spellName)
     {
-        Debug.Log("IN FIREBALL");
         StartCoroutine(waitForUserToSelect());
     }
 

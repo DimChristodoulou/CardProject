@@ -49,9 +49,7 @@ public class movement : MonoBehaviour {
 		Dictionary<Pair<int,int>, int> availablesquares = availableMonsterMovements (gameObject);
 		foreach (Pair<int,int> coordpair in availablesquares.Keys) {
             {
-                Debug.Log("COORDS: " + (coordpair.First + 1) + ", " + (coordpair.Second + 1));
-                GameState.boardTable[coordpair.First, coordpair.Second].GetComponent<nodeInfo>().switchActiveColor();
-                
+                GameState.boardTable[coordpair.First, coordpair.Second].GetComponent<nodeInfo>().switchActiveColor();   
             }
         }
 	}
@@ -80,7 +78,6 @@ public class movement : MonoBehaviour {
 				if (goalPos.Count > 0) {
 					int pr = startPos.Count;
 					if (Utilities.DFS (startPos, goalPos, maxmoves)) {
-						Debug.Log (pr + " " + startPos.Count);
 						foreach (Pair<int,int> pair in goalPos) {
 							if (!availableMoves.ContainsKey (pair)) {
 								availableMoves.Add (pair, 1);

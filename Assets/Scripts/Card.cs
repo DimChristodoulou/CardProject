@@ -19,9 +19,10 @@ public class Card{
     public string card_set;
     public string card_attribute;
     public string card_type;
-    public string card_tags;
+    public string card_keywords;
     public int card_actionpoints;
     public string card_flavortext;
     public int card_movement;
     public string card_rarity;
+    public string card_tribe;
 }

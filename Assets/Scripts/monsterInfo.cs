@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class monsterInfo : MonoBehaviour {
-	//utility class for general info regarding monster
+    //utility class for general info regarding monster
 
-	//card stats saved in the class
+    //card stats saved in the class
 	public string monsterName;
+    public string monsterKeywords;
 	public GameObject card; //the card of the monster
 	public int power, manacost, movspeed, attkrange; //these will affect offsets to card values, but the card is needed for that to be implemented (TODO post-merge)
 	//stores pairs of coordinates that this monster sits on, indexed [0,size-1]
@@ -27,7 +28,7 @@ public class monsterInfo : MonoBehaviour {
 
 	//todo need to find a way to store enchants without changing originals, making silence applicable
 
-	public void setData(string mName, int pow, int mcost, int mspeed, int attkrange, Player parent, int summonTurn) {
+	public void setData(string mName, int pow, int mcost, int mspeed, int attkrange, Player parent, int summonTurn, string keywords) {
 		monsterName = mName;
         power = pow;
         manacost = mcost;
@@ -35,6 +36,7 @@ public class monsterInfo : MonoBehaviour {
         this.attkrange = attkrange;
 		parentPlayer = parent;
         playedturn = summonTurn;
+        monsterKeywords = keywords;
 	}
 
 	public void setPosition(List< Pair<int, int> > myList) {
@@ -43,18 +45,26 @@ public class monsterInfo : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-	}
+        if (monsterKeywords != null)
+        {
+            if (monsterKeywords.Contains("Charge"))
+            {
+                clickable = true;
+                movable = true;
+                attackable = true;
+            }
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		//if (defense <= 0)
-		//	Die ();
+        //if (defense <= 0)
+        //	Die ();
 	}
 
 	public void onStartTurn() {
 		//effects when starting a turn
-		if (playedturn != GameState.turn) {
+		if (playedturn != GameState.turn) { 
 			clickable = true;
 			movable = true;
 			attackable = true;

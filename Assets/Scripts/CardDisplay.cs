@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class CardDisplay : MonoBehaviour {
     
     public GameObject card;
-
+    public static List<string> cardKeywords; 
     private bool isInstantiated = false;
 
     public Text cardName;
@@ -26,7 +27,6 @@ public class CardDisplay : MonoBehaviour {
         if (this.name.Equals("CardDisplaySample(Clone)"))                                   //Needs checking or the cloned object will clone again.
         {
             isInstantiated = true;
-            //DisplayCard(0);
         }
     }
 
@@ -36,6 +36,8 @@ public class CardDisplay : MonoBehaviour {
      */
     public GameObject initializeCard(float x, float y, float z, int cardId)                                                              
     {
+
+            /*This prints the card*/
             cardId--;
             GameObject mainui = GameObject.Find("Main UI");
             if(jsonparse.cards[cardId].card_type.Equals("Minion"))

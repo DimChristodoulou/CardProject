@@ -103,7 +103,6 @@ public class deckbuilder : MonoBehaviour {
         Destroy(leftArrow);
         GameObject rightArrow = GameObject.Find("rightArrowButton(Clone)");
         Destroy(rightArrow);
-        Debug.Log("LENGTH: " + shortFilteredCards.Length);
         DisplayCurrentEight(mainui, shortFilteredCards);
     }
 
@@ -113,7 +112,6 @@ public class deckbuilder : MonoBehaviour {
     public void filterBySearchKeyword()
     {
         GameObject mainui = GameObject.Find("Main UI");
-        Debug.Log("STRING IS: " + searchCard.GetComponent<InputField>().text);
         GameObject[] cardsToBeDestroyed;
         cardsToBeDestroyed = GameObject.FindGameObjectsWithTag("Card");
         foreach (GameObject card in cardsToBeDestroyed){
@@ -136,7 +134,6 @@ public class deckbuilder : MonoBehaviour {
         Destroy(leftArrow);
         GameObject rightArrow = GameObject.Find("rightArrowButton(Clone)");
         Destroy(rightArrow);
-        Debug.Log("SEARCH LENGTH: " + shortFilteredCards.Length);
         DisplayCurrentEight(mainui, shortFilteredCards);
     }
 

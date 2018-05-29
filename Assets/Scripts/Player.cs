@@ -80,6 +80,7 @@ public class Player {
     public void DrawCard(float x, float y, float z, int cardId)
     {
         clonedCard = originalCard.initializeCard(x, y, z, cardId);
+        clonedCard.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
         handCards.Add(clonedCard);
         deckSize--;
         GameObject deck = GameObject.Find("Player_Deck");
@@ -90,11 +91,15 @@ public class Player {
     public void setupPlayCard(GameObject clickedObj) {
         if (GameState.getActivePlayer().currentMana >= int.Parse(clickedObj.GetComponent<CardDisplay>().manaCost.text))
         {
+            
             GameState.getActivePlayer().playCard(GameState.getActivePlayer().handCards.IndexOf(clickedObj));
             //Event system from here on out...
             string s = clickedObj.GetComponent<CardDisplay>().cardName.text.ToString();
-            cardEventHandler.onMinionSummon(s);
-//            GameState.getActivePlayer().decreaseCurrentMana(1);
+            if (clickedObj.GetComponent<CardDisplay>().type.text == "Spell")
+            {
+                cardEventHandler.onMinionSummon(s);
+            }
+
         }
     }
 
@@ -102,23 +107,16 @@ public class Player {
  * Doc: Function used to play a card and resolve its effects.
  */
     public void playCard(int cardIndex){
-        
         selectedCard = handCards[cardIndex];
         selectedCardIndex = cardIndex;
+
         cardSelected = true;
-        // spell
 
-        // creature
-
-        Debug.Log("PLAY CARD WITH INDEX: " + cardIndex);
         if (handCards[cardIndex].GetComponent<CardDisplay>().type.text == "Minion")
         {
             availableNodesForSummon = new List<Pair<int, int>>();
-            Debug.Log("PLAY CARD1");
             foreach (GameObject minion in boardMinions)
             {
-                Debug.Log("BOARD MINIONS COUNT: " + boardMinions.Count);
-                Debug.Log("MINION name: " + minion.name);
                 //minion.GetComponent<movement>().highlightMovableSquares();
                 //Dictionary<Pair<int, int>, int> availableNodes = minion.GetComponent<movement>().availableMonsterMovements(minion);
                 //foreach (KeyValuePair<Pair<int, int>, int> pair )
@@ -127,19 +125,12 @@ public class Player {
                 {
                     if (GameState.boardTable[pair.Key.First, pair.Key.Second].GetComponent<nodeInfo>().isFree)
                     {
-                        Debug.Log(minion.name + ":");
                         GameState.boardTable[pair.Key.First, pair.Key.Second].GetComponent<nodeInfo>().makeActive();
 
                         availableNodesForSummon.Add(pair.Key);
                     }
                 }
             }
-            foreach (Pair<int,int> pair in availableNodesForSummon)
-                Debug.Log("Nodes available: " + pair.First + ", " + pair.Second);
-
-            
-            //summonMonster(handCards[cardIndex].GetComponent<CardDisplay>().name, availableNodes, 1);
-
         }
     }
 
@@ -186,6 +177,7 @@ public class Player {
 		updateClickedItem (null);
 		isPlaying = false;
 		foreach (GameObject monster in boardMinions) {
+            Debug.Log(monster.name);
 			monster.GetComponent<monsterInfo> ().onEndTurn ();
 		}
 		//if (playingPos == 1) {
@@ -198,9 +190,12 @@ public class Player {
 	}
 
 	public void updateClickedItem(GameObject newclick) {
-		//if another element was clicked before, update selection
-		if (selected != null && selected != newclick)
-			selected.GetComponent<clickableV2>().toggleChange();
+        Debug.Log("In UCI");
+        //if another element was clicked before, update selection
+        if (selected != null && selected != newclick)
+        {
+            selected.GetComponent<clickableV2>().toggleChange();
+        }
 		selected = newclick;
 	}
 
@@ -217,7 +212,7 @@ public class Player {
 			if (GameState.allocateBoardPosition (summonPos)) {
 				hero = GameObject.Instantiate (monsterPrefab, GameState.getPositionRelativeToBoard (summonPos), new Quaternion (0, 0, 0, 0));
 				hero.GetComponent<monsterInfo> ().setPosition (summonPos);
-				hero.GetComponent<monsterInfo> ().setData ("hero1", 0, 0, 2, 1, this, GameState.turn);
+				hero.GetComponent<monsterInfo> ().setData ("hero1", 0, 0, 2, 1, this, GameState.turn, null);
 				boardMinions.Add (hero);
 			}
 		} else {
@@ -226,7 +221,7 @@ public class Player {
 			if (GameState.allocateBoardPosition (summonPos)) {
 				hero = GameObject.Instantiate (monsterPrefab, GameState.getPositionRelativeToBoard (summonPos), new Quaternion (0, 0, 0, 0));
 				hero.GetComponent<monsterInfo> ().setPosition (summonPos);
-				hero.GetComponent<monsterInfo> ().setData ("hero2", 0, 0, 2, 1, this, GameState.turn);
+				hero.GetComponent<monsterInfo> ().setData ("hero2", 0, 0, 2, 1, this, GameState.turn, null);
 				boardMinions.Add (hero);
 			}
 		}
@@ -239,17 +234,12 @@ public class Player {
 	public void summonMonster(string mName, List<Pair<int,int>> summonPos, int summonedTurn) {
 		GameObject myObj = null;
 		if (GameState.allocateBoardPosition(summonPos)) {
-            Debug.Log("SUMMON MONSTER1");
             myObj = GameObject.Instantiate(monsterPrefab, GameState.getPositionRelativeToBoard(summonPos), new Quaternion(0,0,0,0));
-            Debug.Log("SUMMON MONSTER2");
 
             myObj.name = mName;
             myObj.GetComponent<monsterInfo>().setPosition(summonPos);
-            Debug.Log("SUMMON MONSTER3");
 
-            //myObj.GetComponent<monsterInfo>().setData(mName, att, def, mcost, mspeed, attkrange, this, summonedTurn);
             boardMinions.Add(myObj);
-            Debug.Log("SUMMON MONSTER4");
 
             //also remove the monster from hand or something
         }

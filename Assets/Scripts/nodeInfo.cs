@@ -44,8 +44,12 @@ public class nodeInfo : MonoBehaviour
         Debug.Log("ACTIVE PLAYER INDEX: " + GameState.activePlayerIndex);
 
         GameObject selectedMonster = activePlayer.selected;
+        
         if (selectedMonster != null)
+        {
+            Debug.Log(selectedMonster.name);
             selectedMonster.GetComponent<movement>().moveTo(xpos, ypos);
+        }
         else if (activePlayer.cardSelected && activePlayer.availableNodesForSummon != null)
         {
             //Debug.Log("search for node: " + xpos + ", " + ypos);
@@ -64,7 +68,8 @@ public class nodeInfo : MonoBehaviour
                                                                   jsonparse.cards[selectedCardDisplay.id].card_manacost,
                                                                   jsonparse.cards[selectedCardDisplay.id].card_movement,
                                                                   2,
-                                                                  activePlayer, GameState.turn);
+                                                                  activePlayer, GameState.turn,
+                                                                  jsonparse.cards[selectedCardDisplay.id].card_keywords);
 
                 currentMinion.GetComponent<monsterInfo>().setPosition(summonNodes);
                 //currentMinion.GetComponent<monsterInfo>().parentPlayer = activePlayer;
@@ -76,8 +81,8 @@ public class nodeInfo : MonoBehaviour
                 //GetComponentInParent<monsterInfo>().setPosition(newPos);
                 GameState.setSquares(currentMinion.GetComponent<monsterInfo>().coords, false);
                 currentMinion.GetComponent<monsterInfo>().onPostMove();
-                
-                
+
+
                 //GameState.boardTable[xpos, ypos].GetComponent<nodeInfo>().switchActiveColor();
 
                 //foreach (GameObject minion in activePlayer.boardMinions)
@@ -88,13 +93,14 @@ public class nodeInfo : MonoBehaviour
                 //}
 
 
-                foreach ( Pair<int,int> pair in activePlayer.availableNodesForSummon)
+                foreach (Pair<int, int> pair in activePlayer.availableNodesForSummon)
                     GameState.boardTable[pair.First, pair.Second].GetComponent<nodeInfo>().makeInactive();
 
-                Destroy(activePlayer.handCards[activePlayer.selectedCardIndex]);
-                activePlayer.handCards.RemoveAt(activePlayer.selectedCardIndex);
-                activePlayer.cardSelected = false;
                 activePlayer.availableNodesForSummon = null;
+                activePlayer.cardSelected = false;
+                //activePlayer.handCards.RemoveAt(activePlayer.selectedCardIndex);
+                Debug.Log(activePlayer.handCards);
+                cardEventHandler.onMinionSummon(jsonparse.cards[selectedCardDisplay.id].card_name);
             }
         }
         else

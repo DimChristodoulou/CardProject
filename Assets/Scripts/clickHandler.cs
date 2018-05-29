@@ -83,20 +83,6 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
                     GameState.getActivePlayer().setupPlayCard(clickedObj);
                 }
             }
-
-            //            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //            Debug.Log("a");
-            //            if (Physics2D.Raycast(ray, out hit, 1000/*, LayerMask.GetMask("CardLayer")*/))
-            //            {
-            //                Debug.Log("RAYCAST COLLIDED WITH: " + hit.collider.tag);
-            //                Debug.Log("a");
-            //                GameObject clickedObj = result.transform.gameObject;
-            //                //if (clickedObj == null || clickedObj.name == "Main UI")
-            //                //clickedObj = eventData.pointerCurrentRaycast.gameObject;
-            //                string clickedCard = clickedObj.name;
-            //                Debug.Log(clickedCard);
-            //                GameState.getActivePlayer().setupPlayCard(clickedObj);
-            //            }
         }
         else
         {
@@ -213,7 +199,6 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
 
             foreach (RaycastResult result in results)
             {
-                Debug.Log("on pointer enter: " + result.gameObject.name);
                 if (result.gameObject.CompareTag("Card"))
                 {
                     Transform hoveredCardName =
@@ -237,6 +222,25 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
                 }
             }
         }
+        else
+        {
+            m_PointerEventData = new PointerEventData(m_EventSystem);
+            m_PointerEventData.position = Input.mousePosition;
+            List<RaycastResult> results = new List<RaycastResult>();
+
+            m_Raycaster.Raycast(m_PointerEventData, results);
+            
+            foreach (RaycastResult result in results)
+            {
+                if (result.gameObject.CompareTag("Card"))
+                {
+                    result.gameObject.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                    result.gameObject.transform.localPosition = result.gameObject.transform.localPosition + new Vector3(0, 75, 0);
+                    result.gameObject.transform.SetSiblingIndex(transform.GetSiblingIndex() + 1);
+                    break;
+                }
+            }
+        }
     }
 
     /*
@@ -244,12 +248,18 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
      */
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("Mouse Exit");
+        //Debug.Log("Mouse Exit");
         Scene currentScene = SceneManager.GetActiveScene();
         if (currentScene.name.Equals("deckbuilder"))
         {
             Text descText = GameObject.Find("description_text").GetComponent<Text>();
             descText.text = "";
+        }
+        else
+        {
+            gameObject.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
+            gameObject.transform.localPosition = gameObject.transform.localPosition - new Vector3(0, 75, 0);
+            gameObject.transform.SetSiblingIndex(transform.GetSiblingIndex() - 1);
         }
     }
 

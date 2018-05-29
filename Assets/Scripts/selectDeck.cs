@@ -20,15 +20,10 @@ public class selectDeck : MonoBehaviour {
         
         int i = 0;
         while (reader.Peek() >= 0) {
-            Debug.Log("HI");
             string deckCode = reader.ReadLine();
             deckCodeList.Add(new List<string>());
             deckCodeList[i].AddRange(deckCode.Split(' '));
 
-            foreach(string item in deckCodeList[i])
-            {
-                Debug.Log(item);
-            }
             int temp = i;
             GameObject deckButton = (GameObject)Instantiate(Resources.Load("deckButton"));
             deckButton.GetComponentInChildren<Text>().text = "Deck #" + (i+1);
