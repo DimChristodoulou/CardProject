@@ -113,6 +113,20 @@ public class cardEffects : MonoBehaviour
                     {
                         target = hit.collider.gameObject;
                         selected = true;
+
+                        //TODO Change this whenever we need to :)
+                        //First, we destroy the GO...
+                        Destroy(target);
+                        //Then we remove the model from the boardMinions list...
+                        GameState.getActivePlayer().boardMinions.Remove(target);
+                        //then we get the coordinates of the monster and set its square to free...
+                        GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First, target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
+                        //then we destroy the card
+                        Destroy(GameState.getActivePlayer().selectedCard);
+                        GameState.getActivePlayer().handCards.RemoveAt(GameState.getActivePlayer().selectedCardIndex);
+
+                        GameState.getActivePlayer().cardSelected = false;
+
                         cardEventHandler.onSummon -= fireball;
                     }
                     else if (results.Count > 0)
@@ -140,21 +154,6 @@ public class cardEffects : MonoBehaviour
         yield return target;
     }
 
-    public void destroyMinion(GameObject target)
-    {
-        //TODO Change this whenever we need to :)
-        //First, we destroy the GO...
-        Destroy(target);
-        //Then we remove the model from the boardMinions list...
-        GameState.getActivePlayer().boardMinions.Remove(target);
-        //then we get the coordinates of the monster and set its square to free...
-        GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First, target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
-        //then we destroy the card
-        Destroy(GameState.getActivePlayer().selectedCard);
-        GameState.getActivePlayer().handCards.RemoveAt(GameState.getActivePlayer().selectedCardIndex);
-
-        GameState.getActivePlayer().cardSelected = false;
-    }
 
     public void fireball(string spellName)
     {
