@@ -12,6 +12,7 @@ public class cardEffects : MonoBehaviour
     private cardEventHandler cardEvents;
     public static bool disableOtherInput = false;
     public static cardEffects instance = null;
+    private graveyard graveyardGO;
     GraphicRaycaster m_Raycaster;
     PointerEventData m_PointerEventData;
     EventSystem m_EventSystem;
@@ -29,9 +30,9 @@ public class cardEffects : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-//        cardEventHandler.onSummon += flamesprite;
-//        cardEventHandler.onSummon += fireball;
-
+        //        cardEventHandler.onSummon += flamesprite;
+        //        cardEventHandler.onSummon += fireball;
+        graveyardGO = GameObject.Find("graveyard").GetComponent<graveyard>();
         m_Raycaster = GameObject.FindGameObjectWithTag("Main UI").GetComponent<GraphicRaycaster>();
         m_EventSystem = GetComponent<EventSystem>();
     }
@@ -122,7 +123,11 @@ public class cardEffects : MonoBehaviour
                         //then we get the coordinates of the monster and set its square to free...
                         GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First, target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
                         //then we destroy the card
+                        GameState.getActivePlayer().graveyard.Add(GameState.getActivePlayer().selectedCard);
+                        graveyardGO.refreshTopGraveyardCard();
+
                         Destroy(GameState.getActivePlayer().selectedCard);
+                        
                         GameState.getActivePlayer().handCards.RemoveAt(GameState.getActivePlayer().selectedCardIndex);
 
                         GameState.getActivePlayer().cardSelected = false;
@@ -141,10 +146,8 @@ public class cardEffects : MonoBehaviour
                             }
                         }
                         
-//                        StopCoroutine(waitForUserToSelect());
                     }
 
-//                }
                 }
             }
 

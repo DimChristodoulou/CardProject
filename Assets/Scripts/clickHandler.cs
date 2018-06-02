@@ -229,7 +229,7 @@ public class clickHandler : MonoBehaviour, IPointerDownHandler, IPointerClickHan
             List<RaycastResult> results = new List<RaycastResult>();
 
             m_Raycaster.Raycast(m_PointerEventData, results);
-            
+
             foreach (RaycastResult result in results)
             {
                 if (result.gameObject.CompareTag("Card"))

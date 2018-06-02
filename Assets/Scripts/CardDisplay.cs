@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.SceneManagement;
+using System.IO;
+using UnityEngine.EventSystems;
 
 public class CardDisplay : MonoBehaviour {
     
@@ -83,6 +86,38 @@ public class CardDisplay : MonoBehaviour {
         //TODO: Other attributes...
         artwork.sprite = Resources.Load(jsonparse.cards[cardId].card_image.ToString(), typeof(Sprite)) as Sprite;
     }
+
+    //public void OnMouseEnter()
+    //{
+    //    Debug.Log("HIIII");
+    //    Scene currentScene = SceneManager.GetActiveScene();
+    //    if (currentScene.name.Equals("deckbuilder")){
+    //        Text descText = GameObject.Find("description_text").GetComponent<Text>();
+    //        descText.text = jsonparse.cards[id].card_flavortext;
+    //    }
+    //    else{
+    //        gameObject.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+    //        gameObject.transform.localPosition = gameObject.transform.localPosition + new Vector3(0, 75, 0);
+    //        gameObject.transform.SetSiblingIndex(transform.GetSiblingIndex() + 1);
+    //    }
+    //}
+
+
+    //public void OnMouseExit()
+    //{
+    //    Scene currentScene = SceneManager.GetActiveScene();
+    //    if (currentScene.name.Equals("deckbuilder"))
+    //    {
+    //        Text descText = GameObject.Find("description_text").GetComponent<Text>();
+    //        descText.text = "";
+    //    }
+    //    else
+    //    {
+    //        gameObject.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
+    //        gameObject.transform.localPosition = gameObject.transform.localPosition - new Vector3(0, 75, 0);
+    //        gameObject.transform.SetSiblingIndex(transform.GetSiblingIndex() - 1);
+    //    }
+    //}
 
 }
 
