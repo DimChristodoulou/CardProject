@@ -60,8 +60,9 @@ public class Player {
             for (int i = 0; i < 4; i++)
             {
                 int cardDrawn = Random.Range(0, deck.Count);
-                DrawCard(-157 + 161 * i, -330.9f, 0, deck[Random.Range(0, deck.Count)]);
+                DrawCard(-157 + 161 * i, -330.9f, 0, deck[cardDrawn]);
                 deck.RemoveAt(cardDrawn);
+                deckSize--;
             }
         }
         if (playingPos == 2)
@@ -70,8 +71,9 @@ public class Player {
             for (int i = 0; i < 4; i++)
             {
                 int cardDrawn = Random.Range(0, deck.Count);
-                DrawCard(-157 + 161 * i, 330, 0, deck[Random.Range(0, deck.Count)]);
+                DrawCard(-157 + 161 * i, 330, 0, deck[cardDrawn]);
                 deck.RemoveAt(cardDrawn);
+                deckSize--;
             }
                 
         }
@@ -82,8 +84,7 @@ public class Player {
         clonedCard = originalCard.initializeCard(x, y, z, cardId);
         clonedCard.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
         handCards.Add(clonedCard);
-        deckSize--;
-        GameObject deck = GameObject.Find("Player_Deck");
+        //GameObject deck = GameObject.Find("Player_Deck");
         Text remainingCards = GameObject.Find("Remaining_Cards").GetComponent<Text>();
         remainingCards.text = "Remaining:\n" + deckSize;
     }
