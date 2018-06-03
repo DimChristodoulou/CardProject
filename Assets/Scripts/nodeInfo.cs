@@ -69,7 +69,8 @@ public class nodeInfo : MonoBehaviour
                                                                   jsonparse.cardTemplates[selectedCard.id].card_movement,
                                                                   2,
                                                                   activePlayer, GameState.turn,
-                                                                  jsonparse.cardTemplates[selectedCard.id].card_keywords);
+                                                                  jsonparse.cardTemplates[selectedCard.id].card_keywords,
+                                                                  activePlayer.selectedCard);
 
                 currentMinion.GetComponent<monsterInfo>().setPosition(summonNodes);
                 //currentMinion.GetComponent<monsterInfo>().parentPlayer = activePlayer;

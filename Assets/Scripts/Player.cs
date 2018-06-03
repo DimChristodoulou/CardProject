@@ -239,7 +239,7 @@ public class Player
                 hero = GameObject.Instantiate(monsterPrefab, GameState.getPositionRelativeToBoard(summonPos),
                     new Quaternion(0, 0, 0, 0));
                 hero.GetComponent<monsterInfo>().setPosition(summonPos);
-                hero.GetComponent<monsterInfo>().setData("hero1", 0, 0, 2, 1, this, GameState.turn, null);
+                hero.GetComponent<monsterInfo>().setData("hero1", 0, 0, 2, 1, this, GameState.turn, null, null);
                 boardMinions.Add(hero);
             }
         }
@@ -255,7 +255,7 @@ public class Player
                 hero = GameObject.Instantiate(monsterPrefab, GameState.getPositionRelativeToBoard(summonPos),
                     new Quaternion(0, 0, 0, 0));
                 hero.GetComponent<monsterInfo>().setPosition(summonPos);
-                hero.GetComponent<monsterInfo>().setData("hero2", 0, 0, 2, 1, this, GameState.turn, null);
+                hero.GetComponent<monsterInfo>().setData("hero2", 0, 0, 2, 1, this, GameState.turn, null, null);
                 boardMinions.Add(hero);
             }
         }

@@ -24,12 +24,12 @@ public class cardEventHandler : MonoBehaviour
             GameState.getActivePlayer().availableNodesForSummon = null;
         }
 
+        Debug.Log(minionName);
         onSummon(minionName);
 
         if (GameState.getActivePlayer().selectedCard.GetComponent<Card>().type.text.Equals("Minion"))
         {
-            //Destroy(GameState.getActivePlayer().selectedCard);
-           
+            Destroy(GameState.getActivePlayer().selectedCard);           
             GameState.getActivePlayer().handCards.RemoveAt(GameState.getActivePlayer().selectedCardIndex);
         }
     }

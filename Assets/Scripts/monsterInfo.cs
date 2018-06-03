@@ -28,7 +28,7 @@ public class monsterInfo : MonoBehaviour {
 
 	//todo need to find a way to store enchants without changing originals, making silence applicable
 
-	public void setData(string mName, int pow, int mcost, int mspeed, int attkrange, Player parent, int summonTurn, string keywords) {
+	public void setData(string mName, int pow, int mcost, int mspeed, int attkrange, Player parent, int summonTurn, string keywords, GameObject monsterCard) {
 		monsterName = mName;
         power = pow;
         manacost = mcost;
@@ -37,6 +37,7 @@ public class monsterInfo : MonoBehaviour {
 		parentPlayer = parent;
         playedturn = summonTurn;
         monsterKeywords = keywords;
+        card = monsterCard;
 	}
 
 	public void setPosition(List< Pair<int, int> > myList) {

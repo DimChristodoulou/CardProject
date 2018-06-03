@@ -71,17 +71,27 @@ public class cardEffects : MonoBehaviour
                 cardEventHandler.onSummon += pyra;
                 break;
             }
+            case "The Emperor's Fool":
+            {
+                cardEventHandler.onSummon += emperorsFool;
+                break;
+            }
         }
     }
 
     public void emperorsHound(string minionName)
     {
-        //Do Nothing
+        cardEventHandler.onSummon -= emperorsHound;
     }
 
     public void firewraith(string minionName)
     {
-        //Do Nothing
+        cardEventHandler.onSummon -= firewraith;
+    }
+
+    public void emperorsFool(string minionName)
+    {
+        cardEventHandler.onSummon -= emperorsFool;
     }
 
     /*
@@ -209,17 +219,18 @@ public class cardEffects : MonoBehaviour
             DealDamageToPlayer(GameState.players[1], minionPower);
 
             GameState.getActivePlayer().boardMinions.Remove(target);
-            Destroy(target);
 
+            GameState.getActivePlayer().graveyard.Add(target.GetComponent<monsterInfo>().card);
+            Debug.Log("TARGET IS: " + target.name);
+            Debug.Log("ID IS : " + target.GetComponent<monsterInfo>().card.GetComponent<Card>().id);
+            graveyardGO.refreshTopGraveyardCard();
+
+            //Destroy(target);
 
             //then we get the coordinates of the monster and set its square to free...
             GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First,
                 target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
             //then we destroy the card
-            GameState.getActivePlayer().graveyard.Add(GameState.getActivePlayer().selectedCard);
-            Debug.Log("TOP GRAVEYARD CARD: " + GameState.getActivePlayer()
-                          .graveyard[GameState.getActivePlayer().graveyard.Count - 1].GetComponent<Card>().cardName);
-            graveyardGO.refreshTopGraveyardCard();
 
             Destroy(GameState.getActivePlayer().selectedCard);
 
