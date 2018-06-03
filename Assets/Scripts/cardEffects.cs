@@ -66,6 +66,11 @@ public class cardEffects : MonoBehaviour
                 cardEventHandler.onSummon += firewraith;
                 break;
             }
+            case "Pyra, the Elemental Lord":
+            {
+                cardEventHandler.onSummon += pyra;
+                break;
+            }
         }
     }
 
@@ -102,17 +107,26 @@ public class cardEffects : MonoBehaviour
         StartCoroutine(waitAndDestroyTarget());
     }
 
+    public void pyra(string minionName)
+    {
+        StartCoroutine(waitForUserToSelectTarget());
+        StartCoroutine(waitAndPyra());
+    }
+
+
     private IEnumerator waitForUserToSelectTarget()
     {
         selected = false;
         disableOtherInput = true;
+
+        yield return new WaitForSeconds(1);
+
         while (!selected)
         {
             if (Input.GetMouseButtonDown(0))
             {
                 m_PointerEventData = new PointerEventData(m_EventSystem) {position = Input.mousePosition};
                 List<RaycastResult> results = new List<RaycastResult>();
-
 
                 m_Raycaster.Raycast(m_PointerEventData, results);
                 this.results = results;
@@ -143,11 +157,8 @@ public class cardEffects : MonoBehaviour
 
         if (target.CompareTag("Model"))
         {
-            //TODO Change this whenever we need to :)
             GameState.getActivePlayer().boardMinions.Remove(target);
-            //First, we destroy the GO...
             Destroy(target);
-            //Then we remove the model from the boardMinions list...
 
             //then we get the coordinates of the monster and set its square to free...
             GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First,
@@ -172,6 +183,60 @@ public class cardEffects : MonoBehaviour
                 {
 //                    selected = true; // stop coroutine
                     cardEventHandler.onSummon -= fireball;
+                    break;
+                }
+            }
+        }
+    }
+
+    private IEnumerator waitAndPyra()
+    {
+//        selected = false;
+
+        while (!selected && target == null)
+        {
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        Debug.Log(selected, target);
+        if (target.CompareTag("Model"))
+        {
+            //TODO Change this whenever we need to :)
+
+            int minionPower = target.GetComponent<monsterInfo>().power;
+            Debug.Log(minionPower);
+            DealDamageToPlayer(GameState.players[0], minionPower);
+            DealDamageToPlayer(GameState.players[1], minionPower);
+
+            GameState.getActivePlayer().boardMinions.Remove(target);
+            Destroy(target);
+
+
+            //then we get the coordinates of the monster and set its square to free...
+            GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First,
+                target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
+            //then we destroy the card
+            GameState.getActivePlayer().graveyard.Add(GameState.getActivePlayer().selectedCard);
+            Debug.Log("TOP GRAVEYARD CARD: " + GameState.getActivePlayer()
+                          .graveyard[GameState.getActivePlayer().graveyard.Count - 1].GetComponent<Card>().cardName);
+            graveyardGO.refreshTopGraveyardCard();
+
+            Destroy(GameState.getActivePlayer().selectedCard);
+
+            GameState.getActivePlayer().handCards.RemoveAt(GameState.getActivePlayer().selectedCardIndex);
+
+            GameState.getActivePlayer().cardSelected = false;
+
+            cardEventHandler.onSummon -= pyra;
+        }
+        else if (results.Count > 0)
+        {
+            foreach (RaycastResult result in results)
+            {
+                if (result.gameObject.CompareTag("Card"))
+                {
+                    //                    selected = true; // stop coroutine
+                    cardEventHandler.onSummon -= pyra;
                     break;
                 }
             }
