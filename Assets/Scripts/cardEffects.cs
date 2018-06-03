@@ -17,6 +17,10 @@ public class cardEffects : MonoBehaviour
     PointerEventData m_PointerEventData;
     EventSystem m_EventSystem;
 
+    private GameObject target;
+    private List<RaycastResult> results;
+    private bool selected;
+
     //    private cardEffects effector = null;
 
 //    private void Awake()
@@ -79,7 +83,6 @@ public class cardEffects : MonoBehaviour
      */
     public void flamesprite(string minionName)
     {
-
         GameState.getActivePlayer().currentMana -= jsonparse.cardTemplates[1].card_manacost;
         Player opponent;
         if (GameState.activePlayerIndex == 0)
@@ -91,77 +94,87 @@ public class cardEffects : MonoBehaviour
         cardEventHandler.onSummon -= flamesprite;
     }
 
-    private IEnumerator waitForUserToSelect()
-    {
-        GameObject target = null;
-        bool selected = false;
-        disableOtherInput = true;
-        while (!selected) { 
 
+    public void fireball(string spellName)
+    {
+        StartCoroutine(waitForUserToSelectTarget());
+        StartCoroutine(waitAndDestroyTarget());
+    }
+
+    private IEnumerator waitForUserToSelectTarget()
+    {
+        selected = false;
+        disableOtherInput = true;
+        while (!selected)
+        {
             if (Input.GetMouseButtonDown(0))
             {
-
                 m_PointerEventData = new PointerEventData(m_EventSystem) {position = Input.mousePosition};
                 List<RaycastResult> results = new List<RaycastResult>();
 
+
                 m_Raycaster.Raycast(m_PointerEventData, results);
+                this.results = results;
+
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 
                 if (Physics.Raycast(ray, out hit))
                 {
-                    if (hit.collider.gameObject.CompareTag("Model"))
-                    {
-                        target = hit.collider.gameObject;
-                        selected = true;
-
-                        //TODO Change this whenever we need to :)
-                        //First, we destroy the GO...
-                        Destroy(target);
-                        //Then we remove the model from the boardMinions list...
-                        GameState.getActivePlayer().boardMinions.Remove(target);
-                        //then we get the coordinates of the monster and set its square to free...
-                        GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First, target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
-                        //then we destroy the card
-                        GameState.getActivePlayer().graveyard.Add(GameState.getActivePlayer().selectedCard);
-                        graveyardGO.refreshTopGraveyardCard();
-
-                        Destroy(GameState.getActivePlayer().selectedCard);
-                        
-                        GameState.getActivePlayer().handCards.RemoveAt(GameState.getActivePlayer().selectedCardIndex);
-
-                        GameState.getActivePlayer().cardSelected = false;
-
-                        cardEventHandler.onSummon -= fireball;
-                    }
-                    else if (results.Count > 0)
-                    {
-                        foreach (RaycastResult result in results)
-                        {
-                            if (result.gameObject.CompareTag("CardTemplate"))
-                            {
-                                selected = true; // stop coroutine
-                                cardEventHandler.onSummon -= fireball;
-                                break;
-                            }
-                        }
-                        
-                    }
-
+                    target = hit.collider.gameObject;
+                    selected = true;
                 }
             }
 
             yield return null;
         }
         disableOtherInput = false;
-        yield return target;
+//        yield return target;
     }
 
-
-    public void fireball(string spellName)
+    IEnumerator waitAndDestroyTarget()
     {
-        StartCoroutine(waitForUserToSelect());
+        while (!selected)
+        {
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        if (target.CompareTag("Model"))
+        {
+            //TODO Change this whenever we need to :)
+            //First, we destroy the GO...
+            Destroy(target);
+            //Then we remove the model from the boardMinions list...
+            GameState.getActivePlayer().boardMinions.Remove(target);
+            //then we get the coordinates of the monster and set its square to free...
+            GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First,
+                target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
+            //then we destroy the card
+            GameState.getActivePlayer().graveyard.Add(GameState.getActivePlayer().selectedCard);
+            graveyardGO.refreshTopGraveyardCard();
+
+            Destroy(GameState.getActivePlayer().selectedCard);
+
+            GameState.getActivePlayer().handCards.RemoveAt(GameState.getActivePlayer().selectedCardIndex);
+
+            GameState.getActivePlayer().cardSelected = false;
+
+            cardEventHandler.onSummon -= fireball;
+        }
+        else if (results.Count > 0)
+        {
+            foreach (RaycastResult result in results)
+            {
+                if (result.gameObject.CompareTag("Card"))
+                {
+//                    selected = true; // stop coroutine
+                    cardEventHandler.onSummon -= fireball;
+                    break;
+                }
+            }
+        }
     }
+
 
     /*
      * Function used to handle the deal damage on player effect

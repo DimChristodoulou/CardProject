@@ -15,6 +15,13 @@ public class cardEventHandler : MonoBehaviour {
     public static void onMinionSummon(string minionName)
     {
         cardEffects.instance.setUpDelegate(minionName);
+
+        if (GameState.getActivePlayer().selectedCard.GetComponent<Card>().type.text.Equals("Spell"))
+        {
+            foreach ( Pair<int, int> node in GameState.getActivePlayer().availableNodesForSummon)
+                GameState.boardTable[node.First, node.Second].GetComponent<nodeInfo>().makeInactive();
+            GameState.getActivePlayer().availableNodesForSummon = null;
+        }
         onSummon(minionName);
 
         if (GameState.getActivePlayer().selectedCard.GetComponent<Card>().type.text.Equals("Minion"))

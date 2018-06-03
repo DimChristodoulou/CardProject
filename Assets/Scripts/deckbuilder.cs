@@ -105,7 +105,6 @@ public class deckbuilder : MonoBehaviour {
         int[] shortFilteredCards = new int[j];
         Array.Copy(filteredCards, shortFilteredCards, j);
         Debug.Log("SIZE OF FILTERED CARDS: " + shortFilteredCards.Length);
-
         
         currentEightCards = 0;
         GameObject leftArrow = GameObject.Find("leftArrowButton(Clone)");
