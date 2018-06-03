@@ -12,7 +12,6 @@ public class graveyard : MonoBehaviour {
     void Start () {
         graveyardGO = GameObject.Find("graveyard");
         topGraveyardCard = new CardDisplay();
-
     }
 	
     public void refreshTopGraveyardCard()
@@ -20,7 +19,7 @@ public class graveyard : MonoBehaviour {
         Debug.Log("x:" + graveyardGO.transform.position.x + "y:" + graveyardGO.transform.position.y + "z:" + graveyardGO.transform.position.z);
         Debug.Log("graveyard count: " + GameState.getActivePlayer().graveyard.Count.ToString() + " graveyard contains: " + GameState.getActivePlayer().graveyard[0].GetComponent<CardDisplay>().id.ToString());
         clonedCard = topGraveyardCard.initializeCard(graveyardGO.transform.localPosition.x, graveyardGO.transform.localPosition.y, graveyardGO.transform.localPosition.z, GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1].GetComponent<CardDisplay>().id+1);
-        clonedCard.GetComponent<clickHandler>().enabled = false;
+        clonedCard.GetComponent<CardDisplay>().pointerEventsEnabled = false;
     }
 
 	// Update is called once per frame

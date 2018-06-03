@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 222920191031879352}
   - component: {fileID: 114352126942464258}
   - component: {fileID: 114730791846277976}
-  - component: {fileID: 114316964138925252}
+  - component: {fileID: 61913272771304804}
   m_Layer: 9
   m_Name: CardDisplaySpellSample
   m_TagString: Card
@@ -133,6 +133,31 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!61 &61913272771304804
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1185992625941298}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.023117065, y: 0.037399292}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 211.27664, y: 311.97568}
+  m_EdgeRadius: 0
 --- !u!114 &114081275303604638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -286,18 +311,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: asd
---- !u!114 &114316964138925252
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1185992625941298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cfc917aacb378c46996651231b874be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Font: {fileID: 12800000, guid: 3b441e50773280048828b2807578f00e, type: 3}
 --- !u!114 &114352126942464258
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -391,6 +404,7 @@ MonoBehaviour:
   element: {fileID: 114275539231727504}
   power: {fileID: 0}
   id: 0
+  m_Font: {fileID: 0}
 --- !u!222 &222241549937847674
 CanvasRenderer:
   m_ObjectHideFlags: 1

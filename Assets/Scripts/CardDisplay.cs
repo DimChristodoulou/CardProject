@@ -6,8 +6,9 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using System.IO;
 using UnityEngine.EventSystems;
+using System;
 
-public class CardDisplay : MonoBehaviour {
+public class CardDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler {
     
     public GameObject card;
     public static List<string> cardKeywords; 
@@ -24,6 +25,16 @@ public class CardDisplay : MonoBehaviour {
     public Text power;
     public int id;
 
+    // for pointer handlers
+    private static bool timesTwo = true;
+    public Font m_Font;
+    static int cardEntryOffset = 133;
+    public bool pointerEventsEnabled;
+
+    void Awake()
+    {
+        pointerEventsEnabled = true;
+    }
 
     void Start()
     {
@@ -39,7 +50,6 @@ public class CardDisplay : MonoBehaviour {
      */
     public GameObject initializeCard(float x, float y, float z, int cardId)                                                              
     {
-
             /*This prints the card*/
             cardId--;
             GameObject mainui = GameObject.Find("Main UI");
@@ -87,37 +97,102 @@ public class CardDisplay : MonoBehaviour {
         artwork.sprite = Resources.Load(jsonparse.cards[cardId].card_image.ToString(), typeof(Sprite)) as Sprite;
     }
 
-    //public void OnMouseEnter()
-    //{
-    //    Debug.Log("HIIII");
-    //    Scene currentScene = SceneManager.GetActiveScene();
-    //    if (currentScene.name.Equals("deckbuilder")){
-    //        Text descText = GameObject.Find("description_text").GetComponent<Text>();
-    //        descText.text = jsonparse.cards[id].card_flavortext;
-    //    }
-    //    else{
-    //        gameObject.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-    //        gameObject.transform.localPosition = gameObject.transform.localPosition + new Vector3(0, 75, 0);
-    //        gameObject.transform.SetSiblingIndex(transform.GetSiblingIndex() + 1);
-    //    }
-    //}
+    public void OnPointerEnter(PointerEventData data)
+    {
+        if (pointerEventsEnabled)
+        {
+            Debug.Log("HIIII");
+            Scene currentScene = SceneManager.GetActiveScene();
+            if (currentScene.name.Equals("deckbuilder"))
+            {
+                Text descText = GameObject.Find("description_text").GetComponent<Text>();
+                descText.text = jsonparse.cards[id].card_flavortext;
+            }
+            else
+            {
+                gameObject.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                gameObject.transform.localPosition = gameObject.transform.localPosition + new Vector3(0, 75, 0);
+                gameObject.transform.SetSiblingIndex(transform.GetSiblingIndex() + 1);
+            }
+        }
+    }
 
 
-    //public void OnMouseExit()
-    //{
-    //    Scene currentScene = SceneManager.GetActiveScene();
-    //    if (currentScene.name.Equals("deckbuilder"))
-    //    {
-    //        Text descText = GameObject.Find("description_text").GetComponent<Text>();
-    //        descText.text = "";
-    //    }
-    //    else
-    //    {
-    //        gameObject.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
-    //        gameObject.transform.localPosition = gameObject.transform.localPosition - new Vector3(0, 75, 0);
-    //        gameObject.transform.SetSiblingIndex(transform.GetSiblingIndex() - 1);
-    //    }
-    //}
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (pointerEventsEnabled)
+        {
+            Debug.Log("BYE");
 
+            Scene currentScene = SceneManager.GetActiveScene();
+            if (currentScene.name.Equals("deckbuilder"))
+            {
+                Text descText = GameObject.Find("description_text").GetComponent<Text>();
+                descText.text = "";
+            }
+            else
+            {
+                gameObject.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
+                gameObject.transform.localPosition = gameObject.transform.localPosition - new Vector3(0, 75, 0);
+                gameObject.transform.SetSiblingIndex(transform.GetSiblingIndex() - 1);
+            }
+        }
+    }
+
+    public void OnPointerClick(PointerEventData data)
+    {
+        if (pointerEventsEnabled)
+        {
+            GameObject mainui = GameObject.Find("Main UI");
+            Scene currentScene = SceneManager.GetActiveScene();
+            if (currentScene.name.Equals("mainscene"))
+                GameState.getActivePlayer().setupPlayCard(gameObject);
+            else
+            {
+                if (deckbuilder.deckBuildActive == true)
+                {
+                    if (Player.deck.Count < 30)
+                    {
+                        string clickedCard = gameObject.name;
+                        Debug.Log(clickedCard);
+                        if (!Player.deck.Contains(gameObject.GetComponent<CardDisplay>().id + 1))
+                        {
+                            GameObject cardListEntry = new GameObject("cardListEntry");
+                            cardListEntry.gameObject.tag = "cardEntry";
+                            cardListEntry.AddComponent<LayoutElement>();
+                            cardListEntry.AddComponent<Text>();
+                            cardListEntry.GetComponent<Text>().text =
+                                gameObject.GetComponent<CardDisplay>().cardName.text;
+                            cardListEntry.GetComponent<Text>().font =
+                                Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
+                            cardListEntry.GetComponent<Text>().fontSize = 10;
+
+                            cardListEntry = Instantiate(cardListEntry,
+                                GameObject.FindGameObjectWithTag("ListWithCards").transform);
+                            cardEntryOffset -= 20;
+                            cardListEntry.transform.localPosition = new Vector3(3.382453f, cardEntryOffset, 0);
+                            ((RectTransform)cardListEntry.transform).sizeDelta = new Vector2(118.89f, 17.58f);
+                            Player.deck.Add(gameObject.GetComponent<CardDisplay>().id + 1);
+                            timesTwo = false;
+                        }
+                        else if (Player.deck.Contains(gameObject.GetComponent<CardDisplay>().id + 1) && timesTwo == false)
+                        {
+                            GameObject[] cardEntries = GameObject.FindGameObjectsWithTag("cardEntry");
+                            foreach (GameObject card in cardEntries)
+                            {
+                                if (card.GetComponent<Text>().text.Equals(gameObject.GetComponent<CardDisplay>().cardName.text))
+                                {
+                                    card.GetComponent<Text>().text =
+                                        gameObject.GetComponent<CardDisplay>().cardName.text + " x2";
+                                    timesTwo = true;
+                                }
+                            }
+                            Player.deck.Add(gameObject.GetComponent<CardDisplay>().id + 1);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 

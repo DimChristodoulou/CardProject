@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -198,7 +199,24 @@ public class deckbuilder : MonoBehaviour {
         saveDeck.transform.localPosition = new Vector3(83.3f, 174.89f, 0);
         ((RectTransform)saveDeck.transform).sizeDelta = new Vector2(100, 30);
         saveDeck.GetComponentInChildren<Text>().text = "SAVE DECK";
-        saveDeck.GetComponent<Button>().onClick.AddListener(clickHandler.SaveDeck);
+        saveDeck.GetComponent<Button>().onClick.AddListener(SaveDeck);
     }
 
+    void SaveDeck()
+    {
+        string deckCode = "";
+        foreach (int cardId in Player.deck)
+        {
+            deckCode += (cardId).ToString() + " ";
+        }
+
+        string path = "Assets/Prefabs/Resources/playerDecks.txt";
+        StreamReader reader = new StreamReader(path, true);
+        string allText = reader.ReadToEnd();
+        reader.Close();
+
+        StreamWriter writer = new StreamWriter(path, true);
+        writer.WriteLine(deckCode);
+        writer.Close();
+    }
 }
