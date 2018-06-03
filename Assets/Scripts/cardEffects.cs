@@ -80,7 +80,7 @@ public class cardEffects : MonoBehaviour
     public void flamesprite(string minionName)
     {
 
-        GameState.getActivePlayer().currentMana -= jsonparse.cards[1].card_manacost;
+        GameState.getActivePlayer().currentMana -= jsonparse.cardTemplates[1].card_manacost;
         Player opponent;
         if (GameState.activePlayerIndex == 0)
             opponent = GameState.players[1];
@@ -138,7 +138,7 @@ public class cardEffects : MonoBehaviour
                     {
                         foreach (RaycastResult result in results)
                         {
-                            if (result.gameObject.CompareTag("Card"))
+                            if (result.gameObject.CompareTag("CardTemplate"))
                             {
                                 selected = true; // stop coroutine
                                 cardEventHandler.onSummon -= fireball;

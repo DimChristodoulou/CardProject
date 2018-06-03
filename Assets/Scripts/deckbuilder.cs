@@ -13,7 +13,7 @@ public class deckbuilder : MonoBehaviour {
 
     public static bool deckBuildActive = false;
 
-    private CardDisplay originalCard;
+    private Card originalCard;
     private GameObject clonedCard;
     private jsonparse cardsJson;
     public GameObject main_ui;
@@ -34,13 +34,13 @@ public class deckbuilder : MonoBehaviour {
         jsonparse.cardids.CopyTo(cardsToBeDisplayed, 0);
         GameObject mainui = GameObject.Find("Main UI");
         cardsJson = new jsonparse();
-        originalCard = new CardDisplay();
+        originalCard = new Card();
         int i = 0;
         DisplayCurrentEight(mainui, cardsToBeDisplayed);
     }
 
     /*
-     * Function used to show the next eight cards on the screen
+     * Function used to show the next eight cardTemplates on the screen
      */
     public void nextScreen(GameObject mainui, int[] cardsToOutput)
     {
@@ -59,7 +59,7 @@ public class deckbuilder : MonoBehaviour {
     }
 
     /*
-    * Function used to show the previous eight cards on the screen
+    * Function used to show the previous eight cardTemplates on the screen
     */
     public void lastScreen(GameObject mainui, int[] cardsToOutput)
     {
@@ -78,7 +78,7 @@ public class deckbuilder : MonoBehaviour {
     }
 
     /*
-    * Function used to filter cards by their Attribute
+    * Function used to filter cardTemplates by their Attribute
     */
     public void filterByAttribute(string attribute)
     {
@@ -91,12 +91,12 @@ public class deckbuilder : MonoBehaviour {
             Destroy(card);
         }
 
-        int[] filteredCards = new int[jsonparse.cards.Length];
+        int[] filteredCards = new int[jsonparse.cardTemplates.Length];
         int j = 0;
-        for(int i=0; i< jsonparse.cards.Length; i++)
+        for(int i=0; i< jsonparse.cardTemplates.Length; i++)
         {
-            if (jsonparse.cards[i].card_attribute.Equals(attribute))
-                filteredCards[j++] = jsonparse.cards[i].card_id;
+            if (jsonparse.cardTemplates[i].card_attribute.Equals(attribute))
+                filteredCards[j++] = jsonparse.cardTemplates[i].card_id;
         }
         int[] shortFilteredCards = filteredCards.Where(i => i != 0).ToArray();
         currentEightCards = 0;
@@ -119,15 +119,15 @@ public class deckbuilder : MonoBehaviour {
             Destroy(card);
         }
 
-        int[] filteredCards = new int[jsonparse.cards.Length];
+        int[] filteredCards = new int[jsonparse.cardTemplates.Length];
         int j = 0;
 
-        for (int i = 0; i < jsonparse.cards.Length; i++)
+        for (int i = 0; i < jsonparse.cardTemplates.Length; i++)
         {
-            if (String.Equals(searchCard.GetComponent<InputField>().text, jsonparse.cards[i].card_type, StringComparison.OrdinalIgnoreCase))
-                filteredCards[j++] = jsonparse.cards[i].card_id;
-            else if (jsonparse.cards[i].card_name.ToLower().Contains(searchCard.GetComponent<InputField>().text.ToLower()) || jsonparse.cards[i].card_text.ToLower().Contains(searchCard.GetComponent<InputField>().text.ToLower()))
-                filteredCards[j++] = jsonparse.cards[i].card_id;
+            if (String.Equals(searchCard.GetComponent<InputField>().text, jsonparse.cardTemplates[i].card_type, StringComparison.OrdinalIgnoreCase))
+                filteredCards[j++] = jsonparse.cardTemplates[i].card_id;
+            else if (jsonparse.cardTemplates[i].card_name.ToLower().Contains(searchCard.GetComponent<InputField>().text.ToLower()) || jsonparse.cardTemplates[i].card_text.ToLower().Contains(searchCard.GetComponent<InputField>().text.ToLower()))
+                filteredCards[j++] = jsonparse.cardTemplates[i].card_id;
         }
         int[] shortFilteredCards = filteredCards.Where(i => i != 0).ToArray();
         currentEightCards = 0;
@@ -139,7 +139,7 @@ public class deckbuilder : MonoBehaviour {
     }
 
     /*
-    * Function used to display 8 cards from the cardsToOutput array to the player.
+    * Function used to display 8 cardTemplates from the cardsToOutput array to the player.
     */
     void DisplayCurrentEight(GameObject mainui, int[] cardsToOutput)
     {

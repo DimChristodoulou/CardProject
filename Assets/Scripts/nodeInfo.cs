@@ -56,20 +56,20 @@ public class nodeInfo : MonoBehaviour
             if (Contains(activePlayer.availableNodesForSummon, new Pair<int, int>(xpos, ypos)))
             {
                 List<Pair<int, int>> summonNodes = new List<Pair<int, int>>() { new Pair<int, int>(xpos, ypos) }; // ONLY for monsters that need one node to spawn
-                activePlayer.summonMonster(activePlayer.selectedCard.GetComponent<CardDisplay>().cardName.text, summonNodes, GameState.turn);
+                activePlayer.summonMonster(activePlayer.selectedCard.GetComponent<Card>().cardName.text, summonNodes, GameState.turn);
 
                 GameObject currentMinion = activePlayer.boardMinions[activePlayer.boardMinions.Count - 1];
 
                 // HERE SET DATA OF MINION USING SETDATA FUNCTION
-                CardDisplay selectedCardDisplay = activePlayer.selectedCard.GetComponent<CardDisplay>();
+                Card selectedCard = activePlayer.selectedCard.GetComponent<Card>();
 
-                currentMinion.GetComponent<monsterInfo>().setData(jsonparse.cards[selectedCardDisplay.id].card_name,
-                                                                  jsonparse.cards[selectedCardDisplay.id].card_actionpoints,
-                                                                  jsonparse.cards[selectedCardDisplay.id].card_manacost,
-                                                                  jsonparse.cards[selectedCardDisplay.id].card_movement,
+                currentMinion.GetComponent<monsterInfo>().setData(jsonparse.cardTemplates[selectedCard.id].card_name,
+                                                                  jsonparse.cardTemplates[selectedCard.id].card_actionpoints,
+                                                                  jsonparse.cardTemplates[selectedCard.id].card_manacost,
+                                                                  jsonparse.cardTemplates[selectedCard.id].card_movement,
                                                                   2,
                                                                   activePlayer, GameState.turn,
-                                                                  jsonparse.cards[selectedCardDisplay.id].card_keywords);
+                                                                  jsonparse.cardTemplates[selectedCard.id].card_keywords);
 
                 currentMinion.GetComponent<monsterInfo>().setPosition(summonNodes);
                 //currentMinion.GetComponent<monsterInfo>().parentPlayer = activePlayer;
@@ -100,7 +100,7 @@ public class nodeInfo : MonoBehaviour
                 activePlayer.cardSelected = false;
                 //activePlayer.handCards.RemoveAt(activePlayer.selectedCardIndex);
                 Debug.Log(activePlayer.handCards);
-                cardEventHandler.onMinionSummon(jsonparse.cards[selectedCardDisplay.id].card_name);
+                cardEventHandler.onMinionSummon(jsonparse.cardTemplates[selectedCard.id].card_name);
             }
         }
         else

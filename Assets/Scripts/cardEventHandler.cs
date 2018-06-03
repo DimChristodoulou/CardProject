@@ -17,7 +17,7 @@ public class cardEventHandler : MonoBehaviour {
         cardEffects.instance.setUpDelegate(minionName);
         onSummon(minionName);
 
-        if (GameState.getActivePlayer().selectedCard.GetComponent<CardDisplay>().type.text.Equals("Minion"))
+        if (GameState.getActivePlayer().selectedCard.GetComponent<Card>().type.text.Equals("Minion"))
         {
             Destroy(GameState.getActivePlayer().selectedCard);
             GameState.getActivePlayer().handCards.RemoveAt(GameState.getActivePlayer().selectedCardIndex);

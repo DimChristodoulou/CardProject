@@ -7,16 +7,16 @@ public class jsonparse : MonoBehaviour {
 
     string path;
     string jsonString;
-    public static Card[] cards;
+    public static CardTemplate[] cardTemplates;
     public static int[] cardids;
 
     // Use this for initialization
     void Start () {
         path = Application.streamingAssetsPath + "/cards.json";
         jsonString = File.ReadAllText(path);
-        cards = JsonHelper.getJsonArray<Card>(jsonString);
-        cardids = new int[cards.Length];
-        for (int i = 0; i < cards.Length; i++)
+        cardTemplates = JsonHelper.getJsonArray<CardTemplate>(jsonString);
+        cardids = new int[cardTemplates.Length];
+        for (int i = 0; i < cardTemplates.Length; i++)
             cardids[i] = i+1;
     }
 
@@ -24,17 +24,17 @@ public class jsonparse : MonoBehaviour {
 
 public class JsonHelper
 {
-    public static Card[] getJsonArray<Card>(string json)
+    public static CardTemplate[] getJsonArray<CardTemplate>(string json)
     {
         string newJson = "{ \"array\": " + json + "}";
-        Wrapper<Card> wrapper = JsonUtility.FromJson<Wrapper<Card>>(newJson);
+        Wrapper<CardTemplate> wrapper = JsonUtility.FromJson<Wrapper<CardTemplate>>(newJson);
         return wrapper.array;
     }
 
     [System.Serializable]
-    private class Wrapper<Card>
+    private class Wrapper<CardTemplate>
     {
-        public Card[] array;
+        public CardTemplate[] array;
     }
 }
 

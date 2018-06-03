@@ -22,7 +22,7 @@ public class Player {
     public static List<int> deck = new List<int>{};                   //Changed from List<GameObject> to static List<int> because the deck will consist of card ids.
     private int deckSize;
 	public bool isPlaying = false;
-    private CardDisplay originalCard;
+    private Card originalCard;
     private GameObject clonedCard;
 	//when a player selects an item, we need to remove selection if we click another
 	public GameObject selected;
@@ -46,7 +46,7 @@ public class Player {
 		handCards = new List<GameObject> ();
 		boardMinions = new List<GameObject> ();
 		graveyard = new List<GameObject> ();
-        originalCard = new CardDisplay();
+        originalCard = new Card();
         
         healthGO = new GameObject();
         healthGO.transform.SetParent(mainui.transform);
@@ -90,13 +90,13 @@ public class Player {
     }
 
     public void setupPlayCard(GameObject clickedObj) {
-        if (GameState.getActivePlayer().currentMana >= int.Parse(clickedObj.GetComponent<CardDisplay>().manaCost.text))
+        if (GameState.getActivePlayer().currentMana >= int.Parse(clickedObj.GetComponent<Card>().manaCost.text))
         {
             
             GameState.getActivePlayer().playCard(GameState.getActivePlayer().handCards.IndexOf(clickedObj));
             //Event system from here on out...
-            string s = clickedObj.GetComponent<CardDisplay>().cardName.text.ToString();
-            if (clickedObj.GetComponent<CardDisplay>().type.text == "Spell")
+            string s = clickedObj.GetComponent<Card>().cardName.text.ToString();
+            if (clickedObj.GetComponent<Card>().type.text == "Spell")
             {
                 cardEventHandler.onMinionSummon(s);
             }
@@ -113,7 +113,7 @@ public class Player {
 
         cardSelected = true;
 
-        if (handCards[cardIndex].GetComponent<CardDisplay>().type.text == "Minion")
+        if (handCards[cardIndex].GetComponent<Card>().type.text == "Minion")
         {
             availableNodesForSummon = new List<Pair<int, int>>();
             foreach (GameObject minion in boardMinions)
@@ -160,7 +160,7 @@ public class Player {
     public void startTurn() {
         //Increase mana at start of turn.
         this.increaseMana(1);
-        //Draw card after increasing mana. (Max number of cards in hand is 8).
+        //Draw card after increasing mana. (Max number of cardTemplates in hand is 8).
         //if (handCards.Count < 8)
         //{
         //    int cardDrawn = Random.Range(0, deck.Count);
@@ -256,7 +256,7 @@ public class Player {
 		GameObject.Destroy(monster); //we can safely delete this since we have created a new card instance for the graveyard
 	}
 
-	public void BanishMonster(GameObject monster) { //this is for banishing monsters immidiately from play, not for graveyard cards
+	public void BanishMonster(GameObject monster) { //this is for banishing monsters immidiately from play, not for graveyard cardTemplates
 		if (boardMinions.Find (x => monster)!=null) {
 			boardMinions.Remove (monster);
 		}
