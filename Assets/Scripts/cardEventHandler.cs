@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class cardEventHandler : MonoBehaviour {
-
+public class cardEventHandler : MonoBehaviour
+{
     public delegate void minionEventHandler(string minionName);
 
     public static event minionEventHandler onSummon;
@@ -16,12 +16,14 @@ public class cardEventHandler : MonoBehaviour {
     {
         cardEffects.instance.setUpDelegate(minionName);
 
-        if (GameState.getActivePlayer().selectedCard.GetComponent<Card>().type.text.Equals("Spell"))
+        if (GameState.getActivePlayer().selectedCard.GetComponent<Card>().type.text.Equals("Spell") &&
+            GameState.getActivePlayer().availableNodesForSummon != null)
         {
-            foreach ( Pair<int, int> node in GameState.getActivePlayer().availableNodesForSummon)
+            foreach (Pair<int, int> node in GameState.getActivePlayer().availableNodesForSummon)
                 GameState.boardTable[node.First, node.Second].GetComponent<nodeInfo>().makeInactive();
             GameState.getActivePlayer().availableNodesForSummon = null;
         }
+
         onSummon(minionName);
 
         if (GameState.getActivePlayer().selectedCard.GetComponent<Card>().type.text.Equals("Minion"))
@@ -38,5 +40,4 @@ public class cardEventHandler : MonoBehaviour {
     {
         onDeath(minionName);
     }
-
 }

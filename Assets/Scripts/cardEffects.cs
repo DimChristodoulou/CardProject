@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
+using System.Linq;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -128,6 +129,7 @@ public class cardEffects : MonoBehaviour
 
             yield return null;
         }
+
         disableOtherInput = false;
 //        yield return target;
     }
@@ -142,10 +144,11 @@ public class cardEffects : MonoBehaviour
         if (target.CompareTag("Model"))
         {
             //TODO Change this whenever we need to :)
+            GameState.getActivePlayer().boardMinions.Remove(target);
             //First, we destroy the GO...
             Destroy(target);
             //Then we remove the model from the boardMinions list...
-            GameState.getActivePlayer().boardMinions.Remove(target);
+
             //then we get the coordinates of the monster and set its square to free...
             GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First,
                 target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
