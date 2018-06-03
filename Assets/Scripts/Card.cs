@@ -51,7 +51,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     public GameObject initializeCard(float x, float y, float z, int cardId)                                                              
     {
             /*This prints the card*/
-            cardId--;
             GameObject mainui = GameObject.Find("Main UI");
             if(jsonparse.cardTemplates[cardId].card_type.Equals("Minion"))
                 card = (GameObject)Instantiate(Resources.Load("CardDisplaySample"));

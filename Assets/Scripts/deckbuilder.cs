@@ -98,7 +98,15 @@ public class deckbuilder : MonoBehaviour {
             if (jsonparse.cardTemplates[i].card_attribute.Equals(attribute))
                 filteredCards[j++] = jsonparse.cardTemplates[i].card_id;
         }
-        int[] shortFilteredCards = filteredCards.Where(i => i != 0).ToArray();
+        
+        
+       // int[] shortFilteredCards = filteredCards.Where(i => Array.IndexOf(filteredCards, i) <= j).ToArray();
+        //Array.Clear(filteredCards, j, filteredCards.Length - j);
+        int[] shortFilteredCards = new int[j];
+        Array.Copy(filteredCards, shortFilteredCards, j);
+        Debug.Log("SIZE OF FILTERED CARDS: " + shortFilteredCards.Length);
+
+        
         currentEightCards = 0;
         GameObject leftArrow = GameObject.Find("leftArrowButton(Clone)");
         Destroy(leftArrow);
