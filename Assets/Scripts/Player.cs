@@ -73,7 +73,7 @@ public class Player
                 int cardDrawn = Random.Range(0, deck.Count);
                 DrawCard(-157 + 161 * i, -330.9f, 0, deck[cardDrawn]);
                 deck.RemoveAt(cardDrawn);
-                deckSize--;
+//                deckSize--;
             }
         }
 
@@ -85,7 +85,7 @@ public class Player
                 int cardDrawn = Random.Range(0, deck.Count);
                 DrawCard(-157 + 161 * i, 330, 0, deck[cardDrawn]);
                 deck.RemoveAt(cardDrawn);
-                deckSize--;
+//                deckSize--;
             }
         }
     }
@@ -97,7 +97,7 @@ public class Player
         handCards.Add(clonedCard);
         //GameObject deck = GameObject.Find("Player_Deck");
         Text remainingCards = GameObject.Find("Remaining_Cards").GetComponent<Text>();
-        remainingCards.text = "Remaining:\n" + deckSize;
+        remainingCards.text = "Remaining:\n" + (--deckSize);
     }
 
     public void setupPlayCard(GameObject clickedObj)
@@ -171,6 +171,7 @@ public class Player
 
     public void startTurn()
     {
+        Debug.Log("HAND CARDS SIZE ON START TURN: " + handCards.Count);
         //Increase mana at start of turn.
         this.increaseMana(1);
         //Draw card after increasing mana. (Max number of cardTemplates in hand is 8).

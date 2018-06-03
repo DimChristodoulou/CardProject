@@ -167,21 +167,53 @@ public class cardEffects : MonoBehaviour
 
         if (target.CompareTag("Model"))
         {
-            GameState.getActivePlayer().boardMinions.Remove(target);
+//            GameState.getActivePlayer().boardMinions.Remove(target);
+            GameState.getActivePlayer().graveyard.Add(target.GetComponent<monsterInfo>().card);
+            Debug.Log("TARGET IS: " + target.name);
+//            Debug.Log("ID IS : " + target.GetComponent<monsterInfo>().card.GetComponent<Card>().id);
+            GameObject topGraveyardCard =
+                GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
+
+
+//            topGraveyardCard.transform
+//                    .localPosition =
+//                GameObject.Find("graveyard").transform.localPosition;
+
+
+            topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
+
+            topGraveyardCard.transform.SetParent(GameObject.Find("graveyard").transform, false);
+            topGraveyardCard.transform
+                .localPosition = new Vector3(0, 0, 0);
+
+            topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
+
+            topGraveyardCard.SetActive(true);
+//            topGraveyardCard.GetComponent<RectTransform>().anch
+//            topGraveyardCard.transform.SetParent(GameObject.Find("Main UI").transform, false);
+
+//
+
+
+////            topGraveyardCard.GetComponent<RectTransform>(). = GameObject.Find("graveyard").GetComponent<RectTransform>();
+//
+//            topGraveyardCard.transform.localScale = new Vector3(0.75f, 0.75f, 0);
+
+
+//            graveyardGO.refreshTopGraveyardCard();
+            GameState.getActivePlayer().handCards.Remove(GameState.getActivePlayer().selectedCard);
+            GameState.getActivePlayer().graveyard.Add(GameState.getActivePlayer().selectedCard);
+            Destroy(GameState.getActivePlayer().selectedCard);
+
+
+            Debug.Log("HAND CARDS SIZE: " + GameState.getActivePlayer().handCards.Count);
+            target.GetComponent<monsterInfo>().parentPlayer.boardMinions.Remove(target);
             Destroy(target);
+
 
             //then we get the coordinates of the monster and set its square to free...
             GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First,
                 target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
-            //then we destroy the card
-            GameState.getActivePlayer().graveyard.Add(GameState.getActivePlayer().selectedCard);
-            graveyardGO.refreshTopGraveyardCard();
-
-            Destroy(GameState.getActivePlayer().selectedCard);
-
-            GameState.getActivePlayer().handCards.RemoveAt(GameState.getActivePlayer().selectedCardIndex);
-
-            GameState.getActivePlayer().cardSelected = false;
 
             cardEventHandler.onSummon -= fireball;
         }
@@ -218,23 +250,56 @@ public class cardEffects : MonoBehaviour
             DealDamageToPlayer(GameState.players[0], minionPower);
             DealDamageToPlayer(GameState.players[1], minionPower);
 
-            GameState.getActivePlayer().boardMinions.Remove(target);
-
+//            GameState.getActivePlayer().boardMinions.Remove(target);
+//            target.GetComponent<monsterInfo>().card.SetActive(true);
             GameState.getActivePlayer().graveyard.Add(target.GetComponent<monsterInfo>().card);
             Debug.Log("TARGET IS: " + target.name);
-            Debug.Log("ID IS : " + target.GetComponent<monsterInfo>().card.GetComponent<Card>().id);
-            graveyardGO.refreshTopGraveyardCard();
+//            Debug.Log("ID IS : " + target.GetComponent<monsterInfo>().card.GetComponent<Card>().id);
+            GameObject topGraveyardCard =
+                GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
 
-            //Destroy(target);
+
+//            topGraveyardCard.transform
+//                    .localPosition =
+//                GameObject.Find("graveyard").transform.localPosition;
+            topGraveyardCard.SetActive(true);
+
+            topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
+
+            topGraveyardCard.transform.SetParent(GameObject.Find("graveyard").transform, false);
+            topGraveyardCard.transform
+                .localPosition = new Vector3(0, 0, 0);
+
+            topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
+
+
+//            topGraveyardCard.GetComponent<RectTransform>().anch
+//            topGraveyardCard.transform.SetParent(GameObject.Find("Main UI").transform, false);
+
+//
+
+
+////            topGraveyardCard.GetComponent<RectTransform>(). = GameObject.Find("graveyard").GetComponent<RectTransform>();
+//
+//            topGraveyardCard.transform.localScale = new Vector3(0.75f, 0.75f, 0);
+
+
+//            graveyardGO.refreshTopGraveyardCard();
+
+            Debug.Log("HAND CARDS SIZE: " + GameState.getActivePlayer().handCards.Count);
+            target.GetComponent<monsterInfo>().parentPlayer.boardMinions.Remove(target);
+            Destroy(target);
 
             //then we get the coordinates of the monster and set its square to free...
             GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First,
                 target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
             //then we destroy the card
 
-            Destroy(GameState.getActivePlayer().selectedCard);
+//            Destroy(GameState.getActivePlayer().selectedCard);
 
-            GameState.getActivePlayer().handCards.RemoveAt(GameState.getActivePlayer().selectedCardIndex);
+            Debug.Log("SELECTED CARD INDEX: " + GameState.getActivePlayer().selectedCardIndex);
+            Debug.Log("HAND CARDS SIZE: " + GameState.getActivePlayer().handCards.Count);
+//            GameState.getActivePlayer().handCards.RemoveAt(GameState.getActivePlayer().selectedCardIndex);
 
             GameState.getActivePlayer().cardSelected = false;
 

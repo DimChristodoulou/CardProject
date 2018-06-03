@@ -2,50 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class monsterInfo : MonoBehaviour {
+public class monsterInfo : MonoBehaviour
+{
     //utility class for general info regarding monster
 
     //card stats saved in the class
-	public string monsterName;
+    public string monsterName;
     public string monsterKeywords;
-	public GameObject card; //the card of the monster
-	public int power, manacost, movspeed, attkrange; //these will affect offsets to card values, but the card is needed for that to be implemented (TODO post-merge)
-	//stores pairs of coordinates that this monster sits on, indexed [0,size-1]
-	public List< Pair<int,int> > coords;
-	public Color hoverColorAttacked = new Color32(0xFF, 0x00, 0x00, 0x8F); // RGBA
-	public Color hoverColorActive = new Color32(0x00, 0x99, 0x00, 0x8F); // RGBA
-	public Color hoverColorInactive = new Color32(0x99, 0x99, 0x00, 0x8F); // RGBA
-	public Color startColor = new Color32(0xFF, 0xFF, 0xFF, 0x00); // RGBA
+    public GameObject card; //the card of the monster
 
-	//a monster is controlled by a player
-	public Player parentPlayer;
+    public int
+        power,
+        manacost,
+        movspeed,
+        attkrange; //these will affect offsets to card values, but the card is needed for that to be implemented (TODO post-merge)
 
-	//a monster can be clicked, move, attack
-	public bool clickable, movable, attackable;
+    //stores pairs of coordinates that this monster sits on, indexed [0,size-1]
+    public List<Pair<int, int>> coords;
+    public Color hoverColorAttacked = new Color32(0xFF, 0x00, 0x00, 0x8F); // RGBA
+    public Color hoverColorActive = new Color32(0x00, 0x99, 0x00, 0x8F); // RGBA
+    public Color hoverColorInactive = new Color32(0x99, 0x99, 0x00, 0x8F); // RGBA
+    public Color startColor = new Color32(0xFF, 0xFF, 0xFF, 0x00); // RGBA
 
-	//the turn the monster was played
-	public int playedturn;
+    //a monster is controlled by a player
+    public Player parentPlayer;
 
-	//todo need to find a way to store enchants without changing originals, making silence applicable
+    //a monster can be clicked, move, attack
+    public bool clickable, movable, attackable;
 
-	public void setData(string mName, int pow, int mcost, int mspeed, int attkrange, Player parent, int summonTurn, string keywords, GameObject monsterCard) {
-		monsterName = mName;
+    //the turn the monster was played
+    public int playedturn;
+
+    //todo need to find a way to store enchants without changing originals, making silence applicable
+
+    public void setData(string mName, int pow, int mcost, int mspeed, int attkrange, Player parent, int summonTurn,
+        string keywords, GameObject monsterCard)
+    {
+        monsterName = mName;
         power = pow;
         manacost = mcost;
         movspeed = mspeed;
         this.attkrange = attkrange;
-		parentPlayer = parent;
+        parentPlayer = parent;
         playedturn = summonTurn;
         monsterKeywords = keywords;
+        if (monsterCard != null)
+            Debug.Log("SELECTED CARD NAME: " + monsterCard.GetComponent<Card>().cardName.text);
+        card = new GameObject();
         card = monsterCard;
-	}
+    }
 
-	public void setPosition(List< Pair<int, int> > myList) {
-		coords = myList;
-	}
+    public void setPosition(List<Pair<int, int>> myList)
+    {
+        coords = myList;
+    }
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         if (monsterKeywords != null)
         {
             if (monsterKeywords.Contains("Charge"))
@@ -56,60 +70,72 @@ public class monsterInfo : MonoBehaviour {
             }
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         //if (defense <= 0)
         //	Die ();
-	}
+    }
 
-	public void onStartTurn() {
-		//effects when starting a turn
-		if (playedturn != GameState.turn) { 
-			clickable = true;
-			movable = true;
-			attackable = true;
-		} else {
-			clickable = false;
-			movable = false;
-			attackable = false;
-		}
-	}
+    public void onStartTurn()
+    {
+        //effects when starting a turn
+        if (playedturn != GameState.turn)
+        {
+            clickable = true;
+            movable = true;
+            attackable = true;
+        }
+        else
+        {
+            clickable = false;
+            movable = false;
+            attackable = false;
+        }
+    }
 
-	public void onEndTurn() {
-		//effects when ending a turn
-	}
+    public void onEndTurn()
+    {
+        //effects when ending a turn
+    }
 
-	public void onPostMove() {
-		//effects after moving
-		movable = false;
-	}
+    public void onPostMove()
+    {
+        //effects after moving
+        movable = false;
+    }
 
-	public void onPostAttack() {
-		//effects after attacking once
-		attackable = false;
-	}
+    public void onPostAttack()
+    {
+        //effects after attacking once
+        attackable = false;
+    }
 
-	public void onPostDefense() {
-		//effects after defending once
-		Debug.Log("help");
-	}
+    public void onPostDefense()
+    {
+        //effects after defending once
+        Debug.Log("help");
+    }
 
-	public void onPostHeal() {
-		//effects after heal
-	}
+    public void onPostHeal()
+    {
+        //effects after heal
+    }
 
-	public void onPostDeath() {
-		//deathrattles
-	}
+    public void onPostDeath()
+    {
+        //deathrattles
+    }
 
-	public void Die() {
-		parentPlayer.DieMonster (this.gameObject);
-		onPostDeath ();
-	}
+    public void Die()
+    {
+        parentPlayer.DieMonster(this.gameObject);
+        onPostDeath();
+    }
 
-	public void Banish() {
-		parentPlayer.BanishMonster (this.gameObject);
-	}
-
+    public void Banish()
+    {
+        parentPlayer.BanishMonster(this.gameObject);
+    }
 }
