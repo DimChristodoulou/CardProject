@@ -158,7 +158,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
                         {
 							GameObject cardListEntry = (GameObject) Instantiate(Resources.Load("cardListEntry"));
                             cardListEntry.gameObject.tag = "cardEntry";
-                            cardListEntry.GetComponent<Text>().text =
+							cardListEntry.GetComponent<Text> ().text = "(" + gameObject.GetComponent<Card> ().manaCost.text + ") ";
+                            cardListEntry.GetComponent<Text>().text +=
                                 gameObject.GetComponent<Card>().cardName.text;
                             cardListEntry.GetComponent<Text>().font =
                                 Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
@@ -177,10 +178,9 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
                             GameObject[] cardEntries = GameObject.FindGameObjectsWithTag("cardEntry");
                             foreach (GameObject card in cardEntries)
                             {
-                                if (card.GetComponent<Text>().text.Equals(gameObject.GetComponent<Card>().cardName.text))
+								if (card.GetComponent<Text>().text.Equals("(" + gameObject.GetComponent<Card> ().manaCost.text + ") " + gameObject.GetComponent<Card>().cardName.text))
                                 {
-                                    card.GetComponent<Text>().text =
-                                        gameObject.GetComponent<Card>().cardName.text + " x2";
+                                    card.GetComponent<Text>().text += " x2";
                                     timesTwo = true;
                                 }
                             }
