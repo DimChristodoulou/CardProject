@@ -156,10 +156,8 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
                         Debug.Log(clickedCard);
                         if (!Player.deck.Contains(gameObject.GetComponent<Card>().id + 1))
                         {
-                            GameObject cardListEntry = new GameObject("cardListEntry");
+							GameObject cardListEntry = (GameObject) Instantiate(Resources.Load("cardListEntry"));
                             cardListEntry.gameObject.tag = "cardEntry";
-                            cardListEntry.AddComponent<LayoutElement>();
-                            cardListEntry.AddComponent<Text>();
                             cardListEntry.GetComponent<Text>().text =
                                 gameObject.GetComponent<Card>().cardName.text;
                             cardListEntry.GetComponent<Text>().font =
