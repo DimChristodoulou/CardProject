@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Wrapper for buffs, need it to store info for buffs inside monsterInfo
+public class buffs
+{
+    public string buffName;
+    public int buffAmount;
+    public int buffCardId;
+}
+
 public class monsterInfo : MonoBehaviour
 {
     //utility class for general info regarding monster
@@ -10,6 +18,7 @@ public class monsterInfo : MonoBehaviour
     public string monsterName;
     public string monsterKeywords;
     public GameObject card; //the card of the monster
+    public List<buffs> monsterBuffs = new List<buffs>();
 
     public int
         power,
@@ -35,8 +44,17 @@ public class monsterInfo : MonoBehaviour
 
     //todo need to find a way to store enchants without changing originals, making silence applicable
 
-    public void setData(string mName, int pow, int mcost, int mspeed, int attkrange, Player parent, int summonTurn,
-        string keywords, GameObject monsterCard)
+    public void addBuff(string name, int amount, int cardID)
+    {
+        buffs tempBuff = new buffs();
+        tempBuff.buffName = name;
+        tempBuff.buffAmount = amount;
+        tempBuff.buffCardId = cardID;
+        monsterBuffs.Add(tempBuff);
+    }
+
+
+    public void setData(string mName, int pow, int mcost, int mspeed, int attkrange, Player parent, int summonTurn, string keywords, GameObject monsterCard)
     {
         monsterName = mName;
         power = pow;

@@ -76,7 +76,41 @@ public class cardEffects : MonoBehaviour
                 cardEventHandler.onSummon += emperorsFool;
                 break;
             }
+            case "The Emperor's Knight":
+            {
+                cardEventHandler.onSummon += emperorsKnight;
+                break;
+            }
+            case "Iron Resolve":
+            {
+                cardEventHandler.onSummon += ironResolve;
+                break;
+            }
         }
+    }
+
+    public void ironResolve(string minionName)
+    {
+        StartCoroutine(waitForUserToSelectTarget());
+        StartCoroutine(targetedIronResolve());
+    }
+
+    private IEnumerator targetedIronResolve()
+    {
+        while (!selected && target == null)
+        {
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        if (target.CompareTag("Model"))
+        {
+
+        }
+    }
+
+    public void emperorsKnight(string minionName)
+    {
+        cardEventHandler.onSummon -= emperorsKnight;
     }
 
     public void emperorsHound(string minionName)
@@ -110,7 +144,6 @@ public class cardEffects : MonoBehaviour
         cardEventHandler.onSummon -= flamesprite;
     }
 
-
     public void fireball(string spellName)
     {
         StartCoroutine(waitForUserToSelectTarget());
@@ -122,7 +155,6 @@ public class cardEffects : MonoBehaviour
         StartCoroutine(waitForUserToSelectTarget());
         StartCoroutine(waitAndPyra());
     }
-
 
     private IEnumerator waitForUserToSelectTarget()
     {
@@ -212,8 +244,7 @@ public class cardEffects : MonoBehaviour
 
 
             //then we get the coordinates of the monster and set its square to free...
-            GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First,
-                target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
+            GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First, target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
 
             cardEventHandler.onSummon -= fireball;
         }
@@ -232,36 +263,25 @@ public class cardEffects : MonoBehaviour
     }
 
     private IEnumerator waitAndPyra()
-    {
-//        selected = false;
-
+    { 
         while (!selected && target == null)
         {
             yield return new WaitForSeconds(0.2f);
         }
 
-        Debug.Log(selected, target);
         if (target.CompareTag("Model"))
         {
-            //TODO Change this whenever we need to :)
-
+            //Get the minion to be destroyed's power
             int minionPower = target.GetComponent<monsterInfo>().power;
-            Debug.Log(minionPower);
+            //Deal its damage to both players
             DealDamageToPlayer(GameState.players[0], minionPower);
             DealDamageToPlayer(GameState.players[1], minionPower);
-
-//            GameState.getActivePlayer().boardMinions.Remove(target);
-//            target.GetComponent<monsterInfo>().card.SetActive(true);
+            //THIS IS WRONG: should add to parent player's graveyard
             GameState.getActivePlayer().graveyard.Add(target.GetComponent<monsterInfo>().card);
-            Debug.Log("TARGET IS: " + target.name);
-//            Debug.Log("ID IS : " + target.GetComponent<monsterInfo>().card.GetComponent<Card>().id);
-            GameObject topGraveyardCard =
-                GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
 
+            GameObject topGraveyardCard = GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
 
-//            topGraveyardCard.transform
-//                    .localPosition =
-//                GameObject.Find("graveyard").transform.localPosition;
+            //This part shows the top graveyard card
             topGraveyardCard.SetActive(true);
 
             topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
@@ -272,21 +292,7 @@ public class cardEffects : MonoBehaviour
 
             topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
 
-
-//            topGraveyardCard.GetComponent<RectTransform>().anch
-//            topGraveyardCard.transform.SetParent(GameObject.Find("Main UI").transform, false);
-
-//
-
-
-////            topGraveyardCard.GetComponent<RectTransform>(). = GameObject.Find("graveyard").GetComponent<RectTransform>();
-//
-//            topGraveyardCard.transform.localScale = new Vector3(0.75f, 0.75f, 0);
-
-
-//            graveyardGO.refreshTopGraveyardCard();
-
-            Debug.Log("HAND CARDS SIZE: " + GameState.getActivePlayer().handCards.Count);
+            //Remove the target from the board minions
             target.GetComponent<monsterInfo>().parentPlayer.boardMinions.Remove(target);
             Destroy(target);
 
@@ -295,11 +301,7 @@ public class cardEffects : MonoBehaviour
                 target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
             //then we destroy the card
 
-//            Destroy(GameState.getActivePlayer().selectedCard);
-
-            Debug.Log("SELECTED CARD INDEX: " + GameState.getActivePlayer().selectedCardIndex);
-            Debug.Log("HAND CARDS SIZE: " + GameState.getActivePlayer().handCards.Count);
-//            GameState.getActivePlayer().handCards.RemoveAt(GameState.getActivePlayer().selectedCardIndex);
+            //GameState.getActivePlayer().handCards.RemoveAt(GameState.getActivePlayer().selectedCardIndex);
 
             GameState.getActivePlayer().cardSelected = false;
 
