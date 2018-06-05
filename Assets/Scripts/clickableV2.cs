@@ -53,8 +53,7 @@ public class clickableV2 : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (cardEffects.disableOtherInput == false && myInfo.clickable &&
-            GameState.getActivePlayer() == this.GetComponentInParent<monsterInfo>().parentPlayer)
+        if (cardEffects.disableOtherInput == false && myInfo.clickable && GameState.getActivePlayer() == this.GetComponentInParent<monsterInfo>().parentPlayer)
         {
             //we can only click our monsters
             toggleChange();
@@ -75,11 +74,14 @@ public class clickableV2 : MonoBehaviour
 
     public void toggleChange()
     {
+        Debug.Log("IN TOGGLE");
         if (!myInfo.parentPlayer.cardSelected)
         {
+            Debug.Log("IN cardSelected");
             toggle = !toggle;
             if (toggle)
             {
+                Debug.Log("IN true");
                 //if (myInfo == null)
                 //    Debug.Log("gameobject name: "+  gameObject.name);
 

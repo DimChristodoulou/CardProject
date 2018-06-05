@@ -97,6 +97,8 @@ public class cardEffects : MonoBehaviour
 
     private IEnumerator targetedIronResolve()
     {
+        Debug.Log("target: " + target.name);
+        Debug.Log("selected: " + selected);
         while (!selected && target == null)
         {
             yield return new WaitForSeconds(0.2f);
@@ -104,7 +106,27 @@ public class cardEffects : MonoBehaviour
 
         if (target.CompareTag("Model"))
         {
+            buffs ironResolveBuff = new buffs();
+            ironResolveBuff.buffAmount = 3;
+            ironResolveBuff.buffCardId = 10;
+            ironResolveBuff.buffName = "Iron Resolve";
+            target.GetComponent<monsterInfo>().refreshBuffs(ironResolveBuff);
+            GameState.getActivePlayer().cardSelected = false;
 
+            GameState.getActivePlayer().handCards.Remove(GameState.getActivePlayer().selectedCard);
+            GameState.getActivePlayer().graveyard.Add(GameState.getActivePlayer().selectedCard);
+
+            GameObject topGraveyardCard = GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
+            topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
+            Debug.Log("TGC" + topGraveyardCard.GetComponent<Card>().cardName.text);
+            topGraveyardCard.transform.SetParent(GameObject.Find("graveyard").transform, false);
+            topGraveyardCard.transform.localPosition = new Vector3(0, 0, 0);
+            topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
+            topGraveyardCard.SetActive(true);
+
+            cardEventHandler.onSummon -= ironResolve;
+
+            //Destroy(GameState.getActivePlayer().selectedCard);
         }
     }
 
@@ -199,40 +221,23 @@ public class cardEffects : MonoBehaviour
 
         if (target.CompareTag("Model"))
         {
-//            GameState.getActivePlayer().boardMinions.Remove(target);
+            GameState.getActivePlayer().boardMinions.Remove(target);
             GameState.getActivePlayer().graveyard.Add(target.GetComponent<monsterInfo>().card);
             Debug.Log("TARGET IS: " + target.name);
 //            Debug.Log("ID IS : " + target.GetComponent<monsterInfo>().card.GetComponent<Card>().id);
-            GameObject topGraveyardCard =
-                GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
+            GameObject topGraveyardCard = GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
 
-
-//            topGraveyardCard.transform
-//                    .localPosition =
-//                GameObject.Find("graveyard").transform.localPosition;
 
 
             topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
 
             topGraveyardCard.transform.SetParent(GameObject.Find("graveyard").transform, false);
-            topGraveyardCard.transform
-                .localPosition = new Vector3(0, 0, 0);
+            topGraveyardCard.transform.localPosition = new Vector3(0, 0, 0);
 
             topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
 
             topGraveyardCard.SetActive(true);
-//            topGraveyardCard.GetComponent<RectTransform>().anch
-//            topGraveyardCard.transform.SetParent(GameObject.Find("Main UI").transform, false);
 
-//
-
-
-////            topGraveyardCard.GetComponent<RectTransform>(). = GameObject.Find("graveyard").GetComponent<RectTransform>();
-//
-//            topGraveyardCard.transform.localScale = new Vector3(0.75f, 0.75f, 0);
-
-
-//            graveyardGO.refreshTopGraveyardCard();
             GameState.getActivePlayer().handCards.Remove(GameState.getActivePlayer().selectedCard);
             GameState.getActivePlayer().graveyard.Add(GameState.getActivePlayer().selectedCard);
             Destroy(GameState.getActivePlayer().selectedCard);

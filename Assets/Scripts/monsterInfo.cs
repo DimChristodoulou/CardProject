@@ -6,7 +6,7 @@ using UnityEngine;
 public class buffs
 {
     public string buffName;
-    public int buffAmount;
+    public int buffAmount = 0;
     public int buffCardId;
 }
 
@@ -94,6 +94,12 @@ public class monsterInfo : MonoBehaviour
     {
         //if (defense <= 0)
         //	Die ();
+    }
+
+    public void refreshBuffs(buffs buff)
+    {
+        if (buff.buffAmount != 0)
+            this.power += buff.buffAmount;
     }
 
     public void onStartTurn()
