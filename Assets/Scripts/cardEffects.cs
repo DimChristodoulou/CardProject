@@ -97,8 +97,6 @@ public class cardEffects : MonoBehaviour
 
     private IEnumerator targetedIronResolve()
     {
-        Debug.Log("target: " + target.name);
-        Debug.Log("selected: " + selected);
         while (!selected && target == null)
         {
             yield return new WaitForSeconds(0.2f);
