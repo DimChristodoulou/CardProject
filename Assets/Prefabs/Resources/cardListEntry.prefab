@@ -61,7 +61,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: The Emperor's Fool
+  m_Text: 
 --- !u!114 &114351731533189764
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -87,6 +87,7 @@ public class GameState : MonoBehaviour {
 	}
 
 	static public void nextPlayerTurn() {
+		resetSquaresColor ();
 		if (activePlayerIndex!=-1)
 			players [activePlayerIndex].endTurn ();
 		activePlayerIndex = (activePlayerIndex + 1) % numOfPlayers;
@@ -129,6 +130,14 @@ public class GameState : MonoBehaviour {
 	static public void setSquares(List<Pair<int,int>> squarecoords, bool value) {
 		foreach (Pair<int,int> coord in squarecoords) {
 			boardTable [coord.First, coord.Second].GetComponent<nodeInfo> ().isFree = value;
+		}
+	}
+
+	static public void resetSquaresColor() {
+		for (int i = 0; i < dimensionY; i++) {
+			for (int j = 0; j < dimensionX; j++) {
+				boardTable [j, i].GetComponent<nodeInfo> ().makeInactive ();
+			}
 		}
 	}
 }
