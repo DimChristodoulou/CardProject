@@ -14,6 +14,9 @@ public class GameState : MonoBehaviour {
 	static private float moveTime = 30.0f;
 	static public float currentMoveTime;
 	static public int turn;
+	static public Texture2D manaTexture;
+	static public Texture2D emptyManaTexture;
+	static private GameObject[] manaCrystals;
 	static public GameObject[,] boardTable;
 	//general info regarding board
 	static public int dimensionX=7, dimensionY=11;
@@ -22,6 +25,13 @@ public class GameState : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		manaTexture = (Texture2D) Resources.Load ("manafull");
+		emptyManaTexture = (Texture2D) Resources.Load ("manaempty");
+		manaCrystals = new GameObject[10];
+		for (int i = 0; i < 10; i++) {
+			GameObject currManaCrystal = GameObject.Find ("Image (" + (i+1) + ")");
+			manaCrystals [i] = currManaCrystal;
+		}
 		turn = 0;
 		boardTable = createBoard (dimensionX, dimensionY);
 		setPlayers (2);
@@ -37,6 +47,8 @@ public class GameState : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (activePlayerIndex != -1)
+			showMana ();
 		currentMoveTime -= Time.deltaTime;
         Text turn_timer = GameObject.Find("turn_timer").GetComponent<Text>();
         turn_timer.text = "Time Remaining: \n" + (int)currentMoveTime;
@@ -138,6 +150,24 @@ public class GameState : MonoBehaviour {
 			for (int j = 0; j < dimensionX; j++) {
 				boardTable [j, i].GetComponent<nodeInfo> ().makeInactive ();
 			}
+		}
+	}
+
+	//VERY UGLY CODE :'(
+	static public void showMana() {
+		int i = 0;
+		print (players [activePlayerIndex].currentMana);
+		for (; i < players [activePlayerIndex].currentMana; i++) {
+			((RawImage)manaCrystals[i].GetComponent<RawImage> ()).texture = manaTexture;
+			manaCrystals[i].SetActive (true);
+		}
+		print (players [activePlayerIndex].maxTurnMana);
+		for (; i < players [activePlayerIndex].maxTurnMana; i++) {
+			((RawImage)manaCrystals[i].GetComponent<RawImage> ()).texture = emptyManaTexture;
+			manaCrystals[i].SetActive (true);
+		}
+		for (; i < 10; i++) {
+			manaCrystals[i].SetActive (false);
 		}
 	}
 }
