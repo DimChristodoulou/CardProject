@@ -156,12 +156,10 @@ public class GameState : MonoBehaviour {
 	//VERY UGLY CODE :'(
 	static public void showMana() {
 		int i = 0;
-		print (players [activePlayerIndex].currentMana);
 		for (; i < players [activePlayerIndex].currentMana; i++) {
 			((RawImage)manaCrystals[i].GetComponent<RawImage> ()).texture = manaTexture;
 			manaCrystals[i].SetActive (true);
 		}
-		print (players [activePlayerIndex].maxTurnMana);
 		for (; i < players [activePlayerIndex].maxTurnMana; i++) {
 			((RawImage)manaCrystals[i].GetComponent<RawImage> ()).texture = emptyManaTexture;
 			manaCrystals[i].SetActive (true);
