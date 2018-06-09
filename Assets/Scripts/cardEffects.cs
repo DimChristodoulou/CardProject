@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEditor;
 
 
 public class cardEffects : MonoBehaviour
@@ -92,14 +93,47 @@ public class cardEffects : MonoBehaviour
                 cardEventHandler.onSummon += idolOfFire;
                 break;
             }
+            case "Flame Shaman":
+            {
+                cardEventHandler.onSummon += flameShaman;
+                break;
+            }
+        }
+    }
+
+    /*
+     * Function that returns a List with all GameObjects in a scene.
+     */
+    private static List<GameObject> GetAllObjectsInScene()
+    {
+        List<GameObject> objectsInScene = new List<GameObject>();
+
+        foreach (GameObject go in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[])
+        {
+            if (go.hideFlags != HideFlags.None)
+                continue;
+
+            if (PrefabUtility.GetPrefabType(go) == PrefabType.Prefab || PrefabUtility.GetPrefabType(go) == PrefabType.ModelPrefab)
+                continue;
+
+            objectsInScene.Add(go);
+        }
+        return objectsInScene;
+    }
+
+    public void flameShaman(string minionName){
+        //TODO: Make this always while this is in play, instead of one time.
+        List<GameObject> allGameObjects = GetAllObjectsInScene();
+        foreach(GameObject GO in allGameObjects){
+            if(GO.GetComponent<monsterInfo>().card.GetComponent<Card>().attribute == "Fire"){
+                GO.GetComponent<monsterInfo>().power += 2;
+            }
         }
     }
 
     public void idolOfFire(string minionName){
         GameState.getActivePlayer().boardMinions.Last().GetComponent<monsterInfo>().cannotMove = true;
         GameState.getActivePlayer().boardMinions.Last().GetComponent<monsterInfo>().cannotAttack = true;
-        Debug.Log(GameState.getActivePlayer().boardMinions.Last().GetComponent<monsterInfo>().cannotMove);
-        Debug.Log(GameState.getActivePlayer().boardMinions.Last().GetComponent<monsterInfo>().cannotAttack);
         cardEventHandler.onSummon -= idolOfFire;
     }
 

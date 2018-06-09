@@ -18,6 +18,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     public Text description;
     public Text manaCost;
     public Text type;
+    public string attribute;
 
     public Image artwork;
     public Image element;
@@ -79,7 +80,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         {
             power.text = jsonparse.cardTemplates[cardId].card_actionpoints.ToString();
         }
-        string attribute = jsonparse.cardTemplates[cardId].card_attribute.ToString();
+        attribute = jsonparse.cardTemplates[cardId].card_attribute.ToString();
         if (attribute.Equals("Fire"))
         {
             element.sprite = Resources.Load("fire", typeof(Sprite)) as Sprite;
