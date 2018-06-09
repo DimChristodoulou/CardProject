@@ -83,10 +83,24 @@ public class cardEffects : MonoBehaviour
             }
             case "Iron Resolve":
             {
+                //TODO: Casting
                 cardEventHandler.onSummon += ironResolve;
                 break;
             }
+            case "Idol of Fire":
+            {
+                cardEventHandler.onSummon += idolOfFire;
+                break;
+            }
         }
+    }
+
+    public void idolOfFire(string minionName){
+        GameState.getActivePlayer().boardMinions.Last().GetComponent<monsterInfo>().cannotMove = true;
+        GameState.getActivePlayer().boardMinions.Last().GetComponent<monsterInfo>().cannotAttack = true;
+        Debug.Log(GameState.getActivePlayer().boardMinions.Last().GetComponent<monsterInfo>().cannotMove);
+        Debug.Log(GameState.getActivePlayer().boardMinions.Last().GetComponent<monsterInfo>().cannotAttack);
+        cardEventHandler.onSummon -= idolOfFire;
     }
 
     public void ironResolve(string minionName)
@@ -108,6 +122,7 @@ public class cardEffects : MonoBehaviour
             ironResolveBuff.buffAmount = 3;
             ironResolveBuff.buffCardId = 10;
             ironResolveBuff.buffName = "Iron Resolve";
+
             target.GetComponent<monsterInfo>().refreshBuffs(ironResolveBuff);
             GameState.getActivePlayer().cardSelected = false;
 
@@ -125,6 +140,18 @@ public class cardEffects : MonoBehaviour
             cardEventHandler.onSummon -= ironResolve;
 
             //Destroy(GameState.getActivePlayer().selectedCard);
+        }
+        else if (results.Count > 0)
+        {
+            foreach (RaycastResult result in results)
+            {
+                if (result.gameObject.CompareTag("Card"))
+                {
+                    //selected = true; // stop coroutine
+                    cardEventHandler.onSummon -= ironResolve;
+                    break;
+                }
+            }
         }
     }
 

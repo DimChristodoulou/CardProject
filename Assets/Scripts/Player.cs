@@ -17,8 +17,7 @@ public class Player
     public int playingPos; //which player am i, 1st or 2nd
     public string pName;
 
-    public GameObject
-        hero; //hero is a seperate unit due to its win condition checks and the fact that he is instantiated from beginning
+    public GameObject hero; //hero is a seperate unit due to its win condition checks and the fact that he is instantiated from beginning
 
     public List<GameObject> handCards;
     public List<GameObject> boardMinions;

@@ -39,6 +39,8 @@ public class monsterInfo : MonoBehaviour
     //a monster can be clicked, move, attack
     public bool clickable, movable, attackable;
 
+    public bool cannotMove = false, cannotAttack = false;
+
     //the turn the monster was played
     public int playedturn;
 
@@ -52,7 +54,6 @@ public class monsterInfo : MonoBehaviour
         tempBuff.buffCardId = cardID;
         monsterBuffs.Add(tempBuff);
     }
-
 
     public void setData(string mName, int pow, int mcost, int mspeed, int attkrange, Player parent, int summonTurn, string keywords, GameObject monsterCard)
     {
@@ -105,7 +106,7 @@ public class monsterInfo : MonoBehaviour
     public void onStartTurn()
     {
         //effects when starting a turn
-        if (playedturn != GameState.turn)
+        if (!cannotAttack && !cannotMove && playedturn != GameState.turn)
         {
             clickable = true;
             movable = true;
