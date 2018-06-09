@@ -24,6 +24,9 @@ public class cardEventHandler : MonoBehaviour
             GameState.getActivePlayer().availableNodesForSummon = null;
         }
 
+		//decrease mana based on card mana cost
+		GameState.getActivePlayer().currentMana -= int.Parse(GameState.getActivePlayer().selectedCard.GetComponent<Card>().manaCost.text);
+
         Debug.Log(minionName);
         onSummon(minionName);
 

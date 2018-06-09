@@ -153,7 +153,6 @@ public class GameState : MonoBehaviour {
 		}
 	}
 
-	//VERY UGLY CODE :'(
 	static public void showMana() {
 		int i = 0;
 		for (; i < players [activePlayerIndex].currentMana; i++) {
