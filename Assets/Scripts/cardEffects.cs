@@ -153,7 +153,7 @@ public class cardEffects : MonoBehaviour
      */
     public void flamesprite(string minionName)
     {
-        GameState.getActivePlayer().currentMana -= jsonparse.cardTemplates[1].card_manacost;
+        //GameState.getActivePlayer().currentMana -= jsonparse.cardTemplates[1].card_manacost;
         Player opponent;
         if (GameState.activePlayerIndex == 0)
             opponent = GameState.players[1];

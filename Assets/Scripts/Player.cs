@@ -10,8 +10,8 @@ public class Player
     private GameObject mainui = GameObject.Find("Main UI");
     public GameObject healthGO;
 
-    public int currentMana = 1;
-    public int maxTurnMana = 1;
+    public int currentMana = 0;
+    public int maxTurnMana = 0;
     public int playerHealth = 50;
     private GameObject monsterPrefab;
     public int playingPos; //which player am i, 1st or 2nd
