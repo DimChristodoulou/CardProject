@@ -95,7 +95,13 @@ public class cardEffects : MonoBehaviour
             }
             case "Flame Shaman":
             {
+                //TODO: while in play
                 cardEventHandler.onSummon += flameShaman;
+                break;
+            }
+            case "Burning Walls":
+            {
+                cardEventHandler.onSummon += burningWalls;
                 break;
             }
         }
@@ -119,6 +125,36 @@ public class cardEffects : MonoBehaviour
             objectsInScene.Add(go);
         }
         return objectsInScene;
+    }
+
+    public void burningWalls(string minionName){
+        int x,y;
+        int maxX = GameState.boardTable.GetLength(0);
+        int maxY = GameState.boardTable.GetLength(1);
+        foreach(GameObject coords in GameState.boardTable){
+            x = coords.GetComponent<nodeInfo>().xpos;
+            y = coords.GetComponent<nodeInfo>().ypos;
+            if(x == 0 || x == maxX-1 || y == 0 || y == maxY-1){
+                if(!coords.GetComponent<nodeInfo>().isFree){
+                    Debug.Log("im in!");
+                }
+            }
+        }
+
+        GameState.getActivePlayer().cardSelected = false;
+
+        GameState.getActivePlayer().handCards.Remove(GameState.getActivePlayer().selectedCard);
+        GameState.getActivePlayer().graveyard.Add(GameState.getActivePlayer().selectedCard);
+
+        GameObject topGraveyardCard = GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
+        topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
+        Debug.Log("TGC" + topGraveyardCard.GetComponent<Card>().cardName.text);
+        topGraveyardCard.transform.SetParent(GameObject.Find("graveyard").transform, false);
+        topGraveyardCard.transform.localPosition = new Vector3(0, 0, 0);
+        topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
+        topGraveyardCard.SetActive(true);
+
+        cardEventHandler.onSummon -= burningWalls;
     }
 
     public void flameShaman(string minionName){
