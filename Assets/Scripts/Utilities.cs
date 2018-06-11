@@ -75,4 +75,37 @@ public class Utilities {
 		return result;
 	}
 
+	public static Pair<int,int> findTopLeftCoord(List<Pair<int,int>> coords) {
+		if (coords.Count == 0)
+			return null;
+		Pair<int,int> topLeftItem = coords [0];
+		foreach (Pair<int,int> item in coords) {
+			if (item.First <= topLeftItem.First && item.Second <= topLeftItem.Second) {
+				topLeftItem = item;
+			}
+		}
+		return topLeftItem;
+	}
+
+	//does NOT take care of line of sight
+	//monster1 is the attacker
+	//monster2 is the defender
+	public static bool distanceWithinRange(GameObject monster1, GameObject monster2) {
+		
+		Pair<int,int> topleft1 = findTopLeftCoord (monster1.GetComponent<monsterInfo>().coords);
+		Pair<int,int> topleft2 = findTopLeftCoord (monster2.GetComponent<monsterInfo>().coords);
+		//suppose only square monsters
+		int monster1Size = Mathf.FloorToInt(Mathf.Sqrt (monster1.GetComponent<monsterInfo> ().coords.Count));
+		int monster2Size = Mathf.FloorToInt(Mathf.Sqrt (monster2.GetComponent<monsterInfo> ().coords.Count));
+		if (monster2Size > monster1Size)
+			monster1Size = monster2Size;
+		//this decrease happens to account for right side of monster
+		int distX = Mathf.Abs (topleft1.First - topleft2.First) - monster1Size;
+		int distY = Mathf.Abs (topleft1.Second - topleft2.Second) - monster1Size;
+		if (monster1.GetComponent<monsterInfo>().attkrange >= Mathf.Floor(Mathf.Sqrt (distX ^ 2 + distY ^ 2)) ) {
+			return true;
+		}
+		return false;
+	}
+
 }

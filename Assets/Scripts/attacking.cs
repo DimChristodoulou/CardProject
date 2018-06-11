@@ -23,7 +23,7 @@ public class attacking : MonoBehaviour {
     public void executeAttack(GameObject enemy)
     {
 		//dont attack if the attacking monster can't attack
-		if (!GetComponentInParent<monsterInfo> ().attackable)
+		if (!GetComponentInParent<monsterInfo> ().attackable || !Utilities.distanceWithinRange(gameObject, enemy))
 			return;
 		int dmgDiff = GetComponentInParent<monsterInfo> ().power - enemy.GetComponent<monsterInfo> ().power;
 		if (dmgDiff>0) {
