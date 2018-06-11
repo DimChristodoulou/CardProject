@@ -153,9 +153,9 @@ public class monsterInfo : MonoBehaviour
         //deathrattles
     }
 
-    public void Die()
+	public void Die(int dmgDiff = 0)
     {
-        parentPlayer.DieMonster(this.gameObject);
+		parentPlayer.DieMonster(this.gameObject, dmgDiff);
         onPostDeath();
     }
 

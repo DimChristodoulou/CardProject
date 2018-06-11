@@ -302,8 +302,10 @@ public class Player
         return;
     }
 
-    public void DieMonster(GameObject monster)
+	public void DieMonster(GameObject monster, int dmgDiff = 0)
     {
+		//TODO decrease hero's hp
+		Debug.Log("decreasing player " + playingPos + " hero hp");
         GameState.setSquares(monster.GetComponent<monsterInfo>().coords, true); //deallocate tiles
         if (boardMinions.Find(x => monster) != null)
         {

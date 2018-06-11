@@ -20,16 +20,22 @@ public class attacking : MonoBehaviour {
 		Debug.Log ("attkline");
 	}
 
-    //public void executeAttack(GameObject enemy)
-    //{
-    //    if (!GetComponentInParent<monsterInfo>().attackable)
-    //        return;
-    //    Debug.Log("attk");
-    //    enemy.GetComponent<monsterInfo>().defense -= GetComponentInParent<monsterInfo>().attack; //dummy attacking
-    //    GetComponentInParent<monsterInfo>().onPostAttack();
-    //    if (enemy.GetComponent<monsterInfo>().defense > 0)
-    //    { //if the monster has died we do not execute the postdefense effects
-    //        enemy.GetComponent<monsterInfo>().onPostDefense();
-    //    }
-    //}
+    public void executeAttack(GameObject enemy)
+    {
+		//dont attack if the attacking monster can't attack
+		if (!GetComponentInParent<monsterInfo> ().attackable)
+			return;
+		int dmgDiff = GetComponentInParent<monsterInfo> ().power - enemy.GetComponent<monsterInfo> ().power;
+		if (dmgDiff>0) {
+			Debug.Log ("enemy dies");
+			enemy.GetComponent<monsterInfo> ().Die (dmgDiff);
+		} else if (dmgDiff==0) {
+			enemy.GetComponent<monsterInfo> ().Die ();
+			GetComponentInParent<monsterInfo> ().Die ();
+			Debug.Log ("both die");
+		} else {
+			Debug.Log ("attacker dies");
+			GetComponentInParent<monsterInfo> ().Die (-dmgDiff);
+		}
+    }
 }
