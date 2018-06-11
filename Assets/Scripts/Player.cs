@@ -14,6 +14,7 @@ public class Player
     public int maxTurnMana = 0;
     public int playerHealth = 50;
     private GameObject monsterPrefab;
+    private GameObject heroPrefab;
     public int playingPos; //which player am i, 1st or 2nd
     public string pName;
 
@@ -50,6 +51,7 @@ public class Player
     {
         selected = null;
         monsterPrefab = ((GameObject) Resources.Load("Monster"));
+        heroPrefab = ((GameObject) Resources.Load("Hero"));
         this.playingPos = pPos;
         this.pName = pName;
         this.deckSize = 30;
@@ -126,20 +128,38 @@ public class Player
         if (handCards[cardIndex].GetComponent<Card>().type.text == "Minion")
         {
             availableNodesForSummon = new List<Pair<int, int>>();
-            foreach (GameObject minion in boardMinions)
-            {
-                //minion.GetComponent<movement>().highlightMovableSquares();
-                //Dictionary<Pair<int, int>, int> availableNodes = minion.GetComponent<movement>().availableMonsterMovements(minion);
-                //foreach (KeyValuePair<Pair<int, int>, int> pair )
+            // foreach (GameObject minion in boardMinions)
+            // {
 
-                foreach (KeyValuePair<Pair<int, int>, int> pair in minion.GetComponent<movement>()
-                    .availableMonsterMovements(minion))
-                {
-                    if (GameState.boardTable[pair.Key.First, pair.Key.Second].GetComponent<nodeInfo>().isFree)
-                    {
-                        GameState.boardTable[pair.Key.First, pair.Key.Second].GetComponent<nodeInfo>().makeActive();
+            //     foreach (KeyValuePair<Pair<int, int>, int> pair in minion.GetComponent<movement>()
+            //         .availableMonsterMovements(minion))
+            //     {
+            //         if (GameState.boardTable[pair.Key.First, pair.Key.Second].GetComponent<nodeInfo>().isFree)
+            //         {
+            //             GameState.boardTable[pair.Key.First, pair.Key.Second].GetComponent<nodeInfo>().makeActive();
 
-                        availableNodesForSummon.Add(pair.Key);
+            //             availableNodesForSummon.Add(pair.Key);
+            //         }
+            //     }
+            // }
+            if( GameState.getActivePlayer() == GameState.players[0] ){
+                for(int i=0;i<7;i++){
+                    for(int j=0;j<2;j++){
+                        if (GameState.boardTable[i,j].GetComponent<nodeInfo>().isFree)
+                        {
+                            GameState.boardTable[i,j].GetComponent<nodeInfo>().makeActive();
+                            availableNodesForSummon.Add(new Pair<int, int>(i,j) );
+                        }
+                    }
+                }
+            }
+            else if(GameState.getActivePlayer() == GameState.players[1]){
+                for(int i = 0; i<GameState.boardTable.GetLength(0); i++){
+                    for(int j=GameState.boardTable.GetLength(1)-3; j<GameState.boardTable.GetLength(1); j++){
+                        if (GameState.boardTable[i,j].GetComponent<nodeInfo>().isFree){
+                            GameState.boardTable[i,j].GetComponent<nodeInfo>().makeActive();
+                            availableNodesForSummon.Add(new Pair<int, int>(i,j) );
+                        }
                     }
                 }
             }
@@ -236,11 +256,9 @@ public class Player
             List<Pair<int, int>> summonPos = new List<Pair<int, int>> {new Pair<int, int>(GameState.dimensionX / 2, 0)};
             if (GameState.allocateBoardPosition(summonPos))
             {
-                hero = GameObject.Instantiate(monsterPrefab, GameState.getPositionRelativeToBoard(summonPos),
+                hero = GameObject.Instantiate(heroPrefab, GameState.getPositionRelativeToBoard(summonPos),
                     new Quaternion(0, 0, 0, 0));
                 hero.GetComponent<monsterInfo>().setPosition(summonPos);
-                hero.GetComponent<monsterInfo>().setData("hero1", 0, 0, 2, 1, this, GameState.turn, null, null);
-                boardMinions.Add(hero);
             }
         }
         else

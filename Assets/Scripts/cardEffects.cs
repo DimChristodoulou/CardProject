@@ -136,7 +136,9 @@ public class cardEffects : MonoBehaviour
             y = coords.GetComponent<nodeInfo>().ypos;
             if(x == 0 || x == maxX-1 || y == 0 || y == maxY-1){
                 if(!coords.GetComponent<nodeInfo>().isFree){
-                    Debug.Log("im in!");
+                    Destroy( coords.GetComponent<nodeInfo>().monsterOnNode );
+                    GameState.getActivePlayer().boardMinions.Remove(coords.GetComponent<nodeInfo>().monsterOnNode);
+                    GameState.getActivePlayer().graveyard.Add(coords.GetComponent<nodeInfo>().monsterOnNode.GetComponent<monsterInfo>().card);
                 }
             }
         }

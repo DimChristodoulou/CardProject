@@ -10,6 +10,7 @@ public class nodeInfo : MonoBehaviour
 {
 	//contains info regarding nodes
 
+    public GameObject monsterOnNode;
 	//checks if node is free to place unit
 	private Renderer mRenderer;
 	public int xpos, ypos;
@@ -82,7 +83,7 @@ public class nodeInfo : MonoBehaviour
                 //GetComponentInParent<monsterInfo>().setPosition(newPos);
                 GameState.setSquares(currentMinion.GetComponent<monsterInfo>().coords, false);
                 currentMinion.GetComponent<monsterInfo>().onPostMove();
-
+                monsterOnNode = currentMinion;
 
                 //GameState.boardTable[xpos, ypos].GetComponent<nodeInfo>().switchActiveColor();
 
