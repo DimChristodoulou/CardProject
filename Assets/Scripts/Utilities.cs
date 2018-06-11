@@ -91,19 +91,15 @@ public class Utilities {
 	//monster1 is the attacker
 	//monster2 is the defender
 	public static bool distanceWithinRange(GameObject monster1, GameObject monster2) {
-		
-		Pair<int,int> topleft1 = findTopLeftCoord (monster1.GetComponent<monsterInfo>().coords);
-		Pair<int,int> topleft2 = findTopLeftCoord (monster2.GetComponent<monsterInfo>().coords);
-		//suppose only square monsters
-		int monster1Size = Mathf.FloorToInt(Mathf.Sqrt (monster1.GetComponent<monsterInfo> ().coords.Count));
-		int monster2Size = Mathf.FloorToInt(Mathf.Sqrt (monster2.GetComponent<monsterInfo> ().coords.Count));
-		if (monster2Size > monster1Size)
-			monster1Size = monster2Size;
-		//this decrease happens to account for right side of monster
-		int distX = Mathf.Abs (topleft1.First - topleft2.First) - monster1Size;
-		int distY = Mathf.Abs (topleft1.Second - topleft2.Second) - monster1Size;
-		if (monster1.GetComponent<monsterInfo>().attkrange >= Mathf.Floor(Mathf.Sqrt (distX ^ 2 + distY ^ 2)) ) {
-			return true;
+		foreach (Pair<int,int> m2pair in monster2.GetComponent<monsterInfo>().coords) {
+			foreach (Pair<int,int> m1pair in monster1.GetComponent<monsterInfo>().coords) {
+				int distX = Mathf.Abs(m2pair.First - m1pair.First);
+				int distY = Mathf.Abs(m2pair.Second - m1pair.Second);
+				if (monster1.GetComponent<monsterInfo>().attkrange >= Mathf.RoundToInt(Mathf.Sqrt(Mathf.Pow(distX, 2) + Mathf.Pow(distY, 2)))) {
+					Debug.Log("ATTKINFO " + Mathf.RoundToInt(Mathf.Sqrt(Mathf.Pow(distX, 2) + Mathf.Pow(distY, 2))) + " " + distX + " " + distY + " " + monster1.GetComponent<monsterInfo>().attkrange);
+					return true;
+				}
+			}
 		}
 		return false;
 	}
