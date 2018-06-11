@@ -154,6 +154,7 @@ public class GameState : MonoBehaviour {
 	}
 
 	static public void showMana() {
+		Debug.Log(players[activePlayerIndex].currentMana);
 		int i = 0;
 		for (; i < players [activePlayerIndex].currentMana; i++) {
 			((RawImage)manaCrystals[i].GetComponent<RawImage> ()).texture = manaTexture;

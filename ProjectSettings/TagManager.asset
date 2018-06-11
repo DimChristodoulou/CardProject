@@ -10,6 +10,8 @@ TagManager:
   - ListWithCards
   - cardEntry
   - Main UI
+  - Hero
+  - Minion
   layers:
   - Default
   - TransparentFX

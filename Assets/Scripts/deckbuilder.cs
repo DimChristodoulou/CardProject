@@ -23,6 +23,7 @@ public class deckbuilder : MonoBehaviour {
 
     private GameObject leftArrow;
     private GameObject rightArrow;
+    public InputField myInputField;
 
     private int[] cardsToBeDisplayed;
 
@@ -211,7 +212,8 @@ public class deckbuilder : MonoBehaviour {
 
     void SaveDeck()
     {
-        string deckCode = "";
+
+        string deckCode = myInputField.text + "☼";
         foreach (int cardId in Player.deck)
         {
             deckCode += (cardId).ToString() + " ";

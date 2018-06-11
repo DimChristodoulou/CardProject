@@ -144,7 +144,7 @@ public class Player
             // }
             if( GameState.getActivePlayer() == GameState.players[0] ){
                 for(int i=0;i<7;i++){
-                    for(int j=0;j<2;j++){
+                    for(int j=0;j<3;j++){
                         if (GameState.boardTable[i,j].GetComponent<nodeInfo>().isFree)
                         {
                             GameState.boardTable[i,j].GetComponent<nodeInfo>().makeActive();
@@ -270,11 +270,9 @@ public class Player
             };
             if (GameState.allocateBoardPosition(summonPos))
             {
-                hero = GameObject.Instantiate(monsterPrefab, GameState.getPositionRelativeToBoard(summonPos),
+                hero = GameObject.Instantiate(heroPrefab, GameState.getPositionRelativeToBoard(summonPos),
                     new Quaternion(0, 0, 0, 0));
                 hero.GetComponent<monsterInfo>().setPosition(summonPos);
-                hero.GetComponent<monsterInfo>().setData("hero2", 0, 0, 2, 1, this, GameState.turn, null, null);
-                boardMinions.Add(hero);
             }
         }
     }

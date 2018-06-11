@@ -29,7 +29,7 @@ GameObject:
   - component: {fileID: 114325682655996194}
   m_Layer: 10
   m_Name: Monster
-  m_TagString: Model
+  m_TagString: Minion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,6 +60,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -127,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterName: 
+  monsterKeywords: 
   card: {fileID: 0}
   power: 0
   manacost: 0
@@ -139,6 +141,8 @@ MonoBehaviour:
   clickable: 0
   movable: 0
   attackable: 0
+  cannotMove: 0
+  cannotAttack: 0
   playedturn: 0
 --- !u!114 &114557672483097732
 MonoBehaviour:

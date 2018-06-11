@@ -23,13 +23,6 @@ public class cardEffects : MonoBehaviour
     private List<RaycastResult> results;
     private bool selected;
 
-    //    private cardEffects effector = null;
-
-//    private void Awake()
-//    {
-//        if (effector == null)
-//            effector = new cardEffects();
-//    }
 
     // Use this for initialization
     void Start()
@@ -135,8 +128,8 @@ public class cardEffects : MonoBehaviour
             x = coords.GetComponent<nodeInfo>().xpos;
             y = coords.GetComponent<nodeInfo>().ypos;
             if(x == 0 || x == maxX-1 || y == 0 || y == maxY-1){
-                if(!coords.GetComponent<nodeInfo>().isFree){
-                    Destroy( coords.GetComponent<nodeInfo>().monsterOnNode );
+                if(!coords.GetComponent<nodeInfo>().isFree && coords.GetComponent<nodeInfo>().monsterOnNode != null){
+                    Destroy( coords.GetComponent<nodeInfo>().monsterOnNode);
                     GameState.getActivePlayer().boardMinions.Remove(coords.GetComponent<nodeInfo>().monsterOnNode);
                     GameState.getActivePlayer().graveyard.Add(coords.GetComponent<nodeInfo>().monsterOnNode.GetComponent<monsterInfo>().card);
                 }
