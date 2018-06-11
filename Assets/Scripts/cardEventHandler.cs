@@ -32,7 +32,7 @@ public class cardEventHandler : MonoBehaviour
 
         if (GameState.getActivePlayer().selectedCard.GetComponent<Card>().type.text.Equals("Minion"))
         {
-            GameState.getActivePlayer().selectedCard.SetActive(false);           
+            GameState.getActivePlayer().selectedCard.SetActive(false);         
             GameState.getActivePlayer().handCards.RemoveAt(GameState.getActivePlayer().selectedCardIndex);
         }
     }
