@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEditor;
 
 
 public class cardEffects : MonoBehaviour
@@ -83,10 +84,93 @@ public class cardEffects : MonoBehaviour
             }
             case "Iron Resolve":
             {
+                //TODO: Casting
                 cardEventHandler.onSummon += ironResolve;
                 break;
             }
+            case "Idol of Fire":
+            {
+                cardEventHandler.onSummon += idolOfFire;
+                break;
+            }
+            case "Flame Shaman":
+            {
+                //TODO: while in play
+                cardEventHandler.onSummon += flameShaman;
+                break;
+            }
+            case "Burning Walls":
+            {
+                cardEventHandler.onSummon += burningWalls;
+                break;
+            }
         }
+    }
+
+    /*
+     * Function that returns a List with all GameObjects in a scene.
+     */
+    private static List<GameObject> GetAllObjectsInScene()
+    {
+        List<GameObject> objectsInScene = new List<GameObject>();
+
+        foreach (GameObject go in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[])
+        {
+            if (go.hideFlags != HideFlags.None)
+                continue;
+
+            if (PrefabUtility.GetPrefabType(go) == PrefabType.Prefab || PrefabUtility.GetPrefabType(go) == PrefabType.ModelPrefab)
+                continue;
+
+            objectsInScene.Add(go);
+        }
+        return objectsInScene;
+    }
+
+    public void burningWalls(string minionName){
+        int x,y;
+        int maxX = GameState.boardTable.GetLength(0);
+        int maxY = GameState.boardTable.GetLength(1);
+        foreach(GameObject coords in GameState.boardTable){
+            x = coords.GetComponent<nodeInfo>().xpos;
+            y = coords.GetComponent<nodeInfo>().ypos;
+            if(x == 0 || x == maxX-1 || y == 0 || y == maxY-1){
+                if(!coords.GetComponent<nodeInfo>().isFree){
+                    Debug.Log("im in!");
+                }
+            }
+        }
+
+        GameState.getActivePlayer().cardSelected = false;
+
+        GameState.getActivePlayer().handCards.Remove(GameState.getActivePlayer().selectedCard);
+        GameState.getActivePlayer().graveyard.Add(GameState.getActivePlayer().selectedCard);
+
+        GameObject topGraveyardCard = GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
+        topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
+        Debug.Log("TGC" + topGraveyardCard.GetComponent<Card>().cardName.text);
+        topGraveyardCard.transform.SetParent(GameObject.Find("graveyard").transform, false);
+        topGraveyardCard.transform.localPosition = new Vector3(0, 0, 0);
+        topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
+        topGraveyardCard.SetActive(true);
+
+        cardEventHandler.onSummon -= burningWalls;
+    }
+
+    public void flameShaman(string minionName){
+        //TODO: Make this always while this is in play, instead of one time.
+        List<GameObject> allGameObjects = GetAllObjectsInScene();
+        foreach(GameObject GO in allGameObjects){
+            if(GO.GetComponent<monsterInfo>().card.GetComponent<Card>().attribute == "Fire"){
+                GO.GetComponent<monsterInfo>().power += 2;
+            }
+        }
+    }
+
+    public void idolOfFire(string minionName){
+        GameState.getActivePlayer().boardMinions.Last().GetComponent<monsterInfo>().cannotMove = true;
+        GameState.getActivePlayer().boardMinions.Last().GetComponent<monsterInfo>().cannotAttack = true;
+        cardEventHandler.onSummon -= idolOfFire;
     }
 
     public void ironResolve(string minionName)
@@ -108,6 +192,7 @@ public class cardEffects : MonoBehaviour
             ironResolveBuff.buffAmount = 3;
             ironResolveBuff.buffCardId = 10;
             ironResolveBuff.buffName = "Iron Resolve";
+
             target.GetComponent<monsterInfo>().refreshBuffs(ironResolveBuff);
             GameState.getActivePlayer().cardSelected = false;
 
@@ -125,6 +210,18 @@ public class cardEffects : MonoBehaviour
             cardEventHandler.onSummon -= ironResolve;
 
             //Destroy(GameState.getActivePlayer().selectedCard);
+        }
+        else if (results.Count > 0)
+        {
+            foreach (RaycastResult result in results)
+            {
+                if (result.gameObject.CompareTag("Card"))
+                {
+                    //selected = true; // stop coroutine
+                    cardEventHandler.onSummon -= ironResolve;
+                    break;
+                }
+            }
         }
     }
 
