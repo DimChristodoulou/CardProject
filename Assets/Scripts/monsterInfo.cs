@@ -43,6 +43,7 @@ public class monsterInfo : MonoBehaviour
 
     //the turn the monster was played
     public int playedturn;
+    public GameObject powerTooltipOfMonster;
 
     //todo need to find a way to store enchants without changing originals, making silence applicable
 
@@ -79,6 +80,7 @@ public class monsterInfo : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        powerTooltipOfMonster = GameState.boardTable[this.coords[0].First, this.coords[0].Second].GetComponent<nodeInfo>().powerTooltip;
         if (monsterKeywords != null)
         {
             if (monsterKeywords.Contains("Charge"))
@@ -93,8 +95,8 @@ public class monsterInfo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (defense <= 0)
-        //	Die ();
+        if(powerTooltipOfMonster!=null)
+            powerTooltipOfMonster.transform.position = Camera.main.WorldToScreenPoint(this.transform.localPosition) + new Vector3(0, -50, 0);
     }
 
     public void refreshBuffs(buffs buff)

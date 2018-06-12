@@ -10,6 +10,8 @@ public class nodeInfo : MonoBehaviour
 {
 	//contains info regarding nodes
 
+    public GameObject powerTooltip;
+    private GameObject mainUI;
     public GameObject monsterOnNode;
 	//checks if node is free to place unit
 	private Renderer mRenderer;
@@ -25,11 +27,12 @@ public class nodeInfo : MonoBehaviour
 		mRenderer = this.GetComponentInParent<Renderer>();
 		currentColor = startColor;
 		mRenderer.material.color = currentColor;
+        mainUI = GameObject.Find("Main UI");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
 	void OnMouseEnter() {
@@ -103,6 +106,11 @@ public class nodeInfo : MonoBehaviour
                 //activePlayer.handCards.RemoveAt(activePlayer.selectedCardIndex);
                 Debug.Log(activePlayer.handCards);
                 cardEventHandler.onMinionSummon(jsonparse.cardTemplates[selectedCard.id].card_name);
+
+                //Creating a visual representation of the monster's power.
+                powerTooltip = (GameObject) Instantiate(Resources.Load("powerTooltip"));
+                powerTooltip.transform.SetParent(mainUI.transform);
+                powerTooltip.GetComponentInChildren<Text>().text = currentMinion.GetComponent<monsterInfo>().power.ToString();
             }
         }
         else

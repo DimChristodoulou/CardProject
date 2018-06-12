@@ -22,17 +22,11 @@ public class CameraMovement : MonoBehaviour
         //Look around with Right Mouse
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            //yaw += lookSpeedH * Input.GetAxis("Mouse X");
-            //pitch -= lookSpeedV * Input.GetAxis("Mouse Y");
             transform.RotateAround(orbitAround.transform.position, Vector3.up, orbitSpeed * Time.deltaTime);
-            //transform.eulerAngles = new Vector3(pitch, yaw, 0f);
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            //yaw += lookSpeedH * Input.GetAxis("Mouse X");
-            //pitch -= lookSpeedV * Input.GetAxis("Mouse Y");
             transform.RotateAround(orbitAround.transform.position, Vector3.up, -orbitSpeed * Time.deltaTime);
-            //transform.eulerAngles = new Vector3(pitch, yaw, 0f);
         }
 
         //drag camera around with right Mouse
@@ -46,10 +40,6 @@ public class CameraMovement : MonoBehaviour
 
         Vector3 pos = transform.position;
 
-        /*pos.y -= scroll * 1000 * zoomSpeed * Time.deltaTime;
-        pos.y = Mathf.Clamp(pos.y, minZoom, maxZoom);
-        pos.x -= scroll * 1000 *zoomSpeed * Time.deltaTime;
-        pos.x = Mathf.Clamp(pos.x, 636, 700); */
 		pos.y -= scroll * 1000 * zoomSpeed * Time.deltaTime;
 		pos.y = Mathf.Clamp(pos.y, minZoom, maxZoom);
 

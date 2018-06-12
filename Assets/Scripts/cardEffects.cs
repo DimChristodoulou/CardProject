@@ -77,7 +77,7 @@ public class cardEffects : MonoBehaviour
             }
             case "Iron Resolve":
             {
-                //TODO: Casting
+                //TODO: Casting multiple
                 cardEventHandler.onSummon += ironResolve;
                 break;
             }
@@ -95,6 +95,18 @@ public class cardEffects : MonoBehaviour
             case "Burning Walls":
             {
                 cardEventHandler.onSummon += burningWalls;
+                break;
+            }
+            case "Elleron, the Raging Fire":
+            {
+                //TODO: Fly, Speed 4
+                cardEventHandler.onSummon += elleron;
+                break;
+            }
+            case "Firestorm":
+            {
+                //TODO: Should this card be added to graveyard last or the monsters it destroys?
+                cardEventHandler.onSummon += firestorm;
                 break;
             }
         }
@@ -120,6 +132,48 @@ public class cardEffects : MonoBehaviour
         return objectsInScene;
     }
 
+    public void firestorm(string minionName){
+        GameObject[] allMinions = GameObject.FindGameObjectsWithTag("Minion");
+        for(int i=0; i<allMinions.Length; i++){
+            GameObject minionGO = allMinions[i];
+            if(minionGO.GetComponent<monsterInfo>().power <= 12){
+                GameState.getActivePlayer().boardMinions.Remove(minionGO);
+                GameState.getActivePlayer().graveyard.Add(minionGO.GetComponent<monsterInfo>().card);
+                GameObject topGraveyardCard = GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
+                Destroy(minionGO);
+                Destroy(minionGO.GetComponent<monsterInfo>().powerTooltipOfMonster);
+                topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
+                topGraveyardCard.transform.SetParent(GameObject.Find("graveyard").transform, false);
+                topGraveyardCard.transform.localPosition = new Vector3(0, 0, 0);
+                topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
+                topGraveyardCard.SetActive(true);
+            }
+        }
+        GameState.getActivePlayer().handCards.Remove(GameState.getActivePlayer().selectedCard);
+        cardEventHandler.onSummon -= firestorm;
+    }
+
+    public void elleron(string minionName){
+        GameObject[] allMinions = GameObject.FindGameObjectsWithTag("Minion");
+        for(int i=0; i<allMinions.Length; i++){
+            GameObject minionGO = allMinions[i];
+            if(i!=allMinions.Length-1){
+                GameState.getActivePlayer().boardMinions.Remove(minionGO);
+                GameState.getActivePlayer().graveyard.Add(minionGO.GetComponent<monsterInfo>().card);
+                GameObject topGraveyardCard = GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
+                Destroy(minionGO);
+                Destroy(minionGO.GetComponent<monsterInfo>().powerTooltipOfMonster);
+                topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
+                topGraveyardCard.transform.SetParent(GameObject.Find("graveyard").transform, false);
+                topGraveyardCard.transform.localPosition = new Vector3(0, 0, 0);
+                topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
+                topGraveyardCard.SetActive(true);
+            }
+        }
+        GameState.getActivePlayer().handCards.Remove(GameState.getActivePlayer().selectedCard);
+        cardEventHandler.onSummon -= elleron;
+    }
+
     public void burningWalls(string minionName){
         int x,y;
         int maxX = GameState.boardTable.GetLength(0);
@@ -130,6 +184,7 @@ public class cardEffects : MonoBehaviour
             if(x == 0 || x == maxX-1 || y == 0 || y == maxY-1){
                 if(!coords.GetComponent<nodeInfo>().isFree && coords.GetComponent<nodeInfo>().monsterOnNode != null){
                     Destroy( coords.GetComponent<nodeInfo>().monsterOnNode);
+                    Destroy( coords.GetComponent<nodeInfo>().monsterOnNode.GetComponent<monsterInfo>().powerTooltipOfMonster);
                     GameState.getActivePlayer().boardMinions.Remove(coords.GetComponent<nodeInfo>().monsterOnNode);
                     GameState.getActivePlayer().graveyard.Add(coords.GetComponent<nodeInfo>().monsterOnNode.GetComponent<monsterInfo>().card);
                 }
@@ -143,7 +198,6 @@ public class cardEffects : MonoBehaviour
 
         GameObject topGraveyardCard = GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
         topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
-        Debug.Log("TGC" + topGraveyardCard.GetComponent<Card>().cardName.text);
         topGraveyardCard.transform.SetParent(GameObject.Find("graveyard").transform, false);
         topGraveyardCard.transform.localPosition = new Vector3(0, 0, 0);
         topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
@@ -181,7 +235,7 @@ public class cardEffects : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
 
-        if (target.CompareTag("Model"))
+        if (target.CompareTag("Minion"))
         {
             buffs ironResolveBuff = new buffs();
             ironResolveBuff.buffAmount = 3;
@@ -309,15 +363,12 @@ public class cardEffects : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
 
-        if (target.CompareTag("Model"))
+        if (target.CompareTag("Minion"))
         {
             GameState.getActivePlayer().boardMinions.Remove(target);
             GameState.getActivePlayer().graveyard.Add(target.GetComponent<monsterInfo>().card);
-            Debug.Log("TARGET IS: " + target.name);
-//            Debug.Log("ID IS : " + target.GetComponent<monsterInfo>().card.GetComponent<Card>().id);
+            
             GameObject topGraveyardCard = GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
-
-
 
             topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
 
@@ -336,7 +387,7 @@ public class cardEffects : MonoBehaviour
             Debug.Log("HAND CARDS SIZE: " + GameState.getActivePlayer().handCards.Count);
             target.GetComponent<monsterInfo>().parentPlayer.boardMinions.Remove(target);
             Destroy(target);
-
+            Destroy(target.GetComponent<monsterInfo>().powerTooltipOfMonster);
 
             //then we get the coordinates of the monster and set its square to free...
             GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First, target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
@@ -364,7 +415,7 @@ public class cardEffects : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
 
-        if (target.CompareTag("Model"))
+        if (target.CompareTag("Minion"))
         {
             //Get the minion to be destroyed's power
             int minionPower = target.GetComponent<monsterInfo>().power;
@@ -390,6 +441,7 @@ public class cardEffects : MonoBehaviour
             //Remove the target from the board minions
             target.GetComponent<monsterInfo>().parentPlayer.boardMinions.Remove(target);
             Destroy(target);
+            Destroy(target.GetComponent<monsterInfo>().powerTooltipOfMonster);
 
             //then we get the coordinates of the monster and set its square to free...
             GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First,

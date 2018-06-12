@@ -115,9 +115,9 @@ public class Player
         }
     }
 
-/*
- * Doc: Function used to play a card and resolve its effects.
- */
+    /*
+    * Doc: Function used to play a card and resolve its effects.
+    */
     public void playCard(int cardIndex)
     {
         selectedCard = handCards[cardIndex];
@@ -128,20 +128,7 @@ public class Player
         if (handCards[cardIndex].GetComponent<Card>().type.text == "Minion")
         {
             availableNodesForSummon = new List<Pair<int, int>>();
-            // foreach (GameObject minion in boardMinions)
-            // {
 
-            //     foreach (KeyValuePair<Pair<int, int>, int> pair in minion.GetComponent<movement>()
-            //         .availableMonsterMovements(minion))
-            //     {
-            //         if (GameState.boardTable[pair.Key.First, pair.Key.Second].GetComponent<nodeInfo>().isFree)
-            //         {
-            //             GameState.boardTable[pair.Key.First, pair.Key.Second].GetComponent<nodeInfo>().makeActive();
-
-            //             availableNodesForSummon.Add(pair.Key);
-            //         }
-            //     }
-            // }
             if( GameState.getActivePlayer() == GameState.players[0] ){
                 for(int i=0;i<7;i++){
                     for(int j=0;j<3;j++){
@@ -168,8 +155,10 @@ public class Player
 
     public void increaseMana(int amount)
     {
-        this.maxTurnMana += amount;
-        this.currentMana = this.maxTurnMana;
+        if(this.maxTurnMana < 10){
+            this.maxTurnMana += amount;
+            this.currentMana = this.maxTurnMana;
+        }
     }
 
     public void decreaseMana(int amount)
