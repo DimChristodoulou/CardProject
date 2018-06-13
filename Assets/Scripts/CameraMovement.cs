@@ -19,6 +19,12 @@ public class CameraMovement : MonoBehaviour
 
     public Camera mainCam;
     public static float zoomLevel;
+    public static float startingZoomLevel;
+
+    void Start(){
+        Vector3 pos = transform.position;
+        startingZoomLevel = pos.y;
+    }
 
     void Update()
     {

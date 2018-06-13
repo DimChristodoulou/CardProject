@@ -96,8 +96,7 @@ public class monsterInfo : MonoBehaviour
     void Update()
     {
         if(powerTooltipOfMonster!=null){
-            Debug.Log(CameraMovement.zoomLevel);
-            powerTooltipOfMonster.transform.position = Camera.main.WorldToScreenPoint(this.transform.localPosition) + new Vector3(0, -10000000/(CameraMovement.zoomLevel*100), 0);
+            powerTooltipOfMonster.transform.position = Camera.main.WorldToScreenPoint(this.transform.localPosition) + new Vector3(0, -50 - (CameraMovement.startingZoomLevel - CameraMovement.zoomLevel), 0);
         }
     }
 

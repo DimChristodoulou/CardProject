@@ -105,7 +105,6 @@ public class cardEffects : MonoBehaviour
             }
             case "Firestorm":
             {
-                //TODO: Should this card be added to graveyard last or the monsters it destroys?
                 cardEventHandler.onSummon += firestorm;
                 break;
             }
