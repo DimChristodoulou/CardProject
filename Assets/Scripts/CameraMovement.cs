@@ -17,6 +17,9 @@ public class CameraMovement : MonoBehaviour
     private float curZoom = 0f;
     public GameObject orbitAround;
 
+    public Camera mainCam;
+    public static float zoomLevel;
+
     void Update()
     {
         //Look around with Right Mouse
@@ -42,6 +45,7 @@ public class CameraMovement : MonoBehaviour
 
 		pos.y -= scroll * 1000 * zoomSpeed * Time.deltaTime;
 		pos.y = Mathf.Clamp(pos.y, minZoom, maxZoom);
+        zoomLevel = pos.y;
 
         transform.position = pos;
     }

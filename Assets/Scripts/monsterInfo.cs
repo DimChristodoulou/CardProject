@@ -95,8 +95,10 @@ public class monsterInfo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(powerTooltipOfMonster!=null)
-            powerTooltipOfMonster.transform.position = Camera.main.WorldToScreenPoint(this.transform.localPosition) + new Vector3(0, -50, 0);
+        if(powerTooltipOfMonster!=null){
+            Debug.Log(CameraMovement.zoomLevel);
+            powerTooltipOfMonster.transform.position = Camera.main.WorldToScreenPoint(this.transform.localPosition) + new Vector3(0, -10000000/(CameraMovement.zoomLevel*100), 0);
+        }
     }
 
     public void refreshBuffs(buffs buff)

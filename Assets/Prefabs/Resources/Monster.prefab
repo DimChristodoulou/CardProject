@@ -41,7 +41,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1500180638956852}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 627.72, y: 2026.95, z: -561.93}
+  m_LocalPosition: {x: 784.6039, y: -23.33065, z: -827.4487}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -144,6 +144,7 @@ MonoBehaviour:
   cannotMove: 0
   cannotAttack: 0
   playedturn: 0
+  powerTooltipOfMonster: {fileID: 0}
 --- !u!114 &114557672483097732
 MonoBehaviour:
   m_ObjectHideFlags: 1
