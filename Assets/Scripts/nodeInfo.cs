@@ -105,12 +105,13 @@ public class nodeInfo : MonoBehaviour
                 activePlayer.cardSelected = false;
                 //activePlayer.handCards.RemoveAt(activePlayer.selectedCardIndex);
                 Debug.Log(activePlayer.handCards);
-                cardEventHandler.onMinionSummon(jsonparse.cardTemplates[selectedCard.id].card_name);
 
                 //Creating a visual representation of the monster's power.
                 powerTooltip = (GameObject) Instantiate(Resources.Load("powerTooltip"));
                 powerTooltip.transform.SetParent(mainUI.transform);
                 powerTooltip.GetComponentInChildren<Text>().text = currentMinion.GetComponent<monsterInfo>().power.ToString();
+
+                cardEventHandler.onMinionSummon(jsonparse.cardTemplates[selectedCard.id].card_name);
             }
         }
         else

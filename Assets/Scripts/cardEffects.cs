@@ -67,6 +67,7 @@ public class cardEffects : MonoBehaviour
             }
             case "The Emperor's Fool":
             {
+                //TODO: card effect
                 cardEventHandler.onSummon += emperorsFool;
                 break;
             }
@@ -77,7 +78,6 @@ public class cardEffects : MonoBehaviour
             }
             case "Iron Resolve":
             {
-                //TODO: Casting multiple
                 cardEventHandler.onSummon += ironResolve;
                 break;
             }
@@ -108,6 +108,11 @@ public class cardEffects : MonoBehaviour
                 cardEventHandler.onSummon += firestorm;
                 break;
             }
+            case "Effigy of Flames":
+            {
+                cardEventHandler.onSummon += effigyOfFlames;
+                break;
+            }
         }
     }
 
@@ -129,6 +134,59 @@ public class cardEffects : MonoBehaviour
             objectsInScene.Add(go);
         }
         return objectsInScene;
+    }
+
+    public void effigyOfFlames(string minionName){
+        StartCoroutine(waitForUserToSelectTarget());
+        StartCoroutine(copyTarget());
+    }
+
+    public IEnumerator copyTarget(){
+        
+        while (!selected && target == null)
+        {
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        if (target.CompareTag("Minion"))
+        {
+            int currentXpos = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].GetComponent<monsterInfo>().coords[0].First;
+            int currentYpos = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].GetComponent<monsterInfo>().coords[0].Second;
+            
+            Vector3 currentWorldPos = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].transform.position;
+
+            Destroy(GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1]);
+            GameState.getActivePlayer().boardMinions.RemoveAt(GameState.getActivePlayer().boardMinions.Count - 1);
+
+            GameObject copiedMinion = Instantiate(target, currentWorldPos, Quaternion.identity);
+
+            List<Pair<int, int>> summonNodes = new List<Pair<int, int>>() { new Pair<int, int>(currentXpos, currentYpos) };
+
+            copiedMinion.GetComponent<monsterInfo>().setPosition(summonNodes);
+            copiedMinion.GetComponent<monsterInfo>().parentPlayer = GameState.getActivePlayer();
+            copiedMinion.GetComponent<monsterInfo>().playedturn = GameState.turn;
+            copiedMinion.GetComponent<monsterInfo>().movable = false;
+            copiedMinion.GetComponent<monsterInfo>().clickable = false;
+
+            GameState.getActivePlayer().boardMinions.Add(copiedMinion);
+            GameState.boardTable[currentXpos, currentYpos].GetComponent<nodeInfo>().powerTooltip.GetComponentInChildren<Text>().text = copiedMinion.GetComponent<monsterInfo>().power.ToString();
+
+
+            cardEventHandler.onSummon -= effigyOfFlames;
+        }
+        else if (results.Count > 0)
+        {
+            foreach (RaycastResult result in results)
+            {
+                if (result.gameObject.CompareTag("Card"))
+                {
+                    //selected = true; // stop coroutine
+                    cardEventHandler.onSummon -= effigyOfFlames;
+                    break;
+                }
+            }
+        }
+        target = null;
     }
 
     public void firestorm(string minionName){
@@ -271,6 +329,7 @@ public class cardEffects : MonoBehaviour
                 }
             }
         }
+        target = null;
     }
 
     public void emperorsKnight(string minionName)
