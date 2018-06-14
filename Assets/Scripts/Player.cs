@@ -108,6 +108,28 @@ public class Player
         remainingCards.text = "Remaining:\n" + (--deckSize);
     }
 
+    public void reorderHandCards(){
+
+        float x;
+        float y;
+
+        if(playingPos == 1)
+            y = -330;
+        else
+            y = 330.9f;
+
+        for(int i=0;i<handCards.Count;i++){
+            Debug.Log("old pos: " + handCards[i].transform.localPosition);
+            x = -300 + 161 * (i-1);
+            handCards[i].transform.localPosition = new Vector3(x,y,0);
+            Debug.Log("new pos: " + handCards[i].transform.localPosition);
+        }
+    }
+
+    public void DiscardCard(int indexInHand){
+        
+    }
+
     public void setupPlayCard(GameObject clickedObj)
     {
         if (GameState.getActivePlayer().currentMana >= int.Parse(clickedObj.GetComponent<Card>().manaCost.text))

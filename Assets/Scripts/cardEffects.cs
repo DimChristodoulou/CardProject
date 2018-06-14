@@ -318,6 +318,9 @@ public class cardEffects : MonoBehaviour
             topGraveyardCard.transform.localPosition = new Vector3(0, 0, 0);
             topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
             topGraveyardCard.SetActive(true);
+            
+            //Reorder cards here until we do better refactoring
+            GameState.getActivePlayer().reorderHandCards();
 
             cardEventHandler.onSummon -= ironResolve;
 
@@ -455,7 +458,8 @@ public class cardEffects : MonoBehaviour
 
             //then we get the coordinates of the monster and set its square to free...
             GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First, target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
-
+            //Reorder cards here until we do better refactoring
+            GameState.getActivePlayer().reorderHandCards();
             cardEventHandler.onSummon -= fireball;
         }
         else if (results.Count > 0)
@@ -497,8 +501,7 @@ public class cardEffects : MonoBehaviour
             topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
 
             topGraveyardCard.transform.SetParent(GameObject.Find("graveyard").transform, false);
-            topGraveyardCard.transform
-                .localPosition = new Vector3(0, 0, 0);
+            topGraveyardCard.transform.localPosition = new Vector3(0, 0, 0);
 
             topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
 
@@ -515,7 +518,8 @@ public class cardEffects : MonoBehaviour
             //GameState.getActivePlayer().handCards.RemoveAt(GameState.getActivePlayer().selectedCardIndex);
 
             GameState.getActivePlayer().cardSelected = false;
-
+            //Reorder cards here until we do better refactoring
+            GameState.getActivePlayer().reorderHandCards();
             cardEventHandler.onSummon -= pyra;
         }
         else if (results.Count > 0)

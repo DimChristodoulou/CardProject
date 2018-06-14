@@ -112,6 +112,7 @@ public class nodeInfo : MonoBehaviour
                 powerTooltip.GetComponentInChildren<Text>().text = currentMinion.GetComponent<monsterInfo>().power.ToString();
 
                 cardEventHandler.onMinionSummon(jsonparse.cardTemplates[selectedCard.id].card_name);
+                GameState.getActivePlayer().reorderHandCards();
             }
         }
         else
