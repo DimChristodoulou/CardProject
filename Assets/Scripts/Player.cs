@@ -72,7 +72,7 @@ public class Player
             for (int i = 0; i < 4; i++)
             {
                 int cardDrawn = Random.Range(0, deck.Count);
-                DrawCard(-157 + 161 * i, -330.9f, 0, deck[cardDrawn]);
+                DrawCard(deck[cardDrawn]);
                 deck.RemoveAt(cardDrawn);
 //                deckSize--;
             }
@@ -84,16 +84,23 @@ public class Player
             for (int i = 0; i < 4; i++)
             {
                 int cardDrawn = Random.Range(0, deck.Count);
-                DrawCard(-157 + 161 * i, 330, 0, deck[cardDrawn]);
+                DrawCard(deck[cardDrawn]);
                 deck.RemoveAt(cardDrawn);
 //                deckSize--;
             }
         }
     }
 
-    public void DrawCard(float x, float y, float z, int cardId)
+    public void DrawCard(int cardId)
     {
-        clonedCard = originalCard.initializeCard(x, y, z, cardId);
+        Debug.Log("Count:" + handCards.Count);
+        float x = -300 + 161 * (handCards.Count-1);
+        float y;
+        if(playingPos == 1)
+            y = -330;
+        else
+            y = 330.9f;
+        clonedCard = originalCard.initializeCard(x, y, 0, cardId);
         clonedCard.transform.localScale = new Vector3(0.75f, 0.75f, 0.75f);
         handCards.Add(clonedCard);
         //GameObject deck = GameObject.Find("Player_Deck");
@@ -183,12 +190,12 @@ public class Player
         //Increase mana at start of turn.
         this.increaseMana(1);
         //Draw card after increasing mana. (Max number of cardTemplates in hand is 8).
-        //if (handCards.Count < 8)
-        //{
-        //    int cardDrawn = Random.Range(0, deck.Count);
-        //    DrawCard(-157 + 161 * handCards.Count, 330, 0, deck[Random.Range(0, deck.Count)]);
-        //    deck.RemoveAt(cardDrawn);
-        //}
+        if (handCards.Count < 8)
+        {
+           int cardDrawn = Random.Range(0, deck.Count);
+           DrawCard(deck[Random.Range(0, deck.Count)]);
+           deck.RemoveAt(cardDrawn);
+        }
         //UI MANA GOES HERE
         foreach (GameObject monster in boardMinions)
         {
@@ -220,7 +227,6 @@ public class Player
 
     public void updateClickedItem(GameObject newclick)
     {
-        Debug.Log("In UCI");
         //if another element was clicked before, update selection
         if (selected != null && selected != newclick)
         {
@@ -292,7 +298,6 @@ public class Player
 	public void DieMonster(GameObject monster, int dmgDiff = 0)
     {
 		//TODO decrease hero's hp
-		Debug.Log("decreasing player " + playingPos + " hero hp");
         GameState.setSquares(monster.GetComponent<monsterInfo>().coords, true); //deallocate tiles
         if (boardMinions.Find(x => monster) != null)
         {

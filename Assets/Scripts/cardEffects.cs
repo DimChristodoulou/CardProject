@@ -300,6 +300,12 @@ public class cardEffects : MonoBehaviour
             ironResolveBuff.buffName = "Iron Resolve";
 
             target.GetComponent<monsterInfo>().refreshBuffs(ironResolveBuff);
+
+            int x = target.GetComponent<monsterInfo>().coords[0].First;
+            int y = target.GetComponent<monsterInfo>().coords[0].Second;
+            
+            GameState.boardTable[x,y].GetComponent<nodeInfo>().powerTooltip.GetComponentInChildren<Text>().text = target.GetComponent<monsterInfo>().power.ToString();
+
             GameState.getActivePlayer().cardSelected = false;
 
             GameState.getActivePlayer().handCards.Remove(GameState.getActivePlayer().selectedCard);

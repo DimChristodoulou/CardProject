@@ -101,7 +101,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     {
         if (pointerEventsEnabled)
         {
-            Debug.Log("HIIII");
             Scene currentScene = SceneManager.GetActiveScene();
             if (currentScene.name.Equals("deckbuilder"))
             {
@@ -122,8 +121,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     {
         if (pointerEventsEnabled)
         {
-            Debug.Log("BYE");
-
             Scene currentScene = SceneManager.GetActiveScene();
             if (currentScene.name.Equals("deckbuilder"))
             {
@@ -155,26 +152,23 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
                     {
                         string clickedCard = gameObject.name;
                         Debug.Log(clickedCard);
-                        if (!Player.deck.Contains(gameObject.GetComponent<Card>().id + 1))
+                        if (!Player.deck.Contains(gameObject.GetComponent<Card>().id))
                         {
 							GameObject cardListEntry = (GameObject) Instantiate(Resources.Load("cardListEntry"));
                             cardListEntry.gameObject.tag = "cardEntry";
 							cardListEntry.GetComponent<Text> ().text = "(" + gameObject.GetComponent<Card> ().manaCost.text + ") ";
-                            cardListEntry.GetComponent<Text>().text +=
-                                gameObject.GetComponent<Card>().cardName.text;
-                            cardListEntry.GetComponent<Text>().font =
-                                Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
-                            cardListEntry.GetComponent<Text>().fontSize = 10;
+                            cardListEntry.GetComponent<Text>().text += gameObject.GetComponent<Card>().cardName.text;
+                            cardListEntry.GetComponent<Text>().font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
+                            cardListEntry.GetComponent<Text>().fontSize = 8;
 
-                            cardListEntry = Instantiate(cardListEntry,
-                                GameObject.FindGameObjectWithTag("ListWithCards").transform);
+                            cardListEntry = Instantiate(cardListEntry, GameObject.FindGameObjectWithTag("ListWithCards").transform);
                             cardEntryOffset -= 20;
                             cardListEntry.transform.localPosition = new Vector3(3.382453f, cardEntryOffset, 0);
                             ((RectTransform)cardListEntry.transform).sizeDelta = new Vector2(118.89f, 17.58f);
-                            Player.deck.Add(gameObject.GetComponent<Card>().id + 1);
+                            Player.deck.Add(gameObject.GetComponent<Card>().id);
                             timesTwo = false;
                         }
-                        else if (Player.deck.Contains(gameObject.GetComponent<Card>().id + 1) && timesTwo == false)
+                        else if (Player.deck.Contains(gameObject.GetComponent<Card>().id) && timesTwo == false)
                         {
                             GameObject[] cardEntries = GameObject.FindGameObjectsWithTag("cardEntry");
                             foreach (GameObject card in cardEntries)
@@ -185,7 +179,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
                                     timesTwo = true;
                                 }
                             }
-                            Player.deck.Add(gameObject.GetComponent<Card>().id + 1);
+                            Player.deck.Add(gameObject.GetComponent<Card>().id);
                         }
                     }
                 }
