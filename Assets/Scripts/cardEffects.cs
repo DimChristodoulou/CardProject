@@ -11,6 +11,8 @@ using UnityEditor;
 
 public class cardEffects : MonoBehaviour
 {
+    private int curX, curY;
+    private Vector3 currentWorldPos;
     private cardEventHandler cardEvents;
     public static bool disableOtherInput = false;
     public static cardEffects instance = null;
@@ -113,6 +115,11 @@ public class cardEffects : MonoBehaviour
                 cardEventHandler.onSummon += effigyOfFlames;
                 break;
             }
+            case "Flame Warper":
+            {
+                cardEventHandler.onSummon += flameWarper;
+                break;
+            }
         }
     }
 
@@ -134,6 +141,49 @@ public class cardEffects : MonoBehaviour
             objectsInScene.Add(go);
         }
         return objectsInScene;
+    }
+
+    public void flameWarper(string minionName){
+        curX = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].GetComponent<monsterInfo>().coords[0].First;
+        curY = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].GetComponent<monsterInfo>().coords[0].Second;
+        currentWorldPos = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].transform.position;
+        StartCoroutine(waitForUserToSelectTarget());
+        StartCoroutine(switchPosWithTarget());
+    }
+
+    public IEnumerator switchPosWithTarget(){
+        while (!selected && target == null)
+        {
+            yield return new WaitForSeconds(0.2f);
+        }
+        if (target.CompareTag("Minion"))
+        {
+            int targetX = target.GetComponent<monsterInfo>().coords[0].First;
+            int targetY = target.GetComponent<monsterInfo>().coords[0].Second;
+            Vector3 targetWorldPos = target.transform.position;
+            Vector3 temp = currentWorldPos;
+            GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].transform.position = targetWorldPos;
+            target.transform.position = temp;
+            List<Pair<int, int>> summonNodes = new List<Pair<int, int>>() { new Pair<int, int>(curX, curY) };
+            List<Pair<int, int>> summonTargetNodes = new List<Pair<int, int>>() { new Pair<int, int>(targetX, targetY) };
+            GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].GetComponent<monsterInfo>().setPosition(summonTargetNodes);
+            target.GetComponent<monsterInfo>().setPosition(summonNodes);
+            cardEventHandler.onSummon -= flameWarper;
+        }
+        else if (results.Count > 0)
+        {
+            foreach (RaycastResult result in results)
+            {
+                if (result.gameObject.CompareTag("Card"))
+                {
+                    //selected = true; // stop coroutine
+                    cardEventHandler.onSummon -= flameWarper;
+                    break;
+                }
+            }
+        }
+        target = null;
+
     }
 
     public void effigyOfFlames(string minionName){
@@ -194,8 +244,12 @@ public class cardEffects : MonoBehaviour
         for(int i=0; i<allMinions.Length; i++){
             GameObject minionGO = allMinions[i];
             if(minionGO.GetComponent<monsterInfo>().power <= 12){
-                GameState.getActivePlayer().boardMinions.Remove(minionGO);
-                GameState.getActivePlayer().graveyard.Add(minionGO.GetComponent<monsterInfo>().card);
+                //Remove the minion from its player's board minions
+                minionGO.GetComponent<monsterInfo>().parentPlayer.boardMinions.Remove(minionGO);
+                //Add the minion to its player's graveyard cards.
+                minionGO.GetComponent<monsterInfo>().parentPlayer.graveyard.Add(minionGO.GetComponent<monsterInfo>().card);
+                //Make the minion's node free.
+                GameState.boardTable[minionGO.GetComponent<monsterInfo>().coords[0].First, minionGO.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
                 GameObject topGraveyardCard = GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
                 Destroy(minionGO);
                 Destroy(minionGO.GetComponent<monsterInfo>().powerTooltipOfMonster);
@@ -206,6 +260,7 @@ public class cardEffects : MonoBehaviour
                 topGraveyardCard.SetActive(true);
             }
         }
+        GameState.getActivePlayer().reorderHandCards();
         GameState.getActivePlayer().handCards.Remove(GameState.getActivePlayer().selectedCard);
         cardEventHandler.onSummon -= firestorm;
     }
@@ -215,8 +270,12 @@ public class cardEffects : MonoBehaviour
         for(int i=0; i<allMinions.Length; i++){
             GameObject minionGO = allMinions[i];
             if(i!=allMinions.Length-1){
-                GameState.getActivePlayer().boardMinions.Remove(minionGO);
-                GameState.getActivePlayer().graveyard.Add(minionGO.GetComponent<monsterInfo>().card);
+                //Remove the minion from its player's board minions
+                minionGO.GetComponent<monsterInfo>().parentPlayer.boardMinions.Remove(minionGO);
+                //Add the minion to its player's graveyard cards.
+                minionGO.GetComponent<monsterInfo>().parentPlayer.graveyard.Add(minionGO.GetComponent<monsterInfo>().card);
+                //Make the minion's node free.
+                GameState.boardTable[minionGO.GetComponent<monsterInfo>().coords[0].First, minionGO.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
                 GameObject topGraveyardCard = GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
                 Destroy(minionGO);
                 Destroy(minionGO.GetComponent<monsterInfo>().powerTooltipOfMonster);
@@ -468,7 +527,7 @@ public class cardEffects : MonoBehaviour
             {
                 if (result.gameObject.CompareTag("Card"))
                 {
-//                    selected = true; // stop coroutine
+                    //selected = true; // stop coroutine
                     cardEventHandler.onSummon -= fireball;
                     break;
                 }
@@ -552,4 +611,5 @@ public class cardEffects : MonoBehaviour
     public static void Freeze(GameObject target)
     {
     }
+    
 }
