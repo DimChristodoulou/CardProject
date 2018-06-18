@@ -595,6 +595,7 @@ public class cardEffects : MonoBehaviour
         }
     }
 
+    //GENERAL GAME MECHANICS AND HELPER FUNCTIONS
 
     /*
      * Function used to handle the deal damage on player effect
@@ -603,6 +604,37 @@ public class cardEffects : MonoBehaviour
     {
         targetPlayer.playerHealth -= amountOfDamage;
         targetPlayer.healthGO.GetComponent<Text>().text = "Health: " + targetPlayer.playerHealth;
+    }
+
+    /*
+     * Doc: Get the GameObjects that are adjacent to a GameObject
+     */
+    public static List<GameObject> getAdjacentMinions(GameObject target){
+        List<GameObject> adjacentMinions = new List<GameObject>();
+        int targetX = target.GetComponent<monsterInfo>().coords[0].First;
+        int targetY = target.GetComponent<monsterInfo>().coords[0].Second;
+        GameObject[,] board = GameState.boardTable;
+
+        if(!board[targetX-1,targetY-1].GetComponent<nodeInfo>().isFree)
+            adjacentMinions.Add(board[targetX-1,targetY-1].GetComponent<nodeInfo>().monsterOnNode);
+        if(!board[targetX,targetY-1].GetComponent<nodeInfo>().isFree)
+            adjacentMinions.Add(board[targetX-1,targetY-1].GetComponent<nodeInfo>().monsterOnNode);
+        if(!board[targetX+1,targetY-1].GetComponent<nodeInfo>().isFree)
+            adjacentMinions.Add(board[targetX-1,targetY-1].GetComponent<nodeInfo>().monsterOnNode);
+
+        if(!board[targetX-1,targetY].GetComponent<nodeInfo>().isFree)
+            adjacentMinions.Add(board[targetX-1,targetY-1].GetComponent<nodeInfo>().monsterOnNode);
+        if(!board[targetX+1,targetY].GetComponent<nodeInfo>().isFree)
+            adjacentMinions.Add(board[targetX-1,targetY-1].GetComponent<nodeInfo>().monsterOnNode);
+
+        if(!board[targetX+1,targetY+1].GetComponent<nodeInfo>().isFree)
+            adjacentMinions.Add(board[targetX-1,targetY-1].GetComponent<nodeInfo>().monsterOnNode);
+        if(!board[targetX,targetY+1].GetComponent<nodeInfo>().isFree)
+            adjacentMinions.Add(board[targetX-1,targetY-1].GetComponent<nodeInfo>().monsterOnNode);
+        if(!board[targetX-1,targetY+1].GetComponent<nodeInfo>().isFree)
+            adjacentMinions.Add(board[targetX-1,targetY-1].GetComponent<nodeInfo>().monsterOnNode);
+        
+        return adjacentMinions;
     }
 
     /*
