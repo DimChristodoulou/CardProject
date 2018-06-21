@@ -120,27 +120,34 @@ public class cardEffects : MonoBehaviour
                 cardEventHandler.onSummon += flameWarper;
                 break;
             }
+            case "Fire Elemental":
+            {
+                cardEventHandler.onSummon += fireElemental;
+                break;
+            }
+            case "Fire Giant":
+            {
+                cardEventHandler.onSummon += fireGiant;
+                break;
+            }
         }
     }
 
-    /*
-     * Function that returns a List with all GameObjects in a scene.
-     */
-    private static List<GameObject> GetAllObjectsInScene()
-    {
-        List<GameObject> objectsInScene = new List<GameObject>();
 
-        foreach (GameObject go in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[])
-        {
-            if (go.hideFlags != HideFlags.None)
-                continue;
-
-            if (PrefabUtility.GetPrefabType(go) == PrefabType.Prefab || PrefabUtility.GetPrefabType(go) == PrefabType.ModelPrefab)
-                continue;
-
-            objectsInScene.Add(go);
+    public void fireGiant(string minionName){
+        GameObject thisMinion = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1];
+        List<GameObject> adjacentMinions = getAdjacentMinions(GameState.boardTable, thisMinion.GetComponent<monsterInfo>().coords[0].First, thisMinion.GetComponent<monsterInfo>().coords[0].Second);
+        foreach(GameObject minionGO in adjacentMinions){
+            minionGO.GetComponent<monsterInfo>().power -= 5;
+            updatePowerTooltip(minionGO);
         }
-        return objectsInScene;
+    }
+
+    public void fireElemental(string minionName){
+        GameObject thisMinion = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1];
+        List<GameObject> adjacentMinions = getAdjacentMinions(GameState.boardTable, thisMinion.GetComponent<monsterInfo>().coords[0].First, thisMinion.GetComponent<monsterInfo>().coords[0].Second);
+        StartCoroutine(waitForUserToSelectTarget());
+        StartCoroutine(destroyTargetIfAdjacent(adjacentMinions));
     }
 
     public void flameWarper(string minionName){
@@ -191,53 +198,6 @@ public class cardEffects : MonoBehaviour
         StartCoroutine(copyTarget());
     }
 
-    public IEnumerator copyTarget(){
-        
-        while (!selected && target == null)
-        {
-            yield return new WaitForSeconds(0.2f);
-        }
-
-        if (target.CompareTag("Minion"))
-        {
-            int currentXpos = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].GetComponent<monsterInfo>().coords[0].First;
-            int currentYpos = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].GetComponent<monsterInfo>().coords[0].Second;
-            
-            Vector3 currentWorldPos = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].transform.position;
-
-            Destroy(GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1]);
-            GameState.getActivePlayer().boardMinions.RemoveAt(GameState.getActivePlayer().boardMinions.Count - 1);
-
-            GameObject copiedMinion = Instantiate(target, currentWorldPos, Quaternion.identity);
-
-            List<Pair<int, int>> summonNodes = new List<Pair<int, int>>() { new Pair<int, int>(currentXpos, currentYpos) };
-
-            copiedMinion.GetComponent<monsterInfo>().setPosition(summonNodes);
-            copiedMinion.GetComponent<monsterInfo>().parentPlayer = GameState.getActivePlayer();
-            copiedMinion.GetComponent<monsterInfo>().playedturn = GameState.turn;
-            copiedMinion.GetComponent<monsterInfo>().movable = false;
-            copiedMinion.GetComponent<monsterInfo>().clickable = false;
-
-            GameState.getActivePlayer().boardMinions.Add(copiedMinion);
-            GameState.boardTable[currentXpos, currentYpos].GetComponent<nodeInfo>().powerTooltip.GetComponentInChildren<Text>().text = copiedMinion.GetComponent<monsterInfo>().power.ToString();
-
-
-            cardEventHandler.onSummon -= effigyOfFlames;
-        }
-        else if (results.Count > 0)
-        {
-            foreach (RaycastResult result in results)
-            {
-                if (result.gameObject.CompareTag("Card"))
-                {
-                    //selected = true; // stop coroutine
-                    cardEventHandler.onSummon -= effigyOfFlames;
-                    break;
-                }
-            }
-        }
-        target = null;
-    }
 
     public void firestorm(string minionName){
         GameObject[] allMinions = GameObject.FindGameObjectsWithTag("Minion");
@@ -359,12 +319,7 @@ public class cardEffects : MonoBehaviour
             ironResolveBuff.buffName = "Iron Resolve";
 
             target.GetComponent<monsterInfo>().refreshBuffs(ironResolveBuff);
-
-            int x = target.GetComponent<monsterInfo>().coords[0].First;
-            int y = target.GetComponent<monsterInfo>().coords[0].Second;
-            
-            GameState.boardTable[x,y].GetComponent<nodeInfo>().powerTooltip.GetComponentInChildren<Text>().text = target.GetComponent<monsterInfo>().power.ToString();
-
+            updatePowerTooltip(target);
             GameState.getActivePlayer().cardSelected = false;
 
             GameState.getActivePlayer().handCards.Remove(GameState.getActivePlayer().selectedCard);
@@ -448,92 +403,7 @@ public class cardEffects : MonoBehaviour
         StartCoroutine(waitAndPyra());
     }
 
-    private IEnumerator waitForUserToSelectTarget()
-    {
-        selected = false;
-        disableOtherInput = true;
 
-        yield return new WaitForSeconds(1);
-
-        while (!selected)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                m_PointerEventData = new PointerEventData(m_EventSystem) {position = Input.mousePosition};
-                List<RaycastResult> results = new List<RaycastResult>();
-
-                m_Raycaster.Raycast(m_PointerEventData, results);
-                this.results = results;
-
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-
-                if (Physics.Raycast(ray, out hit))
-                {
-                    target = hit.collider.gameObject;
-                    selected = true;
-                }
-            }
-
-            yield return null;
-        }
-
-        disableOtherInput = false;
-//        yield return target;
-    }
-
-    IEnumerator waitAndDestroyTarget()
-    {
-        while (!selected)
-        {
-            yield return new WaitForSeconds(0.2f);
-        }
-
-        if (target.CompareTag("Minion"))
-        {
-            GameState.getActivePlayer().boardMinions.Remove(target);
-            GameState.getActivePlayer().graveyard.Add(target.GetComponent<monsterInfo>().card);
-            
-            GameObject topGraveyardCard = GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
-
-            topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
-
-            topGraveyardCard.transform.SetParent(GameObject.Find("graveyard").transform, false);
-            topGraveyardCard.transform.localPosition = new Vector3(0, 0, 0);
-
-            topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
-
-            topGraveyardCard.SetActive(true);
-
-            GameState.getActivePlayer().handCards.Remove(GameState.getActivePlayer().selectedCard);
-            GameState.getActivePlayer().graveyard.Add(GameState.getActivePlayer().selectedCard);
-            Destroy(GameState.getActivePlayer().selectedCard);
-
-
-            Debug.Log("HAND CARDS SIZE: " + GameState.getActivePlayer().handCards.Count);
-            target.GetComponent<monsterInfo>().parentPlayer.boardMinions.Remove(target);
-            Destroy(target);
-            Destroy(target.GetComponent<monsterInfo>().powerTooltipOfMonster);
-
-            //then we get the coordinates of the monster and set its square to free...
-            GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First, target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
-            //Reorder cards here until we do better refactoring
-            GameState.getActivePlayer().reorderHandCards();
-            cardEventHandler.onSummon -= fireball;
-        }
-        else if (results.Count > 0)
-        {
-            foreach (RaycastResult result in results)
-            {
-                if (result.gameObject.CompareTag("Card"))
-                {
-                    //selected = true; // stop coroutine
-                    cardEventHandler.onSummon -= fireball;
-                    break;
-                }
-            }
-        }
-    }
 
     private IEnumerator waitAndPyra()
     { 
@@ -595,7 +465,14 @@ public class cardEffects : MonoBehaviour
         }
     }
 
-    //GENERAL GAME MECHANICS AND HELPER FUNCTIONS
+
+    /* ************************************************************************************************************************************************************************************* */
+    /* ************************************************************************************************************************************************************************************* */
+    /* ************************************************************************************************************************************************************************************* */
+    /* *******************************************************************GENERAL GAME MECHANICS AND HELPER FUNCTIONS*********************************************************************** */
+    /* ************************************************************************************************************************************************************************************* */
+    /* ************************************************************************************************************************************************************************************* */
+    /* ************************************************************************************************************************************************************************************* */
 
     /*
      * Function used to handle the deal damage on player effect
@@ -606,35 +483,156 @@ public class cardEffects : MonoBehaviour
         targetPlayer.healthGO.GetComponent<Text>().text = "Health: " + targetPlayer.playerHealth;
     }
 
-    /*
-     * Doc: Get the GameObjects that are adjacent to a GameObject
-     */
-    public static List<GameObject> getAdjacentMinions(GameObject target){
+    public IEnumerator waitAndDestroyTarget()
+    {
+        while (!selected)
+        {
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        if (target.CompareTag("Minion"))
+        {
+            GameState.getActivePlayer().boardMinions.Remove(target);
+            GameState.getActivePlayer().graveyard.Add(target.GetComponent<monsterInfo>().card);
+            
+            GameObject topGraveyardCard = GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
+
+            topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
+
+            topGraveyardCard.transform.SetParent(GameObject.Find("graveyard").transform, false);
+            topGraveyardCard.transform.localPosition = new Vector3(0, 0, 0);
+
+            topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
+
+            topGraveyardCard.SetActive(true);
+
+            GameState.getActivePlayer().handCards.Remove(GameState.getActivePlayer().selectedCard);
+            GameState.getActivePlayer().graveyard.Add(GameState.getActivePlayer().selectedCard);
+            Destroy(GameState.getActivePlayer().selectedCard);
+
+
+            Debug.Log("HAND CARDS SIZE: " + GameState.getActivePlayer().handCards.Count);
+            target.GetComponent<monsterInfo>().parentPlayer.boardMinions.Remove(target);
+            Destroy(target);
+            Destroy(target.GetComponent<monsterInfo>().powerTooltipOfMonster);
+
+            //then we get the coordinates of the monster and set its square to free...
+            GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First, target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
+            //Reorder cards here until we do better refactoring
+            GameState.getActivePlayer().reorderHandCards();
+            cardEventHandler.onSummon -= fireball;
+        }
+        else if (results.Count > 0)
+        {
+            foreach (RaycastResult result in results)
+            {
+                if (result.gameObject.CompareTag("Card"))
+                {
+                    //selected = true; // stop coroutine
+                    cardEventHandler.onSummon -= fireball;
+                    break;
+                }
+            }
+        }
+    }
+
+    public IEnumerator destroyTargetIfAdjacent(IEnumerable<GameObject> adjacentMinions){
+        while (!selected && target == null)
+        {
+            yield return new WaitForSeconds(0.2f);
+        }
+        if (target.CompareTag("Minion") && adjacentMinions.Contains(target))
+        {
+            //Remove the minion from its player's board minions
+            target.GetComponent<monsterInfo>().parentPlayer.boardMinions.Remove(target);
+            //Add the minion to its player's graveyard cards.
+            target.GetComponent<monsterInfo>().parentPlayer.graveyard.Add(target.GetComponent<monsterInfo>().card);
+            //Make the minion's node free.
+            GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First, target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
+            GameObject topGraveyardCard = GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
+            Destroy(target);
+            Destroy(target.GetComponent<monsterInfo>().powerTooltipOfMonster);
+            topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
+            topGraveyardCard.transform.SetParent(GameObject.Find("graveyard").transform, false);
+            topGraveyardCard.transform.localPosition = new Vector3(0, 0, 0);
+            topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
+            topGraveyardCard.SetActive(true);
+            cardEventHandler.onSummon -= fireElemental;
+        }
+        else if (results.Count > 0)
+        {
+            foreach (RaycastResult result in results)
+            {
+                if (result.gameObject.CompareTag("Card"))
+                {
+                    //selected = true; // stop coroutine
+                    cardEventHandler.onSummon -= fireElemental;
+                    break;
+                }
+            }
+        }
+        target = null;
+    }
+
+    public static List<GameObject> getAdjacentMinions(GameObject[,] arr, int row, int column){
+        int rows = arr.GetLength(0);
+        int columns = arr.GetLength(1);
+        Debug.Log(rows+columns);
         List<GameObject> adjacentMinions = new List<GameObject>();
-        int targetX = target.GetComponent<monsterInfo>().coords[0].First;
-        int targetY = target.GetComponent<monsterInfo>().coords[0].Second;
-        GameObject[,] board = GameState.boardTable;
-
-        if(!board[targetX-1,targetY-1].GetComponent<nodeInfo>().isFree)
-            adjacentMinions.Add(board[targetX-1,targetY-1].GetComponent<nodeInfo>().monsterOnNode);
-        if(!board[targetX,targetY-1].GetComponent<nodeInfo>().isFree)
-            adjacentMinions.Add(board[targetX-1,targetY-1].GetComponent<nodeInfo>().monsterOnNode);
-        if(!board[targetX+1,targetY-1].GetComponent<nodeInfo>().isFree)
-            adjacentMinions.Add(board[targetX-1,targetY-1].GetComponent<nodeInfo>().monsterOnNode);
-
-        if(!board[targetX-1,targetY].GetComponent<nodeInfo>().isFree)
-            adjacentMinions.Add(board[targetX-1,targetY-1].GetComponent<nodeInfo>().monsterOnNode);
-        if(!board[targetX+1,targetY].GetComponent<nodeInfo>().isFree)
-            adjacentMinions.Add(board[targetX-1,targetY-1].GetComponent<nodeInfo>().monsterOnNode);
-
-        if(!board[targetX+1,targetY+1].GetComponent<nodeInfo>().isFree)
-            adjacentMinions.Add(board[targetX-1,targetY-1].GetComponent<nodeInfo>().monsterOnNode);
-        if(!board[targetX,targetY+1].GetComponent<nodeInfo>().isFree)
-            adjacentMinions.Add(board[targetX-1,targetY-1].GetComponent<nodeInfo>().monsterOnNode);
-        if(!board[targetX-1,targetY+1].GetComponent<nodeInfo>().isFree)
-            adjacentMinions.Add(board[targetX-1,targetY-1].GetComponent<nodeInfo>().monsterOnNode);
-        
+        for (int j = row - 1; j <= row + 1; j++)
+            for (int i = column - 1; i <= column + 1; i++)
+                if (i >= 0 && j >= 0 && i < columns && j < rows && !arr[j,i].GetComponent<nodeInfo>().isFree){
+                    Debug.Log(j + i);
+                    adjacentMinions.Add(arr[j,i].GetComponent<nodeInfo>().monsterOnNode);
+                }
         return adjacentMinions;
+    }
+
+    public IEnumerator copyTarget(){    
+        while (!selected && target == null)
+        {
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        if (target.CompareTag("Minion"))
+        {
+            int currentXpos = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].GetComponent<monsterInfo>().coords[0].First;
+            int currentYpos = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].GetComponent<monsterInfo>().coords[0].Second;
+            
+            Vector3 currentWorldPos = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].transform.position;
+
+            Destroy(GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1]);
+            GameState.getActivePlayer().boardMinions.RemoveAt(GameState.getActivePlayer().boardMinions.Count - 1);
+
+            GameObject copiedMinion = Instantiate(target, currentWorldPos, Quaternion.identity);
+
+            List<Pair<int, int>> summonNodes = new List<Pair<int, int>>() { new Pair<int, int>(currentXpos, currentYpos) };
+
+            copiedMinion.GetComponent<monsterInfo>().setPosition(summonNodes);
+            copiedMinion.GetComponent<monsterInfo>().parentPlayer = GameState.getActivePlayer();
+            copiedMinion.GetComponent<monsterInfo>().playedturn = GameState.turn;
+            copiedMinion.GetComponent<monsterInfo>().movable = false;
+            copiedMinion.GetComponent<monsterInfo>().clickable = false;
+
+            GameState.getActivePlayer().boardMinions.Add(copiedMinion);
+            GameState.boardTable[currentXpos, currentYpos].GetComponent<nodeInfo>().powerTooltip.GetComponentInChildren<Text>().text = copiedMinion.GetComponent<monsterInfo>().power.ToString();
+
+
+            cardEventHandler.onSummon -= effigyOfFlames;
+        }
+        else if (results.Count > 0)
+        {
+            foreach (RaycastResult result in results)
+            {
+                if (result.gameObject.CompareTag("Card"))
+                {
+                    //selected = true; // stop coroutine
+                    cardEventHandler.onSummon -= effigyOfFlames;
+                    break;
+                }
+            }
+        }
+        target = null;
     }
 
     /*
@@ -642,6 +640,67 @@ public class cardEffects : MonoBehaviour
      */
     public static void Freeze(GameObject target)
     {
+        //TODO: Freeze
+    }
+
+    /*
+     * Function that returns a List with all GameObjects in a scene.
+     */
+    private static List<GameObject> GetAllObjectsInScene()
+    {
+        List<GameObject> objectsInScene = new List<GameObject>();
+
+        foreach (GameObject go in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[])
+        {
+            if (go.hideFlags != HideFlags.None)
+                continue;
+
+            if (PrefabUtility.GetPrefabType(go) == PrefabType.Prefab || PrefabUtility.GetPrefabType(go) == PrefabType.ModelPrefab)
+                continue;
+
+            objectsInScene.Add(go);
+        }
+        return objectsInScene;
     }
     
+    private IEnumerator waitForUserToSelectTarget()
+    {
+        selected = false;
+        disableOtherInput = true;
+
+        yield return new WaitForSeconds(1);
+
+        while (!selected)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                m_PointerEventData = new PointerEventData(m_EventSystem) {position = Input.mousePosition};
+                List<RaycastResult> results = new List<RaycastResult>();
+
+                m_Raycaster.Raycast(m_PointerEventData, results);
+                this.results = results;
+
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit))
+                {
+                    target = hit.collider.gameObject;
+                    selected = true;
+                }
+            }
+
+            yield return null;
+        }
+
+        disableOtherInput = false;
+//        yield return target;
+    }
+
+    private void updatePowerTooltip(GameObject target){
+        int x = target.GetComponent<monsterInfo>().coords[0].First;
+        int y = target.GetComponent<monsterInfo>().coords[0].Second;
+        GameState.boardTable[x,y].GetComponent<nodeInfo>().powerTooltip.GetComponentInChildren<Text>().text = target.GetComponent<monsterInfo>().power.ToString();
+    }
+
 }
