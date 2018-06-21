@@ -60,15 +60,14 @@ public class Player
         graveyard = new List<GameObject>();
         originalCard = new Card();
 
-        healthGO = new GameObject();
+        healthGO = (GameObject) GameObject.Instantiate(Resources.Load("playerHealth"));
         healthGO.transform.SetParent(mainui.transform);
-        healthGO.AddComponent<Text>();
-        healthGO.GetComponent<Text>().font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
-        healthGO.GetComponent<Text>().text = "Health: " + playerHealth.ToString();
+        healthGO.GetComponentInChildren<Text>().font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
+        healthGO.GetComponentInChildren<Text>().text = playerHealth.ToString();
 
         if (playingPos == 1)
         {
-            healthGO.transform.localPosition = new Vector3(-909, 250, 0);
+            healthGO.transform.localPosition = new Vector3(-850, 300, 0);
             for (int i = 0; i < 4; i++)
             {
                 int cardDrawn = Random.Range(0, deck.Count);
@@ -80,7 +79,7 @@ public class Player
 
         if (playingPos == 2)
         {
-            healthGO.transform.localPosition = new Vector3(909, 250, 0);
+            healthGO.transform.localPosition = new Vector3(850, 300, 0);
             for (int i = 0; i < 4; i++)
             {
                 int cardDrawn = Random.Range(0, deck.Count);

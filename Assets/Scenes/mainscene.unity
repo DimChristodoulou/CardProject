@@ -1397,7 +1397,7 @@ GameObject:
   - component: {fileID: 992757470}
   - component: {fileID: 992757469}
   m_Layer: 5
-  m_Name: Dragon Caller Alanna
+  m_Name: playerFrame1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2006,7 +2006,7 @@ GameObject:
   - component: {fileID: 1278167118}
   - component: {fileID: 1278167117}
   m_Layer: 5
-  m_Name: Jaina_to_PATOMOUNO
+  m_Name: playerFrame2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

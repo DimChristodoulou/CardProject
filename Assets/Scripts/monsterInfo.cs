@@ -18,6 +18,7 @@ public class monsterInfo : MonoBehaviour
     public string monsterName;
     public string monsterKeywords;
     public GameObject card; //the card of the monster
+    private GameObject cardTooltip;
     public List<buffs> monsterBuffs = new List<buffs>();
 
     public int
@@ -32,6 +33,8 @@ public class monsterInfo : MonoBehaviour
     public Color hoverColorActive = new Color32(0x00, 0x99, 0x00, 0x8F); // RGBA
     public Color hoverColorInactive = new Color32(0x99, 0x99, 0x00, 0x8F); // RGBA
     public Color startColor = new Color32(0xFF, 0xFF, 0xFF, 0x00); // RGBA
+
+    private GameObject mainui;
 
     //a monster is controlled by a player
     public Player parentPlayer;
@@ -77,9 +80,24 @@ public class monsterInfo : MonoBehaviour
         coords = myList;
     }
 
+    // void OnMouseOver(){
+    //     if(cardTooltip==null)
+    //         cardTooltip = GameObject.Instantiate(card);
+    //     cardTooltip.SetActive(true);
+    //     cardTooltip.transform.SetParent(mainui.transform);
+    //     cardTooltip.transform.localPosition = Camera.main.WorldToScreenPoint(this.transform.localPosition) + new Vector3(-800, -300, 0);;
+    // }
+
+    // void OnMouseExit(){
+    //     if(cardTooltip != null){
+    //         Destroy(cardTooltip);
+    //     }
+    // }
+
     // Use this for initialization
     void Start()
     {
+        mainui = GameObject.Find("Main UI");
         powerTooltipOfMonster = GameState.boardTable[this.coords[0].First, this.coords[0].Second].GetComponent<nodeInfo>().powerTooltip;
         if (monsterKeywords != null)
         {

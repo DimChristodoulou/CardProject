@@ -201,6 +201,11 @@ public class cardEffects : MonoBehaviour
 
     public void firestorm(string minionName){
         GameObject[] allMinions = GameObject.FindGameObjectsWithTag("Minion");
+
+        GameState.getActivePlayer().cardSelected = false;
+
+        GameState.getActivePlayer().graveyard.Add(GameState.getActivePlayer().selectedCard);
+
         for(int i=0; i<allMinions.Length; i++){
             GameObject minionGO = allMinions[i];
             if(minionGO.GetComponent<monsterInfo>().power <= 12){
@@ -210,7 +215,7 @@ public class cardEffects : MonoBehaviour
                 minionGO.GetComponent<monsterInfo>().parentPlayer.graveyard.Add(minionGO.GetComponent<monsterInfo>().card);
                 //Make the minion's node free.
                 GameState.boardTable[minionGO.GetComponent<monsterInfo>().coords[0].First, minionGO.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
-                GameObject topGraveyardCard = GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
+                GameObject topGraveyardCard = minionGO.GetComponent<monsterInfo>().parentPlayer.graveyard[minionGO.GetComponent<monsterInfo>().parentPlayer.graveyard.Count - 1];
                 Destroy(minionGO);
                 Destroy(minionGO.GetComponent<monsterInfo>().powerTooltipOfMonster);
                 topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
@@ -286,8 +291,11 @@ public class cardEffects : MonoBehaviour
         //TODO: Make this always while this is in play, instead of one time.
         List<GameObject> allGameObjects = GetAllObjectsInScene();
         foreach(GameObject GO in allGameObjects){
-            if(GO.GetComponent<monsterInfo>().card.GetComponent<Card>().attribute == "Fire"){
-                GO.GetComponent<monsterInfo>().power += 2;
+            if(GO.GetComponent<monsterInfo>()!=null && GO.GetComponent<monsterInfo>().card != null){
+                if(GO.GetComponent<monsterInfo>().card.GetComponent<Card>().attribute == "Fire"){
+                    GO.GetComponent<monsterInfo>().power += 2;
+                    updatePowerTooltip(GO);
+                }
             }
         }
     }
@@ -480,7 +488,7 @@ public class cardEffects : MonoBehaviour
     public static void DealDamageToPlayer(Player targetPlayer, int amountOfDamage)
     {
         targetPlayer.playerHealth -= amountOfDamage;
-        targetPlayer.healthGO.GetComponent<Text>().text = "Health: " + targetPlayer.playerHealth;
+        targetPlayer.healthGO.GetComponentInChildren<Text>().text = targetPlayer.playerHealth.ToString();
     }
 
     public IEnumerator waitAndDestroyTarget()
@@ -700,7 +708,9 @@ public class cardEffects : MonoBehaviour
     private void updatePowerTooltip(GameObject target){
         int x = target.GetComponent<monsterInfo>().coords[0].First;
         int y = target.GetComponent<monsterInfo>().coords[0].Second;
-        GameState.boardTable[x,y].GetComponent<nodeInfo>().powerTooltip.GetComponentInChildren<Text>().text = target.GetComponent<monsterInfo>().power.ToString();
+        //THIS IS WRONG, POWER TOOLTIP GETS DESTROYED AND WE CANT ACCESS IT AFTER A MINION MOVES
+        if(GameState.boardTable[x,y].GetComponent<nodeInfo>().powerTooltip != null)
+            GameState.boardTable[x,y].GetComponent<nodeInfo>().powerTooltip.GetComponentInChildren<Text>().text = target.GetComponent<monsterInfo>().power.ToString();
     }
 
 }
