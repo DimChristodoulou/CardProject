@@ -93,9 +93,9 @@ public class Player
     public void DrawCard(int cardId)
     {
         Debug.Log("Count:" + handCards.Count);
-        float x = -300 + 161 * (handCards.Count-1);
+        float x = -300 + 161 * (handCards.Count - 1);
         float y;
-        if(playingPos == 1)
+        if (playingPos == 1)
             y = -330;
         else
             y = 330.9f;
@@ -107,24 +107,36 @@ public class Player
         remainingCards.text = "Remaining:\n" + (--deckSize);
     }
 
-    public void reorderHandCards(){
-
+    public void reorderHandCards()
+    {
         float x;
         float y;
 
-        if(playingPos == 1)
+        if (playingPos == 1)
             y = -330;
         else
             y = 330.9f;
 
-        for(int i=0;i<handCards.Count;i++){
-            x = -300 + 161 * (i-1);
-            handCards[i].transform.localPosition = new Vector3(x,y,0);
+        for (int i = 0; i < handCards.Count; i++)
+        {
+            x = -300 + 161 * (i - 1);
+            handCards[i].transform.localPosition = new Vector3(x, y, 0);
         }
     }
 
-    public void DiscardCard(int indexInHand){
+    public void discardCard(int indexInHand)
+    {
+        handCards.RemoveAt(indexInHand);
+        graveyard.Add(handCards[indexInHand]);
         
+        GameObject topGraveyardCard = graveyard[graveyard.Count - 1];
+
+        topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
+
+        topGraveyardCard.transform.SetParent(GameObject.Find("graveyard").transform, false);
+        topGraveyardCard.transform.localPosition = new Vector3(0, 0, 0);
+
+        topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
     }
 
     public void setupPlayCard(GameObject clickedObj)
@@ -155,23 +167,30 @@ public class Player
         {
             availableNodesForSummon = new List<Pair<int, int>>();
 
-            if( GameState.getActivePlayer() == GameState.players[0] ){
-                for(int i=0;i<7;i++){
-                    for(int j=0;j<3;j++){
-                        if (GameState.boardTable[i,j].GetComponent<nodeInfo>().isFree)
+            if (GameState.getActivePlayer() == GameState.players[0])
+            {
+                for (int i = 0; i < 7; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (GameState.boardTable[i, j].GetComponent<nodeInfo>().isFree)
                         {
-                            GameState.boardTable[i,j].GetComponent<nodeInfo>().makeActive();
-                            availableNodesForSummon.Add(new Pair<int, int>(i,j) );
+                            GameState.boardTable[i, j].GetComponent<nodeInfo>().makeActive();
+                            availableNodesForSummon.Add(new Pair<int, int>(i, j));
                         }
                     }
                 }
             }
-            else if(GameState.getActivePlayer() == GameState.players[1]){
-                for(int i = 0; i<GameState.boardTable.GetLength(0); i++){
-                    for(int j=GameState.boardTable.GetLength(1)-3; j<GameState.boardTable.GetLength(1); j++){
-                        if (GameState.boardTable[i,j].GetComponent<nodeInfo>().isFree){
-                            GameState.boardTable[i,j].GetComponent<nodeInfo>().makeActive();
-                            availableNodesForSummon.Add(new Pair<int, int>(i,j) );
+            else if (GameState.getActivePlayer() == GameState.players[1])
+            {
+                for (int i = 0; i < GameState.boardTable.GetLength(0); i++)
+                {
+                    for (int j = GameState.boardTable.GetLength(1) - 3; j < GameState.boardTable.GetLength(1); j++)
+                    {
+                        if (GameState.boardTable[i, j].GetComponent<nodeInfo>().isFree)
+                        {
+                            GameState.boardTable[i, j].GetComponent<nodeInfo>().makeActive();
+                            availableNodesForSummon.Add(new Pair<int, int>(i, j));
                         }
                     }
                 }
@@ -181,7 +200,8 @@ public class Player
 
     public void increaseMana(int amount)
     {
-        if(this.maxTurnMana < 10){
+        if (this.maxTurnMana < 10)
+        {
             this.maxTurnMana += amount;
             this.currentMana = this.maxTurnMana;
         }
@@ -211,10 +231,11 @@ public class Player
         //Draw card after increasing mana. (Max number of cardTemplates in hand is 8).
         if (handCards.Count < 8)
         {
-           int cardDrawn = Random.Range(0, deck.Count);
-           DrawCard(deck[Random.Range(0, deck.Count)]);
-           deck.RemoveAt(cardDrawn);
+            int cardDrawn = Random.Range(0, deck.Count);
+            DrawCard(deck[Random.Range(0, deck.Count)]);
+            deck.RemoveAt(cardDrawn);
         }
+
         //UI MANA GOES HERE
         foreach (GameObject monster in boardMinions)
         {
@@ -314,9 +335,9 @@ public class Player
         return;
     }
 
-	public void DieMonster(GameObject monster, int dmgDiff = 0)
+    public void DieMonster(GameObject monster, int dmgDiff = 0)
     {
-		//TODO decrease hero's hp
+        //TODO decrease hero's hp
         GameState.setSquares(monster.GetComponent<monsterInfo>().coords, true); //deallocate tiles
         if (boardMinions.Find(x => monster) != null)
         {

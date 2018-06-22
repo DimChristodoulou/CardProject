@@ -134,23 +134,27 @@ public class cardEffects : MonoBehaviour
     }
 
 
-    public void fireGiant(string minionName){
+    public void fireGiant(string minionName)
+    {
         GameObject thisMinion = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1];
         List<GameObject> adjacentMinions = getAdjacentMinions(GameState.boardTable, thisMinion.GetComponent<monsterInfo>().coords[0].First, thisMinion.GetComponent<monsterInfo>().coords[0].Second);
-        foreach(GameObject minionGO in adjacentMinions){
+        foreach (GameObject minionGO in adjacentMinions)
+        {
             minionGO.GetComponent<monsterInfo>().power -= 5;
             updatePowerTooltip(minionGO);
         }
     }
 
-    public void fireElemental(string minionName){
+    public void fireElemental(string minionName)
+    {
         GameObject thisMinion = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1];
         List<GameObject> adjacentMinions = getAdjacentMinions(GameState.boardTable, thisMinion.GetComponent<monsterInfo>().coords[0].First, thisMinion.GetComponent<monsterInfo>().coords[0].Second);
         StartCoroutine(waitForUserToSelectTarget());
         StartCoroutine(destroyTargetIfAdjacent(adjacentMinions));
     }
 
-    public void flameWarper(string minionName){
+    public void flameWarper(string minionName)
+    {
         curX = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].GetComponent<monsterInfo>().coords[0].First;
         curY = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].GetComponent<monsterInfo>().coords[0].Second;
         currentWorldPos = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].transform.position;
@@ -158,11 +162,13 @@ public class cardEffects : MonoBehaviour
         StartCoroutine(switchPosWithTarget());
     }
 
-    public IEnumerator switchPosWithTarget(){
+    public IEnumerator switchPosWithTarget()
+    {
         while (!selected && target == null)
         {
             yield return new WaitForSeconds(0.2f);
         }
+
         if (target.CompareTag("Minion"))
         {
             int targetX = target.GetComponent<monsterInfo>().coords[0].First;
@@ -171,8 +177,8 @@ public class cardEffects : MonoBehaviour
             Vector3 temp = currentWorldPos;
             GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].transform.position = targetWorldPos;
             target.transform.position = temp;
-            List<Pair<int, int>> summonNodes = new List<Pair<int, int>>() { new Pair<int, int>(curX, curY) };
-            List<Pair<int, int>> summonTargetNodes = new List<Pair<int, int>>() { new Pair<int, int>(targetX, targetY) };
+            List<Pair<int, int>> summonNodes = new List<Pair<int, int>>() {new Pair<int, int>(curX, curY)};
+            List<Pair<int, int>> summonTargetNodes = new List<Pair<int, int>>() {new Pair<int, int>(targetX, targetY)};
             GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].GetComponent<monsterInfo>().setPosition(summonTargetNodes);
             target.GetComponent<monsterInfo>().setPosition(summonNodes);
             cardEventHandler.onSummon -= flameWarper;
@@ -189,26 +195,30 @@ public class cardEffects : MonoBehaviour
                 }
             }
         }
-        target = null;
 
+        target = null;
     }
 
-    public void effigyOfFlames(string minionName){
+    public void effigyOfFlames(string minionName)
+    {
         StartCoroutine(waitForUserToSelectTarget());
         StartCoroutine(copyTarget());
     }
 
 
-    public void firestorm(string minionName){
+    public void firestorm(string minionName)
+    {
         GameObject[] allMinions = GameObject.FindGameObjectsWithTag("Minion");
 
         GameState.getActivePlayer().cardSelected = false;
 
         GameState.getActivePlayer().graveyard.Add(GameState.getActivePlayer().selectedCard);
 
-        for(int i=0; i<allMinions.Length; i++){
+        for (int i = 0; i < allMinions.Length; i++)
+        {
             GameObject minionGO = allMinions[i];
-            if(minionGO.GetComponent<monsterInfo>().power <= 12){
+            if (minionGO.GetComponent<monsterInfo>().power <= 12)
+            {
                 //Remove the minion from its player's board minions
                 minionGO.GetComponent<monsterInfo>().parentPlayer.boardMinions.Remove(minionGO);
                 //Add the minion to its player's graveyard cards.
@@ -225,16 +235,20 @@ public class cardEffects : MonoBehaviour
                 topGraveyardCard.SetActive(true);
             }
         }
+
         GameState.getActivePlayer().reorderHandCards();
         GameState.getActivePlayer().handCards.Remove(GameState.getActivePlayer().selectedCard);
         cardEventHandler.onSummon -= firestorm;
     }
 
-    public void elleron(string minionName){
+    public void elleron(string minionName)
+    {
         GameObject[] allMinions = GameObject.FindGameObjectsWithTag("Minion");
-        for(int i=0; i<allMinions.Length; i++){
+        for (int i = 0; i < allMinions.Length; i++)
+        {
             GameObject minionGO = allMinions[i];
-            if(i!=allMinions.Length-1){
+            if (i != allMinions.Length - 1)
+            {
                 //Remove the minion from its player's board minions
                 minionGO.GetComponent<monsterInfo>().parentPlayer.boardMinions.Remove(minionGO);
                 //Add the minion to its player's graveyard cards.
@@ -251,21 +265,26 @@ public class cardEffects : MonoBehaviour
                 topGraveyardCard.SetActive(true);
             }
         }
+
         GameState.getActivePlayer().handCards.Remove(GameState.getActivePlayer().selectedCard);
         cardEventHandler.onSummon -= elleron;
     }
 
-    public void burningWalls(string minionName){
-        int x,y;
+    public void burningWalls(string minionName)
+    {
+        int x, y;
         int maxX = GameState.boardTable.GetLength(0);
         int maxY = GameState.boardTable.GetLength(1);
-        foreach(GameObject coords in GameState.boardTable){
+        foreach (GameObject coords in GameState.boardTable)
+        {
             x = coords.GetComponent<nodeInfo>().xpos;
             y = coords.GetComponent<nodeInfo>().ypos;
-            if(x == 0 || x == maxX-1 || y == 0 || y == maxY-1){
-                if(!coords.GetComponent<nodeInfo>().isFree && coords.GetComponent<nodeInfo>().monsterOnNode != null){
-                    Destroy( coords.GetComponent<nodeInfo>().monsterOnNode);
-                    Destroy( coords.GetComponent<nodeInfo>().monsterOnNode.GetComponent<monsterInfo>().powerTooltipOfMonster);
+            if (x == 0 || x == maxX - 1 || y == 0 || y == maxY - 1)
+            {
+                if (!coords.GetComponent<nodeInfo>().isFree && coords.GetComponent<nodeInfo>().monsterOnNode != null)
+                {
+                    Destroy(coords.GetComponent<nodeInfo>().monsterOnNode);
+                    Destroy(coords.GetComponent<nodeInfo>().monsterOnNode.GetComponent<monsterInfo>().powerTooltipOfMonster);
                     GameState.getActivePlayer().boardMinions.Remove(coords.GetComponent<nodeInfo>().monsterOnNode);
                     GameState.getActivePlayer().graveyard.Add(coords.GetComponent<nodeInfo>().monsterOnNode.GetComponent<monsterInfo>().card);
                 }
@@ -287,12 +306,16 @@ public class cardEffects : MonoBehaviour
         cardEventHandler.onSummon -= burningWalls;
     }
 
-    public void flameShaman(string minionName){
+    public void flameShaman(string minionName)
+    {
         //TODO: Make this always while this is in play, instead of one time.
         List<GameObject> allGameObjects = GetAllObjectsInScene();
-        foreach(GameObject GO in allGameObjects){
-            if(GO.GetComponent<monsterInfo>()!=null && GO.GetComponent<monsterInfo>().card != null){
-                if(GO.GetComponent<monsterInfo>().card.GetComponent<Card>().attribute == "Fire"){
+        foreach (GameObject GO in allGameObjects)
+        {
+            if (GO.GetComponent<monsterInfo>() != null && GO.GetComponent<monsterInfo>().card != null)
+            {
+                if (GO.GetComponent<monsterInfo>().card.GetComponent<Card>().attribute == "Fire")
+                {
                     GO.GetComponent<monsterInfo>().power += 2;
                     updatePowerTooltip(GO);
                 }
@@ -300,7 +323,8 @@ public class cardEffects : MonoBehaviour
         }
     }
 
-    public void idolOfFire(string minionName){
+    public void idolOfFire(string minionName)
+    {
         GameState.getActivePlayer().boardMinions.Last().GetComponent<monsterInfo>().cannotMove = true;
         GameState.getActivePlayer().boardMinions.Last().GetComponent<monsterInfo>().cannotAttack = true;
         cardEventHandler.onSummon -= idolOfFire;
@@ -340,7 +364,7 @@ public class cardEffects : MonoBehaviour
             topGraveyardCard.transform.localPosition = new Vector3(0, 0, 0);
             topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
             topGraveyardCard.SetActive(true);
-            
+
             //Reorder cards here until we do better refactoring
             GameState.getActivePlayer().reorderHandCards();
 
@@ -360,6 +384,7 @@ public class cardEffects : MonoBehaviour
                 }
             }
         }
+
         target = null;
     }
 
@@ -412,9 +437,8 @@ public class cardEffects : MonoBehaviour
     }
 
 
-
     private IEnumerator waitAndPyra()
-    { 
+    {
         while (!selected && target == null)
         {
             yield return new WaitForSeconds(0.2f);
@@ -502,7 +526,7 @@ public class cardEffects : MonoBehaviour
         {
             GameState.getActivePlayer().boardMinions.Remove(target);
             GameState.getActivePlayer().graveyard.Add(target.GetComponent<monsterInfo>().card);
-            
+
             GameObject topGraveyardCard = GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
 
             topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
@@ -544,11 +568,13 @@ public class cardEffects : MonoBehaviour
         }
     }
 
-    public IEnumerator destroyTargetIfAdjacent(IEnumerable<GameObject> adjacentMinions){
+    public IEnumerator destroyTargetIfAdjacent(IEnumerable<GameObject> adjacentMinions)
+    {
         while (!selected && target == null)
         {
             yield return new WaitForSeconds(0.2f);
         }
+
         if (target.CompareTag("Minion") && adjacentMinions.Contains(target))
         {
             //Remove the minion from its player's board minions
@@ -579,24 +605,29 @@ public class cardEffects : MonoBehaviour
                 }
             }
         }
+
         target = null;
     }
 
-    public static List<GameObject> getAdjacentMinions(GameObject[,] arr, int row, int column){
+    public static List<GameObject> getAdjacentMinions(GameObject[,] arr, int row, int column)
+    {
         int rows = arr.GetLength(0);
         int columns = arr.GetLength(1);
-        Debug.Log(rows+columns);
+        Debug.Log(rows + columns);
         List<GameObject> adjacentMinions = new List<GameObject>();
         for (int j = row - 1; j <= row + 1; j++)
-            for (int i = column - 1; i <= column + 1; i++)
-                if (i >= 0 && j >= 0 && i < columns && j < rows && !arr[j,i].GetComponent<nodeInfo>().isFree){
-                    Debug.Log(j + i);
-                    adjacentMinions.Add(arr[j,i].GetComponent<nodeInfo>().monsterOnNode);
-                }
+        for (int i = column - 1; i <= column + 1; i++)
+            if (i >= 0 && j >= 0 && i < columns && j < rows && !arr[j, i].GetComponent<nodeInfo>().isFree)
+            {
+                Debug.Log(j + i);
+                adjacentMinions.Add(arr[j, i].GetComponent<nodeInfo>().monsterOnNode);
+            }
+
         return adjacentMinions;
     }
 
-    public IEnumerator copyTarget(){    
+    public IEnumerator copyTarget()
+    {
         while (!selected && target == null)
         {
             yield return new WaitForSeconds(0.2f);
@@ -606,7 +637,7 @@ public class cardEffects : MonoBehaviour
         {
             int currentXpos = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].GetComponent<monsterInfo>().coords[0].First;
             int currentYpos = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].GetComponent<monsterInfo>().coords[0].Second;
-            
+
             Vector3 currentWorldPos = GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1].transform.position;
 
             Destroy(GameState.getActivePlayer().boardMinions[GameState.getActivePlayer().boardMinions.Count - 1]);
@@ -614,7 +645,7 @@ public class cardEffects : MonoBehaviour
 
             GameObject copiedMinion = Instantiate(target, currentWorldPos, Quaternion.identity);
 
-            List<Pair<int, int>> summonNodes = new List<Pair<int, int>>() { new Pair<int, int>(currentXpos, currentYpos) };
+            List<Pair<int, int>> summonNodes = new List<Pair<int, int>>() {new Pair<int, int>(currentXpos, currentYpos)};
 
             copiedMinion.GetComponent<monsterInfo>().setPosition(summonNodes);
             copiedMinion.GetComponent<monsterInfo>().parentPlayer = GameState.getActivePlayer();
@@ -640,6 +671,7 @@ public class cardEffects : MonoBehaviour
                 }
             }
         }
+
         target = null;
     }
 
@@ -668,9 +700,10 @@ public class cardEffects : MonoBehaviour
 
             objectsInScene.Add(go);
         }
+
         return objectsInScene;
     }
-    
+
     private IEnumerator waitForUserToSelectTarget()
     {
         selected = false;
@@ -705,12 +738,12 @@ public class cardEffects : MonoBehaviour
 //        yield return target;
     }
 
-    private void updatePowerTooltip(GameObject target){
+    private void updatePowerTooltip(GameObject target)
+    {
         int x = target.GetComponent<monsterInfo>().coords[0].First;
         int y = target.GetComponent<monsterInfo>().coords[0].Second;
         //THIS IS WRONG, POWER TOOLTIP GETS DESTROYED AND WE CANT ACCESS IT AFTER A MINION MOVES
-        if(GameState.boardTable[x,y].GetComponent<nodeInfo>().powerTooltip != null)
-            GameState.boardTable[x,y].GetComponent<nodeInfo>().powerTooltip.GetComponentInChildren<Text>().text = target.GetComponent<monsterInfo>().power.ToString();
+        if (GameState.boardTable[x, y].GetComponent<nodeInfo>().powerTooltip != null)
+            GameState.boardTable[x, y].GetComponent<nodeInfo>().powerTooltip.GetComponentInChildren<Text>().text = target.GetComponent<monsterInfo>().power.ToString();
     }
-
 }
