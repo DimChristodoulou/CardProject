@@ -29,11 +29,11 @@ public class cardEventHandler : MonoBehaviour
 
         onSummon(minionName);
 
-        if (GameState.getActivePlayer().selectedCard.GetComponent<Card>().type.text.Equals("Minion"))
-        {
-            GameState.getActivePlayer().selectedCard.SetActive(false);         
-            GameState.getActivePlayer().handCards.RemoveAt(GameState.getActivePlayer().selectedCardIndex);
-        }
+//        if (GameState.getActivePlayer().selectedCard.GetComponent<Card>().type.text.Equals("Minion"))
+//        {
+//            GameState.getActivePlayer().selectedCard.SetActive(false);         
+//            GameState.getActivePlayer().handCards.RemoveAt(GameState.getActivePlayer().selectedCardIndex);
+//        }
     }
 
     /*
@@ -41,6 +41,7 @@ public class cardEventHandler : MonoBehaviour
      */
     public static void onMinionDeath(string minionName)
     {
+        cardEffects.instance.setUpDelegate(minionName);
         onDeath(minionName);
     }
 }

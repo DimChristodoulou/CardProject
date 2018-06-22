@@ -113,6 +113,9 @@ public class monsterInfo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (power <= 0 && monsterName != "")
+            cardEffects.destroyMinion(gameObject);
+        
         if(powerTooltipOfMonster!=null){
             powerTooltipOfMonster.transform.position = Camera.main.WorldToScreenPoint(this.transform.localPosition) + new Vector3(0, -50 - (CameraMovement.startingZoomLevel - CameraMovement.zoomLevel), 0);
         }

@@ -8,47 +8,53 @@ using UnityEngine.SceneManagement;
 
 public class nodeInfo : MonoBehaviour
 {
-	//contains info regarding nodes
+    //contains info regarding nodes
 
     public GameObject powerTooltip;
     private GameObject mainUI;
+
     public GameObject monsterOnNode;
-	//checks if node is free to place unit
-	private Renderer mRenderer;
-	public int xpos, ypos;
-	public bool isFree;
-	public Color activeColor = new Color32(0x00, 0x99, 0x00, 0xFF); // RGBA
-	public Color startColor = new Color32(0xFF, 0xFF, 0xFF, 0x00); // RGBA
-	public Color hoverColor = new Color32(0x2C, 0x2C, 0xFF, 0x8F); //RGBA
-	public Color currentColor; //current color, ignoring temporary effects like hovers
 
-	// Use this for initialization
-	void Start () {
-		mRenderer = this.GetComponentInParent<Renderer>();
-		currentColor = startColor;
-		mRenderer.material.color = currentColor;
+    //checks if node is free to place unit
+    private Renderer mRenderer;
+    public int xpos, ypos;
+    public bool isFree;
+    public Color activeColor = new Color32(0x00, 0x99, 0x00, 0xFF); // RGBA
+    public Color startColor = new Color32(0xFF, 0xFF, 0xFF, 0x00); // RGBA
+    public Color hoverColor = new Color32(0x2C, 0x2C, 0xFF, 0x8F); //RGBA
+    public Color currentColor; //current color, ignoring temporary effects like hovers
+
+    // Use this for initialization
+    void Start()
+    {
+        mRenderer = this.GetComponentInParent<Renderer>();
+        currentColor = startColor;
+        mRenderer.material.color = currentColor;
         mainUI = GameObject.Find("Main UI");
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
 
-	}
+    // Update is called once per frame
+    void Update()
+    {
+    }
 
-	void OnMouseEnter() {
-		colorHovered ();
-	}
+    void OnMouseEnter()
+    {
+        colorHovered();
+    }
 
-	void OnMouseExit() {
-		colorHovered ();
-	}
+    void OnMouseExit()
+    {
+        colorHovered();
+    }
 
-	void OnMouseDown() {
+    void OnMouseDown()
+    {
         Player activePlayer = GameState.players[GameState.activePlayerIndex];
         Debug.Log("ACTIVE PLAYER INDEX: " + GameState.activePlayerIndex);
 
         GameObject selectedMonster = activePlayer.selected;
-        
+
         if (selectedMonster != null)
         {
             Debug.Log(selectedMonster.name);
@@ -59,7 +65,7 @@ public class nodeInfo : MonoBehaviour
             //Debug.Log("search for node: " + xpos + ", " + ypos);
             if (Contains(activePlayer.availableNodesForSummon, new Pair<int, int>(xpos, ypos)))
             {
-                List<Pair<int, int>> summonNodes = new List<Pair<int, int>>() { new Pair<int, int>(xpos, ypos) }; // ONLY for monsters that need one node to spawn
+                List<Pair<int, int>> summonNodes = new List<Pair<int, int>>() {new Pair<int, int>(xpos, ypos)}; // ONLY for monsters that need one node to spawn
                 activePlayer.summonMonster(activePlayer.selectedCard.GetComponent<Card>().cardName.text, summonNodes, GameState.turn);
 
                 GameObject currentMinion = activePlayer.boardMinions[activePlayer.boardMinions.Count - 1];
@@ -68,13 +74,13 @@ public class nodeInfo : MonoBehaviour
                 Card selectedCard = activePlayer.selectedCard.GetComponent<Card>();
 
                 currentMinion.GetComponent<monsterInfo>().setData(jsonparse.cardTemplates[selectedCard.id].card_name,
-                                                                  jsonparse.cardTemplates[selectedCard.id].card_actionpoints,
-                                                                  jsonparse.cardTemplates[selectedCard.id].card_manacost,
-                                                                  jsonparse.cardTemplates[selectedCard.id].card_movement,
-                                                                  1,
-                                                                  activePlayer, GameState.turn,
-                                                                  jsonparse.cardTemplates[selectedCard.id].card_keywords,
-                                                                  activePlayer.selectedCard);
+                    jsonparse.cardTemplates[selectedCard.id].card_actionpoints,
+                    jsonparse.cardTemplates[selectedCard.id].card_manacost,
+                    jsonparse.cardTemplates[selectedCard.id].card_movement,
+                    1,
+                    activePlayer, GameState.turn,
+                    jsonparse.cardTemplates[selectedCard.id].card_keywords,
+                    activePlayer.selectedCard);
 
                 currentMinion.GetComponent<monsterInfo>().setPosition(summonNodes);
                 //currentMinion.GetComponent<monsterInfo>().parentPlayer = activePlayer;
@@ -87,6 +93,7 @@ public class nodeInfo : MonoBehaviour
                 GameState.setSquares(currentMinion.GetComponent<monsterInfo>().coords, false);
                 currentMinion.GetComponent<monsterInfo>().onPostMove();
                 monsterOnNode = currentMinion;
+
 
                 //GameState.boardTable[xpos, ypos].GetComponent<nodeInfo>().switchActiveColor();
 
@@ -111,43 +118,56 @@ public class nodeInfo : MonoBehaviour
                 powerTooltip.transform.SetParent(mainUI.transform);
                 powerTooltip.GetComponentInChildren<Text>().text = currentMinion.GetComponent<monsterInfo>().power.ToString();
 
-                cardEventHandler.onMinionSummon(jsonparse.cardTemplates[selectedCard.id].card_name);
+                if (monsterOnNode.GetComponent<monsterInfo>().card.GetComponent<Card>().description.text.Contains("[On Summon]"))
+                    cardEventHandler.onMinionSummon(jsonparse.cardTemplates[selectedCard.id].card_name);
+                
+                
+                activePlayer.selectedCard.SetActive(false);
+                activePlayer.handCards.RemoveAt(GameState.getActivePlayer().selectedCardIndex);
                 GameState.getActivePlayer().reorderHandCards();
             }
         }
         else
             return;
-
     }
 
-    bool Contains(List<Pair<int,int>> list, Pair<int,int> p)
+    bool Contains(List<Pair<int, int>> list, Pair<int, int> p)
     {
-        foreach (Pair<int,int> pair in list)
+        foreach (Pair<int, int> pair in list)
         {
             if (pair.First == p.First && pair.Second == p.Second)
                 return true;
         }
+
         return false;
     }
 
 
-    public void switchHoverColor() {
-		if (mRenderer.material.color == hoverColor) {
-			mRenderer.material.color = currentColor;
-		} else {
-			mRenderer.material.color = hoverColor;
-		}
-	}
+    public void switchHoverColor()
+    {
+        if (mRenderer.material.color == hoverColor)
+        {
+            mRenderer.material.color = currentColor;
+        }
+        else
+        {
+            mRenderer.material.color = hoverColor;
+        }
+    }
 
-	public void switchActiveColor() {
-		if (currentColor != activeColor) {
-			currentColor = activeColor;
-		}
-		else {
-			currentColor = startColor;
-		}
-		mRenderer.material.color = currentColor;
-	}
+    public void switchActiveColor()
+    {
+        if (currentColor != activeColor)
+        {
+            currentColor = activeColor;
+        }
+        else
+        {
+            currentColor = startColor;
+        }
+
+        mRenderer.material.color = currentColor;
+    }
 
     public void makeActive()
     {
@@ -162,24 +182,29 @@ public class nodeInfo : MonoBehaviour
     }
 
     //colors/uncolors the hovered squares for the movement, if the player has a monster selected
-    private void colorHovered() {
-		GameObject selectedMonster = GameState.players [GameState.activePlayerIndex].selected;
+    private void colorHovered()
+    {
+        GameObject selectedMonster = GameState.players[GameState.activePlayerIndex].selected;
         //Debug.Log("HELLO");
-		if (selectedMonster == null && !GameState.players[GameState.activePlayerIndex].cardSelected) {
-			return; //no selected monster for movement
-		}
+        if (selectedMonster == null && !GameState.players[GameState.activePlayerIndex].cardSelected)
+        {
+            return; //no selected monster for movement
+        }
+
         //int monsterSize = (int)Mathf.Sqrt ((float)selectedMonster.GetComponent<monsterInfo> ().coords.Count);\
         //Debug.Log("xpos: " + xpos);
-		if (xpos + 1/*monsterSize*/ >= GameState.dimensionX || ypos + 1/*monsterSize*/ >= GameState.dimensionY) {
-			return; //out of table placement
-		}
+        if (xpos + 1 /*monsterSize*/ >= GameState.dimensionX || ypos + 1 /*monsterSize*/ >= GameState.dimensionY)
+        {
+            return; //out of table placement
+        }
+
         //Debug.Log("monster size: " + 1/*monsterSize*/);
-		int i;
-		GameState.boardTable [xpos, ypos].GetComponent<nodeInfo> ().switchHoverColor ();
-		//for (i = 1; i < 1/*monsterSize*/; i++) {
-		//	GameState.boardTable [xpos+i, ypos].GetComponent<nodeInfo> ().switchHoverColor ();
-		//	GameState.boardTable [xpos, ypos+i].GetComponent<nodeInfo> ().switchHoverColor ();
-		//	GameState.boardTable [xpos+i, ypos+i].GetComponent<nodeInfo> ().switchHoverColor ();
-		//}
-	}
+        int i;
+        GameState.boardTable[xpos, ypos].GetComponent<nodeInfo>().switchHoverColor();
+        //for (i = 1; i < 1/*monsterSize*/; i++) {
+        //	GameState.boardTable [xpos+i, ypos].GetComponent<nodeInfo> ().switchHoverColor ();
+        //	GameState.boardTable [xpos, ypos+i].GetComponent<nodeInfo> ().switchHoverColor ();
+        //	GameState.boardTable [xpos+i, ypos+i].GetComponent<nodeInfo> ().switchHoverColor ();
+        //}
+    }
 }

@@ -25,6 +25,7 @@ public class cardEffects : MonoBehaviour
     private List<RaycastResult> results;
     private bool selected;
 
+    private static Player parentPlayer;
 
     // Use this for initialization
     void Start()
@@ -130,16 +131,51 @@ public class cardEffects : MonoBehaviour
                 cardEventHandler.onSummon += fireGiant;
                 break;
             }
+            case "Ashen":
+            {
+//                cardEventHandler.onSummon += ashen;
+                cardEventHandler.onDeath += ashen;
+                break;
+            }
         }
     }
 
-    void destroyMinion(GameObject minion)
+    public static void destroyMinion(GameObject minion)
     {
+        //Remove the minion from its player's board minions
+        minion.GetComponent<monsterInfo>().parentPlayer.boardMinions.Remove(minion);
+        //Add the minion to its player's graveyard cards.
+        minion.GetComponent<monsterInfo>().parentPlayer.graveyard.Add(minion.GetComponent<monsterInfo>().card);
+        //Make the minion's node free.
+        GameState.boardTable[minion.GetComponent<monsterInfo>().coords[0].First, minion.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
+        GameObject topGraveyardCard = minion.GetComponent<monsterInfo>().parentPlayer.graveyard[minion.GetComponent<monsterInfo>().parentPlayer.graveyard.Count - 1];
+        
+        parentPlayer = minion.GetComponent<monsterInfo>().parentPlayer;
         Destroy(minion);
         Destroy(minion.GetComponent<monsterInfo>().powerTooltipOfMonster);
 
         if (minion.GetComponent<monsterInfo>().card.GetComponent<Card>().description.text.Contains("[On Death]"))
-            cardEventHandler.onMinionDeath(minion.GetComponent<monsterInfo>().name);
+            cardEventHandler.onMinionDeath(minion.GetComponent<monsterInfo>().monsterName);
+        
+        topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
+        topGraveyardCard.transform.SetParent(GameObject.Find("graveyard").transform, false);
+        topGraveyardCard.transform.localPosition = new Vector3(0, 0, 0);
+        topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
+        topGraveyardCard.SetActive(true);
+    }
+
+    void ashen(string minionName)
+    {
+        Player opponentPlayer;
+        if (parentPlayer == GameState.players[0])
+            opponentPlayer = GameState.players[1];
+        else
+            opponentPlayer = GameState.players[0];
+
+        foreach (GameObject minion in opponentPlayer.boardMinions)
+            minion.GetComponent<monsterInfo>().power -= 3;
+
+        parentPlayer = null;
     }
 
     public void fireGiant(string minionName)
@@ -227,19 +263,7 @@ public class cardEffects : MonoBehaviour
             GameObject minionGO = allMinions[i];
             if (minionGO.GetComponent<monsterInfo>().power <= 12)
             {
-                //Remove the minion from its player's board minions
-                minionGO.GetComponent<monsterInfo>().parentPlayer.boardMinions.Remove(minionGO);
-                //Add the minion to its player's graveyard cards.
-                minionGO.GetComponent<monsterInfo>().parentPlayer.graveyard.Add(minionGO.GetComponent<monsterInfo>().card);
-                //Make the minion's node free.
-                GameState.boardTable[minionGO.GetComponent<monsterInfo>().coords[0].First, minionGO.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
-                GameObject topGraveyardCard = minionGO.GetComponent<monsterInfo>().parentPlayer.graveyard[minionGO.GetComponent<monsterInfo>().parentPlayer.graveyard.Count - 1];
                 destroyMinion(minionGO);
-                topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
-                topGraveyardCard.transform.SetParent(GameObject.Find("graveyard").transform, false);
-                topGraveyardCard.transform.localPosition = new Vector3(0, 0, 0);
-                topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
-                topGraveyardCard.SetActive(true);
             }
         }
 
@@ -256,19 +280,7 @@ public class cardEffects : MonoBehaviour
             GameObject minionGO = allMinions[i];
             if (i != allMinions.Length - 1)
             {
-                //Remove the minion from its player's board minions
-                minionGO.GetComponent<monsterInfo>().parentPlayer.boardMinions.Remove(minionGO);
-                //Add the minion to its player's graveyard cards.
-                minionGO.GetComponent<monsterInfo>().parentPlayer.graveyard.Add(minionGO.GetComponent<monsterInfo>().card);
-                //Make the minion's node free.
-                GameState.boardTable[minionGO.GetComponent<monsterInfo>().coords[0].First, minionGO.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
-                GameObject topGraveyardCard = GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
                 destroyMinion(minionGO);
-                topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
-                topGraveyardCard.transform.SetParent(GameObject.Find("graveyard").transform, false);
-                topGraveyardCard.transform.localPosition = new Vector3(0, 0, 0);
-                topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
-                topGraveyardCard.SetActive(true);
             }
         }
 
@@ -290,8 +302,8 @@ public class cardEffects : MonoBehaviour
                 if (!coords.GetComponent<nodeInfo>().isFree && coords.GetComponent<nodeInfo>().monsterOnNode != null)
                 {
                     destroyMinion(coords.GetComponent<nodeInfo>().monsterOnNode);
-                    GameState.getActivePlayer().boardMinions.Remove(coords.GetComponent<nodeInfo>().monsterOnNode);
-                    GameState.getActivePlayer().graveyard.Add(coords.GetComponent<nodeInfo>().monsterOnNode.GetComponent<monsterInfo>().card);
+//                    GameState.getActivePlayer().boardMinions.Remove(coords.GetComponent<nodeInfo>().monsterOnNode);
+//                    GameState.getActivePlayer().graveyard.Add(coords.GetComponent<nodeInfo>().monsterOnNode.GetComponent<monsterInfo>().card);
                 }
             }
         }
@@ -456,28 +468,7 @@ public class cardEffects : MonoBehaviour
             //Deal its damage to both players
             DealDamageToPlayer(GameState.players[0], minionPower);
             DealDamageToPlayer(GameState.players[1], minionPower);
-            //THIS IS WRONG: should add to parent player's graveyard
-            GameState.getActivePlayer().graveyard.Add(target.GetComponent<monsterInfo>().card);
-
-            GameObject topGraveyardCard = GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
-
-            //This part shows the top graveyard card
-            topGraveyardCard.SetActive(true);
-
-            topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
-
-            topGraveyardCard.transform.SetParent(GameObject.Find("graveyard").transform, false);
-            topGraveyardCard.transform.localPosition = new Vector3(0, 0, 0);
-
-            topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
-
-            //Remove the target from the board minions
-            target.GetComponent<monsterInfo>().parentPlayer.boardMinions.Remove(target);
             destroyMinion(target);
-
-            //then we get the coordinates of the monster and set its square to free...
-            GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First,
-                target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
             //then we destroy the card
 
             //GameState.getActivePlayer().handCards.RemoveAt(GameState.getActivePlayer().selectedCardIndex);
@@ -528,31 +519,7 @@ public class cardEffects : MonoBehaviour
 
         if (target.CompareTag("Minion"))
         {
-            GameState.getActivePlayer().boardMinions.Remove(target);
-            GameState.getActivePlayer().graveyard.Add(target.GetComponent<monsterInfo>().card);
-
-            GameObject topGraveyardCard = GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
-
-            topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
-
-            topGraveyardCard.transform.SetParent(GameObject.Find("graveyard").transform, false);
-            topGraveyardCard.transform.localPosition = new Vector3(0, 0, 0);
-
-            topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
-
-            topGraveyardCard.SetActive(true);
-
-            GameState.getActivePlayer().handCards.Remove(GameState.getActivePlayer().selectedCard);
-            GameState.getActivePlayer().graveyard.Add(GameState.getActivePlayer().selectedCard);
-            Destroy(GameState.getActivePlayer().selectedCard);
-
-
-            Debug.Log("HAND CARDS SIZE: " + GameState.getActivePlayer().handCards.Count);
-            target.GetComponent<monsterInfo>().parentPlayer.boardMinions.Remove(target);
             destroyMinion(target);
-
-            //then we get the coordinates of the monster and set its square to free...
-            GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First, target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
             //Reorder cards here until we do better refactoring
             GameState.getActivePlayer().reorderHandCards();
             cardEventHandler.onSummon -= fireball;
@@ -580,19 +547,7 @@ public class cardEffects : MonoBehaviour
 
         if (target.CompareTag("Minion") && adjacentMinions.Contains(target))
         {
-            //Remove the minion from its player's board minions
-            target.GetComponent<monsterInfo>().parentPlayer.boardMinions.Remove(target);
-            //Add the minion to its player's graveyard cards.
-            target.GetComponent<monsterInfo>().parentPlayer.graveyard.Add(target.GetComponent<monsterInfo>().card);
-            //Make the minion's node free.
-            GameState.boardTable[target.GetComponent<monsterInfo>().coords[0].First, target.GetComponent<monsterInfo>().coords[0].Second].GetComponent<nodeInfo>().isFree = true;
-            GameObject topGraveyardCard = GameState.getActivePlayer().graveyard[GameState.getActivePlayer().graveyard.Count - 1];
             destroyMinion(target);
-            topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
-            topGraveyardCard.transform.SetParent(GameObject.Find("graveyard").transform, false);
-            topGraveyardCard.transform.localPosition = new Vector3(0, 0, 0);
-            topGraveyardCard.transform.localScale = new Vector3(0.52f, 0.5f, 0.75f);
-            topGraveyardCard.SetActive(true);
             cardEventHandler.onSummon -= fireElemental;
         }
         else if (results.Count > 0)
