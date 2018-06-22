@@ -127,6 +127,7 @@ public class Player
     public void discardCard(int indexInHand)
     {
         handCards.RemoveAt(indexInHand);
+        reorderHandCards();
         graveyard.Add(handCards[indexInHand]);
         
         GameObject topGraveyardCard = graveyard[graveyard.Count - 1];
