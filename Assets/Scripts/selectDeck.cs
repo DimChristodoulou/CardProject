@@ -52,7 +52,7 @@ public class selectDeck : MonoBehaviour {
             Debug.Log(deckCodeList[i][j]);
             deckById.Add(int.Parse(deckCodeList[i][j]));
         }
-        Player.deck = deckById;
+        GameState.deck = deckById;
         SceneManager.LoadScene("mainscene");
     }
 	

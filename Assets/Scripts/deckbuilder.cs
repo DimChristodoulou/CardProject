@@ -214,7 +214,7 @@ public class deckbuilder : MonoBehaviour {
     {
 
         string deckCode = myInputField.text + "☼";
-        foreach (int cardId in Player.deck)
+        foreach (int cardId in GameState.deck)
         {
             deckCode += (cardId).ToString() + " ";
         }

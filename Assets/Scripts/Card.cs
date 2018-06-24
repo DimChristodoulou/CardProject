@@ -148,11 +148,11 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
             {
                 if (deckbuilder.deckBuildActive == true)
                 {
-                    if (Player.deck.Count < 30)
+                    if (GameState.deck.Count < 30)
                     {
                         string clickedCard = gameObject.name;
                         Debug.Log(clickedCard);
-                        if (!Player.deck.Contains(gameObject.GetComponent<Card>().id))
+                        if (!GameState.deck.Contains(gameObject.GetComponent<Card>().id))
                         {
 							GameObject cardListEntry = (GameObject) Instantiate(Resources.Load("cardListEntry"));
                             cardListEntry.gameObject.tag = "cardEntry";
@@ -165,10 +165,10 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
                             cardEntryOffset -= 20;
                             cardListEntry.transform.localPosition = new Vector3(3.382453f, cardEntryOffset, 0);
                             ((RectTransform)cardListEntry.transform).sizeDelta = new Vector2(118.89f, 17.58f);
-                            Player.deck.Add(gameObject.GetComponent<Card>().id);
+                            GameState.deck.Add(gameObject.GetComponent<Card>().id);
                             timesTwo = false;
                         }
-                        else if (Player.deck.Contains(gameObject.GetComponent<Card>().id) && timesTwo == false)
+                        else if (GameState.deck.Contains(gameObject.GetComponent<Card>().id) && timesTwo == false)
                         {
                             GameObject[] cardEntries = GameObject.FindGameObjectsWithTag("cardEntry");
                             foreach (GameObject card in cardEntries)
@@ -179,7 +179,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
                                     timesTwo = true;
                                 }
                             }
-                            Player.deck.Add(gameObject.GetComponent<Card>().id);
+                            GameState.deck.Add(gameObject.GetComponent<Card>().id);
                         }
                     }
                 }

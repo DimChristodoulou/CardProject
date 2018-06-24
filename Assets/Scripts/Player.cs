@@ -24,7 +24,7 @@ public class Player
     public List<GameObject> boardMinions;
     public List<GameObject> graveyard;
 
-    public static List<int> deck = new List<int>{}; //Changed from List<GameObject> to static List<int> because the deck will consist of card ids.
+    public List<int> deck; //Changed from List<GameObject> to static List<int> because the deck will consist of card ids.
 
     private int deckSize;
     public bool isPlaying = false;
@@ -44,18 +44,20 @@ public class Player
         cardSelected = false;
     }
 
-    public Player(int pPos, string pName)
+    public Player(int pPos, string pName, List<int> startingDeck)
     {
+        deck = new List<int>(startingDeck);
         selected = null;
         monsterPrefab = ((GameObject) Resources.Load("Monster"));
         heroPrefab = ((GameObject) Resources.Load("Hero"));
         this.playingPos = pPos;
         this.pName = pName;
-        this.deckSize = 30;
+        this.deckSize = deck.Count;
         handCards = new List<GameObject>();
         boardMinions = new List<GameObject>();
         graveyard = new List<GameObject>();
         originalCard = new Card();
+       
 
         healthGO = (GameObject) GameObject.Instantiate(Resources.Load("playerHealth"));
         healthGO.transform.SetParent(mainui.transform);
@@ -85,6 +87,16 @@ public class Player
 //                deckSize--;
             }
         }
+    }
+
+    public List<int> getDeck()
+    {
+        return deck;
+    }
+
+    public void SetDeck(List<int> deck)
+    {
+        this.deck = deck;
     }
 
     public void DrawCard(int cardId)
@@ -126,7 +138,7 @@ public class Player
         handCards.RemoveAt(indexInHand);
         reorderHandCards();
         graveyard.Add(handCards[indexInHand]);
-        
+
         GameObject topGraveyardCard = graveyard[graveyard.Count - 1];
 
         topGraveyardCard.GetComponent<Card>().pointerEventsEnabled = false;
@@ -227,11 +239,16 @@ public class Player
         //Increase mana at start of turn.
         this.increaseMana(1);
         //Draw card after increasing mana. (Max number of cardTemplates in hand is 8).
-        if (handCards.Count < 8)
+        if (handCards.Count < 8 && deckSize > 0)
         {
             int cardDrawn = Random.Range(0, deck.Count);
             DrawCard(deck[Random.Range(0, deck.Count)]);
             deck.RemoveAt(cardDrawn);
+        }
+        else
+        {
+            Text remainingCards = GameObject.Find("Remaining_Cards").GetComponent<Text>();
+            remainingCards.text = "Remaining:\n" + (deckSize);
         }
 
         //UI MANA GOES HERE

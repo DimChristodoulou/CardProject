@@ -22,6 +22,7 @@ public class GameState : MonoBehaviour {
 	static public int dimensionX=7, dimensionY=11;
 	static private float xspacing = 1.2f, yspacing = 1.2f; //offset for board view
 
+	public static List<int> deck;
 
 	// Use this for initialization
 	void Start () {
@@ -90,7 +91,7 @@ public class GameState : MonoBehaviour {
 		players = new Player[numOfPlayers];
 		int i = 0;
 		for (; i < numOfPlayers; i++) {
-			players [i] = new Player (i+1, "Player" + (i + 1));
+			players [i] = new Player (i+1, "Player" + (i + 1), deck);
 		}
 		for (i=0; i < numOfPlayers; i++) {
 			players [i].InstantiateHero ();
