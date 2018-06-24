@@ -24,10 +24,7 @@ public class Player
     public List<GameObject> boardMinions;
     public List<GameObject> graveyard;
 
-    public static List<int>
-        deck = new List<int>
-        {
-        }; //Changed from List<GameObject> to static List<int> because the deck will consist of card ids.
+    public static List<int> deck = new List<int>{}; //Changed from List<GameObject> to static List<int> because the deck will consist of card ids.
 
     private int deckSize;
     public bool isPlaying = false;

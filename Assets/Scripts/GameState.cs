@@ -11,7 +11,7 @@ public class GameState : MonoBehaviour {
 	static public Player[] players;
 	static public int numOfPlayers;
 	static public int activePlayerIndex;
-	static private float moveTime = 30.0f;
+	static private float moveTime = 90.0f;
 	static public float currentMoveTime;
 	static public int turn;
 	static public Texture2D manaTexture;
@@ -35,7 +35,6 @@ public class GameState : MonoBehaviour {
 		turn = 0;
 		boardTable = createBoard (dimensionX, dimensionY);
 		setPlayers (2);
-		moveTime = 30.0f;
 		activePlayerIndex = -1;
 		nextPlayerTurn ();
 	}
