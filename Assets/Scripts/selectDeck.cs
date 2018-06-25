@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class selectDeck : MonoBehaviour {
 
-    private string path = "Assets/Prefabs/Resources/playerDecks.txt";
+    private string path = "Assets/Resources/playerDecks.txt";
 
     List<int> deckById = new List<int>();
     List<List<string>> deckCodeList = new List<List<string>>();

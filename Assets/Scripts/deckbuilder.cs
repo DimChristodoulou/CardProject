@@ -219,7 +219,7 @@ public class deckbuilder : MonoBehaviour {
             deckCode += (cardId).ToString() + " ";
         }
 
-        string path = "Assets/Prefabs/Resources/playerDecks.txt";
+        string path = "Assets/Resources/playerDecks.txt";
         StreamReader reader = new StreamReader(path, true);
         string allText = reader.ReadToEnd();
         reader.Close();

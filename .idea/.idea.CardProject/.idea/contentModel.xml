@@ -130,10 +130,8 @@
             <e p="WebSocket.cs" t="Include" />
           </e>
         </e>
-        <e p="Prefabs" t="Include">
-          <e p="Resources" t="Include">
-            <e p="playerDecks.txt" t="Include" />
-          </e>
+        <e p="Resources" t="Include">
+          <e p="playerDecks.txt" t="Include" />
         </e>
         <e p="Scripts" t="Include">
           <e p="attacking.cs" t="Include" />
