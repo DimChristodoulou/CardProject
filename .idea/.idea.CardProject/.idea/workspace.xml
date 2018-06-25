@@ -88,11 +88,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="selectDeck.cs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="selectDeck.cs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/selectDeck.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
+            <state relative-caret-position="506">
+              <caret line="42" column="25" selection-start-line="42" selection-start-column="25" selection-end-line="42" selection-end-column="25" />
               <folding>
                 <marker date="1529949111493" expanded="true" signature="6:185" ph="..." />
                 <marker date="1529949111493" expanded="true" signature="226:2323" ph="{...}" />
@@ -148,11 +148,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="deckbuilder.cs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="deckbuilder.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/deckbuilder.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="744">
-              <caret line="241" column="5" selection-start-line="241" selection-start-column="5" selection-end-line="241" selection-end-column="5" />
+              <caret line="241" column="22" selection-start-line="241" selection-end-line="242" />
               <folding>
                 <marker date="1529949258585" expanded="true" signature="6:169" ph="..." />
                 <marker date="1529949258585" expanded="true" signature="212:8684" ph="{...}" />
@@ -401,12 +401,12 @@
       <workItem from="1528054300801" duration="13392000" />
       <workItem from="1529689276392" duration="8723000" />
       <workItem from="1529853597199" duration="2028000" />
-      <workItem from="1529945102669" duration="3461000" />
+      <workItem from="1529945102669" duration="3820000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47101000" />
+    <option name="totallyTimeSpent" value="47460000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -419,7 +419,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="right" id="Errors In Solution" order="3" weight="0.32995737" />
@@ -1124,27 +1123,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/selectDeck.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
-          <folding>
-            <marker date="1529949111493" expanded="true" signature="6:185" ph="..." />
-            <marker date="1529949111493" expanded="true" signature="226:2323" ph="{...}" />
-            <marker date="1529949111493" expanded="true" signature="498:1939" ph="{...}" />
-            <marker date="1529949111493" expanded="true" signature="910:1908" ph="{...}" />
-            <marker date="1529949111493" expanded="true" signature="1215:1273" ph="{...}" />
-            <marker date="1529949111493" expanded="true" signature="1978:2251" ph="{...}" />
-            <marker date="1529949111493" expanded="true" signature="2044:2164" ph="{...}" />
-            <marker date="1529949111493" expanded="true" signature="2309:2321" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/deckbuilder.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="744">
-          <caret line="241" column="5" selection-start-line="241" selection-start-column="5" selection-end-line="241" selection-end-column="5" />
+          <caret line="241" column="22" selection-start-line="241" selection-end-line="242" />
           <folding>
             <marker date="1529949258585" expanded="true" signature="6:169" ph="..." />
             <marker date="1529949258585" expanded="true" signature="212:8684" ph="{...}" />
@@ -1177,6 +1159,23 @@
             <marker date="1529949258585" expanded="true" signature="8088:8682" ph="{...}" />
             <marker date="1529949258585" expanded="true" signature="8192:8263" ph="{...}" />
             <marker date="1529949258585" expanded="true" signature="8613:8676" ph="/* writer.WriteLine(deckCode); ... */" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/selectDeck.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="42" column="25" selection-start-line="42" selection-start-column="25" selection-end-line="42" selection-end-column="25" />
+          <folding>
+            <marker date="1529949111493" expanded="true" signature="6:185" ph="..." />
+            <marker date="1529949111493" expanded="true" signature="226:2323" ph="{...}" />
+            <marker date="1529949111493" expanded="true" signature="498:1939" ph="{...}" />
+            <marker date="1529949111493" expanded="true" signature="910:1908" ph="{...}" />
+            <marker date="1529949111493" expanded="true" signature="1215:1273" ph="{...}" />
+            <marker date="1529949111493" expanded="true" signature="1978:2251" ph="{...}" />
+            <marker date="1529949111493" expanded="true" signature="2044:2164" ph="{...}" />
+            <marker date="1529949111493" expanded="true" signature="2309:2321" ph="{...}" />
           </folding>
         </state>
       </provider>
