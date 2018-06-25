@@ -326,17 +326,18 @@ public class cardEffects : MonoBehaviour
     public void flameShaman(string minionName)
     {
         //TODO: Make this always while this is in play, instead of one time.
-        List<GameObject> allGameObjects = GetAllObjectsInScene();
+        GameObject[] allGameObjects = GameObject.FindGameObjectsWithTag("Minion");
         foreach (GameObject GO in allGameObjects)
         {
-            if (GO.GetComponent<monsterInfo>() != null && GO.GetComponent<monsterInfo>().card != null)
+            //ADD THIS IF IF WE'RE NOT HAVING CARDS FOR TOKENS.
+            //if (GO.GetComponent<monsterInfo>() != null && GO.GetComponent<monsterInfo>().card != null)
+            //{
+            if (GO.GetComponent<monsterInfo>().card.GetComponent<Card>().attribute == "Fire")
             {
-                if (GO.GetComponent<monsterInfo>().card.GetComponent<Card>().attribute == "Fire")
-                {
-                    GO.GetComponent<monsterInfo>().power += 2;
-                    updatePowerTooltip(GO);
-                }
+                GO.GetComponent<monsterInfo>().power += 2;
+                updatePowerTooltip(GO);
             }
+            //}
         }
     }
 
@@ -643,23 +644,6 @@ public class cardEffects : MonoBehaviour
     /*
      * Function that returns a List with all GameObjects in a scene.
      */
-    private static List<GameObject> GetAllObjectsInScene()
-    {
-        List<GameObject> objectsInScene = new List<GameObject>();
-
-        foreach (GameObject go in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[])
-        {
-            if (go.hideFlags != HideFlags.None)
-                continue;
-
-            if (PrefabUtility.GetPrefabType(go) == PrefabType.Prefab || PrefabUtility.GetPrefabType(go) == PrefabType.ModelPrefab)
-                continue;
-
-            objectsInScene.Add(go);
-        }
-
-        return objectsInScene;
-    }
 
     private IEnumerator waitForUserToSelectTarget()
     {
