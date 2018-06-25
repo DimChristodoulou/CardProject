@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 
-public class deckbuilder : MonoBehaviour {
-
+public class deckbuilder : MonoBehaviour
+{
     public InputField searchCard;
 
     public static bool deckBuildActive = false;
@@ -25,11 +26,20 @@ public class deckbuilder : MonoBehaviour {
     private GameObject rightArrow;
     public InputField myInputField;
 
+    private string path;
+
     private int[] cardsToBeDisplayed;
+
+    public TextAsset textFile;
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
+
+        Directory.CreateDirectory("Decks");
+        path = "Decks//";
+        textFile = (TextAsset) Resources.Load("playerDecks.txt");
         //TODO: Button as prefab
         cardsToBeDisplayed = new int[jsonparse.cardids.Length];
         jsonparse.cardids.CopyTo(cardsToBeDisplayed, 0);
@@ -47,10 +57,11 @@ public class deckbuilder : MonoBehaviour {
     {
         GameObject[] cardsToBeDestroyed;
         cardsToBeDestroyed = GameObject.FindGameObjectsWithTag("Card");
-        foreach(GameObject card in cardsToBeDestroyed)
+        foreach (GameObject card in cardsToBeDestroyed)
         {
             Destroy(card);
         }
+
         GameObject leftArrow = GameObject.Find("leftArrowButton(Clone)");
         Destroy(leftArrow);
         GameObject rightArrow = GameObject.Find("rightArrowButton(Clone)");
@@ -70,6 +81,7 @@ public class deckbuilder : MonoBehaviour {
         {
             Destroy(card);
         }
+
         GameObject leftArrow = GameObject.Find("leftArrowButton(Clone)");
         Destroy(leftArrow);
         GameObject rightArrow = GameObject.Find("rightArrowButton(Clone)");
@@ -94,19 +106,19 @@ public class deckbuilder : MonoBehaviour {
 
         int[] filteredCards = new int[jsonparse.cardTemplates.Length];
         int j = 0;
-        for(int i=0; i< jsonparse.cardTemplates.Length; i++)
+        for (int i = 0; i < jsonparse.cardTemplates.Length; i++)
         {
             if (jsonparse.cardTemplates[i].card_attribute.Equals(attribute))
                 filteredCards[j++] = jsonparse.cardTemplates[i].card_id;
         }
-        
-        
-       // int[] shortFilteredCards = filteredCards.Where(i => Array.IndexOf(filteredCards, i) <= j).ToArray();
+
+
+        // int[] shortFilteredCards = filteredCards.Where(i => Array.IndexOf(filteredCards, i) <= j).ToArray();
         //Array.Clear(filteredCards, j, filteredCards.Length - j);
         int[] shortFilteredCards = new int[j];
         Array.Copy(filteredCards, shortFilteredCards, j);
         Debug.Log("SIZE OF FILTERED CARDS: " + shortFilteredCards.Length);
-        
+
         currentEightCards = 0;
         GameObject leftArrow = GameObject.Find("leftArrowButton(Clone)");
         Destroy(leftArrow);
@@ -123,7 +135,8 @@ public class deckbuilder : MonoBehaviour {
         GameObject mainui = GameObject.Find("Main UI");
         GameObject[] cardsToBeDestroyed;
         cardsToBeDestroyed = GameObject.FindGameObjectsWithTag("Card");
-        foreach (GameObject card in cardsToBeDestroyed){
+        foreach (GameObject card in cardsToBeDestroyed)
+        {
             Destroy(card);
         }
 
@@ -137,6 +150,7 @@ public class deckbuilder : MonoBehaviour {
             else if (jsonparse.cardTemplates[i].card_name.ToLower().Contains(searchCard.GetComponent<InputField>().text.ToLower()) || jsonparse.cardTemplates[i].card_text.ToLower().Contains(searchCard.GetComponent<InputField>().text.ToLower()))
                 filteredCards[j++] = jsonparse.cardTemplates[i].card_id;
         }
+
         int[] shortFilteredCards = filteredCards.Where(i => i != 0).ToArray();
         currentEightCards = 0;
         GameObject leftArrow = GameObject.Find("leftArrowButton(Clone)");
@@ -154,25 +168,27 @@ public class deckbuilder : MonoBehaviour {
         int len = jsonparse.cardids.Length;
 
         int i;
-        if ((currentEightCards+1)*8 < cardsToOutput.Length)
+        if ((currentEightCards + 1) * 8 < cardsToOutput.Length)
         {
-            rightArrow = (GameObject)Instantiate(Resources.Load("rightArrowButton"));
+            rightArrow = (GameObject) Instantiate(Resources.Load("rightArrowButton"));
             rightArrow.transform.SetParent(mainui.transform, false);
             rightArrow.transform.localPosition = new Vector3(230f, 0, 0);
             Button rAButton = rightArrow.GetComponent<Button>();
             rAButton.onClick.AddListener(() => nextScreen(mainui, cardsToOutput));
         }
-        if(currentEightCards >= 1)
+
+        if (currentEightCards >= 1)
         {
-            leftArrow = (GameObject)Instantiate(Resources.Load("leftArrowButton"));
+            leftArrow = (GameObject) Instantiate(Resources.Load("leftArrowButton"));
             leftArrow.transform.SetParent(mainui.transform, false);
             leftArrow.transform.localPosition = new Vector3(-370f, 0, 0);
             Button lAButton = leftArrow.GetComponent<Button>();
             lAButton.onClick.AddListener(() => lastScreen(mainui, cardsToOutput));
         }
-        for(i = 0; i < 8; i++)
+
+        for (i = 0; i < 8; i++)
         {
-            if((currentEightCards*8)+i < cardsToOutput.Length)
+            if ((currentEightCards * 8) + i < cardsToOutput.Length)
             {
                 if ((i / 4) % 2 == 0)
                     originalCard.initializeCard(-280f + (140 * (i % 4)), 70, 0, cardsToOutput[(currentEightCards * 8) + i]);
@@ -202,30 +218,29 @@ public class deckbuilder : MonoBehaviour {
         main_ui.SetActive(true);
         filterByAttribute(attribute);
         deckBuildActive = true;
-        GameObject saveDeck = (GameObject)Instantiate(Resources.Load("Button"));
+        GameObject saveDeck = (GameObject) Instantiate(Resources.Load("Button"));
         saveDeck.transform.SetParent(main_ui.transform);
         saveDeck.transform.localPosition = new Vector3(83.3f, 174.89f, 0);
-        ((RectTransform)saveDeck.transform).sizeDelta = new Vector2(100, 30);
+        ((RectTransform) saveDeck.transform).sizeDelta = new Vector2(100, 30);
         saveDeck.GetComponentInChildren<Text>().text = "SAVE DECK";
         saveDeck.GetComponent<Button>().onClick.AddListener(SaveDeck);
     }
 
     void SaveDeck()
     {
-
         string deckCode = myInputField.text + "☼";
         foreach (int cardId in GameState.deck)
         {
             deckCode += (cardId).ToString() + " ";
         }
-
-        string path = "Assets/Resources/playerDecks.txt";
-        StreamReader reader = new StreamReader(path, true);
+        var file = File.Open(path + "Decks.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+        StreamReader reader = new StreamReader(file);
         string allText = reader.ReadToEnd();
         reader.Close();
 
-        StreamWriter writer = new StreamWriter(path, true);
-        writer.WriteLine(deckCode);
-        writer.Close();
+//        StreamWriter writer = new StreamWriter(file);
+        System.IO.File.WriteAllText(path + "Decks.txt", deckCode + "\n");
+//        writer.WriteLine(deckCode);
+//        writer.Close();
     }
 }

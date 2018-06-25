@@ -5677,6 +5677,7 @@ MonoBehaviour:
   main_ui: {fileID: 294597677}
   deck_canvas_ui: {fileID: 101410077}
   myInputField: {fileID: 760763906}
+  textFile: {fileID: 4900000, guid: ee671b37eb4f1e7409092a03fc5bef98, type: 3}
 --- !u!4 &1764626293
 Transform:
   m_ObjectHideFlags: 0
