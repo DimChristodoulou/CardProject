@@ -30,7 +30,7 @@ public class movement : MonoBehaviour {
 				newPos.Add (new Pair<int,int> (xpos + i, ypos+j));
 			}
 		}
-		if (!Utilities.DFS (gameObject.GetComponent<monsterInfo> ().coords, newPos, gameObject.GetComponent<monsterInfo> ().movspeed)) {
+		if (!Utilities.BFS (gameObject.GetComponent<monsterInfo> ().coords, newPos, gameObject.GetComponent<monsterInfo> ().movspeed)) {
 			//untoggle the element from player that clicked it, we already have the reference from the item he selected as selectedMonster
 			return;
 		}
@@ -77,7 +77,7 @@ public class movement : MonoBehaviour {
 				}
 				if (goalPos.Count > 0) {
 					int pr = startPos.Count;
-					if (Utilities.DFS (startPos, goalPos, maxmoves)) {
+					if (Utilities.BFS (startPos, goalPos, maxmoves)) {
 						foreach (Pair<int,int> pair in goalPos) {
 							if (!availableMoves.ContainsKey (pair)) {
 								availableMoves.Add (pair, 1);

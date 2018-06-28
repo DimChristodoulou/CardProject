@@ -43,6 +43,43 @@ public class Utilities {
 		return false;
 	}
 
+	static public bool BFS(List<Pair<int,int>> curPos, List<Pair<int,int>> goalPos, int maxmoves) {
+		List<Pair<int,int>> node = new List<Pair<int,int>> ();
+		Queue q = new Queue ();
+		q.Enqueue (new Pair <List<Pair<int,int>>, int> (curPos, 0)); //queue stores the list of position nodes and the moves that were needed for that
+		Dictionary<List<Pair<int,int>>, int> explored = new Dictionary<List<Pair<int,int>>, int> ();
+		while (q.Count > 0) {
+			node = ((Pair <List<Pair<int,int>>, int>)q.Peek ()).First;
+			int moves = ((Pair <List<Pair<int,int>>, int>)q.Peek ()).Second;
+			q.Dequeue ();
+			if (ComparePairLists (goalPos, node)) {
+				return true;
+			}
+			if (moves >= maxmoves) {
+				continue;
+			}
+			for (int i = -1; i <= 1; i++) {
+				for (int j = -1 + Mathf.Abs (i); j <= 1 - Mathf.Abs (i); j++) {
+					List<Pair<int,int>> child = new List<Pair<int,int>> ();
+					foreach (Pair<int,int> startpair in node) {
+						if (startpair.First+i >= 0 && startpair.First+i < GameState.dimensionX && startpair.Second+j >= 0 && startpair.Second+j < GameState.dimensionY && 
+							(GameState.boardTable [startpair.First + i, startpair.Second + j].GetComponent<nodeInfo> ().isFree || Utilities.ContainsPair(curPos, new Pair<int,int>(startpair.First+i,startpair.Second+j)))) {
+							child.Add (new Pair<int,int> (startpair.First + i, startpair.Second + j));
+						} else {
+							child.Clear ();
+							break;
+						}
+					}
+					if (child.Count>0 && !explored.ContainsKey(child)) {
+						explored.Add (child, moves + 1);
+						q.Enqueue (new Pair <List<Pair<int,int>>, int> (child, moves+1));
+					}
+				}
+			}
+		}
+		return false;
+	}
+
 	//utility O(n^2) function to compare 2 lists of pairs
 	//we need better complexity algorithm for that
 	static private bool ComparePairLists(List<Pair<int,int>> aListA, List<Pair<int,int>> aListB)
