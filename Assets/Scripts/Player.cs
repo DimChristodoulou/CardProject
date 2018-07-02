@@ -177,6 +177,23 @@ public class Player
         {
             availableNodesForSummon = new List<Pair<int, int>>();
 
+			//for highlighting peripheral squares to monsters
+			foreach (GameObject minion in GameState.getActivePlayer().boardMinions) {
+				foreach (Pair<int,int> cell in minion.GetComponent<monsterInfo>().coords) {
+					for (int i = -1; i <= 1; i++) {
+						for (int j = -1; j <= 1; j++) {
+							if (cell.First + i >= 0 && cell.First + i < GameState.boardTable.GetLength (1) &&
+							    cell.Second + j >= 0 && cell.Second + j < GameState.boardTable.GetLength (1)) {
+								if (GameState.boardTable [cell.First + i, cell.Second + j].GetComponent<nodeInfo> ().isFree) {
+									GameState.boardTable [cell.First + i, cell.Second + j].GetComponent<nodeInfo> ().makeActive ();
+									availableNodesForSummon.Add (new Pair<int, int> (cell.First + i, cell.Second + j));
+								}
+							}
+						}
+					}
+				}
+			}
+
             if (GameState.getActivePlayer() == GameState.players[0])
             {
                 for (int i = 0; i < 7; i++)
