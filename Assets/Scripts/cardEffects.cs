@@ -184,8 +184,10 @@ public class cardEffects : MonoBehaviour
         List<GameObject> adjacentMinions = getAdjacentMinions(GameState.boardTable, thisMinion.GetComponent<monsterInfo>().coords[0].First, thisMinion.GetComponent<monsterInfo>().coords[0].Second);
         foreach (GameObject minionGO in adjacentMinions)
         {
-            minionGO.GetComponent<monsterInfo>().power -= 5;
-            updatePowerTooltip(minionGO);
+            if(minionGO.GetComponent<monsterInfo>()!=null){
+                minionGO.GetComponent<monsterInfo>().power -= 5;
+                updatePowerTooltip(minionGO);
+            }
         }
     }
 
@@ -385,7 +387,7 @@ public class cardEffects : MonoBehaviour
 
             //Reorder cards here until we do better refactoring
             GameState.getActivePlayer().reorderHandCards();
-
+            target = null;
             cardEventHandler.onSummon -= ironResolve;
 
             //Destroy(GameState.getActivePlayer().selectedCard);
@@ -532,6 +534,8 @@ public class cardEffects : MonoBehaviour
                 if (result.gameObject.CompareTag("Card"))
                 {
                     //selected = true; // stop coroutine
+                    GameState.getActivePlayer().reorderHandCards();
+                    GameState.getActivePlayer().handCards.Remove(GameState.getActivePlayer().selectedCard);
                     cardEventHandler.onSummon -= fireball;
                     break;
                 }
@@ -571,16 +575,21 @@ public class cardEffects : MonoBehaviour
     {
         int rows = arr.GetLength(0);
         int columns = arr.GetLength(1);
-        Debug.Log(rows + columns);
+        Debug.Log(rows + " " + columns);
         List<GameObject> adjacentMinions = new List<GameObject>();
-        for (int j = row - 1; j <= row + 1; j++)
-        for (int i = column - 1; i <= column + 1; i++)
-            if (i >= 0 && j >= 0 && i < columns && j < rows && !arr[j, i].GetComponent<nodeInfo>().isFree)
-            {
-                Debug.Log(j + i);
-                adjacentMinions.Add(arr[j, i].GetComponent<nodeInfo>().monsterOnNode);
+        for (int j = row - 1; j <= row + 1; j++){
+            for (int i = column - 1; i <= column + 1; i++){
+                if(arr[j, i].GetComponent<nodeInfo>().monsterOnNode != null){
+                    if(i!=column || j!=row){
+                        if (i >= 0 && j >= 0 && i < columns && j < rows && !arr[j, i].GetComponent<nodeInfo>().isFree)
+                        {
+                            Debug.Log(j + " " + i);
+                            adjacentMinions.Add(arr[j, i].GetComponent<nodeInfo>().monsterOnNode);
+                        }   
+                    }
+                }
             }
-
+        }
         return adjacentMinions;
     }
 
