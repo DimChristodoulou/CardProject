@@ -22,7 +22,7 @@ public class GameState : MonoBehaviour {
 	static public int dimensionX=7, dimensionY=11;
 	static private float xspacing = 1.2f, yspacing = 1.2f; //offset for board view
 
-	public static List<int> deck;
+	public static List<int> deck = new List<int>();
 
 	// Use this for initialization
 	void Start () {

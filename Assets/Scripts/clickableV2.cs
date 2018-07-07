@@ -74,27 +74,21 @@ public class clickableV2 : MonoBehaviour
 
     public void toggleChange()
     {
-        Debug.Log("IN TOGGLE");
         if (!myInfo.parentPlayer.cardSelected)
         {
-            Debug.Log("IN cardSelected");
             toggle = !toggle;
             if (toggle)
-            {
-                Debug.Log("IN true");
-                //if (myInfo == null)
-                //    Debug.Log("gameobject name: "+  gameObject.name);
-
+			{
                 myInfo.parentPlayer.updateClickedItem(gameObject);
                 mRenderer.material.color = GetComponentInParent<monsterInfo>().hoverColorActive;
+				GetComponentInParent<movement>().highlightMovableSquares();
             }
             else
             {
                 myInfo.parentPlayer.clearClickedItem();
                 mRenderer.material.color = GetComponentInParent<monsterInfo>().startColor;
+				GameState.resetSquaresColor ();
             }
         }
-
-        GetComponentInParent<movement>().highlightMovableSquares();
     }
 }
