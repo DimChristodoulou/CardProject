@@ -268,8 +268,11 @@ public class cardEffects : MonoBehaviour
                 destroyMinion(minionGO);
             }
         }
+        GameState.getActivePlayer().cardSelected = false;
 
-        GameState.getActivePlayer().reorderHandCards();
+        GameState.getActivePlayer().handCards.Remove(GameState.getActivePlayer().selectedCard);
+        GameState.getActivePlayer().graveyard.Add(GameState.getActivePlayer().selectedCard);
+        GameState.getActivePlayer().reorderHandCards(); 
         GameState.getActivePlayer().handCards.Remove(GameState.getActivePlayer().selectedCard);
         cardEventHandler.onSummon -= firestorm;
     }
@@ -524,7 +527,12 @@ public class cardEffects : MonoBehaviour
         {
             destroyMinion(target);
             //Reorder cards here until we do better refactoring
-            GameState.getActivePlayer().reorderHandCards();
+
+            GameState.getActivePlayer().cardSelected = false;
+
+            GameState.getActivePlayer().handCards.Remove(GameState.getActivePlayer().selectedCard);
+            GameState.getActivePlayer().graveyard.Add(GameState.getActivePlayer().selectedCard);
+            GameState.getActivePlayer().reorderHandCards(); 
             cardEventHandler.onSummon -= fireball;
         }
         else if (results.Count > 0)
@@ -534,8 +542,6 @@ public class cardEffects : MonoBehaviour
                 if (result.gameObject.CompareTag("Card"))
                 {
                     //selected = true; // stop coroutine
-                    GameState.getActivePlayer().reorderHandCards();
-                    GameState.getActivePlayer().handCards.Remove(GameState.getActivePlayer().selectedCard);
                     cardEventHandler.onSummon -= fireball;
                     break;
                 }

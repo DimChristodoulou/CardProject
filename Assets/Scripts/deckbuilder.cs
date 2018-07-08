@@ -239,7 +239,7 @@ public class deckbuilder : MonoBehaviour
         reader.Close();
 
 //        StreamWriter writer = new StreamWriter(file);
-        System.IO.File.WriteAllText(path + "Decks.txt", deckCode + "\n");
+        System.IO.File.WriteAllText(path + "Decks.txt", allText + "\n" + deckCode + "\n");
 //        writer.WriteLine(deckCode);
 //        writer.Close();
     }
