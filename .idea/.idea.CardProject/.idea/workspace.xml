@@ -22,80 +22,44 @@
       <file leaf-file-name="Player.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3480">
-              <caret line="250" column="52" selection-start-line="250" selection-start-column="52" selection-end-line="250" selection-end-column="52" />
+            <state relative-caret-position="3960">
+              <caret line="267" column="52" selection-start-line="267" selection-start-column="52" selection-end-line="267" selection-end-column="52" />
               <folding>
-                <marker date="1529855548431" expanded="false" signature="6:100" ph="..." />
-                <marker date="1529855548431" expanded="true" signature="121:12067" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="1429:1471" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="1538:3099" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="2388:2726" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="2512:2716" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="2756:3093" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="2879:3083" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="3131:3164" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="3205:3243" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="3281:3885" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="3921:4238" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="4101:4232" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="4284:4809" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="4863:5395" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="4982:5389" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="5299:5379" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="5401:5475" ph="/* Doc: Function used to play a card and resolve its effects. ... */" />
-                <marker date="1529855548431" expanded="true" signature="5515:7083" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="5713:7077" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="5859:6376" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="5917:6362" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="5983:6344" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="6093:6322" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="6450:7067" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="6540:7053" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="6674:7035" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="6784:7013" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="7125:7281" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="7166:7275" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="7323:7416" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="7465:7513" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="7562:7610" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="7639:8482" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="7925:8097" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="8110:8284" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="8366:8449" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="8509:8884" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="8628:8746" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="8756:8878" ph="/* if (playingPos == 1) { ... */" />
-                <marker date="1529855548431" expanded="true" signature="8913:8946" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="9002:9249" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="9128:9213" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="9285:9322" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="9357:10524" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="9372:9439" ph="/* create and position hero ... */" />
-                <marker date="1529855548431" expanded="true" signature="9468:9954" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="9687:9944" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="9967:10518" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="10088:10190" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="10251:10508" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="10571:10583" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="10678:11171" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="10773:11148" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="11236:11691" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="11428:11490" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="11742:12065" ph="{...}" />
-                <marker date="1529855548431" expanded="true" signature="11897:11959" ph="{...}" />
+                <marker date="1530973338377" expanded="false" signature="6:100" ph="..." />
+                <marker date="1530973338377" expanded="true" signature="1429:1471" ph="{...}" />
+                <marker date="1530973338377" expanded="true" signature="1538:3099" ph="{...}" />
+                <marker date="1530973338377" expanded="true" signature="2388:2726" ph="{...}" />
+                <marker date="1530973338377" expanded="true" signature="2512:2716" ph="{...}" />
+                <marker date="1530973338377" expanded="true" signature="2756:3093" ph="{...}" />
+                <marker date="1530973338377" expanded="true" signature="2879:3083" ph="{...}" />
+                <marker date="1530973338377" expanded="true" signature="3131:3164" ph="{...}" />
+                <marker date="1530973338377" expanded="true" signature="3205:3243" ph="{...}" />
+                <marker date="1530973338377" expanded="true" signature="3281:3885" ph="{...}" />
+                <marker date="1530973338377" expanded="true" signature="3921:4238" ph="{...}" />
+                <marker date="1530973338377" expanded="true" signature="4101:4232" ph="{...}" />
+                <marker date="1530973338377" expanded="true" signature="4284:4809" ph="{...}" />
+                <marker date="1530973338377" expanded="true" signature="4863:5395" ph="{...}" />
+                <marker date="1530973338377" expanded="true" signature="4982:5389" ph="{...}" />
+                <marker date="1530973338377" expanded="true" signature="5299:5379" ph="{...}" />
+                <marker date="1530973338377" expanded="true" signature="5401:5475" ph="/* Doc: Function used to play a card and resolve its effects. ... */" />
+                <marker date="1530973338377" expanded="true" signature="5515:5791" ph="{...}" />
+                <marker date="1530973338377" expanded="true" signature="5713:5791" ph="{...}" />
+                <marker date="1530973338377" expanded="true" signature="12081:12496" ph="{...}" />
+                <marker date="1530973338377" expanded="true" signature="12233:12295" ph="{...}" />
+                <marker date="1530973338377" expanded="true" signature="12547:12870" ph="{...}" />
+                <marker date="1530973338377" expanded="true" signature="12702:12764" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="selectDeck.cs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="selectDeck.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/selectDeck.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
+            <state relative-caret-position="630">
               <caret line="42" column="25" selection-start-line="42" selection-start-column="25" selection-end-line="42" selection-end-column="25" />
               <folding>
                 <marker date="1529949111493" expanded="true" signature="6:185" ph="..." />
-                <marker date="1529949111493" expanded="true" signature="226:2323" ph="{...}" />
                 <marker date="1529949111493" expanded="true" signature="498:1939" ph="{...}" />
                 <marker date="1529949111493" expanded="true" signature="910:1908" ph="{...}" />
                 <marker date="1529949111493" expanded="true" signature="1215:1273" ph="{...}" />
@@ -110,7 +74,7 @@
       <file leaf-file-name="Card.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Card.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="533">
+            <state relative-caret-position="2130">
               <caret line="150" column="35" selection-start-line="150" selection-start-column="35" selection-end-line="150" selection-end-column="35" />
               <folding>
                 <marker date="1529854064112" expanded="false" signature="6:217" ph="..." />
@@ -148,43 +112,44 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="deckbuilder.cs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="deckbuilder.cs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/deckbuilder.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="744">
-              <caret line="241" column="22" selection-start-line="241" selection-end-line="242" />
+            <state relative-caret-position="759">
+              <caret line="246" column="37" lean-forward="true" selection-start-line="246" selection-start-column="37" selection-end-line="246" selection-end-column="37" />
               <folding>
-                <marker date="1529949258585" expanded="true" signature="6:169" ph="..." />
-                <marker date="1529949258585" expanded="true" signature="212:8684" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="794:1301" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="1307:1389" ph="/* Function used to show the next eight cardTemplates on the screen ... */" />
-                <marker date="1529949258585" expanded="true" signature="1456:1973" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="1631:1678" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="1979:2063" ph="/* Function used to show the previous eight cardTemplates on the screen ... */" />
-                <marker date="1529949258585" expanded="true" signature="2130:2647" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="2305:2352" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="2653:2725" ph="/* Function used to filter cardTemplates by their Attribute ... */" />
-                <marker date="1529949258585" expanded="true" signature="2777:4045" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="3009:3056" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="3212:3382" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="3393:3563" ph="/* int[] shortFilteredCards = filteredCards.Where(i =&gt; Array.IndexOf(filteredCards, i) &lt;= j).ToArray(); ... */" />
-                <marker date="1529949258585" expanded="true" signature="4051:4121" ph="/* Function used to search the card database by a keyword ... */" />
-                <marker date="1529949258585" expanded="true" signature="4161:5537" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="4392:4439" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="4596:5156" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="5543:5643" ph="/* Function used to display 8 cardTemplates from the cardsToOutput array to the player. ... */" />
-                <marker date="1529949258585" expanded="true" signature="5712:7137" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="5842:6240" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="6277:6671" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="6704:7131" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="6782:7121" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="7143:7219" ph="/* Function used to switch the active scene to the deck builder ... */" />
-                <marker date="1529949258585" expanded="true" signature="7248:7334" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="7392:7434" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="7479:8067" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="8088:8682" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="8192:8263" ph="{...}" />
-                <marker date="1529949258585" expanded="true" signature="8613:8676" ph="/* writer.WriteLine(deckCode); ... */" />
+                <marker date="1531648212822" expanded="false" signature="6:169" ph="..." />
+                <marker date="1531648212822" expanded="true" signature="212:8811" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="794:1301" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="1307:1389" ph="/* Function used to show the next eight cardTemplates on the screen ... */" />
+                <marker date="1531648212822" expanded="true" signature="1456:1973" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="1631:1678" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="1979:2063" ph="/* Function used to show the previous eight cardTemplates on the screen ... */" />
+                <marker date="1531648212822" expanded="true" signature="2130:2647" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="2305:2352" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="2653:2725" ph="/* Function used to filter cardTemplates by their Attribute ... */" />
+                <marker date="1531648212822" expanded="true" signature="2777:4045" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="3009:3056" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="3212:3382" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="3393:3563" ph="/* int[] shortFilteredCards = filteredCards.Where(i =&gt; Array.IndexOf(filteredCards, i) &lt;= j).ToArray(); ... */" />
+                <marker date="1531648212822" expanded="true" signature="4051:4121" ph="/* Function used to search the card database by a keyword ... */" />
+                <marker date="1531648212822" expanded="true" signature="4161:5537" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="4392:4439" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="4596:5156" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="5543:5643" ph="/* Function used to display 8 cardTemplates from the cardsToOutput array to the player. ... */" />
+                <marker date="1531648212822" expanded="true" signature="5712:7137" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="5842:6240" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="6277:6671" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="6704:7131" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="6782:7121" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="7143:7219" ph="/* Function used to switch the active scene to the deck builder ... */" />
+                <marker date="1531648212822" expanded="true" signature="7248:7334" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="7392:7434" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="7479:8067" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="8088:8809" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="8192:8263" ph="{...}" />
+                <marker date="1531648212822" expanded="true" signature="8483:8617" ph="/* StreamWriter writer = new StreamWriter(file); ... */" />
+                <marker date="1531648212822" expanded="true" signature="8740:8803" ph="/* writer.WriteLine(deckCode); ... */" />
               </folding>
             </state>
           </provider>
@@ -210,7 +175,6 @@
               <caret line="24" column="49" selection-start-line="24" selection-start-column="49" selection-end-line="24" selection-end-column="49" />
               <folding>
                 <marker date="1529948304566" expanded="false" signature="6:100" ph="..." />
-                <marker date="1529948304566" expanded="true" signature="141:5612" ph="{...}" />
                 <marker date="1529948304566" expanded="true" signature="144:385" ph="/* This is the class to handle board, check board conditions (can monster move/summon) where it wants etc ... */" />
                 <marker date="1529948304566" expanded="true" signature="1017:1459" ph="{...}" />
                 <marker date="1529948304566" expanded="true" signature="1207:1326" ph="{...}" />
@@ -275,19 +239,19 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/jsonparse.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/deckbuilder.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/deckbuilder.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/graveyard.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/movement.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameState.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/selectDeck.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameState.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/selectDeck.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/mainMenu.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CardTemplate.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CardTemplate.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/cardEventHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/cardEffects.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/monsterInfo.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Card.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Card.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/nodeInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/clickableV2.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -333,7 +297,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="SolutionExplorer">
+        <option name="show-file-system" value="false" />
+        <option name="show-all-items" value="false" />
+      </pane>
       <pane id="UnityExplorer">
         <subPane>
           <expand>
@@ -351,10 +318,7 @@
         </subPane>
         <option name="show-hidden-items" value="false" />
       </pane>
-      <pane id="SolutionExplorer">
-        <option name="show-file-system" value="false" />
-        <option name="show-all-items" value="false" />
-      </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -402,11 +366,12 @@
       <workItem from="1529689276392" duration="8723000" />
       <workItem from="1529853597199" duration="2028000" />
       <workItem from="1529945102669" duration="3820000" />
+      <workItem from="1531647674777" duration="762000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47460000" />
+    <option name="totallyTimeSpent" value="48222000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -428,7 +393,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12153518" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12260128" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Unity" order="8" />
       <window_info anchor="right" id="Database" order="3" />
@@ -531,64 +496,29 @@
         <state relative-caret-position="2040">
           <caret line="139" column="21" selection-start-line="139" selection-start-column="21" selection-end-line="139" selection-end-column="21" />
           <folding>
-            <marker date="1529855548431" expanded="false" signature="6:100" ph="..." />
-            <marker date="1529855548431" expanded="true" signature="121:12067" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="1429:1471" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="1538:3099" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="2388:2726" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="2512:2716" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="2756:3093" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="2879:3083" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="3131:3164" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="3205:3243" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="3281:3885" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="3921:4238" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="4101:4232" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="4284:4809" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="4863:5395" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="4982:5389" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="5299:5379" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="5401:5475" ph="/* Doc: Function used to play a card and resolve its effects. ... */" />
-            <marker date="1529855548431" expanded="true" signature="5515:7083" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="5713:7077" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="5859:6376" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="5917:6362" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="5983:6344" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="6093:6322" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="6450:7067" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="6540:7053" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="6674:7035" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="6784:7013" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="7125:7281" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="7166:7275" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="7323:7416" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="7465:7513" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="7562:7610" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="7639:8482" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="7925:8097" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="8110:8284" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="8366:8449" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="8509:8884" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="8628:8746" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="8756:8878" ph="/* if (playingPos == 1) { ... */" />
-            <marker date="1529855548431" expanded="true" signature="8913:8946" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="9002:9249" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="9128:9213" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="9285:9322" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="9357:10524" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="9372:9439" ph="/* create and position hero ... */" />
-            <marker date="1529855548431" expanded="true" signature="9468:9954" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="9687:9944" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="9967:10518" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="10088:10190" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="10251:10508" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="10571:10583" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="10678:11171" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="10773:11148" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="11236:11691" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="11428:11490" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="11742:12065" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="11897:11959" ph="{...}" />
+            <marker date="1530973338377" expanded="false" signature="6:100" ph="..." />
+            <marker date="1530973338377" expanded="true" signature="1429:1471" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="1538:3099" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="2388:2726" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="2512:2716" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="2756:3093" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="2879:3083" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="3131:3164" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="3205:3243" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="3281:3885" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="3921:4238" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="4101:4232" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="4284:4809" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="4863:5395" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="4982:5389" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="5299:5379" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="5401:5475" ph="/* Doc: Function used to play a card and resolve its effects. ... */" />
+            <marker date="1530973338377" expanded="true" signature="5515:5791" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="5713:5791" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="12081:12496" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="12233:12295" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="12547:12870" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="12702:12764" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -626,7 +556,6 @@
           <caret line="90" selection-start-line="90" selection-end-line="90" />
           <folding>
             <marker date="1529948304566" expanded="false" signature="6:100" ph="..." />
-            <marker date="1529948304566" expanded="true" signature="141:5612" ph="{...}" />
             <marker date="1529948304566" expanded="true" signature="144:385" ph="/* This is the class to handle board, check board conditions (can monster move/summon) where it wants etc ... */" />
             <marker date="1529948304566" expanded="true" signature="1017:1459" ph="{...}" />
             <marker date="1529948304566" expanded="true" signature="1207:1326" ph="{...}" />
@@ -679,64 +608,29 @@
         <state relative-caret-position="1425">
           <caret line="95" column="47" selection-start-line="95" selection-start-column="47" selection-end-line="95" selection-end-column="47" />
           <folding>
-            <marker date="1529855548431" expanded="false" signature="6:100" ph="..." />
-            <marker date="1529855548431" expanded="true" signature="121:12067" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="1429:1471" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="1538:3099" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="2388:2726" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="2512:2716" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="2756:3093" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="2879:3083" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="3131:3164" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="3205:3243" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="3281:3885" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="3921:4238" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="4101:4232" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="4284:4809" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="4863:5395" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="4982:5389" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="5299:5379" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="5401:5475" ph="/* Doc: Function used to play a card and resolve its effects. ... */" />
-            <marker date="1529855548431" expanded="true" signature="5515:7083" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="5713:7077" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="5859:6376" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="5917:6362" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="5983:6344" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="6093:6322" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="6450:7067" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="6540:7053" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="6674:7035" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="6784:7013" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="7125:7281" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="7166:7275" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="7323:7416" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="7465:7513" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="7562:7610" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="7639:8482" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="7925:8097" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="8110:8284" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="8366:8449" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="8509:8884" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="8628:8746" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="8756:8878" ph="/* if (playingPos == 1) { ... */" />
-            <marker date="1529855548431" expanded="true" signature="8913:8946" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="9002:9249" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="9128:9213" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="9285:9322" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="9357:10524" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="9372:9439" ph="/* create and position hero ... */" />
-            <marker date="1529855548431" expanded="true" signature="9468:9954" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="9687:9944" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="9967:10518" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="10088:10190" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="10251:10508" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="10571:10583" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="10678:11171" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="10773:11148" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="11236:11691" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="11428:11490" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="11742:12065" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="11897:11959" ph="{...}" />
+            <marker date="1530973338377" expanded="false" signature="6:100" ph="..." />
+            <marker date="1530973338377" expanded="true" signature="1429:1471" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="1538:3099" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="2388:2726" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="2512:2716" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="2756:3093" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="2879:3083" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="3131:3164" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="3205:3243" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="3281:3885" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="3921:4238" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="4101:4232" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="4284:4809" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="4863:5395" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="4982:5389" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="5299:5379" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="5401:5475" ph="/* Doc: Function used to play a card and resolve its effects. ... */" />
+            <marker date="1530973338377" expanded="true" signature="5515:5791" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="5713:5791" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="12081:12496" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="12233:12295" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="12547:12870" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="12702:12764" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -983,7 +877,6 @@
           <caret line="24" column="49" selection-start-line="24" selection-start-column="49" selection-end-line="24" selection-end-column="49" />
           <folding>
             <marker date="1529948304566" expanded="false" signature="6:100" ph="..." />
-            <marker date="1529948304566" expanded="true" signature="141:5612" ph="{...}" />
             <marker date="1529948304566" expanded="true" signature="144:385" ph="/* This is the class to handle board, check board conditions (can monster move/summon) where it wants etc ... */" />
             <marker date="1529948304566" expanded="true" signature="1017:1459" ph="{...}" />
             <marker date="1529948304566" expanded="true" signature="1207:1326" ph="{...}" />
@@ -1019,7 +912,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Card.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="533">
+        <state relative-caret-position="2130">
           <caret line="150" column="35" selection-start-line="150" selection-start-column="35" selection-end-line="150" selection-end-column="35" />
           <folding>
             <marker date="1529854064112" expanded="false" signature="6:217" ph="..." />
@@ -1058,124 +951,89 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Player.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3480">
-          <caret line="250" column="52" selection-start-line="250" selection-start-column="52" selection-end-line="250" selection-end-column="52" />
+        <state relative-caret-position="3960">
+          <caret line="267" column="52" selection-start-line="267" selection-start-column="52" selection-end-line="267" selection-end-column="52" />
           <folding>
-            <marker date="1529855548431" expanded="false" signature="6:100" ph="..." />
-            <marker date="1529855548431" expanded="true" signature="121:12067" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="1429:1471" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="1538:3099" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="2388:2726" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="2512:2716" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="2756:3093" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="2879:3083" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="3131:3164" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="3205:3243" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="3281:3885" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="3921:4238" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="4101:4232" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="4284:4809" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="4863:5395" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="4982:5389" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="5299:5379" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="5401:5475" ph="/* Doc: Function used to play a card and resolve its effects. ... */" />
-            <marker date="1529855548431" expanded="true" signature="5515:7083" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="5713:7077" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="5859:6376" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="5917:6362" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="5983:6344" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="6093:6322" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="6450:7067" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="6540:7053" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="6674:7035" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="6784:7013" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="7125:7281" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="7166:7275" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="7323:7416" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="7465:7513" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="7562:7610" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="7639:8482" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="7925:8097" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="8110:8284" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="8366:8449" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="8509:8884" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="8628:8746" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="8756:8878" ph="/* if (playingPos == 1) { ... */" />
-            <marker date="1529855548431" expanded="true" signature="8913:8946" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="9002:9249" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="9128:9213" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="9285:9322" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="9357:10524" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="9372:9439" ph="/* create and position hero ... */" />
-            <marker date="1529855548431" expanded="true" signature="9468:9954" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="9687:9944" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="9967:10518" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="10088:10190" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="10251:10508" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="10571:10583" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="10678:11171" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="10773:11148" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="11236:11691" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="11428:11490" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="11742:12065" ph="{...}" />
-            <marker date="1529855548431" expanded="true" signature="11897:11959" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/deckbuilder.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="744">
-          <caret line="241" column="22" selection-start-line="241" selection-end-line="242" />
-          <folding>
-            <marker date="1529949258585" expanded="true" signature="6:169" ph="..." />
-            <marker date="1529949258585" expanded="true" signature="212:8684" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="794:1301" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="1307:1389" ph="/* Function used to show the next eight cardTemplates on the screen ... */" />
-            <marker date="1529949258585" expanded="true" signature="1456:1973" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="1631:1678" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="1979:2063" ph="/* Function used to show the previous eight cardTemplates on the screen ... */" />
-            <marker date="1529949258585" expanded="true" signature="2130:2647" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="2305:2352" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="2653:2725" ph="/* Function used to filter cardTemplates by their Attribute ... */" />
-            <marker date="1529949258585" expanded="true" signature="2777:4045" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="3009:3056" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="3212:3382" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="3393:3563" ph="/* int[] shortFilteredCards = filteredCards.Where(i =&gt; Array.IndexOf(filteredCards, i) &lt;= j).ToArray(); ... */" />
-            <marker date="1529949258585" expanded="true" signature="4051:4121" ph="/* Function used to search the card database by a keyword ... */" />
-            <marker date="1529949258585" expanded="true" signature="4161:5537" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="4392:4439" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="4596:5156" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="5543:5643" ph="/* Function used to display 8 cardTemplates from the cardsToOutput array to the player. ... */" />
-            <marker date="1529949258585" expanded="true" signature="5712:7137" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="5842:6240" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="6277:6671" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="6704:7131" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="6782:7121" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="7143:7219" ph="/* Function used to switch the active scene to the deck builder ... */" />
-            <marker date="1529949258585" expanded="true" signature="7248:7334" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="7392:7434" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="7479:8067" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="8088:8682" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="8192:8263" ph="{...}" />
-            <marker date="1529949258585" expanded="true" signature="8613:8676" ph="/* writer.WriteLine(deckCode); ... */" />
+            <marker date="1530973338377" expanded="false" signature="6:100" ph="..." />
+            <marker date="1530973338377" expanded="true" signature="1429:1471" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="1538:3099" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="2388:2726" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="2512:2716" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="2756:3093" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="2879:3083" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="3131:3164" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="3205:3243" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="3281:3885" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="3921:4238" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="4101:4232" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="4284:4809" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="4863:5395" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="4982:5389" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="5299:5379" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="5401:5475" ph="/* Doc: Function used to play a card and resolve its effects. ... */" />
+            <marker date="1530973338377" expanded="true" signature="5515:5791" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="5713:5791" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="12081:12496" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="12233:12295" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="12547:12870" ph="{...}" />
+            <marker date="1530973338377" expanded="true" signature="12702:12764" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/selectDeck.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
+        <state relative-caret-position="630">
           <caret line="42" column="25" selection-start-line="42" selection-start-column="25" selection-end-line="42" selection-end-column="25" />
           <folding>
             <marker date="1529949111493" expanded="true" signature="6:185" ph="..." />
-            <marker date="1529949111493" expanded="true" signature="226:2323" ph="{...}" />
             <marker date="1529949111493" expanded="true" signature="498:1939" ph="{...}" />
             <marker date="1529949111493" expanded="true" signature="910:1908" ph="{...}" />
             <marker date="1529949111493" expanded="true" signature="1215:1273" ph="{...}" />
             <marker date="1529949111493" expanded="true" signature="1978:2251" ph="{...}" />
             <marker date="1529949111493" expanded="true" signature="2044:2164" ph="{...}" />
             <marker date="1529949111493" expanded="true" signature="2309:2321" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/deckbuilder.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="759">
+          <caret line="246" column="37" lean-forward="true" selection-start-line="246" selection-start-column="37" selection-end-line="246" selection-end-column="37" />
+          <folding>
+            <marker date="1531648212822" expanded="false" signature="6:169" ph="..." />
+            <marker date="1531648212822" expanded="true" signature="212:8811" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="794:1301" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="1307:1389" ph="/* Function used to show the next eight cardTemplates on the screen ... */" />
+            <marker date="1531648212822" expanded="true" signature="1456:1973" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="1631:1678" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="1979:2063" ph="/* Function used to show the previous eight cardTemplates on the screen ... */" />
+            <marker date="1531648212822" expanded="true" signature="2130:2647" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="2305:2352" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="2653:2725" ph="/* Function used to filter cardTemplates by their Attribute ... */" />
+            <marker date="1531648212822" expanded="true" signature="2777:4045" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="3009:3056" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="3212:3382" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="3393:3563" ph="/* int[] shortFilteredCards = filteredCards.Where(i =&gt; Array.IndexOf(filteredCards, i) &lt;= j).ToArray(); ... */" />
+            <marker date="1531648212822" expanded="true" signature="4051:4121" ph="/* Function used to search the card database by a keyword ... */" />
+            <marker date="1531648212822" expanded="true" signature="4161:5537" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="4392:4439" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="4596:5156" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="5543:5643" ph="/* Function used to display 8 cardTemplates from the cardsToOutput array to the player. ... */" />
+            <marker date="1531648212822" expanded="true" signature="5712:7137" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="5842:6240" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="6277:6671" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="6704:7131" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="6782:7121" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="7143:7219" ph="/* Function used to switch the active scene to the deck builder ... */" />
+            <marker date="1531648212822" expanded="true" signature="7248:7334" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="7392:7434" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="7479:8067" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="8088:8809" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="8192:8263" ph="{...}" />
+            <marker date="1531648212822" expanded="true" signature="8483:8617" ph="/* StreamWriter writer = new StreamWriter(file); ... */" />
+            <marker date="1531648212822" expanded="true" signature="8740:8803" ph="/* writer.WriteLine(deckCode); ... */" />
           </folding>
         </state>
       </provider>
