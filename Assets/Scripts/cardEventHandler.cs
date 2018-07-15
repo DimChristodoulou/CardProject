@@ -23,10 +23,7 @@ public class cardEventHandler : MonoBehaviour
                 GameState.boardTable[node.First, node.Second].GetComponent<nodeInfo>().makeInactive();
             GameState.getActivePlayer().availableNodesForSummon = null;
         }
-
-		//decrease mana based on card mana cost
-		GameState.getActivePlayer().currentMana -= int.Parse(GameState.getActivePlayer().selectedCard.GetComponent<Card>().manaCost.text);
-
+			
         onSummon(minionName);
 
 //        if (GameState.getActivePlayer().selectedCard.GetComponent<Card>().type.text.Equals("Minion"))

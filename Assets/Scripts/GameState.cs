@@ -155,10 +155,12 @@ public class GameState : MonoBehaviour {
 
 	static public void showMana() {
 		int i = 0;
+		Debug.Log ("CURMANA: " + players [activePlayerIndex].currentMana);
 		for (; i < players [activePlayerIndex].currentMana; i++) {
 			((RawImage)manaCrystals[i].GetComponent<RawImage> ()).texture = manaTexture;
 			manaCrystals[i].SetActive (true);
 		}
+		Debug.Log ("MAXMANA: " + players [activePlayerIndex].maxTurnMana);
 		for (; i < players [activePlayerIndex].maxTurnMana; i++) {
 			((RawImage)manaCrystals[i].GetComponent<RawImage> ()).texture = emptyManaTexture;
 			manaCrystals[i].SetActive (true);

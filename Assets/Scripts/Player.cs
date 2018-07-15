@@ -153,6 +153,7 @@ public class Player
     {
         if (GameState.getActivePlayer().currentMana >= int.Parse(clickedObj.GetComponent<Card>().manaCost.text))
         {
+			Debug.Log ("asgd");
             GameState.getActivePlayer().playCard(GameState.getActivePlayer().handCards.IndexOf(clickedObj));
             //Event system from here on out...
             string s = clickedObj.GetComponent<Card>().cardName.text.ToString();
@@ -230,8 +231,8 @@ public class Player
         if (this.maxTurnMana < 10)
         {
             this.maxTurnMana += amount;
-            this.currentMana = this.maxTurnMana;
         }
+		this.currentMana = this.maxTurnMana;
     }
 
     public void decreaseMana(int amount)
@@ -250,11 +251,16 @@ public class Player
         this.currentMana -= amount;
     }
 
+	public void resetCurrentMana() {
+		this.currentMana = maxTurnMana;
+	}
+
     public void startTurn()
     {
         Debug.Log("HAND CARDS SIZE ON START TURN: " + handCards.Count);
         //Increase mana at start of turn.
         this.increaseMana(1);
+		resetCurrentMana();
         //Draw card after increasing mana. (Max number of cardTemplates in hand is 8).
         if (handCards.Count < 8 && deckSize > 0)
         {

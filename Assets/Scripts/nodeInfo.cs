@@ -118,6 +118,10 @@ public class nodeInfo : MonoBehaviour
                 powerTooltip.transform.SetParent(mainUI.transform);
                 powerTooltip.GetComponentInChildren<Text>().text = currentMinion.GetComponent<monsterInfo>().power.ToString();
 
+				//decrease mana based on card mana cost
+				Debug.Log("PRE " + GameState.getActivePlayer().currentMana);
+				GameState.getActivePlayer().currentMana -= int.Parse(GameState.getActivePlayer().selectedCard.GetComponent<Card>().manaCost.text);
+				Debug.Log("POST " + GameState.getActivePlayer().currentMana);
                 if (monsterOnNode.GetComponent<monsterInfo>().card.GetComponent<Card>().description.text.Contains("[On Summon]"))
                     cardEventHandler.onMinionSummon(jsonparse.cardTemplates[selectedCard.id].card_name);
                 
