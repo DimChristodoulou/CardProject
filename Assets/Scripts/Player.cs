@@ -159,6 +159,7 @@ public class Player
             string s = clickedObj.GetComponent<Card>().cardName.text.ToString();
             if (clickedObj.GetComponent<Card>().type.text == "Spell")
             {
+				GameState.getActivePlayer().currentMana -= int.Parse(GameState.getActivePlayer().selectedCard.GetComponent<Card>().manaCost.text);
                 cardEventHandler.onMinionSummon(s);
             }
         }
