@@ -151,6 +151,11 @@
           <e p="movement.cs" t="Include" />
           <e p="nodeInfo.cs" t="Include" />
           <e p="Pair.cs" t="Include" />
+          <e p="Photon" t="Include">
+            <e p="GameManager.cs" t="Include" />
+            <e p="Launcher.cs" t="Include" />
+            <e p="PlayerNameInputField.cs" t="Include" />
+          </e>
           <e p="Player.cs" t="Include" />
           <e p="sceneLoader.cs" t="Include" />
           <e p="selectDeck.cs" t="Include" />
